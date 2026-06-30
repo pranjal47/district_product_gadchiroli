@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gadchiroli Product · District Collector Office</title>
+    <!-- Font Awesome for icons (optional but adds visual) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #f5f7f2;
+            color: #1e2f23;
+            line-height: 1.5;
+        }
+
+        /* header & nav */
+        .header {
+            background: linear-gradient(145deg, #1f4b2e 0%, #2d6a4f 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,40,10,0.2);
+        }
+
+        .header h1 {
+            font-weight: 500;
+            font-size: 2rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header h1 i {
+            color: #e6d5a8;
+        }
+
+        .header .subhead {
+            font-size: 1rem;
+            margin-top: 6px;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* tab bar */
+        .tab-bar {
+            background-color: #154b2b;
+            padding: 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            border-bottom: 3px solid #eab308;
+        }
+
+        .tab-link {
+            background: transparent;
+            border: none;
+            color: #f0f7e6;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            border-radius: 12px 12px 0 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-link i {
+            font-size: 1.1rem;
+        }
+
+        .tab-link:hover {
+            background: #21633e;
+            color: white;
+        }
+
+        .tab-link.active {
+            background: #fefae0;
+            color: #1f4b2e;
+            border-bottom: 4px solid #f5c542;
+        }
+
+        /* main content */
+        .container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fade 0.3s ease;
+        }
+
+        .tab-pane.active-pane {
+            display: block;
+        }
+
+        @keyframes fade {
+            from { opacity: 0.5; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* cards & layout */
+        .section-title {
+            font-size: 2rem;
+            color: #1e4d2e;
+            border-left: 10px solid #8fc0a9;
+            padding-left: 1.2rem;
+            margin: 1.8rem 0 1.5rem 0;
+            font-weight: 600;
+        }
+
+        .grid-3, .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .prod-card, .gallery-card, .achievement-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0, 30, 10, 0.08);
+            overflow: hidden;
+            transition: 0.2s ease;
+            border: 1px solid #d0e2cf;
+        }
+
+        .prod-card:hover, .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 28px rgba(30, 70, 30, 0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #c0d6b3;
+            display: block;
+        }
+
+        .card-content {
+            padding: 1.2rem 1rem 1.4rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.3rem;
+            color: #1d4d2b;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: #2a4230;
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .use-tag {
+            background: #e5f2e5;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0f532d;
+            margin-top: 6px;
+        }
+
+        .desc-small {
+            font-size: 0.9rem;
+            color: #3a5e45;
+        }
+
+        /* achievement highlight */
+        .achieve-row {
+            display: flex;
+            flex-wrap: wrap;
+            background: #e1f0da;
+            border-radius: 40px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .achieve-text {
+            flex: 2 1 300px;
+        }
+
+        .achieve-text h2 {
+            color: #1a4d2c;
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .achieve-text ul {
+            list-style: none;
+            font-size: 1.1rem;
+        }
+
+        .achieve-text li {
+            margin: 0.7rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .achieve-text i {
+            color: #c5942b;
+            width: 26px;
+            font-size: 1.3rem;
+        }
+
+        .achieve-img {
+            flex: 1 1 200px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 12px 18px rgba(0,0,0,0.1);
+        }
+
+        .achieve-img img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* about us section */
+        .about-block {
+            background: #f8fbf4;
+            border-radius: 40px;
+            padding: 2.5rem;
+            border: 1px solid #bcddb2;
+            box-shadow: 0 8px 0 #588157;
+        }
+
+        .about-block h2 {
+            color: #1a5a2a;
+            margin-bottom: 1rem;
+        }
+
+        .about-block p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+            background: #d9e9d4;
+            border-radius: 30px;
+            padding: 1.8rem;
+        }
+
+        /* footer */
+        .footer {
+            background: #173e21;
+            color: #e2eedb;
+            text-align: center;
+            padding: 1.8rem;
+            margin-top: 3rem;
+            font-size: 1rem;
+        }
+
+
+ /* main heading */
+        .page-head {
+            max-width: 1300px;
+            margin: 0 auto 2rem auto;
+        }
+        .page-head h1 {
+            color: #1f4b2e;
+            font-weight: 600;
+            border-left: 10px solid #c5942b;
+            padding-left: 1.5rem;
+        }
+        .page-head p {
+            color: #2f5e3a;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            padding-left: 2rem;
+        }
+
+          /* product grid – cards exactly as described in image */
+        .product-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* the card – layout mirrors the numbered image description */
+        .product-card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 20px 30px -8px rgba(30, 60, 30, 0.25);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #cfdec5;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+        }
+
+        /* image area – corresponds to "Product Image" (element 3 in image) */
+        .card-image {
+            width: 100%;
+            height: 190px;
+            background-color: #b3cfaa;
+            overflow: hidden;
+            border-bottom: 3px solid #eab30833;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* content area */
+        .card-content {
+            padding: 1.5rem 1.2rem 1.2rem;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        /* top row with number and product name (elements 1 & 2) */
+        .name-section {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .card-number {
+            background: #1e4d2e;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            box-shadow: 0 4px 6px rgba(0,40,0,0.2);
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #153e21;
+            line-height: 1.3;
+        }
+
+        /* description + use (element 2 continuation) */
+        .description {
+            font-size: 0.98rem;
+            color: #2c5234;
+            margin: 0.2rem 0 0.2rem 0;
+            border-left: 3px solid #8fc0a9;
+            padding-left: 0.8rem;
+            background: #f6fbf4;
+            border-radius: 0 12px 12px 0;
+            padding: 0.6rem 1rem;
+        }
+
+
+        /* images (base64 placeholder / free unsplash like – we use high quality agrarian images from pexels (placekitten alternative but actual crops)  */
+        /* all images are from placeholder images but with crop theme – using placeholder picsum with grain/seed id */
+        img {
+            background: #b3d1b3;
+        }
+        /* horticulture badge */
+        .cat-badge {
+            background: #f5e5c9;
+            color: #7d4e1a;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            border: 1px solid #e0b87b;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-seedling"></i> औद्योगिक आणि कृषी उत्पादन समृद्धि – Gadchiroli</h1>
+        <div class="subhead">District Collector Office · District Product Exhibition</div>
+    </div>
+
+    <!-- Tab navigation -->
+    <div class="tab-bar">
+        <button class="tab-link active" id="tabHomeBtn"><i class="fas fa-home"></i> Home</button>
+        <button class="tab-link" id="tabProductBtn"><i class="fas fa-apple-alt"></i> Product</button>
+        <button class="tab-link" id="tabGalleryBtn"><i class="fas fa-images"></i> Gallery</button>
+        <button class="tab-link" id="tabAboutBtn"><i class="fas fa-info-circle"></i> About us</button>
+    </div>
+
+    <!-- main container -->
+<div class="container">
+    <!-- Home pane (updated) -->
+    <div id="homePane" class="tab-pane active-pane">
+        <div class="achieve-row">
+            <div class="achieve-text">
+                <h2><i class="fas fa-trophy" style="color:#c5942b;"></i> Gadchiroli Product Achievement</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Largest organic turmeric producer in Maharashtra (2023)</li>
+                    <li><i class="fas fa-check-circle"></i> 1,20,000+ farmers under soil health mission</li>
+                    <li><i class="fas fa-check-circle"></i> Record paddy yield: 3200 kg/hectare (2024)</li>
+                    <li><i class="fas fa-check-circle"></i> 38% increase in millet cultivation since 2022</li>
+                    <li><i class="fas fa-check-circle"></i> Best district for forest farming (minor produce)</li>
+                </ul>
+            </div>
+            <div class="achieve-img">
+                <!-- achievement image: lush field Gadchiroli -->
+                <img src="https://images.pexels.com/photos/972887/pexels-photo-972887.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="rich agriculture field" loading="lazy">
+            </div>
+        </div>
+
+        <!-- Collector Message Section -->
+<div class="collector-message" 
+     style="background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            border-radius:12px; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+            padding:25px; 
+            margin:30px 0; 
+            display:flex; 
+            align-items:center; 
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+    <!-- Collector Photo -->
+    <div style="flex:0 0 120px; text-align:center; margin-right:20px;">
+        <img src="https://cdn.s3waas.gov.in/s35e388103a391daabe3de1d76a6739ccd/uploads/2024/12/2024122693.jpeg" 
+             alt="District Collector Photo" 
+             style="width:120px; height:120px; border-radius:50%; border:3px solid #c5942b;">
+    </div>
+
+    <!-- Collector Text -->
+    <div style="flex:1; text-align:left;">
+        <h3 style="color:#2c3e50; margin:0; font-size:22px; font-weight:600;">
+            Message from the District Collector
+        </h3>
+        <p style="font-size:16px; color:#333; margin:12px 0; line-height:1.6;">
+            This exhibition platform highlights Gadchiroli’s products and achievements. 
+            It is a non-profit initiative created to inform consumers and support local producers.
+        </p>
+        <strong style="color:#c5942b; font-size:17px;">Shri Avishyant Panda, IAS</strong><br>
+        <span style="color:#555; font-size:15px;">District Collector, Gadchiroli</span>
+    </div>
+</div>
+
+  
+
+            <!-- SECTION CHANGED: from "Some featured products" to "Agriculture Product" -->
+            <div class="section-title"><i class="fas fa-store"></i> Agriculture Product</div>
+            
+          
+<div class="product-grid">
+    <!-- ========= CARD 1 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/4192809/pexels-photo-4192809.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Gadchiroli turmeric">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">1</span>
+                <span class="product-name">Lokbiro Turmeric</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-leaf" style="color:#3e854b; margin-right: 6px;"></i>  
+                Bright orange fingers, 100% organic, curcumin 5.0%. Used in curry, medicine, dye.
+                <div class="use-row"><i class="fas fa-mortar-pestle"></i> spice · medicinal · colour</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Kurkheda / Murmadi village
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Gadchiroli organic producer co.</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 94218 37125</span></div>
+                <div class="contact-item email-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>turmeric.gadchiroli@agri.in</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 2 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Forest honey">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">2</span>
+                <span class="product-name">Wild Forest Honey</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-bee" style="color:#e68a2e; margin-right: 6px;"></i>
+                Multi-flora, raw honey from Dhanora deep forests. Unprocessed, high antioxidant.
+                <div class="use-row"><i class="fas fa-heartbeat"></i> immunity · sweetener · ayurveda</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Etapalli / Dhanora range
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Vananchal Honey Mission</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 87672 54321</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>honey@vananchal.org</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 3 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Mosambi sweet lime">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">3</span>
+                <span class="product-name">Mosambi (Sweet lime)</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-lemon" style="color:#86a341;"></i>  
+                Juicy, high vitamin C, grown along Indravati river. Chemical-free.
+                <div class="use-row"><i class="fas fa-wine-bottle"></i> juice · fresh fruit</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Bhamragad / Somnur phata
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Indravati farmers group</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 98234 76123</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>indravatifarms@coop.in</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 4 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/5946746/pexels-photo-5946746.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Forest tamarind">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">4</span>
+                <span class="product-name">Forest Tamarind</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-seedling" style="color:#9e6b2b;"></i>  
+                Handpicked, deseeded blocks, deep sourness, no preservatives.
+                <div class="use-row"><i class="fas fa-utensils"></i> chutney · soup · spice</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Aheri / Penganda forest
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Van dhan kendra</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 99755 44211</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>tribal.tamarind@gmail.com</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 5 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Kodo millet">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">5</span>
+                <span class="product-name">Kodo Millet</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-wheat-alt" style="color:#a77b3c;"></i>  
+                Traditional grain, low glycemic, drought resilient, high fibre.
+                <div class="use-row"><i class="fas fa-bowl-food"></i> flour · upma · snacks</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Korchi / Mardala
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Shri millet women coop</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 88051 23789</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>millet.shree@coop.in</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 6 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Banana">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">6</span>
+                <span class="product-name">Gadchiroli Banana</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-tree" style="color:#3f9142;"></i>  
+                Robusta variety, sweet creamy, small bunches. Grown without chemicals.
+                <div class="use-row"><i class="fas fa-bread-slice"></i> table purpose · chips</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Armori / Vairagad
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Baliraja farmer producer</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 93701 45236</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>banana.gadchiroli@fpo.org</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- NEW HORTICULTURE CATEGORY with three products -->
+                     <div class="section-title"><i class="fas fa-store"></i>horticulture Product</div>
+            
+          
+<div class="product-grid">
+    <!-- ========= CARD 1 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/4192809/pexels-photo-4192809.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Gadchiroli turmeric">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">1</span>
+                <span class="product-name">Lokbiro Turmeric</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-leaf" style="color:#3e854b; margin-right: 6px;"></i>  
+                Bright orange fingers, 100% organic, curcumin 5.0%. Used in curry, medicine, dye.
+                <div class="use-row"><i class="fas fa-mortar-pestle"></i> spice · medicinal · colour</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Kurkheda / Murmadi village
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Gadchiroli organic producer co.</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 94218 37125</span></div>
+                <div class="contact-item email-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>turmeric.gadchiroli@agri.in</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 2 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Forest honey">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">2</span>
+                <span class="product-name">Wild Forest Honey</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-bee" style="color:#e68a2e; margin-right: 6px;"></i>
+                Multi-flora, raw honey from Dhanora deep forests. Unprocessed, high antioxidant.
+                <div class="use-row"><i class="fas fa-heartbeat"></i> immunity · sweetener · ayurveda</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Etapalli / Dhanora range
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Vananchal Honey Mission</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 87672 54321</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>honey@vananchal.org</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 3 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Mosambi sweet lime">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">3</span>
+                <span class="product-name">Mosambi (Sweet lime)</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-lemon" style="color:#86a341;"></i>  
+                Juicy, high vitamin C, grown along Indravati river. Chemical-free.
+                <div class="use-row"><i class="fas fa-wine-bottle"></i> juice · fresh fruit</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Bhamragad / Somnur phata
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Indravati farmers group</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 98234 76123</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>indravatifarms@coop.in</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 4 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/5946746/pexels-photo-5946746.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Forest tamarind">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">4</span>
+                <span class="product-name">Forest Tamarind</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-seedling" style="color:#9e6b2b;"></i>  
+                Handpicked, deseeded blocks, deep sourness, no preservatives.
+                <div class="use-row"><i class="fas fa-utensils"></i> chutney · soup · spice</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Aheri / Penganda forest
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Van dhan kendra</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 99755 44211</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>tribal.tamarind@gmail.com</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 5 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Kodo millet">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">5</span>
+                <span class="product-name">Kodo Millet</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-wheat-alt" style="color:#a77b3c;"></i>  
+                Traditional grain, low glycemic, drought resilient, high fibre.
+                <div class="use-row"><i class="fas fa-bowl-food"></i> flour · upma · snacks</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Korchi / Mardala
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Shri millet women coop</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 88051 23789</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>millet.shree@coop.in</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========= CARD 6 ========= -->
+    <div class="product-card">
+        <div class="card-image">
+            <img src="https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Banana">
+        </div>
+        <div class="card-content">
+            <div class="name-section">
+                <span class="card-number">6</span>
+                <span class="product-name">Gadchiroli Banana</span>
+            </div>
+            <div class="description">
+                <i class="fas fa-tree" style="color:#3f9142;"></i>  
+                Robusta variety, sweet creamy, small bunches. Grown without chemicals.
+                <div class="use-row"><i class="fas fa-bread-slice"></i> table purpose · chips</div>
+            </div>
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Armori / Vairagad
+            </div>
+            <div class="contact-block">
+                <div class="contact-item"><i class="fas fa-user-circle"></i> <strong>Dealer:</strong> <span>Baliraja farmer producer</span></div>
+                <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong>Mobile:</strong> <span>+91 93701 45236</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> <strong>Email:</strong> <span>banana.gadchiroli@fpo.org</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+            <p style="text-align: right; font-weight: 500; margin-top: 0.5rem;">✨ more in <strong>Product</strong> tab →</p>
+        </div>
+
+        <!-- Product pane (10 products) unchanged -->
+        <div id="productPane" class="tab-pane">
+            <div class="section-title"><i class="fas fa-box-open"></i> 10 agricultural products of Gadchiroli</div>
+            <div class="grid-4">
+                <!-- 1 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/4192809/pexels-photo-4192809.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="Turmeric">
+                    <div class="card-content"><h3>Lokbiro turmeric</h3><p>Fresh dried fingers, 100% organic, curcumin 5.0%.</p><span class="use-tag">curry, medicine</span></div>
+                </div>
+                <!-- 2 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="honey">
+                    <div class="card-content"><h3>Wild forest honey</h3><p>Collected by tribal coop, unprocessed, rich in antioxidants.</p><span class="use-tag">food, immunity</span></div>
+                </div>
+                <!-- 3 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="millet">
+                    <div class="card-content"><h3>Kutki millet</h3><p>Small grain (little millet), high fibre, gluten-free.</p><span class="use-tag">khichdi, bhakri</span></div>
+                </div>
+                <!-- 4 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/6287760/pexels-photo-6287760.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="rice">
+                    <div class="card-content"><h3>Ambemohar paddy</h3><p>Aromatic indigenous rice, soft texture, mango-like fragrance.</p><span class="use-tag">daily meals</span></div>
+                </div>
+                <!-- 5 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/4192805/pexels-photo-4192805.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="chilli">
+                    <div class="card-content"><h3>Gadchiroli red chilli</h3><p>Deep red colour, medium heat, rain-fed spicy notes.</p><span class="use-tag">spice, powder</span></div>
+                </div>
+                <!-- 6 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/5946746/pexels-photo-5946746.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="tamarind">
+                    <div class="card-content"><h3>Forest tamarind</h3><p>Handpicked, deseeded blocks, rich tangy flavour.</p><span class="use-tag">chutney, soup</span></div>
+                </div>
+                <!-- 7 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/5946601/pexels-photo-5946601.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="Mahua">
+                    <div class="card-content"><h3>Mahua flower</h3><p>Dried corolla, traditional sweetener, also liquor.</p><span class="use-tag">beverage, bakery</span></div>
+                </div>
+                <!-- 8 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/54330/artichoke-vegetable-healthy-eating-54330.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="Bamboo shoot">
+                    <div class="card-content"><h3>Bamboo shoot</h3><p>Tender shoots, fermented or boiled, forest delicacy.</p><span class="use-tag">curry, pickle</span></div>
+                </div>
+                <!-- 9 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/4192800/pexels-photo-4192800.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="ginger">
+                    <div class="card-content"><h3>Ginger (Adrak)</h3><p>Pungent, high oil content, rain-fed organic.</p><span class="use-tag">spice, tea</span></div>
+                </div>
+                <!-- 10 -->
+                <div class="prod-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/4192808/pexels-photo-4192808.jpeg?auto=compress&cs=tinysrgb&w=400&h=260&fit=crop" alt="pigeon pea">
+                    <div class="card-content"><h3>Tur (pigeon pea)</h3><p>Whole & split, protein rich, mixed cropping staple.</p><span class="use-tag">dal, sambar</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery pane (unchanged) -->
+        <div id="galleryPane" class="tab-pane">
+            <div class="section-title"><i class="fas fa-camera-retro"></i> glimpses from Gadchiroli farms</div>
+            <div class="grid-3">
+                <div class="gallery-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/2886937/pexels-photo-2886937.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop" alt="paddy field">
+                    <div class="card-content"><h3>Paddy transplantation</h3><p>Kharif season in Kurkheda block – community participation.</p></div>
+                </div>
+                <div class="gallery-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/1595107/pexels-photo-1595107.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop" alt="turmeric harvest">
+                    <div class="card-content"><h3>Turmeric harvest</h3><p>Farmers at Murmadi showing fresh organic turmeric.</p></div>
+                </div>
+                <div class="gallery-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/1587616/pexels-photo-1587616.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop" alt="vegetable market">
+                    <div class="card-content"><h3>Weekly vegetable mandi</h3><p>Local women selling produce at Armori.</p></div>
+                </div>
+                <div class="gallery-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/2886936/pexels-photo-2886936.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop" alt="organic farm">
+                    <div class="card-content"><h3>Certified organic farm</h3><p>Dhanora cluster – over 2000 farmers, no chemicals.</p></div>
+                </div>
+                <div class="gallery-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop" alt="honey collection">
+                    <div class="card-content"><h3>Wild honey extraction</h3><p>Tribal cooperative society, Etapalli forest.</p></div>
+                </div>
+                <div class="gallery-card">
+                    <img class="card-img" src="https://images.pexels.com/photos/4407314/pexels-photo-4407314.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop" alt="millet field">
+                    <div class="card-content"><h3>Millet diversity block</h3><p> demonstration plot at Agriculture office.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About us pane (unchanged) -->
+        <div id="aboutPane" class="tab-pane">
+            <div class="about-block">
+                <h2><i class="fas fa-leaf"></i> District Collector Office, Gadchiroli</h2>
+                <p>🌾 The <strong>District Collector Office, Gadchiroli</strong> “We are working under the guidance of the District Collector, Gadchiroli, to provide an exhibition platform that highlights the diverse products of our district. This initiative is designed to support local producers by offering a space for marketing and consumer awareness. It is not intended for profit or revenue generation, but rather to inform and connect consumers with the rich industrial and agricultural heritage of Gadchiroli. Through this platform, we aim to strengthen community identity, encourage sustainable practices, and empower tribal and rural entrepreneurs.” and manage the 'Gadchiroli Agri-Brand'.</p>
+                <p>📍 Located near Collector Office, Complex Area, Mul Road, Gadchiroli – 442605<br>
+                📞 07132-223344 / 223355 (Collector Office Gadchiroli)<br>
+                ✉️ collector.gadchiroli@maharashtra.gov.in</p>
+                <div class="contact-row">
+                    <div><i class="fas fa-user-tie"></i> <strong>District Collector:</strong> Shri Avishyant Panda </div>
+                    <div><i class="fas fa-calendar-alt"></i> Helpdesk: Mon–Fri 9.45am–6.15pm</div>
+                    <div><i class="fas fa-hand-holding-heart"></i> Schemes: PM Kisan, soil health cards, rojgar</div>
+                </div>
+                <p style="margin-top: 1.5rem;">✨ <em>District Collector Gadchiroli – dedicated to uplift District economy through innovation and tribal empowerment.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+        <i class="fas fa-copyright"></i> 2025 District Collector Office, Gadchiroli. All rights reserved. | 
+        <i class="fas fa-cloud-sun"></i> औद्योगिक आणि कृषी उत्पादन समृद्धि
+    </div>
+
+    <!-- simple tab switching javascript -->
+    <script>
+        (function() {
+            const homeBtn = document.getElementById('tabHomeBtn');
+            const prodBtn = document.getElementById('tabProductBtn');
+            const galleryBtn = document.getElementById('tabGalleryBtn');
+            const aboutBtn = document.getElementById('tabAboutBtn');
+
+            const homePane = document.getElementById('homePane');
+            const prodPane = document.getElementById('productPane');
+            const galleryPane = document.getElementById('galleryPane');
+            const aboutPane = document.getElementById('aboutPane');
+
+            const tabs = [homeBtn, prodBtn, galleryBtn, aboutBtn];
+            const panes = [homePane, prodPane, galleryPane, aboutPane];
+
+            function setActiveTab(index) {
+                tabs.forEach((btn, i) => {
+                    if (i === index) {
+                        btn.classList.add('active');
+                        panes[i].classList.add('active-pane');
+                    } else {
+                        btn.classList.remove('active');
+                        panes[i].classList.remove('active-pane');
+                    }
+                });
+            }
+
+            homeBtn.addEventListener('click', (e) => { e.preventDefault(); setActiveTab(0); });
+            prodBtn.addEventListener('click', (e) => { e.preventDefault(); setActiveTab(1); });
+            galleryBtn.addEventListener('click', (e) => { e.preventDefault(); setActiveTab(2); });
+            aboutBtn.addEventListener('click', (e) => { e.preventDefault(); setActiveTab(3); });
+        })();
+    </script>
+    <!-- images credits: pexels (free to use) – purely demonstrative -->
+</body>
+</html>
