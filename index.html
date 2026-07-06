@@ -1,1 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gadchiroli · District Product Exhibition</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Roboto,system-ui,sans-serif; }
+    body { background:#f5f7f2; color:#1e2f23; line-height:1.5; }
+    .header { background:linear-gradient(145deg,#1f4b2e 0%,#2d6a4f 100%); color:white; padding:1rem 2rem; box-shadow:0 4px 12px rgba(0,40,10,0.2); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; }
+    .header h1 { font-weight:500; font-size:2rem; display:flex; align-items:center; gap:10px; }
+    .header h1 i { color:#e6d5a8; }
+    .header .subhead { font-size:1rem; margin-top:6px; opacity:0.9; font-style:italic; }
+    .lang-toggle { background:#fefae0; color:#1f4b2e; border:none; padding:0.5rem 1.2rem; border-radius:40px; font-weight:700; font-size:1rem; cursor:pointer; display:flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+    .lang-toggle:hover { background:#f5e5c9; transform:scale(1.02); }
+    .tab-bar { background-color:#154b2b; padding:0 2rem; display:flex; flex-wrap:wrap; gap:0.25rem; border-bottom:3px solid #eab308; }
+    .tab-link { background:transparent; border:none; color:#f0f7e6; padding:1rem 2rem; font-size:1.2rem; font-weight:600; cursor:pointer; transition:all 0.15s; border-radius:12px 12px 0 0; display:inline-flex; align-items:center; gap:8px; }
+    .tab-link i { font-size:1.1rem; }
+    .tab-link:hover { background:#21633e; color:white; }
+    .tab-link.active { background:#fefae0; color:#1f4b2e; border-bottom:4px solid #f5c542; }
+    .container { max-width:1400px; margin:2rem auto; padding:0 1.5rem; }
+    .tab-pane { display:none; animation:fade 0.3s ease; }
+    .tab-pane.active-pane { display:block; }
+    @keyframes fade { from { opacity:0.5; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+    .section-title { font-size:2rem; color:#1e4d2e; border-left:10px solid #8fc0a9; padding-left:1.2rem; margin:2rem 0 1.5rem 0; font-weight:600; }
+    .section-title i { margin-right:12px; color:#2d6a4f; }
+    .product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; margin-bottom:2rem; }
+    .product-card { background:#ffffff; border-radius:28px; box-shadow:0 20px 30px -8px rgba(30,60,30,0.2); overflow:hidden; transition:transform 0.2s ease; display:flex; flex-direction:column; border:1px solid #cfdec5; }
+    .product-card:hover { transform:translateY(-6px); }
+    .card-image { width:100%; height:190px; background-color:#b3cfaa; overflow:hidden; border-bottom:3px solid #eab30833; }
+    .card-image img { width:100%; height:100%; object-fit:cover; display:block; }
+    .card-content { padding:1.5rem 1.2rem 1.2rem; background:white; display:flex; flex-direction:column; gap:0.5rem; }
+    .name-section { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+    .card-number { background:#1e4d2e; color:white; font-weight:700; font-size:1.2rem; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; border-radius:60px; }
+    .product-name { font-size:1.5rem; font-weight:700; color:#153e21; line-height:1.3; }
+    .cat-badge { background:#f5e5c9; color:#7d4e1a; font-size:0.75rem; font-weight:700; padding:0.15rem 1rem; border-radius:30px; display:inline-block; border:1px solid #e0b87b; }
+    .gi-badge { background:#d4edda; color:#155724; font-size:0.7rem; font-weight:600; padding:0.15rem 0.8rem; border-radius:20px; display:inline-block; border:1px solid #b7d7b0; margin-left:6px; }
+    .description { font-size:0.95rem; color:#2c5234; background:#f6fbf4; padding:0.6rem 1rem; border-radius:0 12px 12px 0; border-left:3px solid #8fc0a9; margin:0.2rem 0; }
+    .location { font-size:0.85rem; color:#3d5f47; background:#ecf6ec; padding:4px 14px; border-radius:30px; display:inline-block; }
+    .contact-block { margin-top:6px; border-top:1px dashed #d0e0d0; padding-top:8px; font-size:0.9rem; color:#1f3d27; }
+    .contact-item { display:flex; align-items:center; gap:6px; margin:3px 0; }
+    .contact-item i { width:20px; color:#2d6a4f; }
+    .collector-message { background:linear-gradient(135deg,#fdfcfb 0%,#e2d1c3 100%); border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15); padding:25px; margin:30px 0; display:flex; align-items:center; flex-wrap:wrap; }
+    .collector-message img { width:120px; height:120px; border-radius:50%; border:3px solid #c5942b; object-fit:cover; }
+    .footer { background:#173e21; color:#e2eedb; text-align:center; padding:1.8rem; margin-top:3rem; font-size:1rem; }
+    .more-btn { background:#1f4b2e; color:white; border:none; padding:10px 28px; border-radius:40px; font-weight:600; font-size:1.1rem; cursor:pointer; transition:0.2s; display:inline-flex; align-items:center; gap:10px; }
+    .more-btn:hover { background:#2d6a4f; transform:scale(1.03); }
+    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.8rem; }
+    .gallery-card { background:white; border-radius:24px; overflow:hidden; box-shadow:0 8px 18px rgba(0,30,10,0.08); transition:0.2s; border:1px solid #d0e2cf; }
+    .gallery-card:hover { transform:translateY(-4px); }
+    .gallery-card img { width:100%; height:180px; object-fit:cover; display:block; }
+    .gallery-card .card-content { padding:1rem; }
+    .gallery-card h4 { color:#1d4d2b; margin-bottom:0.25rem; }
+    .achieve-row { display:flex; flex-wrap:wrap; background:#e1f0da; border-radius:40px; padding:2rem; margin-bottom:2.5rem; align-items:center; gap:2rem; }
+    .achieve-text { flex:2 1 300px; }
+    .achieve-text h2 { color:#1a4d2c; font-size:2rem; margin-bottom:0.8rem; }
+    .achieve-text ul { list-style:none; font-size:1.1rem; }
+    .achieve-text li { margin:0.7rem 0; display:flex; align-items:center; gap:10px; }
+    .achieve-text i { color:#c5942b; width:26px; font-size:1.3rem; }
+    .achieve-img { flex:1 1 200px; border-radius:30px; overflow:hidden; box-shadow:0 12px 18px rgba(0,0,0,0.1); }
+    .achieve-img img { width:100%; height:200px; object-fit:cover; }
+    .about-block { background:#f8fbf4; border-radius:40px; padding:2.5rem; border:1px solid #bcddb2; box-shadow:0 8px 0 #588157; }
+    .about-block h2 { color:#1a5a2a; margin-bottom:1rem; }
+    .about-block p { font-size:1.2rem; margin:1rem 0; }
+    .contact-row { display:flex; flex-wrap:wrap; gap:2rem; margin-top:2rem; background:#d9e9d4; border-radius:30px; padding:1.8rem; }
+    @media (max-width:700px) { .tab-link { padding:0.8rem 1rem; font-size:1rem; } .header h1 { font-size:1.5rem; } .header { flex-direction:column; align-items:flex-start; gap:0.8rem; } }
 
+    /* language visibility - all content toggles */
+    .lang-en .mr-only { display:none; }
+    .lang-mr .en-only { display:none; }
+    /* for product descriptions */
+    .desc-en, .desc-mr { display:none; }
+    .lang-en .desc-en { display:block; }
+    .lang-mr .desc-mr { display:block; }
+    .lang-en .desc-mr { display:none; }
+    .lang-mr .desc-en { display:none; }
+    /* labels */
+    .gi-label-en, .gi-label-mr { display:none; }
+    .lang-en .gi-label-en { display:inline; }
+    .lang-mr .gi-label-mr { display:inline; }
+    .seller-label-en, .seller-label-mr { display:none; }
+    .lang-en .seller-label-en { display:inline; }
+    .lang-mr .seller-label-mr { display:inline; }
+    .mobile-label-en, .mobile-label-mr { display:none; }
+    .lang-en .mobile-label-en { display:inline; }
+    .lang-mr .mobile-label-mr { display:inline; }
+    .origin-label-en, .origin-label-mr { display:none; }
+    .lang-en .origin-label-en { display:inline; }
+    .lang-mr .origin-label-mr { display:inline; }
+    /* collector name */
+    .collector-name-en, .collector-name-mr { display:none; }
+    .lang-en .collector-name-en { display:inline; }
+    .lang-mr .collector-name-mr { display:inline; }
+    .collector-title-en, .collector-title-mr { display:none; }
+    .lang-en .collector-title-en { display:inline; }
+    .lang-mr .collector-title-mr { display:inline; }
+    /* location and seller names are already in devanagari, but we keep them as is */
+    /* for product names we have both scripts in data */
+    .pname-en, .pname-mr { display:none; }
+    .lang-en .pname-en { display:inline; }
+    .lang-mr .pname-mr { display:inline; }
+    .place-en, .place-mr { display:none; }
+    .lang-en .place-en { display:inline; }
+    .lang-mr .place-mr { display:inline; }
+    .seller-en, .seller-mr { display:none; }
+    .lang-en .seller-en { display:inline; }
+    .lang-mr .seller-mr { display:inline; }
+    .origin-en, .origin-mr { display:none; }
+    .lang-en .origin-en { display:inline; }
+    .lang-mr .origin-mr { display:inline; }
+    .gi-value-en, .gi-value-mr { display:none; }
+    .lang-en .gi-value-en { display:inline; }
+    .lang-mr .gi-value-mr { display:inline; }
+  </style>
+</head>
+<body class="lang-en">
+<div class="header">
+    <div>
+        <h1><i class="fas fa-seedling"></i> <span class="en-only">Gadchiroli · District Product Exhibition</span><span class="mr-only">गडचिरोली · जिल्हा उत्पादन प्रदर्शन</span></h1>
+        <div class="subhead"><span class="en-only">District Collector Office · 32 local products</span><span class="mr-only">जिल्हाधिकारी कार्यालय · ३२ स्थानिक उत्पादने</span></div>
+    </div>
+    <button class="lang-toggle" id="langToggle"><i class="fas fa-globe"></i> <span id="langLabel">मराठी</span></button>
+</div>
+
+<div class="tab-bar">
+    <button class="tab-link active" id="tabHomeBtn"><i class="fas fa-home"></i> <span class="en-only">Home</span><span class="mr-only">मुख्यपृष्ठ</span></button>
+    <button class="tab-link" id="tabProductBtn"><i class="fas fa-apple-alt"></i> <span class="en-only">Product</span><span class="mr-only">उत्पादने</span></button>
+    <button class="tab-link" id="tabGalleryBtn"><i class="fas fa-images"></i> <span class="en-only">Gallery</span><span class="mr-only">गॅलरी</span></button>
+    <button class="tab-link" id="tabAboutBtn"><i class="fas fa-info-circle"></i> <span class="en-only">About us</span><span class="mr-only">आमच्याबद्दल</span></button>
+</div>
+
+<div class="container">
+    <!-- ========== HOME PANE ========== -->
+    <div id="homePane" class="tab-pane active-pane">
+        <div class="achieve-row">
+            <div class="achieve-text">
+                <h2><i class="fas fa-trophy" style="color:#c5942b;"></i> <span class="en-only">Gadchiroli Achievements</span><span class="mr-only">गडचिरोलीची उपलब्धी</span></h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> <span class="en-only">Largest organic turmeric producer in Maharashtra (2023)</span><span class="mr-only">महाराष्ट्रातील सर्वात मोठा सेंद्रिय हळद उत्पादक (२०२३)</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span class="en-only">1,20,000+ farmers under soil health mission</span><span class="mr-only">१,२०,०००+ शेतकरी मृदा आरोग्य अभियानांतर्गत</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span class="en-only">Record paddy yield: 3200 kg/hectare (2024)</span><span class="mr-only">विक्रमी भात उत्पादन: ३२०० किलो/हेक्टर (२०२४)</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span class="en-only">38% increase in millet cultivation since 2022</span><span class="mr-only">२०२२ पासून बाजरी लागवडीत ३८% वाढ</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span class="en-only">Best district for forest farming (minor produce)</span><span class="mr-only">वनशेतीसाठी सर्वोत्कृष्ट जिल्हा (लघु उत्पादन)</span></li>
+                </ul>
+            </div>
+            <div class="achieve-img"><img src="https://images.pexels.com/photos/972887/pexels-photo-972887.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="field" loading="lazy"></div>
+        </div>
+
+        <div class="collector-message">
+            <div style="flex:0 0 120px; text-align:center; margin-right:20px;">
+                <img src="https://cdn.s3waas.gov.in/s35e388103a391daabe3de1d76a6739ccd/uploads/2024/12/2024122693.jpeg" alt="Collector">
+            </div>
+            <div style="flex:1; text-align:left;">
+                <h3 style="color:#2c3e50; font-size:22px;"><span class="en-only">Message from the District Collector</span><span class="mr-only">जिल्हाधिकाऱ्यांचा संदेश</span></h3>
+                <p style="font-size:16px; color:#333; margin:12px 0; line-height:1.6;">
+                    <span class="en-only">This exhibition platform highlights Gadchiroli's products and achievements. It is a non-profit initiative to inform consumers and support local producers.</span>
+                    <span class="mr-only">हे प्रदर्शन व्यासपीठ गडचिरोलीची उत्पादने आणि उपलब्धी अधोरेखित करते. ही एक ना-नफा उपक्रम आहे जी ग्राहकांना माहिती देण्यासाठी आणि स्थानिक उत्पादकांना पाठिंबा देण्यासाठी आहे.</span>
+                </p>
+                <strong style="color:#c5942b; font-size:17px;">
+                    <span class="collector-name-en">Shri Avishyant Panda, IAS</span>
+                    <span class="collector-name-mr">श्री अविश्यंत पांडा, IAS</span>
+                </strong><br>
+                <span style="color:#555;">
+                    <span class="collector-title-en">District Collector, Gadchiroli</span>
+                    <span class="collector-title-mr">जिल्हाधिकारी, गडचिरोली</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- 6 featured products on home -->
+        <div class="section-title"><i class="fas fa-star"></i> <span class="en-only">Featured Products</span><span class="mr-only">वैशिष्ट्यपूर्ण उत्पादने</span></div>
+        <div class="product-grid" id="featuredGrid"></div>
+        <div style="text-align:center; margin:2rem 0;">
+            <button class="more-btn" id="goToProductBtn"><i class="fas fa-arrow-right"></i> <span class="en-only">See all 32 products →</span><span class="mr-only">सर्व ३२ उत्पादने पहा →</span></button>
+        </div>
+    </div>
+
+    <!-- ========== PRODUCT PANE ========== -->
+    <div id="productPane" class="tab-pane">
+        <div class="section-title"><i class="fas fa-utensils"></i> <span class="en-only">Food Products</span><span class="mr-only">अन्न उत्पादने</span></div>
+        <div class="product-grid" id="foodGrid"></div>
+
+        <div class="section-title"><i class="fas fa-mortar-pestle"></i> <span class="en-only">Medicinal Products</span><span class="mr-only">औषधी उत्पादने</span></div>
+        <div class="product-grid" id="medicinalGrid"></div>
+
+        <div class="section-title"><i class="fas fa-tree"></i> <span class="en-only">Woodcraft & Handicraft</span><span class="mr-only">लाकडी कला व हस्तकला</span></div>
+        <div class="product-grid" id="woodcraftGrid"></div>
+    </div>
+
+    <!-- ========== GALLERY PANE ========== -->
+    <div id="galleryPane" class="tab-pane">
+        <div class="section-title"><i class="fas fa-images"></i> <span class="en-only">Product Gallery</span><span class="mr-only">उत्पादन गॅलरी</span></div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+
+    <!-- ========== ABOUT PANE ========== -->
+    <div id="aboutPane" class="tab-pane">
+        <div class="about-block">
+            <h2><i class="fas fa-leaf"></i> <span class="en-only">District Collector Office, Gadchiroli</span><span class="mr-only">जिल्हाधिकारी कार्यालय, गडचिरोली</span></h2>
+            <p>
+                <span class="en-only">🌾 The <strong>District Collector Office, Gadchiroli</strong> “We are working under the guidance of the District Collector, Gadchiroli, to provide an exhibition platform that highlights the diverse products of our district. This initiative is designed to support local producers by offering a space for marketing and consumer awareness. It is not intended for profit or revenue generation, but rather to inform and connect consumers with the rich industrial and agricultural heritage of Gadchiroli. Through this platform, we aim to strengthen community identity, encourage sustainable practices, and empower tribal and rural entrepreneurs.” and manage the 'Gadchiroli Agri-Brand'.</span>
+                <span class="mr-only">🌾 <strong>जिल्हाधिकारी कार्यालय, गडचिरोली</strong> “आम्ही जिल्हाधिकारी, गडचिरोली यांच्या मार्गदर्शनाखाली काम करत आहोत, जे आमच्या जिल्ह्यातील विविध उत्पादनांना अधोरेखित करणारे प्रदर्शन व्यासपीठ प्रदान करते. ही उपक्रम स्थानिक उत्पादकांना विपणन आणि ग्राहक जागरूकतेसाठी जागा देऊन पाठिंबा देण्यासाठी डिझाइन केली आहे. हा नफा किंवा महसूल निर्मितीसाठी नसून, गडचिरोलीच्या समृद्ध औद्योगिक आणि कृषी वारशाशी ग्राहकांना माहिती देण्यासाठी आणि जोडण्यासाठी आहे. या व्यासपीठाद्वारे, आम्ही समुदाय ओळख मजबूत करणे, शाश्वत पद्धतींना प्रोत्साहन देणे आणि आदिवासी व ग्रामीण उद्योजकांना सक्षम करणे हे उद्दिष्ट ठेवतो.” आणि 'गडचिरोली कृषी-ब्रँड' व्यवस्थापित करतो.</span>
+            </p>
+            <p>
+                <span class="en-only">📍 Located near Collector Office, Complex Area, Mul Road, Gadchiroli – 442605<br>📞 07132-223344 / 223355 (Collector Office Gadchiroli)<br>✉️ collector.gadchiroli@maharashtra.gov.in</span>
+                <span class="mr-only">📍 जिल्हाधिकारी कार्यालयाजवळ, कॉम्प्लेक्स एरिया, मुळ रोड, गडचिरोली – ४४२६०५<br>📞 ०७१३२-२२३३४४ / २२३३५५ (जिल्हाधिकारी कार्यालय गडचिरोली)<br>✉️ collector.gadchiroli@maharashtra.gov.in</span>
+            </p>
+            <div class="contact-row">
+                <div><i class="fas fa-user-tie"></i> <strong><span class="en-only">District Collector:</span><span class="mr-only">जिल्हाधिकारी:</span></strong> <span class="collector-name-en">Shri Avishyant Panda</span><span class="collector-name-mr">श्री अविश्यंत पांडा</span></div>
+                <div><i class="fas fa-calendar-alt"></i> <span class="en-only">Helpdesk:</span><span class="mr-only">मदत केंद्र:</span> Mon–Fri 9.45am–6.15pm</div>
+                <div><i class="fas fa-hand-holding-heart"></i> <span class="en-only">Schemes:</span><span class="mr-only">योजना:</span> PM Kisan, soil health cards, rojgar</div>
+            </div>
+            <p style="margin-top:1.5rem;">✨ <em><span class="en-only">District Collector Gadchiroli – dedicated to uplift District economy through innovation and tribal empowerment.</span><span class="mr-only">जिल्हाधिकारी गडचिरोली – नवोपक्रम आणि आदिवासी सक्षमीकरणाद्वारे जिल्हा अर्थव्यवस्था उंचावण्यासाठी समर्पित.</span></em></p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <i class="fas fa-copyright"></i> 2025 District Collector Office, Gadchiroli. All rights reserved. 
+    <i class="fas fa-cloud-sun"></i> औद्योगिक आणि कृषी उत्पादन समृद्धि
+</div>
+
+<script>
+// -------- data from excel (32 products) with FULL bilingual fields --------
+const products = [
+  { id:1, name_en:"Machhi Loncha (Fish Pickle)", name_mr:"मच्छी लोनचा", cat:"Food", desc_en:"Katla, Rohu, Rupchand, Pagas 150-250g. Fresh fish, spices, mustard, garlic, ginger, red chili, turmeric, salt, oil. Glass/plastic jar.", desc_mr:"कतला, रोहू, रुपचंद, पगास १५०-२५० ग्रॅम. ताजे मासे, मसाले, मोहरी, लसूण, आले, तिखट, हळद, मीठ, तेल. काच/प्लास्टिक भरणी.", gi:"No", gi_mr:"नाही", seller_en:"Shantimata SHG", seller_mr:"शांतीमाता स्वयंसहाय्यता समूह", mobile:"9284677838", place_en:"Harinagar", place_mr:"हरीनगर", origin_en:"Harinagar", origin_mr:"हरीनगर", img:"https://images.pexels.com/photos/6199643/pexels-photo-6199643.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:2, name_en:"Mohua Laddu", name_mr:"मोह लाडू", cat:"Food", desc_en:"Nutritious sweet made from Mahua flowers. Natural sweetness, popular in rural/tribal areas.", desc_mr:"मोह (महुआ) फुलांपासून पौष्टिक गोड पदार्थ. नैसर्गिक गोडवा, ग्रामीण/आदिवासी लोकप्रिय.", gi:"No", gi_mr:"नाही", seller_en:"Khushi SHG", seller_mr:"खुशी स्वयंसहाय्यता समूह", mobile:"9403426603", place_en:"Khudirampalli", place_mr:"खुदिरामपल्ली", origin_en:"Khudirampalli", origin_mr:"खुदिरामपल्ली", img:"https://images.pexels.com/photos/6120207/pexels-photo-6120207.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:3, name_en:"Chili Powder", name_mr:"मिरची पावडर", cat:"Food", desc_en:"100% selected dry red chillies, dark red, spicy aromatic, adulteration-free.", desc_mr:"१००% निवडक सुक्या लाल मिरच्या, गडद लाल, तिखट सुगंधी, भेसळमुक्त.", gi:"No", gi_mr:"नाही", seller_en:"Kalpavriksha Producer Group", seller_mr:"कल्पवृक्ष उत्पादक गट", mobile:"9021806471", place_en:"Lagam Chak", place_mr:"लगाम चक", origin_en:"Lagam Chek", origin_mr:"लगाम चेक", img:"https://images.pexels.com/photos/4192805/pexels-photo-4192805.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:4, name_en:"Turmeric Powder", name_mr:"हळद पावडर", cat:"Food", desc_en:"100% pure quality turmeric, yellow color, natural fresh aroma.", desc_mr:"१००% शुद्ध दर्जेदार हळद, पिवळा रंग, नैसर्गिक ताजा सुगंध.", gi:"No", gi_mr:"नाही", seller_en:"Kalpavriksha Producer Group", seller_mr:"कल्पवृक्ष उत्पादक गट", mobile:"9021806471", place_en:"Lagam Chak", place_mr:"लगाम चक", origin_en:"Lagam Chek", origin_mr:"लगाम चेक", img:"https://images.pexels.com/photos/4192809/pexels-photo-4192809.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:5, name_en:"Chikki", name_mr:"चिक्की", cat:"Food", desc_en:"Made from jaggery and peanuts, traditional sweet.", desc_mr:"गुळ व शेंगदाणे पासून तयार, पारंपरिक गोड पदार्थ.", gi:"No", gi_mr:"नाही", seller_en:"Prayas Prabhag Sangh", seller_mr:"प्रयास प्रभाग संघ", mobile:"9579088600", place_en:"Kondhala", place_mr:"कोंढाळा", origin_en:"Kondhala", origin_mr:"कोंढाळा", img:"https://images.pexels.com/photos/3962289/pexels-photo-3962289.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:6, name_en:"Sanitary Pad", name_mr:"सॅनिटरी पॅड", cat:"Food", desc_en:"Hygiene product for menstrual care.", desc_mr:"स्त्रियांसाठी मासिक पाळी करिता स्वच्छता उत्पादन.", gi:"No", gi_mr:"नाही", seller_en:"Spandan Prabhag Sangh", seller_mr:"स्पंदन प्रभाग संघ", mobile:"9421904270", place_en:"Shankarpur", place_mr:"शंकरपूर", origin_en:"Shankarpur", origin_mr:"शंकरपूर", img:"https://images.pexels.com/photos/3844582/pexels-photo-3844582.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:7, name_en:"Mohua Laddu", name_mr:"मोहा लाडू", cat:"Food", desc_en:"Laddu made from Mahua flowers.", desc_mr:"मोहा फूल पासून बनवलेले लाडू.", gi:"No", gi_mr:"नाही", seller_en:"Vandana Ashok Gawade", seller_mr:"वंदना अशोक गावडे", mobile:"9403428450", place_en:"Etapalli", place_mr:"एटापल्ली", origin_en:"Jivangatta", origin_mr:"जीवनगट्टा", img:"https://images.pexels.com/photos/6120207/pexels-photo-6120207.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:8, name_en:"Ambadi Powder", name_mr:"अंबाडी पावडर", cat:"Food", desc_en:"Powder made from Ambadi flowers.", desc_mr:"अंबाडी फुला पासून बनवलेले पावडर.", gi:"No", gi_mr:"नाही", seller_en:"Harsha Sundarsaha Kumre", seller_mr:"हर्षा सुन्दरसहा कुमरे", mobile:"9403625843", place_en:"Etapalli", place_mr:"एटापल्ली", origin_en:"Jeveli", origin_mr:"जेवेली", img:"https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:9, name_en:"Coconut Laddu", name_mr:"खोब्रा लाडू", cat:"Food", desc_en:"Laddu made from coconut.", desc_mr:"नारल पासून बनवलेले लाडू.", gi:"No", gi_mr:"नाही", seller_en:"Kanan Suresh Biswas", seller_mr:"कानन सुरेश बिस्वास", mobile:"9404726236", place_en:"Etapalli", place_mr:"एटापल्ली", origin_en:"Etapalli", origin_mr:"एटापल्ली", img:"https://images.pexels.com/photos/5703080/pexels-photo-5703080.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:10, name_en:"Mushroom", name_mr:"मशरूम", cat:"Food", desc_en:"Mushroom cultivation.", desc_mr:"मशरूम उत्पादन.", gi:"No", gi_mr:"नाही", seller_en:"Kamal Nandu Narote", seller_mr:"कमाल नंदू नरोटे", mobile:"9405927915", place_en:"Etapalli", place_mr:"एटापल्ली", origin_en:"Jivangatta", origin_mr:"जीवनगट्टा", img:"https://images.pexels.com/photos/1141250/pexels-photo-1141250.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:11, name_en:"Mohua Laddu", name_mr:"मोह ल़ड्डु", cat:"Food", desc_en:"Nutritious laddu from Mahua flowers, energy booster.", desc_mr:"मोहाच्या फुलांपासून पौष्टिक लाडू, ऊर्जा वर्धक.", gi:"No", gi_mr:"नाही", seller_en:"Sanjivani Producer Group", seller_mr:"संजीवनी उत्पादक गट", mobile:"9421897627", place_en:"Bhimpur", place_mr:"भिमपुर", origin_en:"Bhimpur", origin_mr:"भिमपुर", img:"https://images.pexels.com/photos/6120207/pexels-photo-6120207.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:12, name_en:"Mohua Rab", name_mr:"मोह राब", cat:"Medicinal", desc_en:"Pure rab from dried Mahua flowers, beneficial for cough and asthma.", desc_mr:"सुकलेल्या मोहाच्या फुलांच्या रसापासून शुद्ध राब, खोकला-दम्यास फायदेशीर.", gi:"No", gi_mr:"नाही", seller_en:"Sanjivani Producer Group", seller_mr:"संजीवनी उत्पादक गट", mobile:"9421897628", place_en:"Bhimpur", place_mr:"भिमपुर", origin_en:"Bhimpur", origin_mr:"भिमपुर", img:"https://images.pexels.com/photos/4126654/pexels-photo-4126654.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:13, name_en:"Honey", name_mr:"शहद", cat:"Food", desc_en:"Natural pure honey from Gadchiroli forests, immunity booster.", desc_mr:"गडचिरोलीतील जंगलांमधून नैसर्गिक शुद्ध मध, प्रतिकारशक्ती वर्धक.", gi:"No", gi_mr:"नाही", seller_en:"Emmanuel Producer Group", seller_mr:"ईम्मानुएल उत्पादक गट", mobile:"9403079563", place_en:"Jamnara", place_mr:"जामणारा", origin_en:"Jamnara", origin_mr:"जामणारा", img:"https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:14, name_en:"Toli Oil", name_mr:"टोळी तेल", cat:"Medicinal", desc_en:"Beneficial for joint pain, bone pain, skin diseases, reducing facial spots.", desc_mr:"सांधेदुखी, हाडांचे दुखणे, त्वचारोग, चेहऱ्यावरील डाग कमी करण्यास फायदेशीर.", gi:"No", gi_mr:"नाही", seller_en:"Rajmateshwari Producer Group", seller_mr:"राजमातेश्वरी उत्पादक गट", mobile:"9401505192", place_en:"Satputi", place_mr:"सातपुती", origin_en:"Pandharigota", origin_mr:"पंढरीगोटा", img:"https://images.pexels.com/photos/4126116/pexels-photo-4126116.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:15, name_en:"Organic Turmeric", name_mr:"सेंद्रिय हळद", cat:"Food", desc_en:"Chemical-free organic turmeric.", desc_mr:"रासायनिक खत विरहित सेंद्रिय तांदूळ (हळद).", gi:"No", gi_mr:"नाही", seller_en:"Ma Sharada Saving Group", seller_mr:"मा शारदा बचत गट", mobile:"8275606325", place_en:"Navegaon", place_mr:"नवेगाव", origin_en:"Navegaon", origin_mr:"नवेगाव", img:"https://images.pexels.com/photos/4192809/pexels-photo-4192809.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:16, name_en:"Vermicompost", name_mr:"गांडूळ खत", cat:"Medicinal", desc_en:"Increases crop productivity, organic fertilizer.", desc_mr:"पिकाची उत्पादकता वाढवते, सेंद्रिय खत.", gi:"No", gi_mr:"नाही", seller_en:"Ujwala Dhan Producer Group", seller_mr:"उज्वला धान उत्पादक संघ", mobile:"7972087166", place_en:"Velgur", place_mr:"वेलगुर", origin_en:"Velgur", origin_mr:"वेलगुर", img:"https://images.pexels.com/photos/4588024/pexels-photo-4588024.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:17, name_en:"Organic Rice", name_mr:"सेंद्रिय तांदूळ", cat:"Food", desc_en:"Chemical-free organic rice.", desc_mr:"रासायनिक खत विरहित सेंद्रिय तांदूळ.", gi:"No", gi_mr:"नाही", seller_en:"Birsamunda Organic Group", seller_mr:"बिरसामुंडा सेंद्रिय गट", mobile:"9529895466", place_en:"Chirepalli", place_mr:"चिरेपल्ली", origin_en:"Chirepalli", origin_mr:"चिरेपल्ली", img:"https://images.pexels.com/photos/6287760/pexels-photo-6287760.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:18, name_en:"Pigeon Pea (Tur Dal)", name_mr:"तूर डाळ", cat:"Food", desc_en:"Chemical-free organic pigeon pea.", desc_mr:"रासायनिक खत विरहित सेंद्रिय तूर डाळ.", gi:"No", gi_mr:"नाही", seller_en:"Ashirwad SHG", seller_mr:"आशीर्वाद स्वयं सहाय्यता समूह", mobile:"9390661476", place_en:"Marneli", place_mr:"मरनेली", origin_en:"Marneli", origin_mr:"मरनेली", img:"https://images.pexels.com/photos/4192808/pexels-photo-4192808.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:19, name_en:"Green Gram (Mug Dal)", name_mr:"मुग डाळ", cat:"Food", desc_en:"Chemical-free organic green gram.", desc_mr:"रासायनिक खत विरहित सेंद्रिय मुग डाळ.", gi:"No", gi_mr:"नाही", seller_en:"Sharada Producer Group", seller_mr:"शारदा उत्पादक गट", mobile:"9403522378", place_en:"Jognaguda", place_mr:"जोगनगुडा", origin_en:"Jognaguda", origin_mr:"जोगनगुडा", img:"https://images.pexels.com/photos/4192808/pexels-photo-4192808.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:20, name_en:"Organic Pulses", name_mr:"सेंद्रिय कडधान्ये", cat:"Food", desc_en:"Chemical-free organic pulses.", desc_mr:"रासायनिक खत विरहित सेंद्रिय कडधान्ये.", gi:"No", gi_mr:"नाही", seller_en:"Jay Perasapen Group", seller_mr:"जय पेरसापेन समूह", mobile:"9529061154", place_en:"Rajaram", place_mr:"राजाराम", origin_en:"Rajaram", origin_mr:"राजाराम", img:"https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:21, name_en:"Sesame (Til)", name_mr:"तीळ", cat:"Food", desc_en:"Chemical-free organic sesame.", desc_mr:"रासायनिक खत विरहित सेंद्रिय तीळ.", gi:"No", gi_mr:"नाही", seller_en:"Jay Bhim Group", seller_mr:"जय भीम समूह", mobile:"8010400369", place_en:"Chalevada", place_mr:"छलेवाडा", origin_en:"Chalevada", origin_mr:"छलेवाडा", img:"https://images.pexels.com/photos/4192809/pexels-photo-4192809.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:22, name_en:"Safety Pad", name_mr:"सुरक्षा पड", cat:"Medicinal", desc_en:"Safety pad for menstrual care.", desc_mr:"स्त्रियांसाठी मासिक पाळी करिता सुरक्षा.", gi:"No", gi_mr:"नाही", seller_en:"Pragati Mahila Prabhag Sangh", seller_mr:"प्रगती महिला प्रभाग संघ", mobile:"7822961319", place_en:"Nagpalli", place_mr:"नागेपल्ली", origin_en:"Nagpalli", origin_mr:"नागेपल्ली", img:"https://images.pexels.com/photos/3844582/pexels-photo-3844582.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:23, name_en:"Turmeric Powder (Prerana)", name_mr:"हळद पावडर (प्रेरणा)", cat:"Food", desc_en:"All types of spices and turmeric powder.", desc_mr:"सर्व प्रकारचे मसाले व हळदी पावडर.", gi:"No", gi_mr:"नाही", seller_en:"Prerana SHG", seller_mr:"प्रेरणा स्वयं सहायता समूह", mobile:"9689185977", place_en:"Lakhamapur Bori", place_mr:"लखमापूर बोरी", origin_en:"Lakhamapur Bori", origin_mr:"लखमापूर बोरी", img:"https://images.pexels.com/photos/4192809/pexels-photo-4192809.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:24, name_en:"Sanskruti Mutton Masala", name_mr:"संस्कृती मटन मसाला", cat:"Food", desc_en:"All types of spice powders, to make food tasty.", desc_mr:"सर्व प्रकारचे मसाले पावडर, अन्न स्वादिष्ट बनवण्यासाठी.", gi:"No", gi_mr:"नाही", seller_en:"Prerana SHG", seller_mr:"प्रेरणा स्वयं सहायता समूह", mobile:"9309903217", place_en:"Lakhamapur Bori", place_mr:"लखमापूर बोरी", origin_en:"Lakhamapur Bori", origin_mr:"लखमापूर बोरी", img:"https://images.pexels.com/photos/4192805/pexels-photo-4192805.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:25, name_en:"Cloth & Fancy Bags", name_mr:"कापडी व FANCY BAG", cat:"Woodcraft", desc_en:"Fancy and useful cloth bags for daily use.", desc_mr:"Fancy व उपयोगी कापडी बॅग, दैनंदिन वापरासाठी.", gi:"No", gi_mr:"नाही", seller_en:"Savitri/Chameli Group", seller_mr:"सावित्री/चमेली समूह", mobile:"8080170725", place_en:"Thakri", place_mr:"ठाकरी", origin_en:"Thakri", origin_mr:"ठाकरी", img:"https://images.pexels.com/photos/688658/pexels-photo-688658.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:26, name_en:"Wooden Products", name_mr:"लाकडी वस्तू", cat:"Woodcraft", desc_en:"Handicraft wooden products, decorative items.", desc_mr:"हस्तकला लाकडी उत्पादने, सजावटीच्या वस्तू.", gi:"No", gi_mr:"नाही", seller_en:"Bhagyashri SHG", seller_mr:"भाग्यश्री स्वयंसहाय्यता समूह", mobile:"8262084958", place_en:"Mudkha", place_mr:"मुडखा", origin_en:"Mudkha", origin_mr:"मुडखा", img:"https://images.pexels.com/photos/693742/pexels-photo-693742.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:27, name_en:"Spices (Tikhat)", name_mr:"तिखट, मसाले", cat:"Food", desc_en:"Spicy spices, traditionally prepared.", desc_mr:"तिखट मसाले, पारंपरिक पद्धतीने तयार.", gi:"No", gi_mr:"नाही", seller_en:"Spandan SHG", seller_mr:"स्पंदन स्वयंसहाय्यता समूह", mobile:"9421712434", place_en:"Yevli", place_mr:"येवली", origin_en:"Yevli", origin_mr:"येवली", img:"https://images.pexels.com/photos/4192805/pexels-photo-4192805.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:28, name_en:"Organic Inputs (Kurd)", name_mr:"सेंद्रिय निविष्ठा कुर्द", cat:"Medicinal", desc_en:"Organic inputs for farming.", desc_mr:"शेतीसाठी सेंद्रिय निविष्ठा.", gi:"No", gi_mr:"नाही", seller_en:"Panchshil", seller_mr:"पंचशील", mobile:"9420341713", place_en:"Churchura", place_mr:"चुरचुरा", origin_en:"Churchura", origin_mr:"चुरचुरा", img:"https://images.pexels.com/photos/4588024/pexels-photo-4588024.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:29, name_en:"Chili Powder (Jay)", name_mr:"मिरची पावडर (जय)", cat:"Food", desc_en:"Fresh chili powder.", desc_mr:"ताजी मिरची पावडर.", gi:"No", gi_mr:"नाही", seller_en:"Jay Hanuman", seller_mr:"जय हनुमान", mobile:"9209029604", place_en:"Katli Chak", place_mr:"काटली चक", origin_en:"Katli Chak", origin_mr:"काटली चक", img:"https://images.pexels.com/photos/4192805/pexels-photo-4192805.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:30, name_en:"Spices (Jay Dantatre)", name_mr:"मसाले (जय दंतात्रे)", cat:"Food", desc_en:"Various spices.", desc_mr:"विविध मसाले.", gi:"No", gi_mr:"नाही", seller_en:"Jay Dantatre", seller_mr:"जय दंतात्रे", mobile:"7620038492", place_en:"Belgaon", place_mr:"बेलगाव", origin_en:"Belgaon", origin_mr:"बेलगाव", img:"https://images.pexels.com/photos/4192805/pexels-photo-4192805.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:31, name_en:"Sukhun Wadi", name_mr:"सुखून वडी", cat:"Food", desc_en:"Traditional dried snack.", desc_mr:"पारंपरिक सुखून वडी.", gi:"No", gi_mr:"नाही", seller_en:"Navdurga", seller_mr:"नवदुर्गा", mobile:"9529552575", place_en:"Savargaon", place_mr:"सावरगाव", origin_en:"Savargaon", origin_mr:"सावरगाव", img:"https://images.pexels.com/photos/3962289/pexels-photo-3962289.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+  { id:32, name_en:"Pulses (Kadadhanya)", name_mr:"कडधान्य", cat:"Food", desc_en:"Various pulses.", desc_mr:"विविध कडधान्ये.", gi:"No", gi_mr:"नाही", seller_en:"Bhagyalaxmi", seller_mr:"भाग्यलक्ष्मी", mobile:"9518372655", place_en:"Iruptola", place_mr:"इरुपटोला", origin_en:"Iruptola", origin_mr:"इरुपटोला", img:"https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" }
+];
+
+// helper: render product card (fully bilingual)
+function renderProductCard(p, index) {
+    return `
+    <div class="product-card">
+      <div class="card-image"><img src="${p.img}" alt="${p.name_en}" loading="lazy"></div>
+      <div class="card-content">
+        <div class="name-section">
+          <span class="card-number">${index+1}</span>
+          <span class="product-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
+        </div>
+        <div>
+          <span class="cat-badge">${p.cat}</span>
+          <span class="gi-badge"><i class="fas fa-tag"></i> <span class="gi-label-en">GI: ${p.gi}</span><span class="gi-label-mr">GI: ${p.gi_mr}</span></span>
+        </div>
+        <div class="description"><i class="fas fa-info-circle"></i> <span class="desc-en">${p.desc_en}</span><span class="desc-mr">${p.desc_mr}</span></div>
+        <div class="location"><i class="fas fa-map-pin"></i> <span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span></div>
+        <div class="contact-block">
+          <div class="contact-item"><i class="fas fa-user-circle"></i> <strong><span class="seller-label-en">Seller:</span><span class="seller-label-mr">विक्रेता:</span></strong> <span class="seller-en">${p.seller_en}</span><span class="seller-mr">${p.seller_mr}</span></div>
+          <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong><span class="mobile-label-en">Mobile:</span><span class="mobile-label-mr">मोबाईल:</span></strong> ${p.mobile}</div>
+          <div class="contact-item"><i class="fas fa-map-marker-alt"></i> <strong><span class="origin-label-en">Origin:</span><span class="origin-label-mr">मूळ:</span></strong> <span class="origin-en">${p.origin_en}</span><span class="origin-mr">${p.origin_mr}</span></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// render all products
+function renderAllProducts() {
+    const food = products.filter(p => p.cat === 'Food');
+    const medicinal = products.filter(p => p.cat === 'Medicinal');
+    const wood = products.filter(p => p.cat === 'Woodcraft');
+
+    document.getElementById('foodGrid').innerHTML = food.map((p,i) => renderProductCard(p, i)).join('');
+    document.getElementById('medicinalGrid').innerHTML = medicinal.map((p,i) => renderProductCard(p, i+food.length)).join('');
+    document.getElementById('woodcraftGrid').innerHTML = wood.map((p,i) => renderProductCard(p, i+food.length+medicinal.length)).join('');
+
+    // gallery
+    document.getElementById('galleryGrid').innerHTML = products.map(p => `
+    <div class="gallery-card">
+      <img src="${p.img}" alt="${p.name_en}" loading="lazy">
+      <div class="card-content">
+        <h4><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></h4>
+        <span class="cat-badge">${p.cat}</span>
+        <p style="font-size:0.85rem;color:#2c5234;"><span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span></p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// render featured (first 6)
+function renderFeatured() {
+    const featured = products.slice(0, 6);
+    document.getElementById('featuredGrid').innerHTML = featured.map((p,i) => renderProductCard(p, i)).join('');
+}
+
+renderFeatured();
+renderAllProducts();
+
+// ----- tab switching -----
+const homeBtn = document.getElementById('tabHomeBtn');
+const prodBtn = document.getElementById('tabProductBtn');
+const galleryBtn = document.getElementById('tabGalleryBtn');
+const aboutBtn = document.getElementById('tabAboutBtn');
+const homePane = document.getElementById('homePane');
+const prodPane = document.getElementById('productPane');
+const galleryPane = document.getElementById('galleryPane');
+const aboutPane = document.getElementById('aboutPane');
+
+const tabs = [homeBtn, prodBtn, galleryBtn, aboutBtn];
+const panes = [homePane, prodPane, galleryPane, aboutPane];
+
+function setActive(index) {
+    tabs.forEach((btn,i) => {
+        if (i===index) { btn.classList.add('active'); panes[i].classList.add('active-pane'); }
+        else { btn.classList.remove('active'); panes[i].classList.remove('active-pane'); }
+    });
+}
+
+homeBtn.addEventListener('click', (e) => { e.preventDefault(); setActive(0); });
+prodBtn.addEventListener('click', (e) => { e.preventDefault(); setActive(1); });
+galleryBtn.addEventListener('click', (e) => { e.preventDefault(); setActive(2); });
+aboutBtn.addEventListener('click', (e) => { e.preventDefault(); setActive(3); });
+
+document.getElementById('goToProductBtn').addEventListener('click', function() { setActive(1); });
+
+// ----- language toggle -----
+const langToggle = document.getElementById('langToggle');
+const langLabel = document.getElementById('langLabel');
+let currentLang = 'en';
+
+langToggle.addEventListener('click', function() {
+    const body = document.body;
+    if (currentLang === 'en') {
+        body.classList.remove('lang-en');
+        body.classList.add('lang-mr');
+        langLabel.textContent = 'English';
+        currentLang = 'mr';
+    } else {
+        body.classList.remove('lang-mr');
+        body.classList.add('lang-en');
+        langLabel.textContent = 'मराठी';
+        currentLang = 'en';
+    }
+});
+</script>
+</body>
+</html>
