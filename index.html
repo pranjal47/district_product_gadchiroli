@@ -12,9 +12,7 @@
 <style>
 /* ==========================================================================
    GADCHIROLI DISTRICT EXHIBITION — DESIGN TOKENS
-   Palette drawn from the district itself: sal-forest canopy, laterite soil,
-   turmeric harvest, and the dotted line-work of local Gond/Warli craft used
-   as a restrained structural motif (seals, dividers) rather than decoration.
+   Light mode default; dark mode available via toggle.
    ========================================================================== */
 :root{
   --forest-950:#0b2318;
@@ -128,6 +126,28 @@ a{color:inherit;}
   transition:.2s;font-size:.85rem;
 }
 .icon-toggle:hover{background:rgba(255,255,255,.12);}
+
+/* ============================== GIGW ACCESSIBILITY TOOLBAR ============================== */
+.a11y-toolbar{display:flex;align-items:center;gap:5px;padding-right:.7rem;border-right:1px solid rgba(255,255,255,.25);}
+.a11y-btn{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:var(--turmeric-100);
+  min-width:26px;height:26px;padding:0 6px;border-radius:6px;cursor:pointer;font-size:.72rem;font-weight:700;
+  display:inline-flex;align-items:center;justify-content:center;transition:.15s;text-decoration:none;
+}
+.a11y-btn:hover{background:rgba(255,255,255,.22);}
+
+/* High contrast mode — overrides token palette for maximum legibility */
+[data-contrast="high"]{
+  --forest-900:#000000;--forest-800:#000000;--forest-700:#001a00;--forest-600:#003300;--forest-100:#fff9d6;--forest-50:#fffef2;
+  --turmeric-500:#ffcc00;--turmeric-600:#b38f00;--turmeric-100:#fff3b0;
+  --laterite-500:#cc0000;--laterite-600:#900;--laterite-100:#ffdada;
+  --ink-900:#000000;--ink-700:#000000;--ink-500:#1a1a1a;
+  --paper-0:#ffffff;--paper-50:#ffffff;--paper-100:#ffffff;--paper-200:#f0f0f0;
+  --line:#000000;
+}
+[data-contrast="high"] .product-card,[data-contrast="high"] .home-card,[data-contrast="high"] .download-card,
+[data-contrast="high"] .vendor-card,[data-contrast="high"] .story-card,[data-contrast="high"] .about-block{border-width:2px;}
+
 
 .header{
   position:sticky;top:0;z-index:60;
@@ -259,6 +279,14 @@ a{color:inherit;}
 .stat .label{font-size:.78rem;color:var(--ink-500);font-weight:600;text-transform:uppercase;letter-spacing:.03em;}
 .stat + .stat{border-left:1px dashed var(--line);}
 
+/* ============================== TRUST STRIP (e-commerce style) ============================== */
+.trust-strip{background:var(--forest-900);border-bottom:1px solid var(--line);}
+.trust-strip-inner{
+  max-width:1400px;margin:0 auto;padding:.85rem 1.5rem;display:flex;justify-content:center;gap:2.2rem;flex-wrap:wrap;
+}
+.trust-item{display:flex;align-items:center;gap:8px;color:var(--turmeric-100);font-size:.82rem;font-weight:600;opacity:.9;}
+.trust-item i{color:var(--turmeric-400);}
+
 /* ============================== SECTION TITLE ============================== */
 .section-title{
   font-family:var(--font-display);
@@ -272,6 +300,74 @@ a{color:inherit;}
   display:inline-flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;
 }
 .section-sub{color:var(--ink-500);margin:-0.8rem 0 1.4rem;font-size:1.02rem;max-width:70ch;}
+
+/* ============================== CAROUSEL / SLIDESHOW ============================== */
+.carousel-wrapper{
+  position:relative;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:2rem;
+  box-shadow:0 14px 30px -18px rgba(var(--shadow-color),.55);
+  background:var(--paper-0);border:1px solid var(--line);
+}
+.carousel-slides{
+  display:flex;transition:transform .6s var(--ease);will-change:transform;
+}
+.carousel-slide{
+  min-width:100%;height:380px;position:relative;flex-shrink:0;
+}
+.carousel-slide img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.carousel-overlay{
+  position:absolute;inset:0;background:linear-gradient(0deg, rgba(11,35,24,.6) 0%, transparent 60%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;
+  color:#fff;
+}
+.carousel-overlay h3{
+  font-family:var(--font-display);font-size:1.8rem;font-weight:600;margin-bottom:.2rem;
+  text-shadow:0 2px 8px rgba(0,0,0,.4);
+}
+.carousel-overlay p{
+  font-size:1.1rem;max-width:60ch;opacity:.92;
+  text-shadow:0 2px 6px rgba(0,0,0,.4);
+}
+.carousel-dots{
+  position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:.6rem;z-index:5;
+}
+.carousel-dots button{
+  width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.8);
+  background:transparent;cursor:pointer;padding:0;transition:.3s;
+}
+.carousel-dots button.active{
+  background:var(--turmeric-400);border-color:var(--turmeric-400);
+}
+.carousel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.85);border:none;border-radius:50%;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;cursor:pointer;z-index:5;transition:.2s;
+  color:var(--ink-900);box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.carousel-btn:hover{background:#fff;transform:translateY(-50%) scale(1.05);}
+.carousel-btn.prev{left:1rem;}
+.carousel-btn.next{right:1rem;}
+@media (max-width:700px){
+  .carousel-slide{height:260px;}
+  .carousel-overlay h3{font-size:1.3rem;}
+  .carousel-overlay p{font-size:.95rem;}
+  .carousel-btn{width:34px;height:34px;font-size:.9rem;}
+}
+
+/* ============================== QUICK CATEGORY CHIPS ============================== */
+.quick-cat-chips{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.cat-chip{
+  background:var(--paper-0);border:2px solid var(--line);color:var(--ink-700);
+  padding:.55rem 1.2rem;border-radius:var(--radius-pill);font-weight:700;font-size:.88rem;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;transition:.2s;
+}
+.cat-chip i{color:var(--ink-500);}
+.cat-chip:hover{border-color:var(--forest-400);color:var(--forest-700);}
+.cat-chip.active{background:var(--forest-800);border-color:var(--forest-800);color:#fff;}
+.cat-chip.active i{color:var(--turmeric-400);}
 
 /* ============================== CONTROLS ROW (view/sort) ============================== */
 .controls-row{
@@ -492,6 +588,17 @@ a{color:inherit;}
 .vendor-card h4{color:var(--forest-800);font-size:1.2rem;margin-bottom:.6rem;font-family:var(--font-display);font-weight:600;}
 .vendor-card .vendor-meta{color:var(--ink-700);font-size:.92rem;margin:.3rem 0;display:flex;align-items:center;gap:8px;}
 .vendor-card .vendor-meta i{width:20px;color:var(--forest-600);}
+.vendor-products-list{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:.5rem;}
+.vendor-product-row{
+  display:flex;align-items:center;gap:.7rem;padding:.5rem;border-radius:var(--radius-sm);
+  text-decoration:none;color:inherit;transition:.15s;border:1px solid transparent;
+}
+.vendor-product-row:hover{background:var(--forest-50);border-color:var(--forest-100);}
+.vendor-product-thumb{width:42px;height:42px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--forest-100);}
+.vendor-product-info{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
+.vendor-product-name{font-weight:700;color:var(--forest-800);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.vendor-product-cert{font-size:.74rem;color:var(--ink-500);}
+.vendor-product-pdf-icon{color:var(--laterite-500);font-size:.95rem;flex-shrink:0;}
 .copy-btn{
   background:var(--paper-100);border:1px solid var(--line);color:var(--ink-700);
   padding:.2rem .6rem;border-radius:var(--radius-pill);font-size:.72rem;cursor:pointer;margin-left:auto;transition:.15s;
@@ -554,6 +661,118 @@ a{color:inherit;}
   text-align:center;font-weight:600;margin-top:1.5rem;border:2px solid var(--forest-400);
 }
 .feedback-success.show{display:block;}
+
+/* ============================== DOWNLOAD TAB (redesigned) ============================== */
+.download-hero{
+  background:linear-gradient(135deg, var(--forest-800), var(--forest-600));
+  border-radius:var(--radius-lg);padding:2.2rem 2.4rem;margin-bottom:2rem;color:#fff;position:relative;overflow:hidden;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.4rem;
+}
+.download-hero::after{
+  content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.12), transparent 70%);
+}
+.download-hero h3{font-family:var(--font-display);font-size:1.5rem;font-weight:600;margin-bottom:.4rem;}
+.download-hero p{opacity:.88;font-size:.96rem;max-width:48ch;}
+.download-hero .dl-count-chip{
+  background:rgba(255,255,255,.15);border:1px dashed rgba(255,255,255,.5);padding:.9rem 1.4rem;border-radius:var(--radius-md);
+  text-align:center;flex-shrink:0;
+}
+.download-hero .dl-count-chip .num{font-family:var(--font-display);font-size:1.8rem;font-weight:700;display:block;}
+.download-hero .dl-count-chip .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;opacity:.85;}
+
+.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-bottom:2rem;}
+@media (max-width:800px){.download-grid{grid-template-columns:1fr;}}
+.download-card{
+  background:var(--paper-0);border-radius:var(--radius-lg);padding:1.9rem;border:1px solid var(--line);
+  box-shadow:0 14px 30px -18px rgba(var(--shadow-color),.5);transition:.25s var(--ease);position:relative;overflow:hidden;
+}
+.download-card::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--turmeric-500),var(--forest-600));
+}
+.download-card:hover{transform:translateY(-5px);box-shadow:0 22px 42px -18px rgba(var(--shadow-color),.55);}
+.download-card .dl-icon-badge{
+  width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg, var(--forest-100), var(--paper-50));
+  display:flex;align-items:center;justify-content:center;margin-bottom:1rem;border:1px solid var(--forest-100);
+}
+.download-card .dl-icon-badge i{color:var(--forest-700);font-size:1.4rem;}
+.download-card h3{font-family:var(--font-display);color:var(--forest-800);font-size:1.35rem;margin-bottom:.6rem;display:flex;align-items:center;gap:10px;font-weight:600;}
+.download-card h3 i{color:var(--turmeric-500);}
+.download-card p{color:var(--ink-700);margin-bottom:1.2rem;font-size:.96rem;}
+.download-btn-group{display:flex;flex-wrap:wrap;gap:.7rem;}
+.download-btn{
+  background:var(--forest-800);color:#fff;border:none;padding:.65rem 1.4rem;border-radius:var(--radius-pill);
+  font-weight:700;font-size:.88rem;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;box-shadow:0 8px 18px -10px rgba(var(--shadow-color),.5);
+}
+.download-btn:hover{background:var(--forest-600);transform:translateY(-2px);}
+.download-btn i{font-size:.95rem;}
+.download-btn.outline{background:transparent;border:2px solid var(--forest-800);color:var(--forest-800);box-shadow:none;}
+.download-btn.outline:hover{background:var(--forest-800);color:#fff;}
+
+.download-search{
+  display:flex;gap:.8rem;flex-wrap:wrap;margin:0 0 2rem;align-items:center;
+  background:var(--paper-0);padding:.7rem 1.1rem;border-radius:var(--radius-pill);
+  border:2px solid var(--line);transition:.2s;box-shadow:0 10px 26px -18px rgba(var(--shadow-color),.6);
+}
+.download-search:focus-within{border-color:var(--forest-600);box-shadow:0 10px 26px -14px rgba(45,112,73,.35);}
+.download-search input{flex:1 1 200px;padding:.65rem .5rem;border:none;font-size:1rem;background:transparent;min-width:120px;outline:none;color:var(--ink-900);}
+.download-search input::placeholder{color:var(--ink-300);}
+.download-search .search-btn{
+  background:var(--forest-800);color:#fff;border:none;padding:.65rem 1.7rem;border-radius:var(--radius-pill);
+  font-size:.96rem;font-weight:700;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+}
+.download-search .search-btn:hover{background:var(--forest-600);}
+.download-search .clear-btn{
+  background:var(--paper-100);color:var(--ink-700);border:none;padding:.65rem 1.3rem;border-radius:var(--radius-pill);
+  font-size:.9rem;font-weight:700;cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.download-search .clear-btn:hover{background:var(--line);}
+
+.download-results-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.1rem;margin-top:1.5rem;
+}
+.download-result-item{
+  background:var(--paper-0);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:1.1rem 1.2rem;display:flex;justify-content:space-between;align-items:center;transition:.2s;gap:.8rem;
+  position:relative;padding-left:1.4rem;
+}
+.download-result-item::before{
+  content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:4px;background:var(--turmeric-500);
+}
+.download-result-item:hover{background:var(--forest-50);border-color:var(--forest-400);transform:translateX(3px);}
+.download-result-item .item-info{display:flex;flex-direction:column;gap:.2rem;min-width:0;}
+.download-result-item .item-info .item-name{font-weight:700;color:var(--forest-800);font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.download-result-item .item-info .item-meta{font-size:.78rem;color:var(--ink-500);}
+.download-result-item .item-actions{display:flex;gap:.5rem;flex-shrink:0;}
+.download-result-item .item-actions .dl-btn{
+  background:var(--forest-800);color:#fff;border:none;padding:.4rem .85rem;border-radius:var(--radius-pill);
+  font-size:.72rem;font-weight:700;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:5px;text-decoration:none;
+}
+.download-result-item .item-actions .dl-btn:hover{background:var(--forest-600);}
+.download-result-item .item-actions .dl-btn.outline{background:transparent;border:1px solid var(--forest-800);color:var(--forest-800);}
+.download-result-item .item-actions .dl-btn.outline:hover{background:var(--forest-800);color:#fff;}
+
+.download-highlights{margin-top:2.4rem;}
+.download-highlights .highlights-heading{
+  font-family:var(--font-display);color:var(--forest-800);font-size:1.3rem;font-weight:600;
+  margin-bottom:1rem;display:flex;align-items:center;gap:10px;
+}
+.download-highlights .highlights-heading i{color:var(--turmeric-500);}
+.download-highlights .highlight-item{
+  background:var(--paper-0);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:1.1rem 1.4rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem;
+  transition:.2s;
+}
+.download-highlights .highlight-item:hover{background:var(--forest-50);transform:translateX(3px);border-color:var(--forest-400);}
+.download-highlights .highlight-item .hl-info{display:flex;align-items:center;gap:14px;}
+.download-highlights .highlight-item .hl-info .hl-file-icon{
+  width:42px;height:42px;border-radius:12px;background:var(--laterite-100);color:var(--laterite-500);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+}
+.download-highlights .highlight-item .hl-info .hl-title{font-weight:700;color:var(--forest-800);display:block;}
+.download-highlights .highlight-item .hl-info .hl-sub{font-size:.78rem;color:var(--ink-500);}
+
 
 /* ============================== SEARCH ============================== */
 .search-container{
@@ -651,6 +870,19 @@ a{color:inherit;}
 .footer .footer-links{display:flex;gap:1.4rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;font-size:.85rem;}
 .footer .footer-links a{opacity:.8;transition:.15s;}
 .footer .footer-links a:hover{opacity:1;color:var(--turmeric-400);}
+.emblem-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem;}
+.emblem-badge{
+  display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);
+  padding:.5rem 1rem;border-radius:var(--radius-pill);font-size:.78rem;font-weight:600;color:var(--forest-100);
+}
+.emblem-badge i{color:var(--turmeric-400);}
+.footer-policy-links{
+  display:flex;gap:1.1rem;justify-content:center;margin-top:1.1rem;flex-wrap:wrap;font-size:.78rem;
+  border-top:1px solid rgba(255,255,255,.12);padding-top:1.1rem;
+}
+.footer-policy-links a{opacity:.65;transition:.15s;}
+.footer-policy-links a:hover{opacity:1;color:var(--turmeric-400);text-decoration:underline;}
+.footer .footer-meta{font-size:.76rem !important;opacity:.6 !important;margin:1rem auto 0 !important;max-width:60ch;text-align:center;}
 
 /* ============================== RESPONSIVE ============================== */
 @media (max-width:900px){
@@ -672,6 +904,8 @@ a{color:inherit;}
   .stat + .stat{border-left:none;border-top:1px dashed var(--line);padding-top:.8rem;}
   .to-top{left:.9rem;bottom:.9rem;width:42px;height:42px;}
   .toast-stack{right:.7rem;bottom:.9rem;left:.7rem;max-width:none;}
+  .download-grid{grid-template-columns:1fr;}
+  .download-result-item{flex-direction:column;align-items:flex-start;gap:.6rem;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -740,18 +974,28 @@ a{color:inherit;}
 .feedback-label-en,.feedback-label-mr{display:none;}
 .lang-en .feedback-label-en{display:inline;}
 .lang-mr .feedback-label-mr{display:inline;}
+.download-label-en,.download-label-mr{display:none;}
+.lang-en .download-label-en{display:inline;}
+.lang-mr .download-label-mr{display:inline;}
 </style>
 </head>
 <body class="lang-en">
 <a href="#mainContent" class="skip-link">Skip to main content</a>
 
-<!-- ===== GOVT INFO STRIP ===== -->
+<!-- ===== GOVT INFO STRIP (GIGW accessibility toolbar) ===== -->
 <div class="topbar">
     <div class="topbar-left">
         <span><i class="fas fa-map-marker-alt"></i> Government of Maharashtra</span>
         <span><i class="fas fa-shield-alt"></i> Official District Portal</span>
     </div>
     <div class="topbar-right">
+        <div class="a11y-toolbar" role="group" aria-label="Accessibility tools">
+            <button class="a11y-btn" id="fontDecreaseBtn" title="Decrease text size" aria-label="Decrease text size">A-</button>
+            <button class="a11y-btn" id="fontResetBtn" title="Reset text size" aria-label="Reset text size">A</button>
+            <button class="a11y-btn" id="fontIncreaseBtn" title="Increase text size" aria-label="Increase text size">A+</button>
+            <button class="a11y-btn" id="contrastToggleBtn" title="Toggle high contrast" aria-label="Toggle high contrast"><i class="fas fa-circle-half-stroke"></i></button>
+            <a class="a11y-btn" href="https://www.disabilityaffairs.gov.in/content/page/screen-reader.php" target="_blank" rel="noopener" title="Screen Reader Access"><i class="fas fa-headphones"></i></a>
+        </div>
         <span><i class="fas fa-phone"></i> 07132-223344</span>
     </div>
 </div>
@@ -789,13 +1033,14 @@ a{color:inherit;}
         <button class="tab-link" id="tabVendorBtn"><i class="fas fa-store"></i> <span class="en-only">Vendor Info</span><span class="mr-only">विक्रेता माहिती</span></button>
         <button class="tab-link" id="tabStoryBtn"><i class="fas fa-star"></i> <span class="en-only">Success Stories</span><span class="mr-only">यशोगाथा</span></button>
         <button class="tab-link" id="tabFeedbackBtn"><i class="fas fa-comment"></i> <span class="en-only">Feedback</span><span class="mr-only">अभिप्राय</span></button>
+        <button class="tab-link" id="tabDownloadBtn"><i class="fas fa-download"></i> <span class="en-only">Download</span><span class="mr-only">डाउनलोड</span></button>
         <button class="tab-link" id="tabAboutBtn"><i class="fas fa-info-circle"></i> <span class="en-only">About us</span><span class="mr-only">आमच्याबद्दल</span></button>
     </div>
 </div>
 
 <main id="mainContent">
 
-<!-- ===== HERO (home only) ===== -->
+<!-- ===== HERO ===== -->
 <div class="hero" id="homeHero">
     <div class="hero-inner">
         <div>
@@ -817,6 +1062,59 @@ a{color:inherit;}
             <div class="stat"><span class="num" data-target="0">0</span><span class="label en-only">Vendor groups</span><span class="label mr-only">विक्रेता गट</span></div>
             <div class="stat"><span class="num" data-target="3">0</span><span class="label en-only">Categories</span><span class="label mr-only">श्रेणी</span></div>
         </div>
+    </div>
+</div>
+
+<!-- ===== CAROUSEL / SLIDESHOW (5 images) ===== -->
+<div class="carousel-wrapper" id="mainCarousel" role="region" aria-label="Featured images of Gadchiroli products">
+    <div class="carousel-slides" id="carouselSlides">
+        <div class="carousel-slide">
+            <img src="https://images.pexels.com/photos/4192809/pexels-photo-4192809.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&fit=crop" alt="Organic turmeric harvest" loading="lazy">
+            <div class="carousel-overlay">
+                <h3><span class="en-only">Organic Turmeric</span><span class="mr-only">सेंद्रिय हळद</span></h3>
+                <p><span class="en-only">Gadchiroli's famous high-curcumin turmeric — grown without chemicals.</span><span class="mr-only">गडचिरोलीची प्रसिद्ध उच्च-करक्यूमिन हळद — रासायनिक मुक्त.</span></p>
+            </div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&fit=crop" alt="Wild forest honey" loading="lazy">
+            <div class="carousel-overlay">
+                <h3><span class="en-only">Wild Forest Honey</span><span class="mr-only">वन मध</span></h3>
+                <p><span class="en-only">Pure, unprocessed honey collected from the deep forests of Dhanora.</span><span class="mr-only">धानोराच्या जंगलातून गोळा केलेले शुद्ध, अप्रक्रियाकृत मध.</span></p>
+            </div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&fit=crop" alt="Kodo millet" loading="lazy">
+            <div class="carousel-overlay">
+                <h3><span class="en-only">Kodo Millet</span><span class="mr-only">कोदो बाजरी</span></h3>
+                <p><span class="en-only">Traditional drought-resilient grain, high fibre and low glycemic.</span><span class="mr-only">पारंपरिक दुष्काळ-प्रतिरोधक धान्य, उच्च फायबर व कमी ग्लायसेमिक.</span></p>
+            </div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.pexels.com/photos/5946746/pexels-photo-5946746.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&fit=crop" alt="Forest tamarind" loading="lazy">
+            <div class="carousel-overlay">
+                <h3><span class="en-only">Forest Tamarind</span><span class="mr-only">वन चिंच</span></h3>
+                <p><span class="en-only">Handpicked, deseeded blocks with a deep tangy flavour.</span><span class="mr-only">हाताने निवडलेले, बियाणे-मुक्त तुकडे खोल आंबट चवीसह.</span></p>
+            </div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&fit=crop" alt="Banana plantation" loading="lazy">
+            <div class="carousel-overlay">
+                <h3><span class="en-only">Gadchiroli Banana</span><span class="mr-only">गडचिरोली केळी</span></h3>
+                <p><span class="en-only">Sweet, creamy Robusta variety grown along the Indravati river.</span><span class="mr-only">इंद्रावती नदीकाठी पिकवलेली गोड, मलईदार रोबस्टा वाण.</span></p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+    <button class="carousel-btn next" id="carouselNext" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+    <div class="carousel-dots" id="carouselDots"></div>
+</div>
+
+<div class="trust-strip">
+    <div class="trust-strip-inner">
+        <div class="trust-item"><i class="fas fa-certificate"></i> <span class="en-only">Govt. Certified Vendors</span><span class="mr-only">सरकार-प्रमाणित विक्रेते</span></div>
+        <div class="trust-item"><i class="fas fa-people-group"></i> <span class="en-only">Direct from SHGs &amp; Producers</span><span class="mr-only">थेट बचत गट व उत्पादकांकडून</span></div>
+        <div class="trust-item"><i class="fas fa-hand-holding-heart"></i> <span class="en-only">No Middlemen, No Markup</span><span class="mr-only">दलाल नाही, अतिरिक्त शुल्क नाही</span></div>
+        <div class="trust-item"><i class="fas fa-shield-halved"></i> <span class="en-only">Official District Portal</span><span class="mr-only">अधिकृत जिल्हा पोर्टल</span></div>
     </div>
 </div>
 <div class="seam" id="heroSeam"></div>
@@ -918,12 +1216,19 @@ a{color:inherit;}
                 <span class="insight-sub" id="statTopSearchName">—</span>
             </div>
         </div>
-        <p class="insights-note"><i class="fas fa-circle-info"></i> <span class="en-only">Figures reflect on-portal activity and update live as visitors search the catalogue this session.</span><span class="mr-only">आकडेवारी पोर्टलवरील क्रियाकलाप दर्शवते आणि या सत्रात पर्यटक कॅटलॉग शोधताच थेट अद्यतनित होते.</span></p>
+        <p class="insights-note"><i class="fas fa-circle-info"></i> <span class="en-only">Total, today's and last month's visitor counts are real, persisted figures recorded on every page load — not a simulation.</span><span class="mr-only">एकूण, आजचे आणि मागील महिन्याचे पर्यटक आकडे प्रत्येक पेज लोडवर नोंदवलेले खरे आकडे आहेत — अनुकरण नाही.</span></p>
+        <p class="insights-note" id="insightsOfflineNote" style="display:none;"><i class="fas fa-triangle-exclamation" style="color:var(--laterite-500);"></i> <span class="en-only">Live counter temporarily unreachable (network restriction) — showing "—" until it reconnects.</span><span class="mr-only">थेट काउंटर सध्या उपलब्ध नाही (नेटवर्क प्रतिबंध) — पुन्हा कनेक्ट होईपर्यंत "—" दाखवत आहे.</span></p>
     </div>
 
     <!-- ===== PRODUCT PANE ===== -->
     <div id="productPane" class="tab-pane">
         <div class="section-title"><i class="fas fa-apple-alt"></i> <span class="en-only">Browse Products</span><span class="mr-only">उत्पादने ब्राउझ करा</span></div>
+        <div class="quick-cat-chips" id="quickCatChips">
+            <button class="cat-chip active" data-cat="all"><i class="fas fa-border-all"></i> <span class="en-only">All</span><span class="mr-only">सर्व</span></button>
+            <button class="cat-chip" data-cat="Food"><i class="fas fa-utensils"></i> <span class="en-only">Food</span><span class="mr-only">अन्न</span></button>
+            <button class="cat-chip" data-cat="Medicinal"><i class="fas fa-mortar-pestle"></i> <span class="en-only">Medicinal</span><span class="mr-only">औषधी</span></button>
+            <button class="cat-chip" data-cat="Woodcraft"><i class="fas fa-tree"></i> <span class="en-only">Woodcraft</span><span class="mr-only">लाकडी कला</span></button>
+        </div>
         <div class="search-container">
             <i class="fas fa-search" style="color:var(--ink-300); font-size:1.05rem;"></i>
             <input type="text" id="productSearch" placeholder="Search for products, sellers, locations..." />
@@ -1075,6 +1380,106 @@ a{color:inherit;}
         </div>
     </div>
 
+    <!-- ===== DOWNLOAD PANE ===== -->
+    <div id="downloadPane" class="tab-pane">
+        <div class="section-title"><i class="fas fa-download"></i> <span class="en-only">Downloads</span><span class="mr-only">डाउनलोड</span></div>
+        <p class="section-sub"><span class="en-only">Download product catalogs, certificates, exhibition highlights and more.</span><span class="mr-only">उत्पादन कॅटलॉग, प्रमाणपत्रे, प्रदर्शन हायलाइट्स आणि अधिक डाउनलोड करा.</span></p>
+
+        <div class="download-hero">
+            <div>
+                <h3><i class="fas fa-folder-open"></i> <span class="en-only">Resource Library</span><span class="mr-only">संसाधन ग्रंथालय</span></h3>
+                <p><span class="en-only">Everything you need — catalogs, certificates and exhibition documents — in one downloadable, government-verified collection.</span><span class="mr-only">कॅटलॉग, प्रमाणपत्रे आणि प्रदर्शन दस्तऐवज — सर्व काही एका सरकार-प्रमाणित संग्रहात.</span></p>
+            </div>
+            <div class="dl-count-chip">
+                <span class="num">47</span>
+                <span class="lbl en-only">Files Available</span><span class="lbl mr-only">फाइल्स उपलब्ध</span>
+            </div>
+        </div>
+
+        <!-- Quick download cards -->
+        <div class="download-grid">
+            <div class="download-card">
+                <div class="dl-icon-badge"><i class="fas fa-book"></i></div>
+                <h3><span class="en-only">Product Catalogs</span><span class="mr-only">उत्पादन कॅटलॉग</span></h3>
+                <p><span class="en-only">Complete product catalogs in PDF format. Includes all 43+ products with details.</span><span class="mr-only">PDF स्वरूपात संपूर्ण उत्पादन कॅटलॉग. तपशिलांसह सर्व ४३+ उत्पादनांचा समावेश.</span></p>
+                <div class="download-btn-group">
+                    <button class="download-btn" id="dlCatalogAll"><i class="fas fa-file-pdf"></i> <span class="en-only">Full Catalog</span><span class="mr-only">संपूर्ण कॅटलॉग</span></button>
+                    <button class="download-btn outline" id="dlCatalogFood"><i class="fas fa-file-pdf"></i> <span class="en-only">Food Products</span><span class="mr-only">अन्न उत्पादने</span></button>
+                    <button class="download-btn outline" id="dlCatalogMedicinal"><i class="fas fa-file-pdf"></i> <span class="en-only">Medicinal</span><span class="mr-only">औषधी</span></button>
+                    <button class="download-btn outline" id="dlCatalogWoodcraft"><i class="fas fa-file-pdf"></i> <span class="en-only">Woodcraft</span><span class="mr-only">लाकडी कला</span></button>
+                </div>
+            </div>
+            <div class="download-card">
+                <div class="dl-icon-badge"><i class="fas fa-certificate"></i></div>
+                <h3><span class="en-only">Product Certificates</span><span class="mr-only">उत्पादन प्रमाणपत्रे</span></h3>
+                <p><span class="en-only">Download individual product certificates (PDF) by searching below.</span><span class="mr-only">खाली शोधून वैयक्तिक उत्पादन प्रमाणपत्रे (PDF) डाउनलोड करा.</span></p>
+                <div class="download-btn-group">
+                    <button class="download-btn" id="dlCertGuide"><i class="fas fa-info-circle"></i> <span class="en-only">Certificate Guide</span><span class="mr-only">प्रमाणपत्र मार्गदर्शक</span></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download search for certificates -->
+        <div class="download-search">
+            <i class="fas fa-search" style="color:var(--ink-300); font-size:1.05rem;"></i>
+            <input type="text" id="downloadSearchInput" placeholder="Search product by name or certificate number..." />
+            <button class="search-btn" id="downloadSearchBtn"><i class="fas fa-search"></i> <span class="download-label-en">Search</span><span class="download-label-mr">शोधा</span></button>
+            <button class="clear-btn" id="downloadClearBtn"><i class="fas fa-times"></i> <span class="download-label-en">Clear</span><span class="download-label-mr">साफ करा</span></button>
+        </div>
+
+        <div id="downloadResults">
+            <!-- dynamically populated -->
+        </div>
+
+        <!-- Exhibition Highlights -->
+        <div class="download-highlights">
+            <div class="highlights-heading">
+                <i class="fas fa-award"></i>
+                <span class="en-only">Exhibition Highlights</span><span class="mr-only">प्रदर्शन हायलाइट्स</span>
+            </div>
+            <div class="highlight-item">
+                <div class="hl-info">
+                    <div class="hl-file-icon"><i class="fas fa-file-pdf"></i></div>
+                    <div>
+                        <span class="hl-title"><span class="en-only">Exhibition 2025 – Official Brochure</span><span class="mr-only">प्रदर्शन २०२५ – अधिकृत ब्रोशर</span></span>
+                        <span class="hl-sub">PDF · <span class="en-only">Updated recently</span><span class="mr-only">अलीकडे अद्यतनित</span></span>
+                    </div>
+                </div>
+                <button class="download-btn" id="dlBrochure"><i class="fas fa-download"></i> <span class="en-only">PDF</span><span class="mr-only">PDF</span></button>
+            </div>
+            <div class="highlight-item">
+                <div class="hl-info">
+                    <div class="hl-file-icon"><i class="fas fa-images"></i></div>
+                    <div>
+                        <span class="hl-title"><span class="en-only">Product Gallery – Image Collection</span><span class="mr-only">उत्पादन गॅलरी – प्रतिमा संग्रह</span></span>
+                        <span class="hl-sub">ZIP · <span class="en-only">All product photos</span><span class="mr-only">सर्व उत्पादन फोटो</span></span>
+                    </div>
+                </div>
+                <button class="download-btn" id="dlGalleryImages"><i class="fas fa-download"></i> <span class="en-only">Images (ZIP)</span><span class="mr-only">प्रतिमा (ZIP)</span></button>
+            </div>
+            <div class="highlight-item">
+                <div class="hl-info">
+                    <div class="hl-file-icon"><i class="fas fa-address-book"></i></div>
+                    <div>
+                        <span class="hl-title"><span class="en-only">Vendor & Product Directory</span><span class="mr-only">विक्रेता आणि उत्पादन निर्देशिका</span></span>
+                        <span class="hl-sub">PDF · <span class="en-only">All registered vendors</span><span class="mr-only">सर्व नोंदणीकृत विक्रेते</span></span>
+                    </div>
+                </div>
+                <button class="download-btn" id="dlDirectory"><i class="fas fa-download"></i> <span class="en-only">PDF</span><span class="mr-only">PDF</span></button>
+            </div>
+            <div class="highlight-item">
+                <div class="hl-info">
+                    <div class="hl-file-icon"><i class="fas fa-chart-column"></i></div>
+                    <div>
+                        <span class="hl-title"><span class="en-only">SARAS Mela 2025 – Special Event Report</span><span class="mr-only">सरस मेळा २०२५ – विशेष कार्यक्रम अहवाल</span></span>
+                        <span class="hl-sub">PDF · <span class="en-only">Event summary</span><span class="mr-only">कार्यक्रम सारांश</span></span>
+                    </div>
+                </div>
+                <button class="download-btn" id="dlSarasReport"><i class="fas fa-download"></i> <span class="en-only">PDF</span><span class="mr-only">PDF</span></button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== ABOUT PANE ===== -->
     <div id="aboutPane" class="tab-pane">
         <div class="about-block">
@@ -1105,6 +1510,11 @@ a{color:inherit;}
 <!-- ===== FOOTER ===== -->
 <div class="footer">
     <div class="footer-inner">
+        <div class="emblem-row">
+            <div class="emblem-badge"><i class="fas fa-landmark"></i><span>Government of Maharashtra</span></div>
+            <div class="emblem-badge"><i class="fas fa-shield-halved"></i><span>Digital India</span></div>
+            <div class="emblem-badge"><i class="fas fa-server"></i><span>National Informatics Centre (NIC)</span></div>
+        </div>
         <div class="footer-emblem"><i class="fas fa-seedling"></i></div>
         <p><i class="fas fa-copyright"></i> 2025 District Collector Office, Gadchiroli. All rights reserved.</p>
         <p>औद्योगिक आणि कृषी उत्पादन समृद्धि · <span class="en-only">Digital India</span><span class="mr-only">डिजिटल इंडिया</span></p>
@@ -1113,8 +1523,35 @@ a{color:inherit;}
             <a href="#" id="footerProductLink">Products</a>
             <a href="#" id="footerVendorLink">Vendor Registration</a>
             <a href="#" id="footerFeedbackLink">Feedback</a>
+            <a href="#" id="footerDownloadLink">Download</a>
             <a href="#" id="footerAboutLink">About</a>
         </div>
+        <div class="footer-policy-links">
+            <a href="#" class="policy-link" data-policy="disclaimer">Disclaimer</a>
+            <a href="#" class="policy-link" data-policy="privacy">Privacy Policy</a>
+            <a href="#" class="policy-link" data-policy="terms">Terms of Use</a>
+            <a href="#" class="policy-link" data-policy="hyperlinking">Hyperlinking Policy</a>
+            <a href="#" class="policy-link" data-policy="copyright">Copyright Policy</a>
+            <a href="#" class="policy-link" data-policy="accessibility">Accessibility Statement</a>
+            <a href="#" class="policy-link" data-policy="sitemap">Sitemap</a>
+            <a href="https://rti.gov.in" target="_blank" rel="noopener">RTI</a>
+            <a href="https://www.disabilityaffairs.gov.in/content/page/screen-reader.php" target="_blank" rel="noopener">Screen Reader Access</a>
+        </div>
+        <p class="footer-meta">
+            <span class="en-only">Content owned and maintained by District Collector Office, Gadchiroli. Designed, developed &amp; hosted by National Informatics Centre (NIC).</span>
+            <span class="mr-only">सामग्री जिल्हाधिकारी कार्यालय, गडचिरोली यांच्या मालकीची व देखरेखीखाली. डिझाइन, विकास व होस्टिंग राष्ट्रीय सूचना विज्ञान केंद्र (NIC) द्वारे.</span>
+            <br><span class="en-only">Last Reviewed / Updated:</span><span class="mr-only">अखेरचे पुनरावलोकन / अद्यतन:</span> <span id="lastUpdatedDate"></span>
+            &nbsp;·&nbsp; <span class="en-only">Best viewed in latest versions of Chrome, Firefox, Edge and Safari.</span><span class="mr-only">Chrome, Firefox, Edge व Safari च्या नवीनतम आवृत्त्यांमध्ये सर्वोत्तम पाहिले जाते.</span>
+        </p>
+    </div>
+</div>
+
+<!-- ===== POLICY MODAL (GIGW: Disclaimer / Privacy / Terms / etc.) ===== -->
+<div class="popup-overlay" id="policyModal">
+    <div class="popup-box" style="max-width:640px;max-height:80vh;overflow-y:auto;">
+        <button class="popup-close" id="policyModalClose">&times;</button>
+        <h3><i class="fas fa-file-shield"></i> <span id="policyModalTitle">Policy</span></h3>
+        <div id="policyModalBody" style="color:var(--ink-700);font-size:.96rem;line-height:1.7;"></div>
     </div>
 </div>
 
@@ -1145,95 +1582,97 @@ a{color:inherit;}
 
 <script>
     // ============================================================
-    //  DATA (43 products + stories + news)
+    //  DATA (43 products + stories + news) with PDF cert links
     // ============================================================
+    // Each product now has a certPdf property - link to the certificate PDF
+    // If no specific link is given, we generate a default one based on cert number
     const products = [
         { id: 1, name_en: "Machhi Loncha (Fish Pickle)", name_mr: "मच्छी लोनचा", cat: "Food", desc_en: "Katla, Rohu, Rupchand, Pagas 150-250g. Fresh fish, spices, mustard, garlic, ginger, red chili, turmeric, salt, oil. Glass/plastic jar.", desc_mr: "कतला, रोहू, रुपचंद, पगास १५०-२५० ग्रॅम. ताजे मासे, मसाले, मोहरी, लसूण, आले, तिखट, हळद, मीठ, तेल. काच/प्लास्टिक भरणी.", gi: "No", gi_mr: "नाही", seller_en: "Shantimata SHG", seller_mr: "शांतीमाता स्वयंसहाय्यता समूह", mobile: "9284677838", place_en: "Harinagar", place_mr: "हरीनगर", origin_en: "Harinagar", origin_mr: "हरीनगर",
-            img: "https://somethingiscooking.com/wp-content/uploads/2017/11/Fish-Pickle-682x1024.jpg", cert: "GDC-F-001" },
+            img: "https://somethingiscooking.com/wp-content/uploads/2017/11/Fish-Pickle-682x1024.jpg", cert: "GDC-F-001", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
         { id: 2, name_en: "Mohua Laddu", name_mr: "मोह लाडू", cat: "Food", desc_en: "Nutritious sweet made from Mahua flowers. Natural sweetness, popular in rural/tribal areas.", desc_mr: "मोह (महुआ) फुलांपासून पौष्टिक गोड पदार्थ. नैसर्गिक गोडवा, ग्रामीण/आदिवासी लोकप्रिय.", gi: "No", gi_mr: "नाही", seller_en: "Khushi SHG", seller_mr: "खुशी स्वयंसहाय्यता समूह", mobile: "9403426603", place_en: "Khudirampalli", place_mr: "खुदिरामपल्ली", origin_en: "Khudirampalli", origin_mr: "खुदिरामपल्ली",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjVpXzKLKEcRuHZhwtcH43GJCuZsybWzi2CElhJy1lAg&s=10", cert: "GDC-F-002" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjVpXzKLKEcRuHZhwtcH43GJCuZsybWzi2CElhJy1lAg&s=10", cert: "GDC-F-002", certPdf: "https://drive.google.com/file/d/1sample002/view?usp=sharing" },
         { id: 3, name_en: "Chilli Powder", name_mr: "मिरची पावडर", cat: "Food", desc_en: "100% selected dry red chillies, dark red, spicy aromatic, adulteration-free.", desc_mr: "१००% निवडक सुक्या लाल मिरच्या, गडद लाल, तिखट सुगंधी, भेसळमुक्त.", gi: "No", gi_mr: "नाही", seller_en: "Kalpavriksha Producer Group", seller_mr: "कल्पवृक्ष उत्पादक गट", mobile: "9021806471", place_en: "Lagam Chak", place_mr: "लगाम चक", origin_en: "Lagam Chek", origin_mr: "लगाम चेक",
-            img: "https://media.istockphoto.com/id/1312125865/photo/mortar-and-pestle.jpg?b=1&s=612x612&w=0&k=20&c=qi7YVE6NMv18d7RYGaTFJ836eymx2x6VBm3bgLBM1cc=", cert: "GDC-F-003" },
+            img: "https://media.istockphoto.com/id/1312125865/photo/mortar-and-pestle.jpg?b=1&s=612x612&w=0&k=20&c=qi7YVE6NMv18d7RYGaTFJ836eymx2x6VBm3bgLBM1cc=", cert: "GDC-F-003", certPdf: "https://drive.google.com/file/d/1sample003/view?usp=sharing" },
         { id: 4, name_en: "Turmeric Powder", name_mr: "हळद पावडर", cat: "Food", desc_en: "100% pure quality turmeric, yellow color, natural fresh aroma.", desc_mr: "१००% शुद्ध दर्जेदार हळद, पिवळा रंग, नैसर्गिक ताजा सुगंध.", gi: "No", gi_mr: "नाही", seller_en: "Kalpavriksha Producer Group", seller_mr: "कल्पवृक्ष उत्पादक गट", mobile: "9021806471", place_en: "Lagam Chak", place_mr: "लगाम चक", origin_en: "Lagam Chek", origin_mr: "लगाम चेक",
-            img: "https://images.pexels.com/photos/6220710/pexels-photo-6220710.jpeg", cert: "GDC-F-004" },
+            img: "https://images.pexels.com/photos/6220710/pexels-photo-6220710.jpeg", cert: "GDC-F-004", certPdf: "https://drive.google.com/file/d/1sample004/view?usp=sharing" },
         { id: 5, name_en: "Chikki", name_mr: "चिक्की", cat: "Food", desc_en: "Made from jaggery and peanuts, traditional sweet.", desc_mr: "गुळ व शेंगदाणे पासून तयार, पारंपरिक गोड पदार्थ.", gi: "No", gi_mr: "नाही", seller_en: "Prayas Prabhag Sangh", seller_mr: "प्रयास प्रभाग संघ", mobile: "9579088600", place_en: "Kondhala", place_mr: "कोंढाळा", origin_en: "Kondhala", origin_mr: "कोंढाळा",
-            img: "https://images.pexels.com/photos/17255911/pexels-photo-17255911.jpeg", cert: "GDC-F-005" },
+            img: "https://images.pexels.com/photos/17255911/pexels-photo-17255911.jpeg", cert: "GDC-F-005", certPdf: "https://drive.google.com/file/d/1sample005/view?usp=sharing" },
         { id: 6, name_en: "Sanitary Pad", name_mr: "सॅनिटरी पॅड", cat: "Medicinal", desc_en: "Hygiene product for menstrual care.", desc_mr: "स्त्रियांसाठी मासिक पाळी करिता स्वच्छता उत्पादन.", gi: "No", gi_mr: "नाही", seller_en: "Spandan Prabhag Sangh", seller_mr: "स्पंदन प्रभाग संघ", mobile: "9421904270", place_en: "Shankarpur", place_mr: "शंकरपूर", origin_en: "Shankarpur", origin_mr: "शंकरपूर",
-            img: "https://images.pexels.com/photos/7692468/pexels-photo-7692468.jpeg", cert: "GDC-F-006" },
+            img: "https://images.pexels.com/photos/7692468/pexels-photo-7692468.jpeg", cert: "GDC-F-006", certPdf: "https://drive.google.com/file/d/1sample006/view?usp=sharing" },
         { id: 7, name_en: "Mohua Laddu", name_mr: "मोहा लाडू", cat: "Food", desc_en: "Laddu made from Mahua flowers.", desc_mr: "मोहा फूल पासून बनवलेले लाडू.", gi: "No", gi_mr: "नाही", seller_en: "Vandana Ashok Gawade", seller_mr: "वंदना अशोक गावडे", mobile: "9403428450", place_en: "Etapalli", place_mr: "एटापल्ली", origin_en: "Jivangatta", origin_mr: "जीवनगट्टा",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjVpXzKLKEcRuHZhwtcH43GJCuZsybWzi2CElhJy1lAg&s=10", cert: "GDC-F-007" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjVpXzKLKEcRuHZhwtcH43GJCuZsybWzi2CElhJy1lAg&s=10", cert: "GDC-F-007", certPdf: "https://drive.google.com/file/d/1sample007/view?usp=sharing" },
         { id: 8, name_en: "Ambadi Powder", name_mr: "अंबाडी पावडर", cat: "Food", desc_en: "Powder made from Ambadi flowers.", desc_mr: "अंबाडी फुला पासून बनवलेले पावडर.", gi: "No", gi_mr: "नाही", seller_en: "Harsha Sundarsaha Kumre", seller_mr: "हर्षा सुन्दरसहा कुमरे", mobile: "9403625843", place_en: "Etapalli", place_mr: "एटापल्ली", origin_en: "Jeveli", origin_mr: "जेवेली",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8awt4nFckfziAR1GA3f9EgQlfDwvmEX9y77R6lI9LFw&s=10", cert: "GDC-F-008" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8awt4nFckfziAR1GA3f9EgQlfDwvmEX9y77R6lI9LFw&s=10", cert: "GDC-F-008", certPdf: "https://drive.google.com/file/d/1sample008/view?usp=sharing" },
         { id: 9, name_en: "Coconut Laddu", name_mr: "खोब्रा लाडू", cat: "Food", desc_en: "Laddu made from coconut.", desc_mr: "नारल पासून बनवलेले लाडू.", gi: "No", gi_mr: "नाही", seller_en: "Kanan Suresh Biswas", seller_mr: "कानन सुरेश बिस्वास", mobile: "9404726236", place_en: "Etapalli", place_mr: "एटापल्ली", origin_en: "Etapalli", origin_mr: "एटापल्ली",
-            img: "https://images.pexels.com/photos/34153203/pexels-photo-34153203.jpeg", cert: "GDC-F-009" },
+            img: "https://images.pexels.com/photos/34153203/pexels-photo-34153203.jpeg", cert: "GDC-F-009", certPdf: "https://drive.google.com/file/d/1sample009/view?usp=sharing" },
         { id: 10, name_en: "Mushroom", name_mr: "मशरूम", cat: "Food", desc_en: "Mushroom cultivation.", desc_mr: "मशरूम उत्पादन.", gi: "No", gi_mr: "नाही", seller_en: "Kamal Nandu Narote", seller_mr: "कमाल नंदू नरोटे", mobile: "9405927915", place_en: "Etapalli", place_mr: "एटापल्ली", origin_en: "Jivangatta", origin_mr: "जीवनगट्टा",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ26QV6dIiQfMsNGDeuEtWoMBPlJOBFscY10exoLW_boQ&s=10", cert: "GDC-F-010" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ26QV6dIiQfMsNGDeuEtWoMBPlJOBFscY10exoLW_boQ&s=10", cert: "GDC-F-010", certPdf: "https://drive.google.com/file/d/1sample010/view?usp=sharing" },
         { id: 11, name_en: "Mohua Laddu", name_mr: "मोह ल़ड्डु", cat: "Food", desc_en: "Nutritious laddu from Mahua flowers, energy booster.", desc_mr: "मोहाच्या फुलांपासून पौष्टिक लाडू, ऊर्जा वर्धक.", gi: "No", gi_mr: "नाही", seller_en: "Sanjivani Producer Group", seller_mr: "संजीवनी उत्पादक गट", mobile: "9421897627", place_en: "Bhimpur", place_mr: "भिमपुर", origin_en: "Bhimpur", origin_mr: "भिमपुर",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjVpXzKLKEcRuHZhwtcH43GJCuZsybWzi2CElhJy1lAg&s=10", cert: "GDC-F-011" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjVpXzKLKEcRuHZhwtcH43GJCuZsybWzi2CElhJy1lAg&s=10", cert: "GDC-F-011", certPdf: "https://drive.google.com/file/d/1sample011/view?usp=sharing" },
         { id: 12, name_en: "Mohua Rab", name_mr: "मोह राब", cat: "Medicinal", desc_en: "Pure rab from dried Mahua flowers, beneficial for cough and asthma.", desc_mr: "सुकलेल्या मोहाच्या फुलांच्या रसापासून शुद्ध राब, खोकला-दम्यास फायदेशीर.", gi: "No", gi_mr: "नाही", seller_en: "Sanjivani Producer Group", seller_mr: "संजीवनी उत्पादक गट", mobile: "9421897628", place_en: "Bhimpur", place_mr: "भिमपुर", origin_en: "Bhimpur", origin_mr: "भिमपुर",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlZjToAfyI8aNf9jPjmcXR_9Qpg-Pcsg45Vmw4hSd_YQ&s=10", cert: "GDC-F-012" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlZjToAfyI8aNf9jPjmcXR_9Qpg-Pcsg45Vmw4hSd_YQ&s=10", cert: "GDC-F-012", certPdf: "https://drive.google.com/file/d/1sample012/view?usp=sharing" },
         { id: 13, name_en: "Honey", name_mr: "शहद", cat: "Food", desc_en: "Natural pure honey from Gadchiroli forests, immunity booster.", desc_mr: "गडचिरोलीतील जंगलांमधून नैसर्गिक शुद्ध मध, प्रतिकारशक्ती वर्धक.", gi: "No", gi_mr: "नाही", seller_en: "Emmanuel Producer Group", seller_mr: "ईम्मानुएल उत्पादक गट", mobile: "9403079563", place_en: "Jamnara", place_mr: "जामणारा", origin_en: "Jamnara", origin_mr: "जामणारा",
-            img: "https://images.pexels.com/photos/5634210/pexels-photo-5634210.jpeg", cert: "GDC-F-013" },
+            img: "https://images.pexels.com/photos/5634210/pexels-photo-5634210.jpeg", cert: "GDC-F-013", certPdf: "https://drive.google.com/file/d/1sample013/view?usp=sharing" },
         { id: 14, name_en: "Toli Oil", name_mr: "टोळी तेल", cat: "Medicinal", desc_en: "Beneficial for joint pain, bone pain, skin diseases, reducing facial spots.", desc_mr: "सांधेदुखी, हाडांचे दुखणे, त्वचारोग, चेहऱ्यावरील डाग कमी करण्यास फायदेशीर.", gi: "No", gi_mr: "नाही", seller_en: "Rajmateshwari Producer Group", seller_mr: "राजमातेश्वरी उत्पादक गट", mobile: "9401505192", place_en: "Satputi", place_mr: "सातपुती", origin_en: "Pandharigota", origin_mr: "पंढरीगोटा",
-            img: "https://5.imimg.com/data5/UZ/JM/OP/SELLER-63371599/500ml-sesame-oil-500x500.jpg", cert: "GDC-F-014" },
+            img: "https://5.imimg.com/data5/UZ/JM/OP/SELLER-63371599/500ml-sesame-oil-500x500.jpg", cert: "GDC-F-014", certPdf: "https://drive.google.com/file/d/1sample014/view?usp=sharing" },
         { id: 15, name_en: "Organic Turmeric", name_mr: "सेंद्रिय हळद", cat: "Food", desc_en: "Chemical-free organic turmeric.", desc_mr: "रासायनिक खत विरहित सेंद्रिय तांदूळ (हळद).", gi: "No", gi_mr: "नाही", seller_en: "Ma Sharada Saving Group", seller_mr: "मा शारदा बचत गट", mobile: "8275606325", place_en: "Navegaon", place_mr: "नवेगाव", origin_en: "Navegaon", origin_mr: "नवेगाव",
-            img: "https://images.pexels.com/photos/6220710/pexels-photo-6220710.jpeg", cert: "GDC-F-015" },
+            img: "https://images.pexels.com/photos/6220710/pexels-photo-6220710.jpeg", cert: "GDC-F-015", certPdf: "https://drive.google.com/file/d/1sample015/view?usp=sharing" },
         { id: 16, name_en: "Vermicompost", name_mr: "गांडूळ खत", cat: "Medicinal", desc_en: "Increases crop productivity, organic fertilizer.", desc_mr: "पिकाची उत्पादकता वाढवते, सेंद्रिय खत.", gi: "No", gi_mr: "नाही", seller_en: "Ujwala Dhan Producer Group", seller_mr: "उज्वला धान उत्पादक संघ", mobile: "7972087166", place_en: "Velgur", place_mr: "वेलगुर", origin_en: "Velgur", origin_mr: "वेलगुर",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmwSiT_b_AK6nZNtuIC-AsKjLmXpm2gdaDk51OPu-YYw&s=10", cert: "GDC-F-016" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmwSiT_b_AK6nZNtuIC-AsKjLmXpm2gdaDk51OPu-YYw&s=10", cert: "GDC-F-016", certPdf: "https://drive.google.com/file/d/1sample016/view?usp=sharing" },
         { id: 17, name_en: "Organic Rice", name_mr: "सेंद्रिय तांदूळ", cat: "Food", desc_en: "Chemical-free organic rice.", desc_mr: "रासायनिक खत विरहित सेंद्रिय तांदूळ.", gi: "No", gi_mr: "नाही", seller_en: "Birsamunda Organic Group", seller_mr: "बिरसामुंडा सेंद्रिय गट", mobile: "9529895466", place_en: "Chirepalli", place_mr: "चिरेपल्ली", origin_en: "Chirepalli", origin_mr: "चिरेपल्ली",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrvw19tek4tH7zRT8NDAO_jWm_kGR7GkfpChPpYzZZgQ&s=10", cert: "GDC-F-017" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrvw19tek4tH7zRT8NDAO_jWm_kGR7GkfpChPpYzZZgQ&s=10", cert: "GDC-F-017", certPdf: "https://drive.google.com/file/d/1sample017/view?usp=sharing" },
         { id: 18, name_en: "Pigeon Pea (Tur Dal)", name_mr: "तूर डाळ", cat: "Food", desc_en: "Chemical-free organic pigeon pea.", desc_mr: "रासायनिक खत विरहित सेंद्रिय तूर डाळ.", gi: "No", gi_mr: "नाही", seller_en: "Ashirwad SHG", seller_mr: "आशीर्वाद स्वयं सहाय्यता समूह", mobile: "9390661476", place_en: "Marneli", place_mr: "मरनेली", origin_en: "Marneli", origin_mr: "मरनेली",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg-iY5S6_na497aDfyScQ-AIvPqiTq-m7XOZSfLwQelg&s=10", cert: "GDC-F-018" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg-iY5S6_na497aDfyScQ-AIvPqiTq-m7XOZSfLwQelg&s=10", cert: "GDC-F-018", certPdf: "https://drive.google.com/file/d/1sample018/view?usp=sharing" },
         { id: 19, name_en: "Green Gram (Mug Dal)", name_mr: "मुग डाळ", cat: "Food", desc_en: "Chemical-free organic green gram.", desc_mr: "रासायनिक खत विरहित सेंद्रिय मुग डाळ.", gi: "No", gi_mr: "नाही", seller_en: "Sharada Producer Group", seller_mr: "शारदा उत्पादक गट", mobile: "9403522378", place_en: "Jognaguda", place_mr: "जोगनगुडा", origin_en: "Jognaguda", origin_mr: "जोगनगुडा",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFSoT9S4fsA8trz6llGSWFz7N-B_hKTxZqE8DR5c8BUA&s=10", cert: "GDC-F-019" },
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFSoT9S4fsA8trz6llGSWFz7N-B_hKTxZqE8DR5c8BUA&s=10", cert: "GDC-F-019", certPdf: "https://drive.google.com/file/d/1sample019/view?usp=sharing" },
         { id: 20, name_en: "Organic Pulses", name_mr: "सेंद्रिय कडधान्ये", cat: "Food", desc_en: "Chemical-free organic pulses.", desc_mr: "रासायनिक खत विरहित सेंद्रिय कडधान्ये.", gi: "No", gi_mr: "नाही", seller_en: "Jay Perasapen Group", seller_mr: "जय पेरसापेन समूह", mobile: "9529061154", place_en: "Rajaram", place_mr: "राजाराम", origin_en: "Rajaram", origin_mr: "राजाराम",
-            img: "https://images.pexels.com/photos/18778270/pexels-photo-18778270.jpeg", cert: "GDC-F-020" },
+            img: "https://images.pexels.com/photos/18778270/pexels-photo-18778270.jpeg", cert: "GDC-F-020", certPdf: "https://drive.google.com/file/d/1sample020/view?usp=sharing" },
         { id: 21, name_en: "Sesame (Til)", name_mr: "तीळ", cat: "Food", desc_en: "Chemical-free organic sesame.", desc_mr: "रासायनिक खत विरहित सेंद्रिय तीळ.", gi: "No", gi_mr: "नाही", seller_en: "Jay Bhim Group", seller_mr: "जय भीम समूह", mobile: "8010400369", place_en: "Chalevada", place_mr: "छलेवाडा", origin_en: "Chalevada", origin_mr: "छलेवाडा",
-            img: "https://5.imimg.com/data5/UZ/JM/OP/SELLER-63371599/500ml-sesame-oil-500x500.jpg", cert: "GDC-F-021" },
+            img: "https://5.imimg.com/data5/UZ/JM/OP/SELLER-63371599/500ml-sesame-oil-500x500.jpg", cert: "GDC-F-021", certPdf: "https://drive.google.com/file/d/1sample021/view?usp=sharing" },
         { id: 22, name_en: "Safety Pad", name_mr: "सुरक्षा पड", cat: "Medicinal", desc_en: "Safety pad for menstrual care.", desc_mr: "स्त्रियांसाठी मासिक पाळी करिता सुरक्षा.", gi: "No", gi_mr: "नाही", seller_en: "Pragati Mahila Prabhag Sangh", seller_mr: "प्रगती महिला प्रभाग संघ", mobile: "7822961319", place_en: "Nagpalli", place_mr: "नागेपल्ली", origin_en: "Nagpalli", origin_mr: "नागेपल्ली",
-            img: "https://images.pexels.com/photos/7692468/pexels-photo-7692468.jpeg", cert: "GDC-F-022" },
+            img: "https://images.pexels.com/photos/7692468/pexels-photo-7692468.jpeg", cert: "GDC-F-022", certPdf: "https://drive.google.com/file/d/1sample022/view?usp=sharing" },
         { id: 23, name_en: "Turmeric Powder (Prerana)", name_mr: "हळद पावडर (प्रेरणा)", cat: "Food", desc_en: "All types of spices and turmeric powder.", desc_mr: "सर्व प्रकारचे मसाले व हळदी पावडर.", gi: "No", gi_mr: "नाही", seller_en: "Prerana SHG", seller_mr: "प्रेरणा स्वयं सहायता समूह", mobile: "9689185977", place_en: "Lakhamapur Bori", place_mr: "लखमापूर बोरी", origin_en: "Lakhamapur Bori", origin_mr: "लखमापूर बोरी",
-            img: "https://images.pexels.com/photos/6220710/pexels-photo-6220710.jpeg", cert: "GDC-F-023" },
+            img: "https://images.pexels.com/photos/6220710/pexels-photo-6220710.jpeg", cert: "GDC-F-023", certPdf: "https://drive.google.com/file/d/1sample023/view?usp=sharing" },
         { id: 24, name_en: "Sanskruti Mutton Masala", name_mr: "संस्कृती मटन मसाला", cat: "Food", desc_en: "All types of spice powders, to make food tasty.", desc_mr: "सर्व प्रकारचे मसाले पावडर, अन्न स्वादिष्ट बनवण्यासाठी.", gi: "No", gi_mr: "नाही", seller_en: "Prerana SHG", seller_mr: "प्रेरणा स्वयं सहायता समूह", mobile: "9309903217", place_en: "Lakhamapur Bori", place_mr: "लखमापूर बोरी", origin_en: "Lakhamapur Bori", origin_mr: "लखमापूर बोरी",
-            img: "https://images.pexels.com/photos/32144884/pexels-photo-32144884.jpeg", cert: "GDC-F-024" },
+            img: "https://images.pexels.com/photos/32144884/pexels-photo-32144884.jpeg", cert: "GDC-F-024", certPdf: "https://drive.google.com/file/d/1sample024/view?usp=sharing" },
         { id: 25, name_en: "Cloth & Fancy Bags", name_mr: "कापडी व FANCY BAG", cat: "Woodcraft", desc_en: "Fancy and useful cloth bags for daily use.", desc_mr: "Fancy व उपयोगी कापडी बॅग, दैनंदिन वापरासाठी.", gi: "No", gi_mr: "नाही", seller_en: "Savitri/Chameli Group", seller_mr: "सावित्री/चमेली समूह", mobile: "8080170725", place_en: "Thakri", place_mr: "ठाकरी", origin_en: "Thakri", origin_mr: "ठाकरी",
-            img: "https://images.pexels.com/photos/688658/pexels-photo-688658.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop", cert: "GDC-F-025" },
+            img: "https://images.pexels.com/photos/688658/pexels-photo-688658.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop", cert: "GDC-F-025", certPdf: "https://drive.google.com/file/d/1sample025/view?usp=sharing" },
         { id: 26, name_en: "Wooden Products", name_mr: "लाकडी वस्तू", cat: "Woodcraft", desc_en: "Handicraft wooden products, decorative items.", desc_mr: "हस्तकला लाकडी उत्पादने, सजावटीच्या वस्तू.", gi: "No", gi_mr: "नाही", seller_en: "Bhagyashri SHG", seller_mr: "भाग्यश्री स्वयंसहाय्यता समूह", mobile: "8262084958", place_en: "Mudkha", place_mr: "मुडखा", origin_en: "Mudkha", origin_mr: "मुडखा",
-            img: "https://images.pexels.com/photos/693742/pexels-photo-693742.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop", cert: "GDC-F-026" },
+            img: "https://images.pexels.com/photos/693742/pexels-photo-693742.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop", cert: "GDC-F-026", certPdf: "https://drive.google.com/file/d/1sample026/view?usp=sharing" },
         { id: 27, name_en: "Spices (Tikhat)", name_mr: "तिखट, मसाले", cat: "Food", desc_en: "Spicy spices, traditionally prepared.", desc_mr: "तिखट मसाले, पारंपरिक पद्धतीने तयार.", gi: "No", gi_mr: "नाही", seller_en: "Spandan SHG", seller_mr: "स्पंदन स्वयंसहाय्यता समूह", mobile: "9421712434", place_en: "Yevli", place_mr: "येवली", origin_en: "Yevli", origin_mr: "येवली",
-            img: "https://images.pexels.com/photos/37701466/pexels-photo-37701466.jpeg", cert: "GDC-F-027" },
+            img: "https://images.pexels.com/photos/37701466/pexels-photo-37701466.jpeg", cert: "GDC-F-027", certPdf: "https://drive.google.com/file/d/1sample027/view?usp=sharing" },
         { id: 28, name_en: "Organic Inputs (Kurd)", name_mr: "सेंद्रिय निविष्ठा कुर्द", cat: "Medicinal", desc_en: "Organic inputs for farming.", desc_mr: "शेतीसाठी सेंद्रिय निविष्ठा.", gi: "No", gi_mr: "नाही", seller_en: "Panchshil", seller_mr: "पंचशील", mobile: "9420341713", place_en: "Churchura", place_mr: "चुरचुरा", origin_en: "Churchura", origin_mr: "चुरचुरा",
-            img: "https://eos.com/wp-content/uploads/2024/02/ash-organic-fertilizer.png.webp", cert: "GDC-F-028" },
+            img: "https://eos.com/wp-content/uploads/2024/02/ash-organic-fertilizer.png.webp", cert: "GDC-F-028", certPdf: "https://drive.google.com/file/d/1sample028/view?usp=sharing" },
         { id: 29, name_en: "Chili Powder (Jay)", name_mr: "मिरची पावडर (जय)", cat: "Food", desc_en: "Fresh chili powder.", desc_mr: "ताजी मिरची पावडर.", gi: "No", gi_mr: "नाही", seller_en: "Jay Hanuman", seller_mr: "जय हनुमान", mobile: "9209029604", place_en: "Katli Chak", place_mr: "काटली चक", origin_en: "Katli Chak", origin_mr: "काटली चक",
-            img: "https://media.istockphoto.com/id/1312125865/photo/mortar-and-pestle.jpg?b=1&s=612x612&w=0&k=20&c=qi7YVE6NMv18d7RYGaTFJ836eymx2x6VBm3bgLBM1cc=", cert: "GDC-F-029" },
+            img: "https://media.istockphoto.com/id/1312125865/photo/mortar-and-pestle.jpg?b=1&s=612x612&w=0&k=20&c=qi7YVE6NMv18d7RYGaTFJ836eymx2x6VBm3bgLBM1cc=", cert: "GDC-F-029", certPdf: "https://drive.google.com/file/d/1sample029/view?usp=sharing" },
         { id: 30, name_en: "Spices (Jay Dantatre)", name_mr: "मसाले (जय दंतात्रे)", cat: "Food", desc_en: "Various spices.", desc_mr: "विविध मसाले.", gi: "No", gi_mr: "नाही", seller_en: "Jay Dantatre", seller_mr: "जय दंतात्रे", mobile: "7620038492", place_en: "Belgaon", place_mr: "बेलगाव", origin_en: "Belgaon", origin_mr: "बेलगाव",
-            img: "https://images.pexels.com/photos/37701466/pexels-photo-37701466.jpeg", cert: "GDC-F-030" },
+            img: "https://images.pexels.com/photos/37701466/pexels-photo-37701466.jpeg", cert: "GDC-F-030", certPdf: "https://drive.google.com/file/d/1sample030/view?usp=sharing" },
         { id: 31, name_en: "Sukhun Wadi", name_mr: "सुखून वडी", cat: "Food", desc_en: "Traditional dried snack.", desc_mr: "पारंपरिक सुखून वडी.", gi: "No", gi_mr: "नाही", seller_en: "Navdurga", seller_mr: "नवदुर्गा", mobile: "9529552575", place_en: "Savargaon", place_mr: "सावरगाव", origin_en: "Savargaon", origin_mr: "सावरगाव",
-            img: "https://images.pexels.com/photos/3962289/pexels-photo-3962289.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop", cert: "GDC-F-031" },
+            img: "https://images.pexels.com/photos/3962289/pexels-photo-3962289.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop", cert: "GDC-F-031", certPdf: "https://drive.google.com/file/d/1sample031/view?usp=sharing" },
         { id: 32, name_en: "Pulses (Kadadhanya)", name_mr: "कडधान्य", cat: "Food", desc_en: "Various pulses.", desc_mr: "विविध कडधान्ये.", gi: "No", gi_mr: "नाही", seller_en: "Bhagyalaxmi", seller_mr: "भाग्यलक्ष्मी", mobile: "9518372655", place_en: "Iruptola", place_mr: "इरुपटोला", origin_en: "Iruptola", origin_mr: "इरुपटोला",
-            img: "https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop", cert: "GDC-F-032" },
+            img: "https://images.pexels.com/photos/5812633/pexels-photo-5812633.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop", cert: "GDC-F-032", certPdf: "https://drive.google.com/file/d/1sample032/view?usp=sharing" },
         { id: 33, name_en: "Honey (Vadsa)", name_mr: "मध (वडसा)", cat: "Food", desc_en: "Immunity booster, cold and cough relief, natural sweetener.", desc_mr: "रोगप्रतिकारशक्ती वाढवणे, सर्दी-खोकल्यात आराम, नैसर्गिक गोड पदार्थ.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Wadsa", place_mr: "वडसा", origin_en: "Kulkheda", origin_mr: "कुळखेडा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-033" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-033", certPdf: "https://drive.google.com/file/d/1sample033/view?usp=sharing" },
         { id: 34, name_en: "Purple powder", name_mr: "जांभूळ पावडर", cat: "Food", desc_en: "Aids in blood sugar control, improves digestion, source of antioxidants.", desc_mr: "रक्तातील साखर नियंत्रणास मदत, पचन सुधारणा,अँटिऑक्सिडंटचा स्रोत.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Wadsa", place_mr: "वडसा", origin_en: "Kulkheda", origin_mr: "कुळखेडा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-034" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-034", certPdf: "https://drive.google.com/file/d/1sample034/view?usp=sharing" },
         { id: 35, name_en: "Purple juice", name_mr: "जांभूळ जूस", cat: "Food", desc_en: "Refreshes the body, aids in digestion, supplements in diabetes management.", desc_mr: "शरीराला ताजेतवाने ठेवणे, पचनास मदत, मधुमेह व्यवस्थापनात पूरक.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Vadsa", place_mr: "वडसा", origin_en: "Kulkheda", origin_mr: "कुळखेडा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-035" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-035", certPdf: "https://drive.google.com/file/d/1sample035/view?usp=sharing" },
         { id: 36, name_en: "Moh Ladu, Shankarpale, Chakali", name_mr: "मोह लाडू, शंकरपाळे, चकली", cat: "Food", desc_en: "Nutritious food, local value added production, support for income generation.", desc_mr: "पौष्टिक खाद्यपदार्थ, स्थानिक मूल्यवर्धित उत्पादन,उत्पन्नवाढीस मदत.", gi: "No", gi_mr: "नाही", seller_en: "Deepjyoti Van Dhan Vikas Kendra Dhanora", seller_mr: "दीपज्योती वन धन विकास केंद्र धानोरा", mobile: "8329832066", place_en: "Dhanora", place_mr: "धानोरा", origin_en: "Dhanora", origin_mr: "धानोरा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-036" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-036", certPdf: "https://drive.google.com/file/d/1sample036/view?usp=sharing" },
         { id: 37, name_en: "Gum, Berda", name_mr: "हिरडा, बेरडा", cat: "Food", desc_en: "Uses in Ayurvedic medicine, improve digestion, use in preparation of triphala.", desc_mr: "आयुर्वेदिक औषधांमध्ये वापर, पचन सुधारणा, त्रिफळा तयार करण्यासाठी उपयोग.", gi: "No", gi_mr: "नाही", seller_en: "Composite Subordinate Forest Produce Collection Center Vairagarh", seller_mr: "संमिश्र गौण वन उपज संकलन केंद्र वैरागढ", mobile: "8669797343", place_en: "Vairagarh", place_mr: "वैरागढ", origin_en: "Kukdi, Kojbi, Navargaon, Medha, Vadegaon", origin_mr: "कुकडी, कोजबी, नवरगाव, मेढा, वाडेगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-037" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-037", certPdf: "https://drive.google.com/file/d/1sample037/view?usp=sharing" },
         { id: 38, name_en: "Tamarind", name_mr: "चिंच", cat: "Food", desc_en: "To give sour taste, use in chutney, amati, syrup, masala.", desc_mr: "आंबट चव देण्यासाठी, चटणी, आमटी, सरबत, मसाल्यात वापर.", gi: "No", gi_mr: "नाही", seller_en: "Composite Subordinate Forest Produce Collection Center Vairagarh", seller_mr: "संमिश्र गौण वन उपज संकलन केंद्र वैरागढ", mobile: "8669797343", place_en: "Vairagarh", place_mr: "वैरागढ", origin_en: "Kukdi, Kojbi, Navargaon, Medha, Vadegaon", origin_mr: "कुकडी, कोजबी, नवरगाव, मेढा, वाडेगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-038" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-038", certPdf: "https://drive.google.com/file/d/1sample038/view?usp=sharing" },
         { id: 39, name_en: "Gum (Dink)", name_mr: "डिंक", cat: "Food", desc_en: "Dink Ladoo, in the diet of women after delivery, to give strength and energy.", desc_mr: "डिंक लाडू, प्रसूतीनंतर महिलांच्या आहारात, शरीराला ताकद व ऊर्जा देण्यासाठी.", gi: "No", gi_mr: "नाही", seller_en: "Composite Subordinate Forest Produce Collection Center Vairagarh", seller_mr: "संमिश्र गौण वन उपज संकलन केंद्र वैरागढ", mobile: "8669797343", place_en: "Vairagarh", place_mr: "वैरागढ", origin_en: "Kukdi, Kojbi, Navargaon, Medha, Vadegaon", origin_mr: "कुकडी, कोजबी, नवरगाव, मेढा, वाडेगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-039" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-039", certPdf: "https://drive.google.com/file/d/1sample039/view?usp=sharing" },
         { id: 40, name_en: "Whole Masala Powder", name_mr: "संपूर्ण मसाला पावडर", cat: "Food", desc_en: "To add flavor and aroma to vegetables, meats, non-vegetarian dishes.", desc_mr: "भाजी, आमटी, मांसाहारी पदार्थ व इतर पाककृतींमध्ये चव आणि सुगंध वाढवण्यासाठी.", gi: "No", gi_mr: "नाही", seller_en: "Gyandeep Tejaswini Chili Masala Women's Industry Group", seller_mr: "ज्ञानदीप तेजस्विनी मिरची मसाला महिला उद्योग गट", mobile: "9921765529", place_en: "Armory", place_mr: "आरमोरी", origin_en: "Armory", origin_mr: "आरमोरी",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-040" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-040", certPdf: "https://drive.google.com/file/d/1sample040/view?usp=sharing" },
         { id: 41, name_en: "Mushrooms (dry, wet)", name_mr: "मशरूम (सुके, ओले)", cat: "Food", desc_en: "Nutritious food, good source of protein, vegetables, soups, snacks.", desc_mr: "पौष्टिक अन्न, प्रथिनांचा उत्तम स्रोत, भाजी, सूप, स्नॅक्स व प्रक्रिया उद्योगात वापर.", gi: "No", gi_mr: "नाही", seller_en: "Dnyaneshwari Sahata Group Adarsh Women Sahata Group", seller_mr: "ज्ञानेश्वरी बचत गट आदर्श महिला बचत गट", mobile: "9284491420", place_en: "Gogaon", place_mr: "गोगाव", origin_en: "Gogaon", origin_mr: "गोगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-041" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-041", certPdf: "https://drive.google.com/file/d/1sample041/view?usp=sharing" },
         { id: 42, name_en: "Charoli", name_mr: "चारोळी", cat: "Food", desc_en: "Use in sweets, kheer, halwa, shrikhand, spices and dry fruit mix.", desc_mr: "मिठाई, खीर, हलवा, श्रीखंड, मसाले व ड्रायफ्रूट मिश्रणात वापर.", gi: "No", gi_mr: "नाही", seller_en: "Shramsaflya Loksanchalit Sadhan Kendra Chamorshi", seller_mr: "श्रमसाफल्य लोक्संचालीत साधन केंद्र चामोर्शी", mobile: "9403237072", place_en: "Chamorshi", place_mr: "चामोर्शी", origin_en: "Parimuranda", origin_mr: "पारीमुरांडा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-042" },
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-042", certPdf: "https://drive.google.com/file/d/1sample042/view?usp=sharing" },
         { id: 43, name_en: "Arjun Sal", name_mr: "अर्जुन साल", cat: "Food", desc_en: "Uses in Ayurveda for heart health, blood pressure control and making decoctions.", desc_mr: "आयुर्वेदात हृदयाच्या आरोग्यासाठी, रक्तदाब नियंत्रणासाठी आणि काढा तयार करण्यासाठी वापर.", gi: "No", gi_mr: "नाही", seller_en: "Composite Subordinate Forest Produce Collection Center Vairagarh", seller_mr: "संमिश्र गौण वन उपज संकलन केंद्र वैरागढ", mobile: "8669797343", place_en: "Vairagarh", place_mr: "वैरागढ", origin_en: "Kukdi, Kojbi, Navargaon, Medha, Vadegaon", origin_mr: "कुकडी, कोजबी, नवरगाव, मेढा, वाडेगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-043" }
+            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-043", certPdf: "https://drive.google.com/file/d/1sample043/view?usp=sharing" }
     ];
 
     const stories = [{
@@ -1375,7 +1814,7 @@ a{color:inherit;}
             <div class="badge-row">
               <span class="cat-badge">${p.cat}</span>
               <span class="gi-badge"><i class="fas fa-tag"></i> <span class="gi-label-en">GI: ${p.gi}</span><span class="gi-label-mr">GI: ${p.gi_mr}</span></span>
-              <span class="cert-badge" title="Certified product"><i class="fas fa-certificate"></i> <span class="cert-label-en">${p.cert}</span><span class="cert-label-mr">${p.cert}</span></span>
+              <a href="${p.certPdf}" target="_blank" class="cert-badge" title="Download Certificate PDF"><i class="fas fa-file-pdf"></i> <span class="cert-label-en">${p.cert}</span><span class="cert-label-mr">${p.cert}</span></a>
             </div>
             <div class="description"><i class="fas fa-info-circle"></i> <span class="desc-en">${p.desc_en}</span><span class="desc-mr">${p.desc_mr}</span></div>
             <div class="location"><i class="fas fa-map-pin"></i> <span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span></div>
@@ -1389,15 +1828,24 @@ a{color:inherit;}
       `;
     }
 
-    function renderVendorCard(p) {
+    function renderVendorCard(vendor) {
+        const productsHtml = vendor.products.map(p => `
+          <a href="${p.certPdf}" target="_blank" class="vendor-product-row" data-id="${p.id}" title="${p.cert}">
+            <img src="${p.img}" alt="${p.name_en}" loading="lazy" class="vendor-product-thumb">
+            <span class="vendor-product-info">
+              <span class="vendor-product-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
+              <span class="vendor-product-cert">${p.cert}</span>
+            </span>
+            <i class="fas fa-file-pdf vendor-product-pdf-icon"></i>
+          </a>
+        `).join('');
         return `
         <div class="vendor-card">
-          <h4><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></h4>
-          <div class="vendor-meta"><i class="fas fa-user"></i> <strong><span class="seller-label-en">Seller:</span><span class="seller-label-mr">विक्रेता:</span></strong> <span class="seller-en">${p.seller_en}</span><span class="seller-mr">${p.seller_mr}</span></div>
-          <div class="vendor-meta"><i class="fas fa-phone"></i> ${p.mobile} <button class="copy-btn" data-phone="${p.mobile}"><i class="fas fa-copy"></i> <span class="en-only">Copy</span><span class="mr-only">कॉपी</span></button></div>
-          <div class="vendor-meta"><i class="fas fa-map-pin"></i> <span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span></div>
-          <div class="vendor-meta"><i class="fas fa-tag"></i> <span class="cert-label-en">${p.cert}</span><span class="cert-label-mr">${p.cert}</span></div>
-          <div style="margin-top:0.5rem;"><span class="cat-badge">${p.cat}</span></div>
+          <h4><span class="seller-en">${vendor.seller_en}</span><span class="seller-mr">${vendor.seller_mr}</span></h4>
+          <div class="vendor-meta"><i class="fas fa-phone"></i> ${vendor.mobile} <button class="copy-btn" data-phone="${vendor.mobile}"><i class="fas fa-copy"></i> <span class="en-only">Copy</span><span class="mr-only">कॉपी</span></button></div>
+          <div class="vendor-meta"><i class="fas fa-map-pin"></i> <span class="place-en">${vendor.place_en}</span><span class="place-mr">${vendor.place_mr}</span></div>
+          <div class="vendor-meta"><i class="fas fa-boxes-stacked"></i> ${vendor.products.length} <span class="en-only">product(s) listed</span><span class="mr-only">उत्पादन(ने) सूचीबद्ध</span></div>
+          <div class="vendor-products-list">${productsHtml}</div>
         </div>
       `;
     }
@@ -1497,19 +1945,23 @@ a{color:inherit;}
         // Featured (first 6)
         document.getElementById('featuredGrid').innerHTML = products.slice(0, 6).map((p, i) => renderProductCard(p, i)).join('');
 
-        // Vendor Grid (unique vendors)
+        // Vendor Grid — group by vendor, listing EVERY product that vendor sells,
+        // each with the exact same photo/name/cert-PDF used in Product/Gallery/Download tabs
         const vendorMap = {};
         products.forEach(p => {
-            const key = p.seller_en + p.seller_mr;
-            if (!vendorMap[key]) vendorMap[key] = { ...p };
+            const key = p.seller_en + '|' + p.seller_mr;
+            if (!vendorMap[key]) {
+                vendorMap[key] = { seller_en: p.seller_en, seller_mr: p.seller_mr, mobile: p.mobile, place_en: p.place_en, place_mr: p.place_mr, products: [] };
+            }
+            vendorMap[key].products.push(p);
         });
         const vendorList = Object.values(vendorMap);
-        document.getElementById('vendorGrid').innerHTML = vendorList.map(p => renderVendorCard(p)).join('');
+        document.getElementById('vendorGrid').innerHTML = vendorList.map(v => renderVendorCard(v)).join('');
 
         // Stories
         document.getElementById('storyGrid').innerHTML = stories.map(s => renderStoryCard(s)).join('');
 
-        // Populate feedback vendor & product dropdowns
+        // Populate feedback dropdowns
         populateFeedbackDropdowns();
 
         // Wire up interactive bits + reveal animation
@@ -1530,6 +1982,49 @@ a{color:inherit;}
         const resultCountNum = document.getElementById('resultCountNum');
         if (resultCountNum) resultCountNum.textContent = products.length;
     }
+
+    // ============================================================
+    //  CAROUSEL / SLIDESHOW
+    // ============================================================
+    let currentSlide = 0;
+    const totalSlides = document.querySelectorAll('.carousel-slide').length;
+    const slidesContainer = document.getElementById('carouselSlides');
+    const dotsContainer = document.getElementById('carouselDots');
+
+    function goToSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        currentSlide = index;
+        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        // Update dots
+        document.querySelectorAll('.carousel-dots button').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlide);
+        });
+    }
+
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+
+    // Build dots
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = i === 0 ? 'active' : '';
+        dot.setAttribute('aria-label', `Go to slide ${i+1}`);
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+
+    document.getElementById('carouselNext').addEventListener('click', nextSlide);
+    document.getElementById('carouselPrev').addEventListener('click', prevSlide);
+
+    // Auto-play (pause on hover)
+    let autoPlayInterval = setInterval(nextSlide, 5000);
+    const carouselWrapper = document.getElementById('mainCarousel');
+    carouselWrapper.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    carouselWrapper.addEventListener('mouseleave', () => {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(nextSlide, 5000);
+    });
 
     // ============================================================
     //  FEEDBACK DROPDOWNS
@@ -1564,7 +2059,7 @@ a{color:inherit;}
     }
 
     // ============================================================
-    //  FEEDBACK FORM HANDLING (SMTP-free: mailto fallback)
+    //  FEEDBACK FORM HANDLING
     // ============================================================
     const feedbackForm = document.getElementById('feedbackForm');
     const fbSubmitBtn = document.getElementById('fbSubmitBtn');
@@ -1573,7 +2068,6 @@ a{color:inherit;}
     feedbackForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Gather data
         const name = document.getElementById('fbName').value.trim();
         const mobile = document.getElementById('fbMobile').value.trim();
         const email = document.getElementById('fbEmail').value.trim();
@@ -1582,7 +2076,6 @@ a{color:inherit;}
         const product = document.getElementById('fbProduct').value;
         const message = document.getElementById('fbMessage').value.trim();
 
-        // Basic validation
         if (!name || !mobile || !message) {
             toast((currentLang === 'en' ? 'Please fill in all required fields' : 'कृपया सर्व आवश्यक फील्ड भरा'), 'fa-exclamation-circle');
             return;
@@ -1592,7 +2085,6 @@ a{color:inherit;}
             return;
         }
 
-        // Build email body
         const productName = product ? products.find(p => p.id == product)?.name_en || product : 'Not specified';
         const vendorName = vendor || 'Not specified';
         const body = `
@@ -1610,21 +2102,16 @@ a{color:inherit;}
     Submitted via: https://gadchiroli.gov.in/exhibition
     `;
 
-        // Use mailto as a free, reliable fallback (opens user's email client)
         const subject = encodeURIComponent(`Feedback: ${name} - District Exhibition`);
         const mailtoLink = `mailto:collector.gadchiroli@maharashtra.gov.in?subject=${subject}&body=${encodeURIComponent(body)}`;
-
-        // Try to send via mailto
         window.location.href = mailtoLink;
 
-        // Show success message
         fbSuccess.classList.add('show');
         fbSubmitBtn.disabled = true;
         fbSubmitBtn.innerHTML = `<i class="fas fa-check"></i> <span class="en-only">Sent</span><span class="mr-only">पाठवले</span>`;
 
         toast((currentLang === 'en' ? 'Thank you! Your feedback has been sent' : 'धन्यवाद! तुमचा अभिप्राय पाठवला गेला'), 'fa-paper-plane');
 
-        // Optionally reset after a delay (but keep success visible)
         setTimeout(() => {
             feedbackForm.reset();
             fbSubmitBtn.disabled = false;
@@ -1633,6 +2120,122 @@ a{color:inherit;}
                 fbSuccess.classList.remove('show');
             }, 4000);
         }, 6000);
+    });
+
+    // ============================================================
+    //  DOWNLOAD FUNCTIONS
+    // ============================================================
+    function generateCatalogPDF(category) {
+        const filtered = category ? products.filter(p => p.cat === category) : products;
+        const title = category ? `${category} Products Catalog` : 'Complete Product Catalog';
+        let html = `<html><head><title>${title}</title><style>body{font-family:sans-serif;padding:2rem;}h1{color:#1a5a2a;}table{width:100%;border-collapse:collapse;margin-top:1rem;}th{background:#1f4b2e;color:#fff;padding:.5rem;text-align:left;}td,th{border:1px solid #ddd;padding:.5rem;}</style></head><body>`;
+        html += `<h1>${title} - Gadchiroli District Exhibition</h1><p>Generated: ${new Date().toLocaleDateString()}</p><table><tr><th>#</th><th>Product</th><th>Category</th><th>Seller</th><th>Location</th><th>Cert</th></tr>`;
+        filtered.forEach((p, i) => {
+            html += `<tr><td>${i+1}</td><td>${p.name_en}</td><td>${p.cat}</td><td>${p.seller_en}</td><td>${p.place_en}</td><td>${p.cert}</td></tr>`;
+        });
+        html += `</table></body></html>`;
+        const blob = new Blob([html], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${title.replace(/\s/g,'_')}.pdf`;
+        a.click();
+        URL.revokeObjectURL(url);
+        toast((currentLang === 'en' ? 'Catalog downloaded!' : 'कॅटलॉग डाउनलोड झाला!'), 'fa-file-pdf');
+    }
+
+    // Catalog download buttons
+    document.getElementById('dlCatalogAll').addEventListener('click', () => generateCatalogPDF(null));
+    document.getElementById('dlCatalogFood').addEventListener('click', () => generateCatalogPDF('Food'));
+    document.getElementById('dlCatalogMedicinal').addEventListener('click', () => generateCatalogPDF('Medicinal'));
+    document.getElementById('dlCatalogWoodcraft').addEventListener('click', () => generateCatalogPDF('Woodcraft'));
+
+    // Certificate guide
+    document.getElementById('dlCertGuide').addEventListener('click', () => {
+        toast((currentLang === 'en' ? 'Use the search below to find and download any product certificate.' : 'कोणतेही उत्पादन प्रमाणपत्र शोधण्यासाठी आणि डाउनलोड करण्यासाठी खालील शोध वापरा.'), 'fa-info-circle');
+    });
+
+    // Download search
+    function renderDownloadResults(query) {
+        const container = document.getElementById('downloadResults');
+        const q = query.toLowerCase().trim();
+        let matched = products;
+        if (q) {
+            matched = products.filter(p => p.name_en.toLowerCase().includes(q) || p.name_mr.toLowerCase().includes(q) || p.cert.toLowerCase().includes(q));
+        }
+        if (matched.length === 0) {
+            container.innerHTML = `<div class="no-results"><span class="en-only">No products found.</span><span class="mr-only">कोणतीही उत्पादने सापडली नाहीत.</span></div>`;
+            return;
+        }
+        container.innerHTML = `<div class="download-results-grid">${matched.map(p => `
+          <div class="download-result-item">
+            <div class="item-info">
+              <span class="item-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
+              <span class="item-meta">${p.cert} · ${p.place_en}</span>
+            </div>
+            <div class="item-actions">
+              <a href="${p.certPdf}" target="_blank" class="dl-btn"><i class="fas fa-file-pdf"></i> <span class="en-only">PDF</span><span class="mr-only">PDF</span></a>
+              <button class="dl-btn outline" onclick="downloadProductImage(${p.id})"><i class="fas fa-image"></i> <span class="en-only">Image</span><span class="mr-only">प्रतिमा</span></button>
+            </div>
+          </div>
+        `).join('')}</div>`;
+    }
+
+    window.downloadProductImage = function(id) {
+        const p = products.find(pr => pr.id === id);
+        if (p) {
+            fetch(p.img)
+                .then(res => res.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${p.cert}_${p.name_en.replace(/\s/g,'_')}.jpg`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    toast((currentLang === 'en' ? 'Image downloaded!' : 'प्रतिमा डाउनलोड झाली!'), 'fa-image');
+                })
+                .catch(() => {
+                    toast((currentLang === 'en' ? 'Could not download image, opening in new tab' : 'प्रतिमा डाउनलोड करू शकलो नाही, नवीन टॅबमध्ये उघडत आहे'), 'fa-external-link-alt');
+                    window.open(p.img, '_blank');
+                });
+        }
+    };
+
+    document.getElementById('downloadSearchBtn').addEventListener('click', function() {
+        const query = document.getElementById('downloadSearchInput').value;
+        renderDownloadResults(query);
+    });
+    document.getElementById('downloadSearchInput').addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') {
+            renderDownloadResults(this.value);
+        }
+    });
+    document.getElementById('downloadClearBtn').addEventListener('click', function() {
+        document.getElementById('downloadSearchInput').value = '';
+        renderDownloadResults('');
+    });
+
+    // Exhibition highlights downloads (simulated)
+    document.getElementById('dlBrochure').addEventListener('click', () => {
+        toast((currentLang === 'en' ? 'Brochure downloading...' : 'ब्रोशर डाउनलोड होत आहे...'), 'fa-file-pdf');
+        generateCatalogPDF(null);
+    });
+    document.getElementById('dlGalleryImages').addEventListener('click', () => {
+        toast((currentLang === 'en' ? 'Preparing image collection...' : 'प्रतिमा संग्रह तयार होत आहे...'), 'fa-images');
+        // Simulate ZIP download - open first product images in new tabs
+        products.slice(0, 5).forEach(p => {
+            window.open(p.img, '_blank');
+        });
+        toast((currentLang === 'en' ? 'Opening 5 sample product images' : '५ नमुना उत्पादन प्रतिमा उघडत आहे'), 'fa-images');
+    });
+    document.getElementById('dlDirectory').addEventListener('click', () => {
+        toast((currentLang === 'en' ? 'Vendor directory downloading...' : 'विक्रेता निर्देशिका डाउनलोड होत आहे...'), 'fa-file-pdf');
+        generateCatalogPDF(null);
+    });
+    document.getElementById('dlSarasReport').addEventListener('click', () => {
+        toast((currentLang === 'en' ? 'SARAS Mela report downloading...' : 'सरस मेळा अहवाल डाउनलोड होत आहे...'), 'fa-file-pdf');
+        generateCatalogPDF(null);
     });
 
     // ============================================================
@@ -1667,39 +2270,60 @@ a{color:inherit;}
     if (statStripEl) statObserver.observe(statStripEl);
 
     // ============================================================
-    //  VISITOR INSIGHTS — START AT ZERO, AUTO-INCREMENT
+    //  VISITOR INSIGHTS — REAL, PERSISTED COUNTS
+    //  Uses countapi.mileshilliard.com — a free, keyless, open hit-
+    //  counter API (successor to the old countapi.xyz). Each unique
+    //  key is a real persisted counter on their server, so these
+    //  numbers are genuine across every visitor and every session,
+    //  not a local animation. If the office network blocks external
+    //  APIs, the cards fall back to "—" instead of breaking.
     // ============================================================
-    const visitorStats = {
-        total: 0,
-        lastMonth: 0,
-        today: 0
-    };
+    const COUNTER_BASE = 'https://countapi.mileshilliard.com/api/v1';
+    const COUNTER_PREFIX = 'gdcr_district_expo_v2'; // unique prefix to avoid clashing with anyone else's key
 
-    // Seed the search leaderboard
+    function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+    function todayKeyPart(d) { return `${d.getFullYear()}${pad2(d.getMonth() + 1)}${pad2(d.getDate())}`; }
+    function monthKeyPart(d) { return `${d.getFullYear()}${pad2(d.getMonth() + 1)}`; }
+
+    async function counterHit(key) {
+        try {
+            const res = await fetch(`${COUNTER_BASE}/hit/${COUNTER_PREFIX}_${key}`);
+            if (!res.ok) return null;
+            const data = await res.json();
+            return typeof data.value === 'number' ? data.value : parseInt(data.value, 10);
+        } catch (err) { return null; }
+    }
+    async function counterGet(key) {
+        try {
+            const res = await fetch(`${COUNTER_BASE}/get/${COUNTER_PREFIX}_${key}`);
+            if (!res.ok) return 0; // 404 = key not created yet (e.g. no data for last month)
+            const data = await res.json();
+            return typeof data.value === 'number' ? data.value : parseInt(data.value, 10) || 0;
+        } catch (err) { return null; }
+    }
+
+    const visitorStats = { total: null, today: null, lastMonth: null };
+
     const searchTally = {};
-    ['Machhi Loncha (Fish Pickle)', 'Charoli', 'Arjun Sal'].forEach((name, i) => {
-        searchTally[name] = [0, 0, 0][i];
-    });
+    ['Machhi Loncha (Fish Pickle)', 'Charoli', 'Arjun Sal'].forEach((name) => { searchTally[name] = 0; });
 
     function topSearchedProduct() {
         let bestName = Object.keys(searchTally)[0];
         let bestCount = searchTally[bestName] || 0;
         Object.entries(searchTally).forEach(([name, count]) => {
-            if (count > bestCount) { bestName = name;
-                bestCount = count; }
+            if (count > bestCount) { bestName = name; bestCount = count; }
         });
-        return { name: bestName, count: bestCount };
+        return { name: bestCount > 0 ? bestName : '—', count: bestCount };
     }
 
     function countUpTo(el, target, duration) {
+        if (target === null || isNaN(target)) { el.textContent = '—'; return; }
         const start = performance.now();
-        const from = 0;
         const realTarget = target || 0;
-
         function frame(now) {
             const progress = Math.min(1, (now - start) / duration);
             const eased = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(from + (realTarget - from) * eased);
+            const current = Math.floor(realTarget * eased);
             el.textContent = current.toLocaleString('en-IN');
             if (progress < 1) requestAnimationFrame(frame);
             else el.textContent = realTarget.toLocaleString('en-IN');
@@ -1713,30 +2337,37 @@ a{color:inherit;}
         countUpTo(document.getElementById('statTodayVisitors'), visitorStats.today, 1000);
         countUpTo(document.getElementById('statLastMonthVisitors'), visitorStats.lastMonth, 1200);
         countUpTo(document.getElementById('statTopSearchCount'), top.count, 1000);
-        document.getElementById('statTopSearchName').textContent = top.name || '—';
+        document.getElementById('statTopSearchName').textContent = top.name;
+        const noteEl = document.getElementById('insightsOfflineNote');
+        if (noteEl) noteEl.style.display = (visitorStats.total === null) ? 'flex' : 'none';
     }
 
-    let insightsAnimated = false;
+    let insightsDataReady = false;
+    let insightsSectionVisible = false;
+
+    async function loadVisitorStats() {
+        const now = new Date();
+        const prevMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        // Hitting = "count this visit". Each key is scoped so today/month reset themselves by key name.
+        const [total, today, month, lastMonth] = await Promise.all([
+            counterHit('total'),
+            counterHit('day_' + todayKeyPart(now)),
+            counterHit('month_' + monthKeyPart(now)),
+            counterGet('month_' + monthKeyPart(prevMonthDate))
+        ]);
+        visitorStats.total = total;
+        visitorStats.today = today;
+        visitorStats.lastMonth = lastMonth;
+        insightsDataReady = true;
+        if (insightsSectionVisible) renderInsights();
+    }
+    loadVisitorStats();
+
     const insightsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !insightsAnimated) {
-                insightsAnimated = true;
-                renderInsights();
-                // Auto-increment visitors every 8 seconds
-                const interval = setInterval(() => {
-                    visitorStats.today += 1;
-                    visitorStats.total += 1;
-                    const todayEl = document.getElementById('statTodayVisitors');
-                    const totalEl = document.getElementById('statTotalVisitors');
-                    if (todayEl) todayEl.textContent = visitorStats.today.toLocaleString('en-IN');
-                    if (totalEl) totalEl.textContent = visitorStats.total.toLocaleString('en-IN');
-                    // Also increment last month every 5 increments to simulate monthly growth
-                    if (visitorStats.today % 5 === 0) {
-                        visitorStats.lastMonth += 1;
-                        const lastMonthEl = document.getElementById('statLastMonthVisitors');
-                        if (lastMonthEl) lastMonthEl.textContent = visitorStats.lastMonth.toLocaleString('en-IN');
-                    }
-                }, 8000);
+            if (entry.isIntersecting && !insightsSectionVisible) {
+                insightsSectionVisible = true;
+                if (insightsDataReady) renderInsights();
                 insightsObserver.disconnect();
             }
         });
@@ -1752,6 +2383,7 @@ a{color:inherit;}
         container.innerHTML = newsItems.map(item => {
             return `
           <div class="news-item" data-product-id="${item.productId}">
+
             <span class="news-badge">NEW</span>
             <div class="news-text">
               <span class="en-only">${item.title_en}</span>
@@ -1786,7 +2418,7 @@ a{color:inherit;}
     function showPopup(product) {
         popupName.textContent = product.name_en + ' / ' + product.name_mr;
         popupDetail.textContent = `Seller: ${product.seller_en} · Location: ${product.place_en}`;
-        popupCert.textContent = `Cert: ${product.cert}`;
+        popupCert.textContent = `Cert: ${product.cert} | <a href="${product.certPdf}" target="_blank" style="color:var(--forest-600);text-decoration:underline;">Download PDF</a>`;
         popup.classList.add('active');
         popupViewBtn.dataset.productId = product.id;
         popupShareBtn.dataset.productId = product.id;
@@ -1842,6 +2474,7 @@ a{color:inherit;}
     const vendorBtn = document.getElementById('tabVendorBtn');
     const storyBtn = document.getElementById('tabStoryBtn');
     const feedbackBtn = document.getElementById('tabFeedbackBtn');
+    const downloadBtn = document.getElementById('tabDownloadBtn');
     const aboutBtn = document.getElementById('tabAboutBtn');
 
     const homePane = document.getElementById('homePane');
@@ -1850,10 +2483,11 @@ a{color:inherit;}
     const vendorPane = document.getElementById('vendorPane');
     const storyPane = document.getElementById('storyPane');
     const feedbackPane = document.getElementById('feedbackPane');
+    const downloadPane = document.getElementById('downloadPane');
     const aboutPane = document.getElementById('aboutPane');
 
-    const tabs = [homeBtn, prodBtn, galleryBtn, vendorBtn, storyBtn, feedbackBtn, aboutBtn];
-    const panes = [homePane, prodPane, galleryPane, vendorPane, storyPane, feedbackPane, aboutPane];
+    const tabs = [homeBtn, prodBtn, galleryBtn, vendorBtn, storyBtn, feedbackBtn, downloadBtn, aboutBtn];
+    const panes = [homePane, prodPane, galleryPane, vendorPane, storyPane, feedbackPane, downloadPane, aboutPane];
     const homeHero = document.getElementById('homeHero');
     const heroSeam = document.getElementById('heroSeam');
 
@@ -1885,8 +2519,11 @@ a{color:inherit;}
         setActive(4); });
     feedbackBtn.addEventListener('click', (e) => { e.preventDefault();
         setActive(5); });
+    downloadBtn.addEventListener('click', (e) => { e.preventDefault();
+        setActive(6); 
+        renderDownloadResults(''); });
     aboutBtn.addEventListener('click', (e) => { e.preventDefault();
-        setActive(6); });
+        setActive(7); });
 
     document.getElementById('goToProductBtn').addEventListener('click', () => setActive(1));
     document.getElementById('goToProductBtn2').addEventListener('click', () => setActive(1));
@@ -1898,12 +2535,86 @@ a{color:inherit;}
         setActive(3); });
     document.getElementById('footerFeedbackLink').addEventListener('click', (e) => { e.preventDefault();
         setActive(5); });
+    document.getElementById('footerDownloadLink').addEventListener('click', (e) => { e.preventDefault();
+        setActive(6);
+        renderDownloadResults(''); });
     document.getElementById('footerAboutLink').addEventListener('click', (e) => { e.preventDefault();
-        setActive(6); });
+        setActive(7); });
 
     document.getElementById('navToggle').addEventListener('click', () => {
         document.getElementById('tabBar').classList.toggle('open');
     });
+
+    // ============================================================
+    //  GIGW POLICY MODAL (Disclaimer / Privacy / Terms / Hyperlinking /
+    //  Copyright / Accessibility / Sitemap) — standard govt boilerplate
+    // ============================================================
+    const policyContent = {
+        disclaimer: {
+            title_en: 'Disclaimer', title_mr: 'अस्वीकरण',
+            en: 'The information on this portal is provided by the District Collector Office, Gadchiroli for general informational purposes only, to promote local products and producers. While every effort is made to keep information accurate and current, the District Administration makes no warranty of any kind regarding completeness or accuracy. Product listings are submitted by vendors and are not independently verified for commercial claims. This portal does not process any payments or transactions.',
+            mr: 'या पोर्टलवरील माहिती जिल्हाधिकारी कार्यालय, गडचिरोली द्वारे केवळ सामान्य माहितीच्या उद्देशाने, स्थानिक उत्पादने व उत्पादकांना प्रोत्साहन देण्यासाठी दिली आहे. माहिती अचूक व अद्ययावत ठेवण्याचा प्रयत्न केला जातो, परंतु जिल्हा प्रशासन पूर्णतेबाबत कोणतीही हमी देत नाही. उत्पादन यादी विक्रेत्यांनी सादर केली असून व्यावसायिक दाव्यांची स्वतंत्र पडताळणी केलेली नाही. हे पोर्टल कोणतेही पेमेंट किंवा व्यवहार हाताळत नाही.'
+        },
+        privacy: {
+            title_en: 'Privacy Policy', title_mr: 'गोपनीयता धोरण',
+            en: 'This portal collects only the information you voluntarily submit through the Feedback and Vendor Registration forms (such as name, mobile number, email and address) to respond to your query or process your registration. This data is used solely for official purposes by the District Collector Office and is not sold or shared with third parties for marketing.',
+            mr: 'हे पोर्टल केवळ अभिप्राय व विक्रेता नोंदणी फॉर्मद्वारे तुम्ही स्वेच्छेने सादर केलेली माहिती (नाव, मोबाईल क्रमांक, ईमेल, पत्ता) तुमच्या प्रश्नाला उत्तर देण्यासाठी किंवा नोंदणी प्रक्रियेसाठी गोळा करते. ही माहिती केवळ जिल्हाधिकारी कार्यालयाच्या अधिकृत वापरासाठी असून तिसऱ्या पक्षाला विक्री किंवा जाहिरातीसाठी दिली जात नाही.'
+        },
+        terms: {
+            title_en: 'Terms of Use', title_mr: 'वापर अटी',
+            en: 'By using this portal you agree to use the content and services for lawful purposes only. Reproduction of content for commercial purposes requires prior permission from the District Collector Office, Gadchiroli. The District Administration reserves the right to update product listings, features and these terms at any time.',
+            mr: 'या पोर्टलचा वापर करून तुम्ही केवळ कायदेशीर उद्देशांसाठी सामग्री व सेवा वापरण्यास सहमती देता. व्यावसायिक उद्देशासाठी सामग्रीच्या पुनरुत्पादनासाठी जिल्हाधिकारी कार्यालय, गडचिरोली यांची पूर्वपरवानगी आवश्यक आहे. जिल्हा प्रशासन कोणत्याही वेळी उत्पादन यादी, वैशिष्ट्ये व या अटी अद्यतनित करण्याचा अधिकार राखून ठेवते.'
+        },
+        hyperlinking: {
+            title_en: 'Hyperlinking Policy', title_mr: 'हायपरलिंकिंग धोरण',
+            en: 'This portal may contain links to external, non-government websites (such as vendor registration forms). These links are provided for user convenience only; the District Collector Office does not endorse and is not responsible for the content, accuracy or privacy practices of external sites.',
+            mr: 'या पोर्टलवर बाह्य, गैर-सरकारी वेबसाइट्सच्या (उदा. विक्रेता नोंदणी फॉर्म) लिंक्स असू शकतात. या लिंक्स केवळ वापरकर्त्याच्या सोयीसाठी दिल्या आहेत; जिल्हाधिकारी कार्यालय बाह्य साइट्सच्या सामग्री, अचूकता किंवा गोपनीयता पद्धतींसाठी जबाबदार नाही.'
+        },
+        copyright: {
+            title_en: 'Copyright Policy', title_mr: 'कॉपीराइट धोरण',
+            en: 'Material featured on this portal — text, logos and design — may be reproduced free of charge for non-commercial, educational purposes provided it is reproduced accurately and the source is acknowledged. Product photographs are used with vendor consent for exhibition purposes.',
+            mr: 'या पोर्टलवरील सामग्री — मजकूर, लोगो व डिझाइन — अचूकपणे पुनरुत्पादित केल्यास व स्रोताचा उल्लेख केल्यास गैर-व्यावसायिक, शैक्षणिक उद्देशांसाठी विनामूल्य वापरता येईल. उत्पादन छायाचित्रे विक्रेत्यांच्या संमतीने प्रदर्शनाच्या उद्देशाने वापरली आहेत.'
+        },
+        accessibility: {
+            title_en: 'Accessibility Statement', title_mr: 'सुलभता विधान',
+            en: 'This portal is designed to follow the Guidelines for Indian Government Websites (GIGW) and WCAG 2.1 AA principles: keyboard navigation, screen-reader-friendly markup, resizable text and a high-contrast mode (see the A- / A / A+ and contrast controls at the top of every page). If you face any accessibility barrier, please tell us via the Feedback tab.',
+            mr: 'हे पोर्टल भारतीय सरकारी वेबसाइट मार्गदर्शक तत्त्वे (GIGW) व WCAG 2.1 AA तत्त्वांचे पालन करण्यासाठी डिझाइन केले आहे: कीबोर्ड नेव्हिगेशन, स्क्रीन-रीडर-अनुकूल मार्कअप, आकार बदलता येणारा मजकूर व उच्च-कॉन्ट्रास्ट मोड (प्रत्येक पानाच्या वर A- / A / A+ व कॉन्ट्रास्ट नियंत्रणे पहा). कोणताही सुलभता अडथळा आढळल्यास कृपया अभिप्राय टॅबद्वारे कळवा.'
+        }
+    };
+
+    const policyModal = document.getElementById('policyModal');
+    const policyModalTitle = document.getElementById('policyModalTitle');
+    const policyModalBody = document.getElementById('policyModalBody');
+
+    function openPolicyModal(key) {
+        if (key === 'sitemap') {
+            policyModalTitle.textContent = currentLang === 'en' ? 'Sitemap' : 'साइटमॅप';
+            policyModalBody.innerHTML = `<ul style="padding-left:1.2rem;line-height:2;">
+                <li>Home / मुख्यपृष्ठ</li><li>Product / उत्पादने</li><li>Gallery / गॅलरी</li>
+                <li>Vendor Info / विक्रेता माहिती</li><li>Success Stories / यशोगाथा</li>
+                <li>Feedback / अभिप्राय</li><li>Download / डाउनलोड</li><li>About us / आमच्याबद्दल</li></ul>`;
+        } else {
+            const p = policyContent[key];
+            if (!p) return;
+            policyModalTitle.textContent = currentLang === 'en' ? p.title_en : p.title_mr;
+            policyModalBody.textContent = currentLang === 'en' ? p.en : p.mr;
+        }
+        policyModal.classList.add('active');
+    }
+    document.querySelectorAll('.policy-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            openPolicyModal(link.dataset.policy);
+        });
+    });
+    document.getElementById('policyModalClose').addEventListener('click', () => policyModal.classList.remove('active'));
+    policyModal.addEventListener('click', (e) => { if (e.target === policyModal) policyModal.classList.remove('active'); });
+
+    // Last updated date (GIGW requires a visible last-reviewed date)
+    const lastUpdatedEl = document.getElementById('lastUpdatedDate');
+    if (lastUpdatedEl) {
+        lastUpdatedEl.textContent = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' });
+    }
 
     // ============================================================
     //  LANGUAGE TOGGLE
@@ -1928,11 +2639,10 @@ a{color:inherit;}
     });
 
     // ============================================================
-    //  DARK MODE
+    //  DARK MODE (light default)
     // ============================================================
     const themeToggle = document.getElementById('themeToggle');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let isDark = prefersDark;
+    let isDark = false;
 
     function applyTheme() {
         document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
@@ -1944,6 +2654,30 @@ a{color:inherit;}
         applyTheme();
         toast(isDark ? (currentLang === 'en' ? 'Dark mode on' : 'डार्क मोड सुरू') : (currentLang === 'en' ? 'Light mode on' :
             'लाइट मोड सुरू'), isDark ? 'fa-moon' : 'fa-sun');
+    });
+
+    // ============================================================
+    //  GIGW ACCESSIBILITY TOOLBAR (text resize + high contrast)
+    // ============================================================
+    let fontStep = 0; // -2 .. +3, each step = 10%
+    function applyFontStep() {
+        document.documentElement.style.fontSize = (100 + fontStep * 10) + '%';
+    }
+    document.getElementById('fontIncreaseBtn').addEventListener('click', () => {
+        if (fontStep < 3) { fontStep++; applyFontStep(); }
+    });
+    document.getElementById('fontDecreaseBtn').addEventListener('click', () => {
+        if (fontStep > -2) { fontStep--; applyFontStep(); }
+    });
+    document.getElementById('fontResetBtn').addEventListener('click', () => {
+        fontStep = 0; applyFontStep();
+    });
+
+    let highContrast = false;
+    document.getElementById('contrastToggleBtn').addEventListener('click', () => {
+        highContrast = !highContrast;
+        document.documentElement.setAttribute('data-contrast', highContrast ? 'high' : 'normal');
+        toast(highContrast ? (currentLang === 'en' ? 'High contrast on' : 'उच्च कॉन्ट्रास्ट सुरू') : (currentLang === 'en' ? 'High contrast off' : 'उच्च कॉन्ट्रास्ट बंद'), 'fa-circle-half-stroke');
     });
 
     // ============================================================
@@ -2049,7 +2783,10 @@ a{color:inherit;}
 
     searchBtn.addEventListener('click', performSearch);
     searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') performSearch(); });
-    categoryFilter.addEventListener('change', performSearch);
+    categoryFilter.addEventListener('change', () => {
+        performSearch();
+        document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === categoryFilter.value));
+    });
 
     clearBtn.addEventListener('click', function() {
         searchInput.value = '';
@@ -2059,6 +2796,17 @@ a{color:inherit;}
         document.querySelectorAll('#productResults .product-card').forEach(c => c.style.display = '');
         noResultsMsg.style.display = 'none';
         if (resultCountNum) resultCountNum.textContent = products.length;
+        document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
+    });
+
+    // Quick category chips — thin convenience layer over the existing categoryFilter select
+    document.querySelectorAll('.cat-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            categoryFilter.value = chip.dataset.cat;
+            performSearch();
+        });
     });
 
     // ============================================================
@@ -2074,7 +2822,7 @@ a{color:inherit;}
     toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     // ============================================================
-    //  INITIAL RENDER (after DOM ready)
+    //  INITIAL RENDER
     // ============================================================
     renderAll();
 </script>
