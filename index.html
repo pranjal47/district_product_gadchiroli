@@ -3,8 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gadchiroli · District Product Exhibition</title>
-<meta name="description" content="Official product exhibition portal of the District Collector Office, Gadchiroli — showcasing 43+ certified local, tribal and forest-based products." />
+<title>Gadchiroli · District Exhibition – Agro, Forest & Industrial</title>
+<meta name="description" content="Official exhibition portal of the District Collector Office, Gadchiroli — showcasing agro-forest, natural & industrial products, non-profit initiative." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231c4f32'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle' fill='%23d99a1b'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#1c4f32">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gadchiroli District Exhibition — Agro, Forest & Industrial Portal">
+<meta property="og:description" content="A free, non-profit initiative of the District Collector Office, Gadchiroli, promoting local agro-forest producers alongside the district's industrial development story.">
+<meta property="og:site_name" content="Gadchiroli District Exhibition">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gadchiroli District Exhibition Portal">
+<meta name="twitter:description" content="Official, non-profit portal of the District Collector Office, Gadchiroli.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +22,7 @@
 /* ==========================================================================
    GADCHIROLI DISTRICT EXHIBITION — DESIGN TOKENS
    Light mode default; dark mode available via toggle.
+   Blended palette: forest, turmeric, laterite.
    ========================================================================== */
 :root{
   --forest-950:#0b2318;
@@ -815,8 +825,9 @@ a{color:inherit;}
 }
 .popup-overlay.active{display:flex;}
 .popup-box{
-  background:var(--paper-0);max-width:480px;width:100%;border-radius:var(--radius-lg);padding:2rem;
+  background:var(--paper-0);max-width:560px;width:90%;border-radius:var(--radius-lg);padding:2rem;
   box-shadow:0 40px 70px rgba(0,0,0,.35);animation:popIn .3s var(--ease);position:relative;border:1px solid var(--line);
+  max-height:80vh;overflow-y:auto;
 }
 @keyframes popIn{from{transform:scale(.85);opacity:0;}to{transform:scale(1);opacity:1;}}
 .popup-box .popup-close{
@@ -834,6 +845,73 @@ a{color:inherit;}
   font-weight:700;cursor:pointer;transition:.2s;margin-top:.5rem;
 }
 .popup-box .popup-btn:hover{background:var(--forest-600);}
+.popup-box .popup-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.8rem;}
+.popup-box .popup-grid .popup-label{font-weight:700;color:var(--forest-700);font-size:.82rem;}
+.popup-box .popup-grid .popup-value{color:var(--ink-700);font-size:.92rem;}
+
+/* Quick view popup specific styles */
+.quickview-popup .popup-product img{max-width:100%;border-radius:12px;margin-bottom:1rem;max-height:240px;object-fit:cover;width:100%;}
+.quickview-popup .popup-product .popup-name{font-size:1.3rem;}
+
+/* ============================== DISTRICT GALLERY SLIDER ============================== */
+.district-slider-wrapper{
+  position:relative;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:1.5rem;
+  box-shadow:0 14px 30px -18px rgba(var(--shadow-color),.55);
+  background:var(--paper-0);border:1px solid var(--line);
+}
+.district-slider-slides{
+  display:flex;transition:transform .6s var(--ease);will-change:transform;
+}
+.district-slider-slide{
+  min-width:100%;height:420px;position:relative;flex-shrink:0;
+}
+.district-slider-slide img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.district-slider-overlay{
+  position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg, rgba(11,35,24,.7) 0%, transparent 70%);
+  padding:1.5rem 2rem;color:#fff;
+}
+.district-slider-overlay h4{font-family:var(--font-display);font-size:1.3rem;font-weight:600;margin-bottom:.2rem;}
+.district-slider-overlay p{font-size:.95rem;opacity:.9;}
+.district-slider-overlay .slider-meta{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.85rem;opacity:.85;margin-top:.3rem;}
+.district-slider-overlay .slider-meta span{display:inline-flex;align-items:center;gap:6px;}
+.district-slider-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.85);border:none;border-radius:50%;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;cursor:pointer;z-index:5;transition:.2s;
+  color:var(--ink-900);box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.district-slider-btn:hover{background:#fff;transform:translateY(-50%) scale(1.05);}
+.district-slider-btn.prev{left:1rem;}
+.district-slider-btn.next{right:1rem;}
+.district-slider-dots{
+  position:absolute;bottom:0.8rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:.6rem;z-index:5;
+}
+.district-slider-dots button{
+  width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.8);
+  background:transparent;cursor:pointer;padding:0;transition:.3s;
+}
+.district-slider-dots button.active{
+  background:var(--turmeric-400);border-color:var(--turmeric-400);
+}
+.district-slider-download{
+  position:absolute;top:1rem;right:1rem;z-index:6;
+  background:rgba(255,255,255,.9);border:none;border-radius:var(--radius-pill);
+  padding:.4rem 1rem;font-weight:700;font-size:.85rem;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;color:var(--forest-800);transition:.2s;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.district-slider-download:hover{background:#fff;transform:scale(1.03);}
+@media (max-width:700px){
+  .district-slider-slide{height:300px;}
+  .district-slider-overlay h4{font-size:1.1rem;}
+  .district-slider-overlay p{font-size:.85rem;}
+  .district-slider-btn{width:34px;height:34px;font-size:.9rem;}
+  .district-slider-download{padding:.3rem .7rem;font-size:.75rem;}
+}
 
 /* ============================== TOASTS ============================== */
 .toast-stack{position:fixed;bottom:1.4rem;right:1.4rem;z-index:1200;display:flex;flex-direction:column;gap:.6rem;max-width:320px;}
@@ -883,6 +961,62 @@ a{color:inherit;}
 .footer-policy-links a{opacity:.65;transition:.15s;}
 .footer-policy-links a:hover{opacity:1;color:var(--turmeric-400);text-decoration:underline;}
 .footer .footer-meta{font-size:.76rem !important;opacity:.6 !important;margin:1rem auto 0 !important;max-width:60ch;text-align:center;}
+/* ============================== NOTICE TICKER ============================== */
+.notice-ticker{background:var(--turmeric-100);border-bottom:1px solid var(--turmeric-400);overflow:hidden;position:relative;}
+.notice-ticker-track{display:flex;white-space:nowrap;width:max-content;animation:tickerScroll 38s linear infinite;}
+.notice-ticker:hover .notice-ticker-track{animation-play-state:paused;}
+.notice-ticker-set{display:inline-flex;align-items:center;gap:3rem;padding:.55rem 2rem .55rem 0;}
+.notice-label{background:var(--laterite-500);color:#fff;font-weight:700;font-size:.72rem;padding:.3rem .9rem;border-radius:var(--radius-pill);flex-shrink:0;letter-spacing:.03em;text-transform:uppercase;}
+.notice-item{color:var(--forest-800);font-size:.86rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;}
+.notice-item i{color:var(--turmeric-600);}
+@keyframes tickerScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ============================== BREADCRUMB ============================== */
+.breadcrumb-bar{background:var(--paper-50);border-bottom:1px solid var(--line);}
+.breadcrumb-inner{
+  max-width:1400px;margin:0 auto;padding:.65rem 1.5rem;font-size:.82rem;color:var(--ink-500);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.breadcrumb-inner i.home-crumb{color:var(--turmeric-500);}
+.breadcrumb-sep{opacity:.5;}
+.breadcrumb-current{color:var(--forest-800);font-weight:700;}
+
+/* ============================== SCROLL PROGRESS ============================== */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--turmeric-500),var(--laterite-500));z-index:2000;width:0%;}
+
+/* ============================== PRINT BUTTON ============================== */
+.print-btn{
+  position:fixed;bottom:5.3rem;left:1.4rem;z-index:900;width:46px;height:46px;border-radius:50%;
+  background:var(--forest-700);color:#fff;border:none;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 12px 24px -8px rgba(var(--shadow-color),.6);transition:.2s;
+}
+.print-btn:hover{background:var(--forest-600);transform:scale(1.05);}
+@media print{
+  .topbar,.header,.nav-wrap,.notice-ticker,.breadcrumb-bar,.trust-strip,.to-top,.print-btn,.toast-stack,
+  .footer,.popup-overlay,.scroll-progress{display:none !important;}
+  body{background:#fff !important;color:#000 !important;}
+  .tab-pane{display:block !important;}
+}
+
+/* ============================== IMPORTANT LINKS + QR/SHARE (footer) ============================== */
+.important-links{max-width:900px;margin:0 auto 1.4rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.12);}
+.important-links .il-heading{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--forest-100);opacity:.7;margin-bottom:.7rem;text-align:center;}
+.important-links .il-row{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;}
+.important-links a{
+  display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);
+  color:var(--turmeric-100);padding:.4rem .95rem;border-radius:var(--radius-pill);font-size:.78rem;font-weight:600;transition:.15s;
+}
+.important-links a:hover{background:rgba(255,255,255,.16);color:#fff;}
+.footer-share-qr{display:flex;justify-content:center;align-items:center;gap:1.6rem;flex-wrap:wrap;margin:1.4rem 0;padding:1.2rem;background:rgba(255,255,255,.05);border-radius:var(--radius-lg);max-width:520px;margin-left:auto;margin-right:auto;}
+.footer-share-qr img{width:88px;height:88px;border-radius:10px;background:#fff;padding:5px;}
+.footer-share-qr .share-col{display:flex;flex-direction:column;gap:.5rem;align-items:flex-start;}
+.footer-share-qr .share-label{font-size:.76rem;color:var(--forest-100);opacity:.75;text-transform:uppercase;letter-spacing:.04em;}
+.share-icons{display:flex;gap:.6rem;}
+.share-icons button{
+  width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);
+  color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;font-size:.9rem;
+}
+.share-icons button:hover{background:var(--turmeric-500);color:var(--forest-950);}
 
 /* ============================== RESPONSIVE ============================== */
 @media (max-width:900px){
@@ -903,9 +1037,15 @@ a{color:inherit;}
   .stat-strip{grid-template-columns:1fr;}
   .stat + .stat{border-left:none;border-top:1px dashed var(--line);padding-top:.8rem;}
   .to-top{left:.9rem;bottom:.9rem;width:42px;height:42px;}
+  .print-btn{left:.9rem;bottom:4.1rem;width:42px;height:42px;}
   .toast-stack{right:.7rem;bottom:.9rem;left:.7rem;max-width:none;}
   .download-grid{grid-template-columns:1fr;}
   .download-result-item{flex-direction:column;align-items:flex-start;gap:.6rem;}
+  .district-slider-slide{height:300px;}
+  .district-slider-overlay h4{font-size:1.1rem;}
+  .district-slider-overlay p{font-size:.85rem;}
+  .district-slider-btn{width:34px;height:34px;font-size:.9rem;}
+  .district-slider-download{padding:.3rem .7rem;font-size:.75rem;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -1005,11 +1145,11 @@ a{color:inherit;}
     <div class="brand">
         <div class="brand-badge"><i class="fas fa-seedling"></i></div>
         <div>
-            <h1><span class="en-only">Gadchiroli · District Product Exhibition</span><span class="mr-only">गडचिरोली · जिल्हा उत्पादन प्रदर्शन</span></h1>
+            <h1><span class="en-only">Gadchiroli · District Exhibition – Agro, Forest & Industrial</span><span class="mr-only">गडचिरोली · जिल्हा प्रदर्शन – कृषी, वन व औद्योगिक</span></h1>
             <div class="subhead">
-                <span class="en-only">District Collector Office</span><span class="mr-only">जिल्हाधिकारी कार्यालय</span>
+                <span class="en-only">District Collector Office · Non-Profit · Free Promotion</span><span class="mr-only">जिल्हाधिकारी कार्यालय · ना-नफा · विनामूल्य प्रोत्साहन</span>
                 <span class="dot"></span>
-                <span class="en-only">43+ local products</span><span class="mr-only">४३+ स्थानिक उत्पादने</span>
+                <span class="en-only">43+ local & industrial products</span><span class="mr-only">४३+ स्थानिक व औद्योगिक उत्पादने</span>
             </div>
         </div>
     </div>
@@ -1032,11 +1172,29 @@ a{color:inherit;}
         <button class="tab-link" id="tabGalleryBtn"><i class="fas fa-images"></i> <span class="en-only">Gallery</span><span class="mr-only">गॅलरी</span></button>
         <button class="tab-link" id="tabVendorBtn"><i class="fas fa-store"></i> <span class="en-only">Vendor Info</span><span class="mr-only">विक्रेता माहिती</span></button>
         <button class="tab-link" id="tabStoryBtn"><i class="fas fa-star"></i> <span class="en-only">Success Stories</span><span class="mr-only">यशोगाथा</span></button>
+        <button class="tab-link" id="tabDistrictGalleryBtn"><i class="fas fa-camera-retro"></i> <span class="en-only">District Gallery</span><span class="mr-only">जिल्हा गॅलरी</span></button>
         <button class="tab-link" id="tabFeedbackBtn"><i class="fas fa-comment"></i> <span class="en-only">Feedback</span><span class="mr-only">अभिप्राय</span></button>
         <button class="tab-link" id="tabDownloadBtn"><i class="fas fa-download"></i> <span class="en-only">Download</span><span class="mr-only">डाउनलोड</span></button>
         <button class="tab-link" id="tabAboutBtn"><i class="fas fa-info-circle"></i> <span class="en-only">About us</span><span class="mr-only">आमच्याबद्दल</span></button>
     </div>
 </div>
+
+<!-- ===== NOTICE TICKER ===== -->
+<div class="notice-ticker" role="marquee" aria-label="Latest notices">
+    <div class="notice-ticker-track" id="noticeTickerTrack"></div>
+</div>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+        <i class="fas fa-house home-crumb"></i>
+        <span class="en-only">Gadchiroli District Exhibition</span><span class="mr-only">गडचिरोली जिल्हा प्रदर्शन</span>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current" id="breadcrumbCurrent"><span class="en-only">Home</span><span class="mr-only">मुख्यपृष्ठ</span></span>
+    </div>
+</div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <main id="mainContent">
 
@@ -1044,14 +1202,14 @@ a{color:inherit;}
 <div class="hero" id="homeHero">
     <div class="hero-inner">
         <div>
-            <div class="hero-eyebrow"><i class="fas fa-certificate"></i> <span class="en-only">Certified · Authentic · Local</span><span class="mr-only">प्रमाणित · अस्सल · स्थानिक</span></div>
+            <div class="hero-eyebrow"><i class="fas fa-certificate"></i> <span class="en-only">Non-Profit · Govt. Initiative</span><span class="mr-only">ना-नफा · सरकारी उपक्रम</span></div>
             <h2>
-                <span class="en-only">The forest, the farm and the craft of <em>Gadchiroli</em> — in one place.</span>
-                <span class="mr-only">गडचिरोलीचे जंगल, शेत आणि कला — एकाच ठिकाणी.</span>
+                <span class="en-only">Agro, forest & industrial <em>Gadchiroli</em> — in one place.</span>
+                <span class="mr-only">कृषी, वन व औद्योगिक <em>गडचिरोली</em> — एकाच ठिकाणी.</span>
             </h2>
             <p class="lede">
-                <span class="en-only">A non-profit showcase run by the District Collector Office to connect tribal and rural producers with buyers across Maharashtra — no middlemen, no markup.</span>
-                <span class="mr-only">जिल्हाधिकारी कार्यालयाद्वारे चालवले जाणारे ना-नफा प्रदर्शन, जे आदिवासी व ग्रामीण उत्पादकांना महाराष्ट्रभरातील खरेदीदारांशी जोडते.</span>
+                <span class="en-only">A non-profit showcase run by the District Collector Office to connect tribal, rural and industrial producers with buyers — absolutely free, no middlemen, no markup.</span>
+                <span class="mr-only">जिल्हाधिकारी कार्यालयाद्वारे चालवले जाणारे ना-नफा प्रदर्शन, जे आदिवासी, ग्रामीण व औद्योगिक उत्पादकांना खरेदीदारांशी जोडते — पूर्णपणे मोफत, दलाल नाही, अतिरिक्त शुल्क नाही.</span>
             </p>
             <div class="hero-ctas">
                 <button class="more-btn" id="goToProductBtn"><i class="fas fa-arrow-right"></i> <span class="en-only">Explore all products</span><span class="mr-only">सर्व उत्पादने पहा</span></button>
@@ -1060,7 +1218,7 @@ a{color:inherit;}
         <div class="stat-strip" id="statStrip">
             <div class="stat"><span class="num" data-target="43">0</span><span class="label en-only">Products</span><span class="label mr-only">उत्पादने</span></div>
             <div class="stat"><span class="num" data-target="0">0</span><span class="label en-only">Vendor groups</span><span class="label mr-only">विक्रेता गट</span></div>
-            <div class="stat"><span class="num" data-target="3">0</span><span class="label en-only">Categories</span><span class="label mr-only">श्रेणी</span></div>
+            <div class="stat"><span class="num" data-target="5">0</span><span class="label en-only">Categories</span><span class="label mr-only">श्रेणी</span></div>
         </div>
     </div>
 </div>
@@ -1112,7 +1270,7 @@ a{color:inherit;}
 <div class="trust-strip">
     <div class="trust-strip-inner">
         <div class="trust-item"><i class="fas fa-certificate"></i> <span class="en-only">Govt. Certified Vendors</span><span class="mr-only">सरकार-प्रमाणित विक्रेते</span></div>
-        <div class="trust-item"><i class="fas fa-people-group"></i> <span class="en-only">Direct from SHGs &amp; Producers</span><span class="mr-only">थेट बचत गट व उत्पादकांकडून</span></div>
+        <div class="trust-item"><i class="fas fa-people-group"></i> <span class="en-only">Direct from SHGs, Producers & Industries</span><span class="mr-only">थेट बचत गट, उत्पादक व उद्योगांकडून</span></div>
         <div class="trust-item"><i class="fas fa-hand-holding-heart"></i> <span class="en-only">No Middlemen, No Markup</span><span class="mr-only">दलाल नाही, अतिरिक्त शुल्क नाही</span></div>
         <div class="trust-item"><i class="fas fa-shield-halved"></i> <span class="en-only">Official District Portal</span><span class="mr-only">अधिकृत जिल्हा पोर्टल</span></div>
     </div>
@@ -1130,8 +1288,8 @@ a{color:inherit;}
                 <h3><i class="fas fa-bullhorn"></i> <span class="en-only">Announcements</span><span class="mr-only">घोषणा</span></h3>
                 <div class="announcement-text">
                     <i class="fas fa-calendar-check" style="color:var(--forest-600);"></i>
-                    <span class="en-only">📢 District Product Exhibition 2025 – Now Live! Explore 43+ local products.</span>
-                    <span class="mr-only">📢 जिल्हा उत्पादन प्रदर्शन २०२५ – आता लाइव्ह! ४३+ स्थानिक उत्पादने पाहा.</span>
+                    <span class="en-only">📢 District Exhibition 2025 – Now Live! Explore 43+ agro, forest & industrial products.</span>
+                    <span class="mr-only">📢 जिल्हा प्रदर्शन २०२५ – आता लाइव्ह! ४३+ कृषी, वन व औद्योगिक उत्पादने पाहा.</span>
                 </div>
                 <div class="announcement-text">
                     <i class="fas fa-calendar-alt" style="color:var(--forest-600);"></i>
@@ -1162,6 +1320,7 @@ a{color:inherit;}
                     <li><i class="fas fa-check-circle"></i> <span class="en-only">Record paddy yield: 3200 kg/hectare (2024)</span><span class="mr-only">विक्रमी भात उत्पादन: ३२०० किलो/हेक्टर (२०२४)</span></li>
                     <li><i class="fas fa-check-circle"></i> <span class="en-only">38% increase in millet cultivation since 2022</span><span class="mr-only">२०२२ पासून बाजरी लागवडीत ३८% वाढ</span></li>
                     <li><i class="fas fa-check-circle"></i> <span class="en-only">Best district for forest farming (minor produce)</span><span class="mr-only">वनशेतीसाठी सर्वोत्कृष्ट जिल्हा (लघु उत्पादन)</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span class="en-only">Growing network of small &amp; medium industrial units across the district</span><span class="mr-only">जिल्ह्यभर वाढत असलेले लघु व मध्यम औद्योगिक युनिट्सचे जाळे</span></li>
                 </ul>
             </div>
 
@@ -1169,8 +1328,8 @@ a{color:inherit;}
                 <img src="https://cdn.s3waas.gov.in/s35e388103a391daabe3de1d76a6739ccd/uploads/2024/12/2024122693.jpeg" alt="Collector">
                 <h3><span class="en-only">Message from the District Collector</span><span class="mr-only">जिल्हाधिकाऱ्यांचा संदेश</span></h3>
                 <p>
-                    <span class="en-only">This exhibition platform highlights Gadchiroli's products and achievements. It is a non-profit initiative to inform consumers and support local producers.</span>
-                    <span class="mr-only">हे प्रदर्शन व्यासपीठ गडचिरोलीची उत्पादने आणि उपलब्धी अधोरेखित करते. ही एक ना-नफा उपक्रम आहे जी ग्राहकांना माहिती देण्यासाठी आणि स्थानिक उत्पादकांना पाठिंबा देण्यासाठी आहे.</span>
+                    <span class="en-only">This free, non-profit exhibition platform highlights Gadchiroli's agro, forest and industrial products. We are committed to promoting local producers, SHGs and industries at no cost — connecting them directly to consumers and buyers.</span>
+                    <span class="mr-only">हे विनामूल्य, ना-नफा प्रदर्शन व्यासपीठ गडचिरोलीची कृषी, वन व औद्योगिक उत्पादने अधोरेखित करते. आम्ही स्थानिक उत्पादक, बचत गट व उद्योगांना विनामूल्य प्रोत्साहन देण्यासाठी — त्यांना थेट ग्राहक व खरेदीदारांशी जोडण्यासाठी वचनबद्ध आहोत.</span>
                 </p>
                 <div class="collector-name">
                     <span class="collector-name-en">Shri Avishyant Panda, IAS</span>
@@ -1228,6 +1387,7 @@ a{color:inherit;}
             <button class="cat-chip" data-cat="Food"><i class="fas fa-utensils"></i> <span class="en-only">Food</span><span class="mr-only">अन्न</span></button>
             <button class="cat-chip" data-cat="Medicinal"><i class="fas fa-mortar-pestle"></i> <span class="en-only">Medicinal</span><span class="mr-only">औषधी</span></button>
             <button class="cat-chip" data-cat="Woodcraft"><i class="fas fa-tree"></i> <span class="en-only">Woodcraft</span><span class="mr-only">लाकडी कला</span></button>
+            <button class="cat-chip" data-cat="Industrial"><i class="fas fa-industry"></i> <span class="en-only">Industrial</span><span class="mr-only">औद्योगिक</span></button>
         </div>
         <div class="search-container">
             <i class="fas fa-search" style="color:var(--ink-300); font-size:1.05rem;"></i>
@@ -1237,6 +1397,7 @@ a{color:inherit;}
                 <option value="Food"><span class="category-label-en">Food</span><span class="category-label-mr">अन्न</span></option>
                 <option value="Medicinal"><span class="category-label-en">Medicinal</span><span class="category-label-mr">औषधी</span></option>
                 <option value="Woodcraft"><span class="category-label-en">Woodcraft</span><span class="category-label-mr">लाकडी कला</span></option>
+                <option value="Industrial"><span class="category-label-en">Industrial</span><span class="category-label-mr">औद्योगिक</span></option>
             </select>
             <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i> <span class="search-label-en">Search</span><span class="search-label-mr">शोधा</span></button>
             <button class="clear-search" id="clearSearchBtn"><i class="fas fa-times"></i> <span class="clear-label-en">Clear</span><span class="clear-label-mr">साफ करा</span></button>
@@ -1259,7 +1420,7 @@ a{color:inherit;}
         </div>
 
         <div id="productResults">
-            <div class="section-title"><i class="fas fa-utensils"></i> <span class="en-only">Food Products</span><span class="mr-only">अन्न उत्पादने</span></div>
+            <div class="section-title"><i class="fas fa-utensils"></i> <span class="en-only">Food & Forest Products</span><span class="mr-only">अन्न व वन उत्पादने</span></div>
             <div class="product-grid" id="foodGrid"></div>
 
             <div class="section-title"><i class="fas fa-mortar-pestle"></i> <span class="en-only">Medicinal Products</span><span class="mr-only">औषधी उत्पादने</span></div>
@@ -1267,6 +1428,9 @@ a{color:inherit;}
 
             <div class="section-title"><i class="fas fa-tree"></i> <span class="en-only">Woodcraft & Handicraft</span><span class="mr-only">लाकडी कला व हस्तकला</span></div>
             <div class="product-grid" id="woodcraftGrid"></div>
+
+            <div class="section-title"><i class="fas fa-industry"></i> <span class="en-only">Industrial Products</span><span class="mr-only">औद्योगिक उत्पादने</span></div>
+            <div class="product-grid" id="industrialProductGrid"></div>
         </div>
         <div id="noResultsMessage" style="display:none;" class="no-results">
             <i class="fas fa-search" style="font-size:2rem; display:block; margin-bottom:0.5rem;"></i>
@@ -1278,7 +1442,7 @@ a{color:inherit;}
     <!-- ===== GALLERY PANE ===== -->
     <div id="galleryPane" class="tab-pane">
         <div class="section-title"><i class="fas fa-images"></i> <span class="en-only">Product Gallery</span><span class="mr-only">उत्पादन गॅलरी</span></div>
-        <p class="section-sub"><span class="en-only">A visual look at everything grown, gathered and crafted across the district.</span><span class="mr-only">जिल्ह्यात पिकवलेल्या, गोळा केलेल्या आणि बनवलेल्या सर्व वस्तूंचे दृश्य स्वरूप.</span></p>
+        <p class="section-sub"><span class="en-only">A visual look at everything grown, gathered, crafted and produced across the district.</span><span class="mr-only">जिल्ह्यात पिकवलेल्या, गोळा केलेल्या, बनवलेल्या व उत्पादित केलेल्या सर्व वस्तूंचे दृश्य स्वरूप.</span></p>
         <div class="gallery-grid" id="galleryGrid"></div>
     </div>
 
@@ -1311,12 +1475,31 @@ a{color:inherit;}
     <div id="storyPane" class="tab-pane">
         <div class="section-title"><i class="fas fa-star"></i> <span class="en-only">Success Stories</span><span class="mr-only">यशोगाथा</span></div>
         <p style="margin-bottom:1.5rem; font-size:1.1rem; color:var(--ink-700);">
-            <span class="en-only">Inspiring journeys of our vendors who have transformed their lives through local products.</span>
-            <span class="mr-only">आमच्या विक्रेत्यांच्या प्रेरणादायी प्रवास ज्यांनी स्थानिक उत्पादनांद्वारे आपले जीवन बदलले.</span>
+            <span class="en-only">Inspiring journeys of our vendors, SHGs and industrial workers who have transformed their lives through local products.</span>
+            <span class="mr-only">आमच्या विक्रेत्यांच्या, बचत गट व औद्योगिक कामगारांच्या प्रेरणादायी प्रवास ज्यांनी स्थानिक उत्पादनांद्वारे आपले जीवन बदलले.</span>
         </p>
         <div class="story-grid" id="storyGrid"></div>
+        <div class="story-grid" id="industrialStoryGrid"></div>
     </div>
 
+    <!-- ===== DISTRICT PHOTO GALLERY PANE (with slider per category) ===== -->
+    <div id="districtGalleryPane" class="tab-pane">
+        <div class="section-title"><i class="fas fa-camera-retro"></i> <span class="en-only">District Photo Gallery</span><span class="mr-only">जिल्हा छायाचित्र गॅलरी</span></div>
+        <p class="section-sub"><span class="en-only">Photographs of District Collector, ministerial &amp; VIP visits, government programs, inaugurations and celebrations across Gadchiroli — exclusively for official events, not product listings.</span><span class="mr-only">जिल्हाधिकारी, मंत्री व VIP भेटी, सरकारी कार्यक्रम, उद्घाटन व उत्सवांची छायाचित्रे — केवळ अधिकृत कार्यक्रमांसाठी.</span></p>
+        <div class="quick-cat-chips" id="eventCatChips">
+            <button class="cat-chip active" data-ecat="all"><i class="fas fa-border-all"></i> <span class="en-only">All</span><span class="mr-only">सर्व</span></button>
+            <button class="cat-chip" data-ecat="Collector Visits"><i class="fas fa-user-tie"></i> <span class="en-only">Collector Visits</span><span class="mr-only">जिल्हाधिकारी भेटी</span></button>
+            <button class="cat-chip" data-ecat="Ministerial &amp; VIP Visits" data-ecat-raw="Ministerial & VIP Visits"><i class="fas fa-user-shield"></i> <span class="en-only">Ministerial &amp; VIP Visits</span><span class="mr-only">मंत्री व VIP भेटी</span></button>
+            <button class="cat-chip" data-ecat="Government Programs"><i class="fas fa-people-group"></i> <span class="en-only">Government Programs</span><span class="mr-only">सरकारी कार्यक्रम</span></button>
+            <button class="cat-chip" data-ecat="Inaugurations &amp; Foundation Events" data-ecat-raw="Inaugurations & Foundation Events"><i class="fas fa-ribbon"></i> <span class="en-only">Inaugurations</span><span class="mr-only">उद्घाटन</span></button>
+            <button class="cat-chip" data-ecat="National Days &amp; Celebrations" data-ecat-raw="National Days & Celebrations"><i class="fas fa-flag"></i> <span class="en-only">National Days</span><span class="mr-only">राष्ट्रीय दिन</span></button>
+        </div>
+        <div id="districtGalleryContainer">
+            <!-- dynamically populated with sliders per category -->
+        </div>
+    </div>
+
+    <!-- ===== INDUSTRIAL INITIATIVES & DEVELOPMENT PANE (blended) ===== -->
     <!-- ===== FEEDBACK PANE ===== -->
     <div id="feedbackPane" class="tab-pane">
         <div class="section-title"><i class="fas fa-comment"></i> <span class="en-only">Feedback</span><span class="mr-only">अभिप्राय</span></div>
@@ -1404,9 +1587,10 @@ a{color:inherit;}
                 <p><span class="en-only">Complete product catalogs in PDF format. Includes all 43+ products with details.</span><span class="mr-only">PDF स्वरूपात संपूर्ण उत्पादन कॅटलॉग. तपशिलांसह सर्व ४३+ उत्पादनांचा समावेश.</span></p>
                 <div class="download-btn-group">
                     <button class="download-btn" id="dlCatalogAll"><i class="fas fa-file-pdf"></i> <span class="en-only">Full Catalog</span><span class="mr-only">संपूर्ण कॅटलॉग</span></button>
-                    <button class="download-btn outline" id="dlCatalogFood"><i class="fas fa-file-pdf"></i> <span class="en-only">Food Products</span><span class="mr-only">अन्न उत्पादने</span></button>
+                    <button class="download-btn outline" id="dlCatalogFood"><i class="fas fa-file-pdf"></i> <span class="en-only">Food & Forest</span><span class="mr-only">अन्न व वन</span></button>
                     <button class="download-btn outline" id="dlCatalogMedicinal"><i class="fas fa-file-pdf"></i> <span class="en-only">Medicinal</span><span class="mr-only">औषधी</span></button>
                     <button class="download-btn outline" id="dlCatalogWoodcraft"><i class="fas fa-file-pdf"></i> <span class="en-only">Woodcraft</span><span class="mr-only">लाकडी कला</span></button>
+                    <button class="download-btn outline" id="dlCatalogIndustrial"><i class="fas fa-file-pdf"></i> <span class="en-only">Industrial</span><span class="mr-only">औद्योगिक</span></button>
                 </div>
             </div>
             <div class="download-card">
@@ -1485,11 +1669,11 @@ a{color:inherit;}
         <div class="about-block">
             <h2><i class="fas fa-leaf"></i> <span class="en-only">District Collector Office, Gadchiroli</span><span class="mr-only">जिल्हाधिकारी कार्यालय, गडचिरोली</span></h2>
             <p>
-                <span class="en-only">🌾 The <strong>District Collector Office, Gadchiroli</strong> “We are working under the guidance of the District Collector, Gadchiroli, to provide an exhibition platform that highlights the diverse products of our district. This initiative is designed to support local producers by offering a space for marketing and consumer awareness. It is not intended for profit or revenue generation, but rather to inform and connect consumers with the rich industrial and agricultural heritage of Gadchiroli. Through this platform, we aim to strengthen community identity, encourage sustainable practices, and empower tribal and rural entrepreneurs.” and manage the 'Gadchiroli Agri-Brand'.</span>
-                <span class="mr-only">🌾 <strong>जिल्हाधिकारी कार्यालय, गडचिरोली</strong> “आम्ही जिल्हाधिकारी, गडचिरोली यांच्या मार्गदर्शनाखाली काम करत आहोत, जे आमच्या जिल्ह्यातील विविध उत्पादनांना अधोरेखित करणारे प्रदर्शन व्यासपीठ प्रदान करते. ही उपक्रम स्थानिक उत्पादकांना विपणन आणि ग्राहक जागरूकतेसाठी जागा देऊन पाठिंबा देण्यासाठी डिझाइन केली आहे. हा नफा किंवा महसूल निर्मितीसाठी नसून, गडचिरोलीच्या समृद्ध औद्योगिक आणि कृषी वारशाशी ग्राहकांना माहिती देण्यासाठी आणि जोडण्यासाठी आहे. या व्यासपीठाद्वारे, आम्ही समुदाय ओळख मजबूत करणे, शाश्वत पद्धतींना प्रोत्साहन देणे आणि आदिवासी व ग्रामीण उद्योजकांना सक्षम करणे हे उद्दिष्ट ठेवतो.” आणि 'गडचिरोली कृषी-ब्रँड' व्यवस्थापित करतो.</span>
+                <span class="en-only">🌾 The <strong>District Collector Office, Gadchiroli</strong> is committed to providing a free, non-profit exhibition platform that highlights the diverse agro-forest and industrial products of our district. This initiative is designed to support local producers, SHGs and industries by offering a space for marketing and consumer awareness — completely free of cost, with no middlemen or markup. Through this platform, we aim to strengthen community identity, encourage sustainable practices, and empower tribal, rural and industrial entrepreneurs.</span>
+                <span class="mr-only">🌾 <strong>जिल्हाधिकारी कार्यालय, गडचिरोली</strong> आमच्या जिल्ह्यातील विविध कृषी-वन व औद्योगिक उत्पादनांना अधोरेखित करणारे विनामूल्य, ना-नफा प्रदर्शन व्यासपीठ प्रदान करण्यासाठी वचनबद्ध आहे. ही उपक्रम स्थानिक उत्पादक, बचत गट व उद्योगांना विपणन आणि ग्राहक जागरूकतेसाठी जागा देऊन पाठिंबा देण्यासाठी डिझाइन केली आहे — पूर्णपणे विनामूल्य, दलाल नाही, अतिरिक्त शुल्क नाही. या व्यासपीठाद्वारे, आम्ही समुदाय ओळख मजबूत करणे, शाश्वत पद्धतींना प्रोत्साहन देणे आणि आदिवासी, ग्रामीण व औद्योगिक उद्योजकांना सक्षम करणे हे उद्दिष्ट ठेवतो.</span>
             </p>
             <div class="about-grid">
-                <div class="card"><h4><i class="fas fa-bullseye"></i> <span class="en-only">Our Mission</span><span class="mr-only">आमचे उद्दिष्ट</span></h4><p><span class="en-only">To promote Gadchiroli's unique agricultural and forest-based products, connect producers to markets, and preserve traditional knowledge.</span><span class="mr-only">गडचिरोलीच्या अद्वितीय कृषी आणि वन-आधारित उत्पादनांना प्रोत्साहन देणे, उत्पादकांना बाजारपेठेशी जोडणे आणि पारंपरिक ज्ञान जतन करणे.</span></p></div>
+                <div class="card"><h4><i class="fas fa-bullseye"></i> <span class="en-only">Our Mission</span><span class="mr-only">आमचे उद्दिष्ट</span></h4><p><span class="en-only">To promote Gadchiroli's unique agricultural, forest and industrial products, connect producers to markets, and preserve traditional knowledge — all free of cost.</span><span class="mr-only">गडचिरोलीच्या अद्वितीय कृषी, वन व औद्योगिक उत्पादनांना प्रोत्साहन देणे, उत्पादकांना बाजारपेठेशी जोडणे आणि पारंपरिक ज्ञान जतन करणे — सर्व विनामूल्य.</span></p></div>
                 <div class="card"><h4><i class="fas fa-eye"></i> <span class="en-only">Our Vision</span><span class="mr-only">आमचे दूरदृष्टी</span></h4><p><span class="en-only">To make Gadchiroli a model district for sustainable, community-driven economic growth through product excellence and innovation.</span><span class="mr-only">उत्पादन उत्कृष्टता आणि नवोपक्रमाद्वारे गडचिरोलीला शाश्वत, समुदाय-चालित आर्थिक विकासासाठी आदर्श जिल्हा बनवणे.</span></p></div>
                 <div class="card"><h4><i class="fas fa-handshake"></i> <span class="en-only">Support for Producers</span><span class="mr-only">उत्पादकांसाठी सहाय्य</span></h4><p><span class="en-only">We provide training, branding support, and market linkages to SHGs, tribal groups, and individual producers at no cost.</span><span class="mr-only">आम्ही स्वयंसहाय्यता समूह, आदिवासी गट आणि वैयक्तिक उत्पादकांना विनामूल्य प्रशिक्षण, ब्रँडिंग सहाय्य आणि बाजारपेठेचे दुवे प्रदान करतो.</span></p></div>
                 <div class="card"><h4><i class="fas fa-seedling"></i> <span class="en-only">Sustainability Focus</span><span class="mr-only">शाश्वततेवर भर</span></h4><p><span class="en-only">All products promoted are organic, natural, or crafted with eco-friendly practices, preserving the environment.</span><span class="mr-only">प्रोत्साहित केलेली सर्व उत्पादने सेंद्रिय, नैसर्गिक किंवा पर्यावरणपूरक पद्धतींनी बनवलेली आहेत, पर्यावरण जतन करतात.</span></p></div>
@@ -1500,7 +1684,29 @@ a{color:inherit;}
                 <div><i class="fas fa-calendar-alt"></i> <span class="en-only">Helpdesk:</span><span class="mr-only">मदत केंद्र:</span> Mon–Fri 9.45am–6.15pm</div>
                 <div><i class="fas fa-hand-holding-heart"></i> <span class="en-only">Schemes:</span><span class="mr-only">योजना:</span> PM Kisan, soil health cards, rojgar</div>
             </div>
-            <p style="margin-top:1.5rem;">✨ <em><span class="en-only">District Collector Gadchiroli – dedicated to uplift District economy through innovation and tribal empowerment.</span><span class="mr-only">जिल्हाधिकारी गडचिरोली – नवोपक्रम आणि आदिवासी सक्षमीकरणाद्वारे जिल्हा अर्थव्यवस्था उंचावण्यासाठी समर्पित.</span></em></p>
+            <p style="margin-top:1.5rem;">✨ <em><span class="en-only">District Collector Gadchiroli – dedicated to uplift District economy through innovation and empowerment.</span><span class="mr-only">जिल्हाधिकारी गडचिरोली – नवोपक्रम आणि सक्षमीकरणाद्वारे जिल्हा अर्थव्यवस्था उंचावण्यासाठी समर्पित.</span></em></p>
+            
+            <!-- Development Credit -->
+            <div style="margin-top:2.5rem; padding-top:1.8rem; border-top:2px dashed var(--line); text-align:center; background:var(--paper-50); border-radius:var(--radius-lg); padding:1.8rem;">
+                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;align-items:center;">
+                    <div><i class="fas fa-server" style="font-size:2rem;color:var(--forest-600);"></i></div>
+                    <div>
+                        <p style="font-weight:700;color:var(--forest-800);font-size:1.05rem;">
+                            <span class="en-only">Developed &amp; Hosted by</span><span class="mr-only">विकसित व होस्ट केलेले</span><br>
+                            <span style="color:var(--laterite-500);font-size:1.1rem;">National Informatics Centre (NIC), Gadchiroli</span>
+                        </p>
+                        <p style="font-size:.92rem;color:var(--ink-500);">
+                            <span class="en-only">Under the guidance of</span><span class="mr-only">यांच्या मार्गदर्शनाखाली</span><br>
+                            <strong style="color:var(--forest-700);">Shri Sanjay Tripathi</strong><br>
+                            <span class="en-only">Director (IT), NIC Gadchiroli</span><span class="mr-only">संचालक (IT), NIC गडचिरोली</span>
+                        </p>
+                        <p style="font-size:.78rem;color:var(--ink-300);margin-top:.4rem;">
+                            <span class="en-only">NIC Gadchiroli Team — Technical Design, Development &amp; Hosting</span>
+                            <span class="mr-only">NIC गडचिरोली टीम — तांत्रिक डिझाइन, विकास व होस्टिंग</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1522,6 +1728,7 @@ a{color:inherit;}
             <a href="#" id="footerHomeLink">Home</a>
             <a href="#" id="footerProductLink">Products</a>
             <a href="#" id="footerVendorLink">Vendor Registration</a>
+            <a href="#" id="footerDistrictGalleryLink">District Gallery</a>
             <a href="#" id="footerFeedbackLink">Feedback</a>
             <a href="#" id="footerDownloadLink">Download</a>
             <a href="#" id="footerAboutLink">About</a>
@@ -1537,9 +1744,35 @@ a{color:inherit;}
             <a href="https://rti.gov.in" target="_blank" rel="noopener">RTI</a>
             <a href="https://www.disabilityaffairs.gov.in/content/page/screen-reader.php" target="_blank" rel="noopener">Screen Reader Access</a>
         </div>
+        <div class="important-links">
+            <div class="il-heading"><span class="en-only">Important Links</span><span class="mr-only">महत्त्वाचे दुवे</span></div>
+            <div class="il-row">
+                <a href="https://www.maharashtra.gov.in" target="_blank" rel="noopener"><i class="fas fa-landmark"></i> Government of Maharashtra</a>
+                <a href="https://www.india.gov.in" target="_blank" rel="noopener"><i class="fas fa-flag"></i> National Portal of India</a>
+                <a href="https://www.digitalindia.gov.in" target="_blank" rel="noopener"><i class="fas fa-shield-halved"></i> Digital India</a>
+                <a href="https://aaplesarkar.mahaonline.gov.in" target="_blank" rel="noopener"><i class="fas fa-user-check"></i> Aaple Sarkar</a>
+                <a href="https://www.mahaonline.gov.in" target="_blank" rel="noopener"><i class="fas fa-globe"></i> MahaOnline</a>
+                <a href="https://www.midcindia.org" target="_blank" rel="noopener"><i class="fas fa-industry"></i> MIDC</a>
+                <a href="https://data.gov.in" target="_blank" rel="noopener"><i class="fas fa-database"></i> Open Government Data</a>
+            </div>
+        </div>
+        <div class="footer-share-qr">
+            <img id="footerQrImg" alt="QR code to visit this portal" width="88" height="88">
+            <div class="share-col">
+                <span class="share-label"><span class="en-only">Scan or share this portal</span><span class="mr-only">पोर्टल स्कॅन करा किंवा शेअर करा</span></span>
+                <div class="share-icons">
+                    <button id="shareWhatsapp" title="Share on WhatsApp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></button>
+                    <button id="shareFacebook" title="Share on Facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></button>
+                    <button id="shareTwitter" title="Share on X" aria-label="Share on X"><i class="fab fa-x-twitter"></i></button>
+                    <button id="shareCopyLink" title="Copy link" aria-label="Copy link"><i class="fas fa-link"></i></button>
+                </div>
+            </div>
+        </div>
         <p class="footer-meta">
-            <span class="en-only">Content owned and maintained by District Collector Office, Gadchiroli. Designed, developed &amp; hosted by National Informatics Centre (NIC).</span>
-            <span class="mr-only">सामग्री जिल्हाधिकारी कार्यालय, गडचिरोली यांच्या मालकीची व देखरेखीखाली. डिझाइन, विकास व होस्टिंग राष्ट्रीय सूचना विज्ञान केंद्र (NIC) द्वारे.</span>
+            <span class="en-only">Content owned and maintained by District Collector Office, Gadchiroli.</span>
+            <span class="mr-only">सामग्री जिल्हाधिकारी कार्यालय, गडचिरोली यांच्या मालकीची व देखरेखीखाली.</span>
+            <br><span class="en-only">Designed, developed &amp; hosted by National Informatics Centre (NIC), Gadchiroli.</span>
+            <span class="mr-only">डिझाइन, विकास व होस्टिंग राष्ट्रीय सूचना विज्ञान केंद्र (NIC), गडचिरोली द्वारे.</span>
             <br><span class="en-only">Last Reviewed / Updated:</span><span class="mr-only">अखेरचे पुनरावलोकन / अद्यतन:</span> <span id="lastUpdatedDate"></span>
             &nbsp;·&nbsp; <span class="en-only">Best viewed in latest versions of Chrome, Firefox, Edge and Safari.</span><span class="mr-only">Chrome, Firefox, Edge व Safari च्या नवीनतम आवृत्त्यांमध्ये सर्वोत्तम पाहिले जाते.</span>
         </p>
@@ -1555,7 +1788,22 @@ a{color:inherit;}
     </div>
 </div>
 
-<!-- ===== POPUP ===== -->
+<!-- ===== PRODUCT QUICK VIEW POPUP (enhanced with full details) ===== -->
+<div class="popup-overlay quickview-popup" id="quickViewPopup">
+    <div class="popup-box" style="max-width:560px;">
+        <button class="popup-close" id="quickViewClose">&times;</button>
+        <h3><i class="fas fa-eye"></i> <span class="en-only">Product Details</span><span class="mr-only">उत्पादन तपशील</span></h3>
+        <div class="popup-product" id="quickViewContent">
+            <!-- populated dynamically -->
+        </div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem;">
+            <a href="#" target="_blank" class="popup-btn" id="quickViewCertBtn" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;"><i class="fas fa-file-pdf"></i> <span class="en-only">Download Certificate</span><span class="mr-only">प्रमाणपत्र डाउनलोड करा</span></a>
+            <button class="popup-btn" style="background:var(--laterite-500);" id="quickViewShareBtn"><i class="fas fa-share-alt"></i> <span class="en-only">Share</span><span class="mr-only">शेअर करा</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== LEGACY POPUP (for news) ===== -->
 <div class="popup-overlay" id="newsPopup">
     <div class="popup-box">
         <button class="popup-close" id="popupClose">&times;</button>
@@ -1579,6 +1827,7 @@ a{color:inherit;}
 <!-- ===== TOASTS & BACK TO TOP ===== -->
 <div class="toast-stack" id="toastStack"></div>
 <button class="to-top" id="toTopBtn" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<button class="print-btn" id="printBtn" title="Print this page" aria-label="Print this page"><i class="fas fa-print"></i></button>
 
 <script>
     // ============================================================
@@ -1675,6 +1924,19 @@ a{color:inherit;}
             img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-043" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"}
     ];
 
+    // --- INDUSTRIAL PRODUCTS (blended into the main product grid) ---
+    const industrialProducts = [
+        { id: 101, name_en: "Bamboo Furniture & Handicrafts", name_mr: "बांबू फर्निचर व हस्तकला", cat: "Industrial", desc_en: "Chairs, baskets and decor pieces crafted by a small-scale bamboo processing unit, turning the district's abundant bamboo into finished goods locally.", desc_mr: "जिल्ह्यातील मुबलक बांबूपासून स्थानिक पातळीवर खुर्च्या, टोपल्या व सजावटीच्या वस्तू बनवणारा लघु-उद्योग.", gi: "No", gi_mr: "नाही", seller_en: "Gadchiroli Bamboo Crafts Unit", seller_mr: "गडचिरोली बांबू क्राफ्ट्स युनिट", mobile: "07132-123456", place_en: "MIDC Industrial Area, Gadchiroli", place_mr: "MIDC औद्योगिक क्षेत्र, गडचिरोली", origin_en: "Gadchiroli", origin_mr: "गडचिरोली", img: "https://picsum.photos/seed/ind-bamboo-1/700/500", cert: "GDC-IND-001", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing" },
+        { id: 102, name_en: "Custom Rice Milling & Rice Bran", name_mr: "कस्टम राइस मिलिंग व राइस ब्रान", cat: "Industrial", desc_en: "A local rice mill offering custom milling for farmers and producing rice bran as a by-product for oil extraction and cattle feed.", desc_mr: "शेतकऱ्यांसाठी कस्टम मिलिंग सेवा देणारी व तेल उत्खनन आणि पशुखाद्यासाठी राइस ब्रान तयार करणारी स्थानिक राइस मिल.", gi: "No", gi_mr: "नाही", seller_en: "Chamorshi Rice Mill (Small Scale)", seller_mr: "चामोर्शी राइस मिल (लघु उद्योग)", mobile: "07132-123457", place_en: "Chamorshi", place_mr: "चामोर्शी", origin_en: "Chamorshi", origin_mr: "चामोर्शी", img: "https://picsum.photos/seed/ind-rice-1/700/500", cert: "GDC-IND-002", certPdf: "https://drive.google.com/file/d/1ind002/view?usp=sharing" },
+        { id: 103, name_en: "Dal (Pulses) Processing", name_mr: "डाळ प्रक्रिया", cat: "Industrial", desc_en: "A small dal mill that cleans, splits and polishes locally grown tur and chana into market-ready pulses for nearby markets.", desc_mr: "स्थानिक पिकवलेल्या तूर व हरभऱ्याची स्वच्छता, विभाजन व पॉलिशिंग करून बाजारासाठी तयार डाळ बनवणारी लघु डाळ मिल.", gi: "No", gi_mr: "नाही", seller_en: "Armori Dal Processing Unit", seller_mr: "आरमोरी डाळ प्रक्रिया युनिट", mobile: "07132-123458", place_en: "Armori", place_mr: "आरमोरी", origin_en: "Armori", origin_mr: "आरमोरी", img: "https://picsum.photos/seed/ind-dal-1/700/500", cert: "GDC-IND-003", certPdf: "https://drive.google.com/file/d/1ind003/view?usp=sharing" },
+        { id: 104, name_en: "Cold-Pressed Edible Oil (Til/Groundnut)", name_mr: "कोल्ड-प्रेस्ड खाद्यतेल (तीळ/भुईमूग)", cat: "Industrial", desc_en: "A village-level oil ghani (cold-press unit) producing chemical-free til and groundnut oil for household and local retail use.", desc_mr: "घरगुती व स्थानिक विक्रीसाठी रसायनमुक्त तीळ व भुईमूग तेल तयार करणारी गावपातळीवरील कोल्ड-प्रेस तेल घाणी.", gi: "No", gi_mr: "नाही", seller_en: "Kurkheda Village Oil Ghani", seller_mr: "कुरखेडा ग्राम तेल घाणी", mobile: "07132-123459", place_en: "Kurkheda", place_mr: "कुरखेडा", origin_en: "Kurkheda", origin_mr: "कुरखेडा", img: "https://picsum.photos/seed/ind-oil-1/700/500", cert: "GDC-IND-004", certPdf: "https://drive.google.com/file/d/1ind004/view?usp=sharing" },
+        { id: 105, name_en: "Agricultural Tools & Implements", name_mr: "शेती अवजारे व साधने", cat: "Industrial", desc_en: "A small steel-fabrication workshop making and repairing hand tools, sickles and farm implements for the district's farming community.", desc_mr: "जिल्ह्यातील शेतकरी समुदायासाठी हाताची अवजारे, विळे व शेती साधने बनवणारी व दुरुस्त करणारी लघु स्टील फॅब्रिकेशन कार्यशाळा.", gi: "No", gi_mr: "नाही", seller_en: "Dhanora Agro-Tools Workshop", seller_mr: "धानोरा कृषी-साधने कार्यशाळा", mobile: "07132-123460", place_en: "Dhanora", place_mr: "धानोरा", origin_en: "Dhanora", origin_mr: "धानोरा", img: "https://picsum.photos/seed/ind-tools-1/700/500", cert: "GDC-IND-005", certPdf: "https://drive.google.com/file/d/1ind005/view?usp=sharing" },
+        { id: 106, name_en: "Handmade Paper & Eco Packaging", name_mr: "हस्तनिर्मित कागद व इको पॅकेजिंग", cat: "Industrial", desc_en: "A small eco-unit converting agricultural waste and cotton rags into handmade paper products and biodegradable packaging.", desc_mr: "शेती कचरा व कापूस चिंध्यांपासून हस्तनिर्मित कागद उत्पादने व जैवविघटनशील पॅकेजिंग बनवणारा लघु इको-उद्योग.", gi: "No", gi_mr: "नाही", seller_en: "Desaiganj Eco-Paper Unit", seller_mr: "देसाईगंज इको-पेपर युनिट", mobile: "07132-123461", place_en: "Desaiganj (Wadsa)", place_mr: "देसाईगंज (वडसा)", origin_en: "Desaiganj", origin_mr: "देसाईगंज", img: "https://picsum.photos/seed/ind-paper-1/700/500", cert: "GDC-IND-006", certPdf: "https://drive.google.com/file/d/1ind006/view?usp=sharing" }
+    ];
+
+    // Combine all products
+    const allProducts = [...products, ...industrialProducts];
+
     const stories = [{
         id: 1,
         name_en: "From Forest to Fame",
@@ -1725,12 +1987,41 @@ a{color:inherit;}
         cert: "GDC-F-014"
     }];
 
+    // Industrial success stories (blended)
+    const industrialStoriesData = [
+        { id: 101, name_en: "Ramesh Halami", name_mr: "रमेश हलामी", role_en: "Founder, Gadchiroli Bamboo Crafts Unit", role_mr: "संस्थापक, गडचिरोली बांबू क्राफ्ट्स युनिट", desc_en: "Trained at the district ITI, Ramesh started a small bamboo-furniture unit that now supports five local artisan families.", desc_mr: "जिल्हा ITI मध्ये प्रशिक्षित रमेशने एक लघु बांबू-फर्निचर युनिट सुरू केले, जे आता पाच स्थानिक कारागीर कुटुंबांना आधार देते.", img: "https://picsum.photos/seed/ind-story-1/700/500" },
+        { id: 102, name_en: "Sunita Madavi", name_mr: "सुनिता मडावी", role_en: "Proprietor, Kurkheda Village Oil Ghani", role_mr: "मालक, कुरखेडा ग्राम तेल घाणी", desc_en: "One of the first women to run a cold-press oil unit in her village, Sunita now trains other women to set up similar micro-enterprises.", desc_mr: "आपल्या गावातील कोल्ड-प्रेस तेल युनिट चालवणाऱ्या पहिल्या महिलांपैकी एक, सुनिता आता इतर महिलांना असेच सूक्ष्म-उद्योग सुरू करण्याचे प्रशिक्षण देते.", img: "https://picsum.photos/seed/ind-story-2/700/500" },
+        { id: 103, name_en: "Somanpally Contractors' Collective", name_mr: "सोमनपल्ली कंत्राटदार सामूहिक", role_en: "Local Small-Industry Supply Group", role_mr: "स्थानिक लघु-उद्योग पुरवठा गट", desc_en: "A collective of local small contractors and workshop owners now supplies transport, tooling and packaging services to nearby small industrial units.", desc_mr: "स्थानिक लहान कंत्राटदार व कार्यशाळा मालकांचे सामूहिक आता जवळच्या लघु औद्योगिक युनिट्सना वाहतूक, साधने व पॅकेजिंग सेवा पुरवते.", img: "https://picsum.photos/seed/ind-story-3/700/500" }
+    ];
+
     const newsItems = [
         { id: 1, title_en: "New Product: Arjun Sal added!", title_mr: "नवीन उत्पादन: अर्जुन साल जोडले!", productId: 43, date: "2 days ago" },
         { id: 2, title_en: "Charoli now available from Chamorshi", title_mr: "चामोर्शीकडून चारोळी आता उपलब्ध", productId: 42, date: "5 days ago" },
         { id: 3, title_en: "Mushroom (dry/wet) listed from Gogaon", title_mr: "गोगावकडून मशरूम (सुके/ओले) सूचीबद्ध", productId: 41, date: "1 week ago" },
         { id: 4, title_en: "Whole Masala Powder from Armory", title_mr: "आरमोरीकडून संपूर्ण मसाला पावडर", productId: 40, date: "1 week ago" },
-        { id: 5, title_en: "Gum (Dink) added from Vairagarh", title_mr: "वैरागढकडून डिंक जोडले", productId: 39, date: "2 weeks ago" }
+        { id: 5, title_en: "Gum (Dink) added from Vairagarh", title_mr: "वैरागढकडून डिंक जोडले", productId: 39, date: "2 weeks ago" },
+        { id: 6, title_en: "New Product: Dal Processing unit added from Armori", title_mr: "नवीन उत्पादन: आरमोरीकडून डाळ प्रक्रिया युनिट जोडले", productId: 103, date: "1 month ago" }
+    ];
+
+    // ============================================================
+    //  DISTRICT GALLERY DATA
+    // ============================================================
+    const officialEvents = [
+        { id: 1, title_en: "District Collector reviews PM-KISAN camp", title_mr: "जिल्हाधिकाऱ्यांनी PM-किसान शिबिराचा आढावा घेतला", cat: "Collector Visits", cat_mr: "जिल्हाधिकारी भेटी", date: "12 June 2026", place_en: "Gadchiroli Tehsil Office", place_mr: "गडचिरोली तहसील कार्यालय", img: "https://picsum.photos/seed/gdcr-ev-01/900/600" },
+        { id: 2, title_en: "Collector inspects Soil Health Card distribution drive", title_mr: "जिल्हाधिकाऱ्यांनी मृदा आरोग्य कार्ड वितरण मोहिमेची पाहणी केली", cat: "Collector Visits", cat_mr: "जिल्हाधिकारी भेटी", date: "3 May 2026", place_en: "Dhanora Taluka", place_mr: "धानोरा तालुका", img: "https://picsum.photos/seed/gdcr-ev-02/900/600" },
+        { id: 3, title_en: "Collector's field visit to SARAS exhibition stalls", title_mr: "सरस प्रदर्शन स्टॉल्सला जिल्हाधिकाऱ्यांची क्षेत्रभेट", cat: "Collector Visits", cat_mr: "जिल्हाधिकारी भेटी", date: "18 July 2025", place_en: "Collector Office Ground", place_mr: "जिल्हाधिकारी कार्यालय मैदान", img: "https://picsum.photos/seed/gdcr-ev-03/900/600" },
+        { id: 4, title_en: "Chief Minister lays foundation of Konsari development projects", title_mr: "मुख्यमंत्र्यांनी कोन्सारी विकास प्रकल्पांची पायाभरणी केली", cat: "Ministerial & VIP Visits", cat_mr: "मंत्री व VIP भेटी", date: "22 July 2025", place_en: "Konsari, Gadchiroli", place_mr: "कोन्सारी, गडचिरोली", img: "https://picsum.photos/seed/gdcr-ev-04/900/600" },
+        { id: 5, title_en: "Guardian Minister reviews district development works", title_mr: "पालकमंत्र्यांनी जिल्हा विकास कामांचा आढावा घेतला", cat: "Ministerial & VIP Visits", cat_mr: "मंत्री व VIP भेटी", date: "9 April 2026", place_en: "Zilla Parishad Hall", place_mr: "जिल्हा परिषद सभागृह", img: "https://picsum.photos/seed/gdcr-ev-05/900/600" },
+        { id: 6, title_en: "State delegation visits tribal handicraft cluster", title_mr: "राज्य शिष्टमंडळाची आदिवासी हस्तकला क्लस्टरला भेट", cat: "Ministerial & VIP Visits", cat_mr: "मंत्री व VIP भेटी", date: "27 Feb 2026", place_en: "Kurkheda", place_mr: "कुरखेडा", img: "https://picsum.photos/seed/gdcr-ev-06/900/600" },
+        { id: 7, title_en: "Soil Health Mission awareness camp", title_mr: "मृदा आरोग्य अभियान जनजागृती शिबिर", cat: "Government Programs", cat_mr: "सरकारी कार्यक्रम", date: "14 March 2026", place_en: "Armori Panchayat Samiti", place_mr: "आरमोरी पंचायत समिती", img: "https://picsum.photos/seed/gdcr-ev-07/900/600" },
+        { id: 8, title_en: "Skill development training for tribal youth", title_mr: "आदिवासी युवकांसाठी कौशल्य विकास प्रशिक्षण", cat: "Government Programs", cat_mr: "सरकारी कार्यक्रम", date: "5 Jan 2026", place_en: "ITI Gadchiroli", place_mr: "आयटीआय गडचिरोली", img: "https://picsum.photos/seed/gdcr-ev-08/900/600" },
+        { id: 9, title_en: "Women SHG financial literacy workshop", title_mr: "महिला बचत गट आर्थिक साक्षरता कार्यशाळा", cat: "Government Programs", cat_mr: "सरकारी कार्यक्रम", date: "19 Nov 2025", place_en: "Chamorshi Block Office", place_mr: "चामोर्शी गट कार्यालय", img: "https://picsum.photos/seed/gdcr-ev-09/900/600" },
+        { id: 10, title_en: "Inauguration of new Primary Health Centre", title_mr: "नवीन प्राथमिक आरोग्य केंद्राचे उद्घाटन", cat: "Inaugurations & Foundation Events", cat_mr: "उद्घाटन व पायाभरणी कार्यक्रम", date: "2 Oct 2025", place_en: "Etapalli", place_mr: "एटापल्ली", img: "https://picsum.photos/seed/gdcr-ev-10/900/600" },
+        { id: 11, title_en: "Foundation stone laid for new district hospital wing", title_mr: "नवीन जिल्हा रुग्णालय विंगची पायाभरणी", cat: "Inaugurations & Foundation Events", cat_mr: "उद्घाटन व पायाभरणी कार्यक्रम", date: "16 Aug 2025", place_en: "Gadchiroli City", place_mr: "गडचिरोली शहर", img: "https://picsum.photos/seed/gdcr-ev-11/900/600" },
+        { id: 12, title_en: "CBSE model school building inaugurated", title_mr: "CBSE मॉडेल शाळा इमारतीचे उद्घाटन", cat: "Inaugurations & Foundation Events", cat_mr: "उद्घाटन व पायाभरणी कार्यक्रम", date: "23 July 2025", place_en: "Somanpally", place_mr: "सोमनपल्ली", img: "https://picsum.photos/seed/gdcr-ev-12/900/600" },
+        { id: 13, title_en: "Republic Day parade at Collector Office ground", title_mr: "जिल्हाधिकारी कार्यालय मैदानावर प्रजासत्ताक दिन संचलन", cat: "National Days & Celebrations", cat_mr: "राष्ट्रीय दिन व उत्सव", date: "26 Jan 2026", place_en: "Collector Office Ground", place_mr: "जिल्हाधिकारी कार्यालय मैदान", img: "https://picsum.photos/seed/gdcr-ev-13/900/600" },
+        { id: 14, title_en: "Independence Day flag hoisting ceremony", title_mr: "स्वातंत्र्य दिन ध्वजारोहण सोहळा", cat: "National Days & Celebrations", cat_mr: "राष्ट्रीय दिन व उत्सव", date: "15 Aug 2025", place_en: "Collector Office Ground", place_mr: "जिल्हाधिकारी कार्यालय मैदान", img: "https://picsum.photos/seed/gdcr-ev-14/900/600" },
+        { id: 15, title_en: "'Harit Maharashtra' sapling plantation drive", title_mr: "'हरित महाराष्ट्र' रोपे लागवड मोहीम", cat: "National Days & Celebrations", cat_mr: "राष्ट्रीय दिन व उत्सव", date: "22 July 2025", place_en: "Nine locations, district-wide", place_mr: "जिल्हाभर नऊ ठिकाणी", img: "https://picsum.photos/seed/gdcr-ev-15/900/600" }
     ];
 
     // ============================================================
@@ -1758,7 +2049,7 @@ a{color:inherit;}
     function isWishlisted(id) { return wishlist.has(id); }
 
     function toggleWishlist(id, btn) {
-        const product = products.find(p => p.id === id);
+        const product = allProducts.find(p => p.id === id);
         if (wishlist.has(id)) {
             wishlist.delete(id);
             if (btn) btn.classList.remove('active');
@@ -1864,6 +2155,19 @@ a{color:inherit;}
       `;
     }
 
+    function renderIndustrialStoryCard(s) {
+        return `
+        <div class="story-card">
+          <img src="${s.img}" alt="${s.name_en}" loading="lazy">
+          <div class="story-content">
+            <h4><span class="en-only">${s.name_en}</span><span class="mr-only">${s.name_mr}</span></h4>
+            <div class="story-seller"><i class="fas fa-user-circle"></i> <span class="en-only">${s.role_en}</span><span class="mr-only">${s.role_mr}</span></div>
+            <p><span class="en-only">${s.desc_en}</span><span class="mr-only">${s.desc_mr}</span></p>
+          </div>
+        </div>
+      `;
+    }
+
     // ============================================================
     //  WIRE UP CARD BUTTONS
     // ============================================================
@@ -1880,8 +2184,8 @@ a{color:inherit;}
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const id = parseInt(btn.dataset.id);
-                const p = products.find(pr => pr.id === id);
-                if (p) showPopup(p);
+                const p = allProducts.find(pr => pr.id === id);
+                if (p) showQuickView(p);
             });
         });
     }
@@ -1918,19 +2222,203 @@ a{color:inherit;}
     }
 
     // ============================================================
+    //  QUICK VIEW POPUP (enhanced with full details)
+    // ============================================================
+    const quickViewPopup = document.getElementById('quickViewPopup');
+    const quickViewClose = document.getElementById('quickViewClose');
+    const quickViewContent = document.getElementById('quickViewContent');
+    const quickViewCertBtn = document.getElementById('quickViewCertBtn');
+    const quickViewShareBtn = document.getElementById('quickViewShareBtn');
+    let currentQuickViewProduct = null;
+
+    function showQuickView(product) {
+        currentQuickViewProduct = product;
+        const imgHtml = product.img ? `<img src="${product.img}" alt="${product.name_en}" style="width:100%;border-radius:12px;margin-bottom:1rem;max-height:240px;object-fit:cover;">` : '';
+        quickViewContent.innerHTML = `
+            ${imgHtml}
+            <div class="popup-name"><span class="pname-en">${product.name_en}</span><span class="pname-mr">${product.name_mr}</span></div>
+            <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem;">
+                <span class="cat-badge">${product.cat}</span>
+                <span class="gi-badge"><i class="fas fa-tag"></i> <span class="gi-label-en">GI: ${product.gi}</span><span class="gi-label-mr">GI: ${product.gi_mr}</span></span>
+                <span class="cert-badge"><i class="fas fa-file-pdf"></i> ${product.cert}</span>
+            </div>
+            <div class="popup-grid">
+                <div><span class="popup-label"><i class="fas fa-user-circle"></i> <span class="en-only">Seller</span><span class="mr-only">विक्रेता</span></span><div class="popup-value"><span class="seller-en">${product.seller_en}</span><span class="seller-mr">${product.seller_mr}</span></div></div>
+                <div><span class="popup-label"><i class="fas fa-mobile-alt"></i> <span class="en-only">Mobile</span><span class="mr-only">मोबाईल</span></span><div class="popup-value">${product.mobile}</div></div>
+                <div><span class="popup-label"><i class="fas fa-map-pin"></i> <span class="en-only">Location</span><span class="mr-only">स्थान</span></span><div class="popup-value"><span class="place-en">${product.place_en}</span><span class="place-mr">${product.place_mr}</span></div></div>
+                <div><span class="popup-label"><i class="fas fa-map-marker-alt"></i> <span class="en-only">Origin</span><span class="mr-only">मूळ</span></span><div class="popup-value"><span class="origin-en">${product.origin_en}</span><span class="origin-mr">${product.origin_mr}</span></div></div>
+                <div style="grid-column:1/-1;"><span class="popup-label"><i class="fas fa-info-circle"></i> <span class="en-only">Description</span><span class="mr-only">वर्णन</span></span><div class="popup-value"><span class="desc-en">${product.desc_en}</span><span class="desc-mr">${product.desc_mr}</span></div></div>
+                <div style="grid-column:1/-1;"><span class="popup-label"><i class="fas fa-certificate"></i> <span class="en-only">Certificate</span><span class="mr-only">प्रमाणपत्र</span></span><div class="popup-value">${product.cert}</div></div>
+            </div>
+        `;
+        quickViewCertBtn.href = product.certPdf || '#';
+        quickViewCertBtn.target = '_blank';
+        quickViewPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeQuickView() {
+        quickViewPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    quickViewClose.addEventListener('click', closeQuickView);
+    quickViewPopup.addEventListener('click', (e) => { if (e.target === quickViewPopup) closeQuickView(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeQuickView(); });
+
+    quickViewShareBtn.addEventListener('click', function() {
+        if (currentQuickViewProduct) {
+            const shareText = `${currentQuickViewProduct.name_en} — Gadchiroli District Exhibition (${currentQuickViewProduct.cert})`;
+            if (navigator.share) {
+                navigator.share({ title: 'Gadchiroli Exhibition', text: shareText }).catch(() => {});
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(shareText).then(() => toast(currentLang === 'en' ? 'Product details copied' :
+                    'उत्पादन तपशील कॉपी केले', 'fa-copy'));
+            } else {
+                toast(shareText, 'fa-share-alt');
+            }
+        }
+    });
+
+    // ============================================================
+    //  DISTRICT GALLERY SLIDER (per category)
+    // ============================================================
+    function renderDistrictGallerySliders(filterCat) {
+        const container = document.getElementById('districtGalleryContainer');
+        if (!container) return;
+        let events = officialEvents;
+        if (filterCat && filterCat !== 'all') {
+            events = officialEvents.filter(e => e.cat === filterCat);
+        }
+        // Group by category
+        const cats = ['Collector Visits', 'Ministerial & VIP Visits', 'Government Programs', 'Inaugurations & Foundation Events', 'National Days & Celebrations'];
+        let html = '';
+        cats.forEach(cat => {
+            const items = events.filter(e => e.cat === cat);
+            if (items.length === 0) return;
+            const catLabel = cat;
+            const catLabelMr = items[0]?.cat_mr || cat;
+            html += `
+                <div style="margin-bottom:2.5rem;">
+                    <h4 style="font-family:var(--font-display);color:var(--forest-800);font-size:1.2rem;margin-bottom:.8rem;display:flex;align-items:center;gap:10px;">
+                        <i class="fas fa-folder-open" style="color:var(--turmeric-500);"></i>
+                        <span class="en-only">${catLabel}</span><span class="mr-only">${catLabelMr}</span>
+                    </h4>
+                    <div class="district-slider-wrapper" data-slider="${cat.replace(/\s/g,'_')}">
+                        <div class="district-slider-slides">
+                            ${items.map(ev => `
+                                <div class="district-slider-slide">
+                                    <img src="${ev.img}" alt="${ev.title_en}" loading="lazy">
+                                    <div class="district-slider-overlay">
+                                        <h4><span class="en-only">${ev.title_en}</span><span class="mr-only">${ev.title_mr}</span></h4>
+                                        <p><span class="place-en">${ev.place_en}</span><span class="place-mr">${ev.place_mr}</span></p>
+                                        <div class="slider-meta">
+                                            <span><i class="far fa-calendar"></i> ${ev.date}</span>
+                                            <span><i class="fas fa-tag"></i> <span class="en-only">${ev.cat}</span><span class="mr-only">${ev.cat_mr}</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="district-slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="district-slider-btn next"><i class="fas fa-chevron-right"></i></button>
+                        <div class="district-slider-dots"></div>
+                        <button class="district-slider-download" data-images='${JSON.stringify(items.map(e => e.img))}'><i class="fas fa-download"></i> <span class="en-only">Download All Images</span><span class="mr-only">सर्व प्रतिमा डाउनलोड करा</span></button>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html || '<p class="no-results"><span class="en-only">No events found for this category.</span><span class="mr-only">या श्रेणीसाठी कोणतेही कार्यक्रम सापडले नाहीत.</span></p>';
+
+        // Initialize each slider
+        container.querySelectorAll('.district-slider-wrapper').forEach(wrapper => {
+            initDistrictSlider(wrapper);
+        });
+    }
+
+    function initDistrictSlider(wrapper) {
+        const slides = wrapper.querySelector('.district-slider-slides');
+        const slideItems = wrapper.querySelectorAll('.district-slider-slide');
+        const prevBtn = wrapper.querySelector('.district-slider-btn.prev');
+        const nextBtn = wrapper.querySelector('.district-slider-btn.next');
+        const dotsContainer = wrapper.querySelector('.district-slider-dots');
+        let currentIndex = 0;
+        const total = slideItems.length;
+
+        if (total <= 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            dotsContainer.style.display = 'none';
+            return;
+        }
+
+        // Create dots
+        for (let i = 0; i < total; i++) {
+            const dot = document.createElement('button');
+            dot.className = i === 0 ? 'active' : '';
+            dot.setAttribute('aria-label', `Go to slide ${i+1}`);
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        function goTo(index) {
+            if (index < 0) index = total - 1;
+            if (index >= total) index = 0;
+            currentIndex = index;
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dotsContainer.querySelectorAll('button').forEach((d, i) => {
+                d.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function next() { goTo(currentIndex + 1); }
+        function prev() { goTo(currentIndex - 1); }
+
+        prevBtn.addEventListener('click', prev);
+        nextBtn.addEventListener('click', next);
+
+        // Auto-play (pause on hover)
+        let interval = setInterval(next, 5000);
+        wrapper.addEventListener('mouseenter', () => clearInterval(interval));
+        wrapper.addEventListener('mouseleave', () => {
+            clearInterval(interval);
+            interval = setInterval(next, 5000);
+        });
+
+        // Download button
+        const downloadBtn = wrapper.querySelector('.district-slider-download');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function() {
+                const images = JSON.parse(this.dataset.images);
+                images.forEach((img, idx) => {
+                    // Open each image in new tab or download
+                    const link = document.createElement('a');
+                    link.href = img;
+                    link.download = `district_gallery_${idx+1}.jpg`;
+                    link.target = '_blank';
+                    link.click();
+                });
+                toast(currentLang === 'en' ? 'Downloading images...' : 'प्रतिमा डाउनलोड होत आहेत...', 'fa-download');
+            });
+        }
+    }
+
+    // ============================================================
     //  RENDER ALL
     // ============================================================
     function renderAll() {
-        const food = products.filter(p => p.cat === 'Food');
-        const medicinal = products.filter(p => p.cat === 'Medicinal');
-        const wood = products.filter(p => p.cat === 'Woodcraft');
+        const food = allProducts.filter(p => p.cat === 'Food');
+        const medicinal = allProducts.filter(p => p.cat === 'Medicinal');
+        const wood = allProducts.filter(p => p.cat === 'Woodcraft');
+        const industrial = allProducts.filter(p => p.cat === 'Industrial');
 
         document.getElementById('foodGrid').innerHTML = food.map((p, i) => renderProductCard(p, i)).join('');
         document.getElementById('medicinalGrid').innerHTML = medicinal.map((p, i) => renderProductCard(p, i + food.length)).join('');
         document.getElementById('woodcraftGrid').innerHTML = wood.map((p, i) => renderProductCard(p, i + food.length + medicinal.length)).join('');
+        document.getElementById('industrialProductGrid').innerHTML = industrial.map((p, i) => renderProductCard(p, i + food.length + medicinal.length + wood.length)).join('');
 
         // Gallery
-        document.getElementById('galleryGrid').innerHTML = products.map(p => `
+        document.getElementById('galleryGrid').innerHTML = allProducts.map(p => `
         <div class="gallery-card">
           <img src="${p.img}" alt="${p.name_en}" loading="lazy">
           <div class="card-content">
@@ -1942,13 +2430,12 @@ a{color:inherit;}
         </div>
       `).join('');
 
-        // Featured (first 6)
-        document.getElementById('featuredGrid').innerHTML = products.slice(0, 6).map((p, i) => renderProductCard(p, i)).join('');
+        // Featured (first 6 from allProducts)
+        document.getElementById('featuredGrid').innerHTML = allProducts.slice(0, 6).map((p, i) => renderProductCard(p, i)).join('');
 
-        // Vendor Grid — group by vendor, listing EVERY product that vendor sells,
-        // each with the exact same photo/name/cert-PDF used in Product/Gallery/Download tabs
+        // Vendor Grid — group by vendor, listing EVERY product that vendor sells
         const vendorMap = {};
-        products.forEach(p => {
+        allProducts.forEach(p => {
             const key = p.seller_en + '|' + p.seller_mr;
             if (!vendorMap[key]) {
                 vendorMap[key] = { seller_en: p.seller_en, seller_mr: p.seller_mr, mobile: p.mobile, place_en: p.place_en, place_mr: p.place_mr, products: [] };
@@ -1958,14 +2445,15 @@ a{color:inherit;}
         const vendorList = Object.values(vendorMap);
         document.getElementById('vendorGrid').innerHTML = vendorList.map(v => renderVendorCard(v)).join('');
 
-        // Stories
+        // Stories (both agro-forest and industrial)
         document.getElementById('storyGrid').innerHTML = stories.map(s => renderStoryCard(s)).join('');
+        document.getElementById('industrialStoryGrid').innerHTML = industrialStoriesData.map(s => renderIndustrialStoryCard(s)).join('');
 
         // Populate feedback dropdowns
         populateFeedbackDropdowns();
 
         // Wire up interactive bits + reveal animation
-        document.querySelectorAll('#foodGrid, #medicinalGrid, #woodcraftGrid, #featuredGrid, #vendorGrid').forEach(grid => {
+        document.querySelectorAll('#foodGrid, #medicinalGrid, #woodcraftGrid, #industrialProductGrid, #featuredGrid, #vendorGrid').forEach(grid => {
             wireProductCardButtons(grid);
             wireVendorCopyButtons(grid);
             observeReveal(grid);
@@ -1975,12 +2463,12 @@ a{color:inherit;}
         const vendorStat = document.querySelector('#statStrip .stat:nth-child(2) .num');
         if (vendorStat) vendorStat.dataset.target = vendorList.length;
         const productStat = document.querySelector('#statStrip .stat:nth-child(1) .num');
-        if (productStat) productStat.dataset.target = products.length;
+        if (productStat) productStat.dataset.target = allProducts.length;
         animateStats();
 
         // Update result count
         const resultCountNum = document.getElementById('resultCountNum');
-        if (resultCountNum) resultCountNum.textContent = products.length;
+        if (resultCountNum) resultCountNum.textContent = allProducts.length;
     }
 
     // ============================================================
@@ -1996,7 +2484,6 @@ a{color:inherit;}
         if (index >= totalSlides) index = 0;
         currentSlide = index;
         slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-        // Update dots
         document.querySelectorAll('.carousel-dots button').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentSlide);
         });
@@ -2005,7 +2492,6 @@ a{color:inherit;}
     function nextSlide() { goToSlide(currentSlide + 1); }
     function prevSlide() { goToSlide(currentSlide - 1); }
 
-    // Build dots
     for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement('button');
         dot.className = i === 0 ? 'active' : '';
@@ -2017,7 +2503,6 @@ a{color:inherit;}
     document.getElementById('carouselNext').addEventListener('click', nextSlide);
     document.getElementById('carouselPrev').addEventListener('click', prevSlide);
 
-    // Auto-play (pause on hover)
     let autoPlayInterval = setInterval(nextSlide, 5000);
     const carouselWrapper = document.getElementById('mainCarousel');
     carouselWrapper.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
@@ -2033,9 +2518,8 @@ a{color:inherit;}
         const vendorSelect = document.getElementById('fbVendor');
         const productSelect = document.getElementById('fbProduct');
 
-        // Unique vendors
         const vendorMap = {};
-        products.forEach(p => {
+        allProducts.forEach(p => {
             const key = p.seller_en + p.seller_mr;
             if (!vendorMap[key]) {
                 vendorMap[key] = { seller_en: p.seller_en, seller_mr: p.seller_mr };
@@ -2049,8 +2533,7 @@ a{color:inherit;}
             vendorSelect.appendChild(opt);
         });
 
-        // All products
-        products.forEach(p => {
+        allProducts.forEach(p => {
             const opt = document.createElement('option');
             opt.value = p.id;
             opt.textContent = p.name_en + ' / ' + p.name_mr;
@@ -2085,7 +2568,7 @@ a{color:inherit;}
             return;
         }
 
-        const productName = product ? products.find(p => p.id == product)?.name_en || product : 'Not specified';
+        const productName = product ? allProducts.find(p => p.id == product)?.name_en || product : 'Not specified';
         const vendorName = vendor || 'Not specified';
         const body = `
     Feedback from District Product Exhibition Portal
@@ -2126,7 +2609,7 @@ a{color:inherit;}
     //  DOWNLOAD FUNCTIONS
     // ============================================================
     function generateCatalogPDF(category) {
-        const filtered = category ? products.filter(p => p.cat === category) : products;
+        const filtered = category ? allProducts.filter(p => p.cat === category) : allProducts;
         const title = category ? `${category} Products Catalog` : 'Complete Product Catalog';
         let html = `<html><head><title>${title}</title><style>body{font-family:sans-serif;padding:2rem;}h1{color:#1a5a2a;}table{width:100%;border-collapse:collapse;margin-top:1rem;}th{background:#1f4b2e;color:#fff;padding:.5rem;text-align:left;}td,th{border:1px solid #ddd;padding:.5rem;}</style></head><body>`;
         html += `<h1>${title} - Gadchiroli District Exhibition</h1><p>Generated: ${new Date().toLocaleDateString()}</p><table><tr><th>#</th><th>Product</th><th>Category</th><th>Seller</th><th>Location</th><th>Cert</th></tr>`;
@@ -2149,6 +2632,7 @@ a{color:inherit;}
     document.getElementById('dlCatalogFood').addEventListener('click', () => generateCatalogPDF('Food'));
     document.getElementById('dlCatalogMedicinal').addEventListener('click', () => generateCatalogPDF('Medicinal'));
     document.getElementById('dlCatalogWoodcraft').addEventListener('click', () => generateCatalogPDF('Woodcraft'));
+    document.getElementById('dlCatalogIndustrial').addEventListener('click', () => generateCatalogPDF('Industrial'));
 
     // Certificate guide
     document.getElementById('dlCertGuide').addEventListener('click', () => {
@@ -2159,9 +2643,9 @@ a{color:inherit;}
     function renderDownloadResults(query) {
         const container = document.getElementById('downloadResults');
         const q = query.toLowerCase().trim();
-        let matched = products;
+        let matched = allProducts;
         if (q) {
-            matched = products.filter(p => p.name_en.toLowerCase().includes(q) || p.name_mr.toLowerCase().includes(q) || p.cert.toLowerCase().includes(q));
+            matched = allProducts.filter(p => p.name_en.toLowerCase().includes(q) || p.name_mr.toLowerCase().includes(q) || p.cert.toLowerCase().includes(q));
         }
         if (matched.length === 0) {
             container.innerHTML = `<div class="no-results"><span class="en-only">No products found.</span><span class="mr-only">कोणतीही उत्पादने सापडली नाहीत.</span></div>`;
@@ -2182,7 +2666,7 @@ a{color:inherit;}
     }
 
     window.downloadProductImage = function(id) {
-        const p = products.find(pr => pr.id === id);
+        const p = allProducts.find(pr => pr.id === id);
         if (p) {
             fetch(p.img)
                 .then(res => res.blob())
@@ -2223,8 +2707,7 @@ a{color:inherit;}
     });
     document.getElementById('dlGalleryImages').addEventListener('click', () => {
         toast((currentLang === 'en' ? 'Preparing image collection...' : 'प्रतिमा संग्रह तयार होत आहे...'), 'fa-images');
-        // Simulate ZIP download - open first product images in new tabs
-        products.slice(0, 5).forEach(p => {
+        allProducts.slice(0, 5).forEach(p => {
             window.open(p.img, '_blank');
         });
         toast((currentLang === 'en' ? 'Opening 5 sample product images' : '५ नमुना उत्पादन प्रतिमा उघडत आहे'), 'fa-images');
@@ -2271,15 +2754,9 @@ a{color:inherit;}
 
     // ============================================================
     //  VISITOR INSIGHTS — REAL, PERSISTED COUNTS
-    //  Uses countapi.mileshilliard.com — a free, keyless, open hit-
-    //  counter API (successor to the old countapi.xyz). Each unique
-    //  key is a real persisted counter on their server, so these
-    //  numbers are genuine across every visitor and every session,
-    //  not a local animation. If the office network blocks external
-    //  APIs, the cards fall back to "—" instead of breaking.
     // ============================================================
     const COUNTER_BASE = 'https://countapi.mileshilliard.com/api/v1';
-    const COUNTER_PREFIX = 'gdcr_district_expo_v2'; // unique prefix to avoid clashing with anyone else's key
+    const COUNTER_PREFIX = 'gdcr_district_expo_v2';
 
     function pad2(n) { return n < 10 ? '0' + n : '' + n; }
     function todayKeyPart(d) { return `${d.getFullYear()}${pad2(d.getMonth() + 1)}${pad2(d.getDate())}`; }
@@ -2296,7 +2773,7 @@ a{color:inherit;}
     async function counterGet(key) {
         try {
             const res = await fetch(`${COUNTER_BASE}/get/${COUNTER_PREFIX}_${key}`);
-            if (!res.ok) return 0; // 404 = key not created yet (e.g. no data for last month)
+            if (!res.ok) return 0;
             const data = await res.json();
             return typeof data.value === 'number' ? data.value : parseInt(data.value, 10) || 0;
         } catch (err) { return null; }
@@ -2305,7 +2782,7 @@ a{color:inherit;}
     const visitorStats = { total: null, today: null, lastMonth: null };
 
     const searchTally = {};
-    ['Machhi Loncha (Fish Pickle)', 'Charoli', 'Arjun Sal'].forEach((name) => { searchTally[name] = 0; });
+    ['Machhi Loncha (Fish Pickle)', 'Charoli', 'Arjun Sal', 'Iron Ore', 'Sponge Iron'].forEach((name) => { searchTally[name] = 0; });
 
     function topSearchedProduct() {
         let bestName = Object.keys(searchTally)[0];
@@ -2348,7 +2825,6 @@ a{color:inherit;}
     async function loadVisitorStats() {
         const now = new Date();
         const prevMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-        // Hitting = "count this visit". Each key is scoped so today/month reset themselves by key name.
         const [total, today, month, lastMonth] = await Promise.all([
             counterHit('total'),
             counterHit('day_' + todayKeyPart(now)),
@@ -2383,7 +2859,6 @@ a{color:inherit;}
         container.innerHTML = newsItems.map(item => {
             return `
           <div class="news-item" data-product-id="${item.productId}">
-
             <span class="news-badge">NEW</span>
             <div class="news-text">
               <span class="en-only">${item.title_en}</span>
@@ -2397,15 +2872,15 @@ a{color:inherit;}
         document.querySelectorAll('.news-item').forEach(el => {
             el.addEventListener('click', function() {
                 const pid = parseInt(this.dataset.productId);
-                const p = products.find(pr => pr.id === pid);
-                if (p) showPopup(p);
+                const p = allProducts.find(pr => pr.id === pid);
+                if (p) showQuickView(p);
             });
         });
     }
     renderNews();
 
     // ============================================================
-    //  POPUP
+    //  LEGACY POPUP (for news)
     // ============================================================
     const popup = document.getElementById('newsPopup');
     const popupClose = document.getElementById('popupClose');
@@ -2436,7 +2911,7 @@ a{color:inherit;}
         const cards = document.querySelectorAll('#productResults .product-card');
         cards.forEach(c => {
             const cert = c.dataset.cert || '';
-            const target = products.find(p => p.id === pid);
+            const target = allProducts.find(p => p.id === pid);
             if (target && cert.includes(target.cert.toLowerCase())) {
                 c.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 c.style.border = '3px solid var(--turmeric-500)';
@@ -2451,8 +2926,8 @@ a{color:inherit;}
 
     popupShareBtn.addEventListener('click', function() {
         const pid = parseInt(this.dataset.productId);
-        const p = products.find(pr => pr.id === pid);
-        const shareText = `${p ? p.name_en : 'Product'} — Gadchiroli District Product Exhibition (${p ? p.cert : ''})`;
+        const p = allProducts.find(pr => pr.id === pid);
+        const shareText = `${p ? p.name_en : 'Product'} — Gadchiroli District Exhibition (${p ? p.cert : ''})`;
         if (navigator.share) {
             navigator.share({ title: 'Gadchiroli Exhibition', text: shareText }).catch(() => {});
         } else if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -2473,6 +2948,7 @@ a{color:inherit;}
     const galleryBtn = document.getElementById('tabGalleryBtn');
     const vendorBtn = document.getElementById('tabVendorBtn');
     const storyBtn = document.getElementById('tabStoryBtn');
+    const districtGalleryBtn = document.getElementById('tabDistrictGalleryBtn');
     const feedbackBtn = document.getElementById('tabFeedbackBtn');
     const downloadBtn = document.getElementById('tabDownloadBtn');
     const aboutBtn = document.getElementById('tabAboutBtn');
@@ -2482,12 +2958,13 @@ a{color:inherit;}
     const galleryPane = document.getElementById('galleryPane');
     const vendorPane = document.getElementById('vendorPane');
     const storyPane = document.getElementById('storyPane');
+    const districtGalleryPane = document.getElementById('districtGalleryPane');
     const feedbackPane = document.getElementById('feedbackPane');
     const downloadPane = document.getElementById('downloadPane');
     const aboutPane = document.getElementById('aboutPane');
 
-    const tabs = [homeBtn, prodBtn, galleryBtn, vendorBtn, storyBtn, feedbackBtn, downloadBtn, aboutBtn];
-    const panes = [homePane, prodPane, galleryPane, vendorPane, storyPane, feedbackPane, downloadPane, aboutPane];
+    const tabs = [homeBtn, prodBtn, galleryBtn, vendorBtn, storyBtn, districtGalleryBtn, feedbackBtn, downloadBtn, aboutBtn];
+    const panes = [homePane, prodPane, galleryPane, vendorPane, storyPane, districtGalleryPane, feedbackPane, downloadPane, aboutPane];
     const homeHero = document.getElementById('homeHero');
     const heroSeam = document.getElementById('heroSeam');
 
@@ -2505,6 +2982,23 @@ a{color:inherit;}
         if (heroSeam) heroSeam.style.display = (index === 0) ? '' : 'none';
         window.scrollTo({ top: 0, behavior: 'smooth' });
         document.getElementById('tabBar').classList.remove('open');
+
+        // Breadcrumb reflects the active tab
+        const crumbEl = document.getElementById('breadcrumbCurrent');
+        if (crumbEl && tabs[index]) {
+            const enSpan = tabs[index].querySelector('.en-only');
+            const mrSpan = tabs[index].querySelector('.mr-only');
+            crumbEl.innerHTML = `<span class="en-only">${enSpan ? enSpan.textContent : ''}</span><span class="mr-only">${mrSpan ? mrSpan.textContent : ''}</span>`;
+        }
+        
+        // Render district gallery when tab is opened
+        if (index === 5) {
+            setTimeout(() => {
+                const activeChip = document.querySelector('#eventCatChips .cat-chip.active');
+                const cat = activeChip ? activeChip.dataset.ecat : 'all';
+                renderDistrictGallerySliders(cat);
+            }, 100);
+        }
     }
 
     homeBtn.addEventListener('click', (e) => { e.preventDefault();
@@ -2517,13 +3011,15 @@ a{color:inherit;}
         setActive(3); });
     storyBtn.addEventListener('click', (e) => { e.preventDefault();
         setActive(4); });
-    feedbackBtn.addEventListener('click', (e) => { e.preventDefault();
+    districtGalleryBtn.addEventListener('click', (e) => { e.preventDefault();
         setActive(5); });
+    feedbackBtn.addEventListener('click', (e) => { e.preventDefault();
+        setActive(6); });
     downloadBtn.addEventListener('click', (e) => { e.preventDefault();
-        setActive(6); 
+        setActive(7); 
         renderDownloadResults(''); });
     aboutBtn.addEventListener('click', (e) => { e.preventDefault();
-        setActive(7); });
+        setActive(8); });
 
     document.getElementById('goToProductBtn').addEventListener('click', () => setActive(1));
     document.getElementById('goToProductBtn2').addEventListener('click', () => setActive(1));
@@ -2533,21 +3029,22 @@ a{color:inherit;}
         setActive(1); });
     document.getElementById('footerVendorLink').addEventListener('click', (e) => { e.preventDefault();
         setActive(3); });
-    document.getElementById('footerFeedbackLink').addEventListener('click', (e) => { e.preventDefault();
+    document.getElementById('footerDistrictGalleryLink').addEventListener('click', (e) => { e.preventDefault();
         setActive(5); });
+    document.getElementById('footerFeedbackLink').addEventListener('click', (e) => { e.preventDefault();
+        setActive(6); });
     document.getElementById('footerDownloadLink').addEventListener('click', (e) => { e.preventDefault();
-        setActive(6);
+        setActive(7);
         renderDownloadResults(''); });
     document.getElementById('footerAboutLink').addEventListener('click', (e) => { e.preventDefault();
-        setActive(7); });
+        setActive(8); });
 
     document.getElementById('navToggle').addEventListener('click', () => {
         document.getElementById('tabBar').classList.toggle('open');
     });
 
     // ============================================================
-    //  GIGW POLICY MODAL (Disclaimer / Privacy / Terms / Hyperlinking /
-    //  Copyright / Accessibility / Sitemap) — standard govt boilerplate
+    //  GIGW POLICY MODAL
     // ============================================================
     const policyContent = {
         disclaimer: {
@@ -2592,6 +3089,7 @@ a{color:inherit;}
             policyModalBody.innerHTML = `<ul style="padding-left:1.2rem;line-height:2;">
                 <li>Home / मुख्यपृष्ठ</li><li>Product / उत्पादने</li><li>Gallery / गॅलरी</li>
                 <li>Vendor Info / विक्रेता माहिती</li><li>Success Stories / यशोगाथा</li>
+                <li>District Photo Gallery / जिल्हा छायाचित्र गॅलरी</li>
                 <li>Feedback / अभिप्राय</li><li>Download / डाउनलोड</li><li>About us / आमच्याबद्दल</li></ul>`;
         } else {
             const p = policyContent[key];
@@ -2610,7 +3108,6 @@ a{color:inherit;}
     document.getElementById('policyModalClose').addEventListener('click', () => policyModal.classList.remove('active'));
     policyModal.addEventListener('click', (e) => { if (e.target === policyModal) policyModal.classList.remove('active'); });
 
-    // Last updated date (GIGW requires a visible last-reviewed date)
     const lastUpdatedEl = document.getElementById('lastUpdatedDate');
     if (lastUpdatedEl) {
         lastUpdatedEl.textContent = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' });
@@ -2657,9 +3154,9 @@ a{color:inherit;}
     });
 
     // ============================================================
-    //  GIGW ACCESSIBILITY TOOLBAR (text resize + high contrast)
+    //  GIGW ACCESSIBILITY TOOLBAR
     // ============================================================
-    let fontStep = 0; // -2 .. +3, each step = 10%
+    let fontStep = 0;
     function applyFontStep() {
         document.documentElement.style.fontSize = (100 + fontStep * 10) + '%';
     }
@@ -2703,7 +3200,7 @@ a{color:inherit;}
 
     function applySort() {
         const mode = sortSelect.value;
-        ['foodGrid', 'medicinalGrid', 'woodcraftGrid'].forEach(gridId => {
+        ['foodGrid', 'medicinalGrid', 'woodcraftGrid', 'industrialProductGrid'].forEach(gridId => {
             const grid = document.getElementById(gridId);
             const cards = Array.from(grid.children);
             if (mode === 'az') {
@@ -2768,7 +3265,7 @@ a{color:inherit;}
         if (resultCountNum) resultCountNum.textContent = visibleCount;
 
         if (query !== '') {
-            const matched = products.find(p => p.name_en.toLowerCase().includes(query) || p.name_mr.toLowerCase()
+            const matched = allProducts.find(p => p.name_en.toLowerCase().includes(query) || p.name_mr.toLowerCase()
             .includes(query));
             if (matched) {
                 searchTally[matched.name_en] = (searchTally[matched.name_en] || 0) + 1;
@@ -2795,11 +3292,10 @@ a{color:inherit;}
         document.querySelectorAll('#productResults .section-title').forEach(s => s.style.display = '');
         document.querySelectorAll('#productResults .product-card').forEach(c => c.style.display = '');
         noResultsMsg.style.display = 'none';
-        if (resultCountNum) resultCountNum.textContent = products.length;
+        if (resultCountNum) resultCountNum.textContent = allProducts.length;
         document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
     });
 
-    // Quick category chips — thin convenience layer over the existing categoryFilter select
     document.querySelectorAll('.cat-chip').forEach(chip => {
         chip.addEventListener('click', () => {
             document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
@@ -2814,17 +3310,78 @@ a{color:inherit;}
     // ============================================================
     const siteHeader = document.getElementById('siteHeader');
     const toTopBtn = document.getElementById('toTopBtn');
+    const scrollProgressEl = document.getElementById('scrollProgress');
     window.addEventListener('scroll', () => {
         const y = window.scrollY;
         siteHeader.classList.toggle('is-compact', y > 40);
         toTopBtn.classList.toggle('show', y > 500);
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (scrollProgressEl && docHeight > 0) scrollProgressEl.style.width = Math.min(100, (y / docHeight) * 100) + '%';
     }, { passive: true });
     toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ============================================================
+    //  NOTICE TICKER
+    // ============================================================
+    const noticeItems = [
+        { icon: 'fa-bullhorn', en: 'District Product Exhibition — 43+ agro-forest products now live', mr: 'जिल्हा उत्पादन प्रदर्शन — ४३+ कृषी-वन उत्पादने आता उपलब्ध' },
+        { icon: 'fa-hand-holding-heart', en: 'A free, non-profit initiative of the District Collector Office, Gadchiroli', mr: 'जिल्हाधिकारी कार्यालय, गडचिरोली यांचा विनामूल्य, ना-नफा उपक्रम' },
+        { icon: 'fa-industry', en: 'Discover small & medium industrial units alongside agro-forest products in the Product tab', mr: 'उत्पादन टॅबमध्ये कृषी-वन उत्पादनांसह लघु व मध्यम औद्योगिक उत्पादने पाहा' },
+        { icon: 'fa-user-plus', en: 'Vendors: register your product free of cost via the Vendor Info tab', mr: 'विक्रेते: विक्रेता माहिती टॅबद्वारे विनामूल्य नोंदणी करा' },
+        { icon: 'fa-comment-dots', en: 'Share your feedback — we read every submission', mr: 'तुमचा अभिप्राय शेअर करा — आम्ही प्रत्येक अभिप्राय वाचतो' }
+    ];
+    function buildNoticeSet() {
+        return noticeItems.map(n => `<span class="notice-item"><i class="fas ${n.icon}"></i> <span class="en-only">${n.en}</span><span class="mr-only">${n.mr}</span></span>`).join('<span class="notice-label" style="background:transparent;color:var(--turmeric-500);">•</span>');
+    }
+    const tickerTrack = document.getElementById('noticeTickerTrack');
+    if (tickerTrack) {
+        const set = `<span class="notice-ticker-set"><span class="notice-label"><i class="fas fa-circle-info"></i> <span class="en-only">Notice</span><span class="mr-only">सूचना</span></span>${buildNoticeSet()}</span>`;
+        tickerTrack.innerHTML = set + set; // duplicated for seamless infinite scroll
+    }
+
+    // ============================================================
+    //  PRINT BUTTON
+    // ============================================================
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+    // ============================================================
+    //  QR CODE + SOCIAL SHARE (footer)
+    // ============================================================
+    const portalUrl = (window.location && window.location.href && window.location.href.startsWith('http')) ? window.location.href : 'https://gadchiroli.gov.in';
+    const qrImg = document.getElementById('footerQrImg');
+    if (qrImg) qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent(portalUrl);
+
+    document.getElementById('shareWhatsapp').addEventListener('click', () => window.open('https://wa.me/?text=' + encodeURIComponent('Gadchiroli District Exhibition Portal: ' + portalUrl), '_blank'));
+    document.getElementById('shareFacebook').addEventListener('click', () => window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(portalUrl), '_blank'));
+    document.getElementById('shareTwitter').addEventListener('click', () => window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(portalUrl) + '&text=' + encodeURIComponent('Gadchiroli District Exhibition Portal'), '_blank'));
+    document.getElementById('shareCopyLink').addEventListener('click', () => {
+        const finish = () => toast(currentLang === 'en' ? 'Link copied' : 'दुवा कॉपी केला', 'fa-link');
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(portalUrl).then(finish).catch(finish);
+        } else { finish(); }
+    });
+
+    // ============================================================
+    //  DISTRICT GALLERY - event category chips
+    // ============================================================
+    document.querySelectorAll('#eventCatChips .cat-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('#eventCatChips .cat-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            const raw = chip.dataset.ecatRaw || chip.dataset.ecat;
+            renderDistrictGallerySliders(raw);
+        });
+    });
 
     // ============================================================
     //  INITIAL RENDER
     // ============================================================
     renderAll();
+    
+    // Initialize district gallery after render
+    setTimeout(() => {
+        renderDistrictGallerySliders('all');
+    }, 200);
 </script>
 </body>
 </html>
