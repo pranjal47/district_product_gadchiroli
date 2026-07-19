@@ -1149,7 +1149,7 @@ a{color:inherit;}
             <div class="subhead">
                 <span class="en-only">District Collector Office · Non-Profit · Free Promotion</span><span class="mr-only">जिल्हाधिकारी कार्यालय · ना-नफा · विनामूल्य प्रोत्साहन</span>
                 <span class="dot"></span>
-                <span class="en-only">43+ local & industrial products</span><span class="mr-only">४३+ स्थानिक व औद्योगिक उत्पादने</span>
+                <span class="en-only"><span id="headerProductCountEn">43</span>+ local & industrial products</span><span class="mr-only"><span id="headerProductCountMr">४३</span>+ स्थानिक व औद्योगिक उत्पादने</span>
             </div>
         </div>
     </div>
@@ -1216,9 +1216,9 @@ a{color:inherit;}
             </div>
         </div>
         <div class="stat-strip" id="statStrip">
-            <div class="stat"><span class="num" data-target="43">0</span><span class="label en-only">Products</span><span class="label mr-only">उत्पादने</span></div>
-            <div class="stat"><span class="num" data-target="0">0</span><span class="label en-only">Vendor groups</span><span class="label mr-only">विक्रेता गट</span></div>
-            <div class="stat"><span class="num" data-target="5">0</span><span class="label en-only">Categories</span><span class="label mr-only">श्रेणी</span></div>
+            <div class="stat"><span class="num" id="statProductsNum" data-target="43">0</span><span class="label en-only">Products</span><span class="label mr-only">उत्पादने</span></div>
+            <div class="stat"><span class="num" id="statVendorsNum" data-target="0">0</span><span class="label en-only">Vendor groups</span><span class="label mr-only">विक्रेता गट</span></div>
+            <div class="stat"><span class="num" id="statCategoriesNum" data-target="4">0</span><span class="label en-only">Categories</span><span class="label mr-only">श्रेणी</span></div>
         </div>
     </div>
 </div>
@@ -1288,8 +1288,8 @@ a{color:inherit;}
                 <h3><i class="fas fa-bullhorn"></i> <span class="en-only">Announcements</span><span class="mr-only">घोषणा</span></h3>
                 <div class="announcement-text">
                     <i class="fas fa-calendar-check" style="color:var(--forest-600);"></i>
-                    <span class="en-only">📢 District Exhibition 2025 – Now Live! Explore 43+ agro, forest & industrial products.</span>
-                    <span class="mr-only">📢 जिल्हा प्रदर्शन २०२५ – आता लाइव्ह! ४३+ कृषी, वन व औद्योगिक उत्पादने पाहा.</span>
+                    <span class="en-only">📢 District Exhibition 2025 – Now Live! Explore <span id="announceProductCountEn">43</span>+ agro, forest & industrial products.</span>
+                    <span class="mr-only">📢 जिल्हा प्रदर्शन २०२५ – आता लाइव्ह! <span id="announceProductCountMr">४३</span>+ कृषी, वन व औद्योगिक उत्पादने पाहा.</span>
                 </div>
                 <div class="announcement-text">
                     <i class="fas fa-calendar-alt" style="color:var(--forest-600);"></i>
@@ -1346,7 +1346,7 @@ a{color:inherit;}
         <div class="section-title"><i class="fas fa-star"></i> <span class="en-only">Featured Products</span><span class="mr-only">वैशिष्ट्यपूर्ण उत्पादने</span></div>
         <div class="product-grid" id="featuredGrid"></div>
         <div style="text-align:center; margin:2rem 0;">
-            <button class="more-btn" id="goToProductBtn2"><i class="fas fa-arrow-right"></i> <span class="en-only">See all 43+ products →</span><span class="mr-only">सर्व ४३+ उत्पादने पहा →</span></button>
+            <button class="more-btn" id="goToProductBtn2"><i class="fas fa-arrow-right"></i> <span class="en-only">See all <span id="btnProductCountEn">43</span>+ products →</span><span class="mr-only">सर्व <span id="btnProductCountMr">४३</span>+ उत्पादने पहा →</span></button>
         </div>
 
         <!-- ===== VISITOR INSIGHTS ===== -->
@@ -1584,7 +1584,7 @@ a{color:inherit;}
             <div class="download-card">
                 <div class="dl-icon-badge"><i class="fas fa-book"></i></div>
                 <h3><span class="en-only">Product Catalogs</span><span class="mr-only">उत्पादन कॅटलॉग</span></h3>
-                <p><span class="en-only">Complete product catalogs in PDF format. Includes all 43+ products with details.</span><span class="mr-only">PDF स्वरूपात संपूर्ण उत्पादन कॅटलॉग. तपशिलांसह सर्व ४३+ उत्पादनांचा समावेश.</span></p>
+                <p><span class="en-only">Complete product catalogs in PDF format. Includes all <span id="dlProductCountEn">43</span>+ products with details.</span><span class="mr-only">PDF स्वरूपात संपूर्ण उत्पादन कॅटलॉग. तपशिलांसह सर्व <span id="dlProductCountMr">४३</span>+ उत्पादनांचा समावेश.</span></p>
                 <div class="download-btn-group">
                     <button class="download-btn" id="dlCatalogAll"><i class="fas fa-file-pdf"></i> <span class="en-only">Full Catalog</span><span class="mr-only">संपूर्ण कॅटलॉग</span></button>
                     <button class="download-btn outline" id="dlCatalogFood"><i class="fas fa-file-pdf"></i> <span class="en-only">Food & Forest</span><span class="mr-only">अन्न व वन</span></button>
@@ -2459,16 +2459,35 @@ a{color:inherit;}
             observeReveal(grid);
         });
 
-        // Update stat strip
+        // Update stat strip — products, vendors AND categories, all computed live
         const vendorStat = document.querySelector('#statStrip .stat:nth-child(2) .num');
         if (vendorStat) vendorStat.dataset.target = vendorList.length;
         const productStat = document.querySelector('#statStrip .stat:nth-child(1) .num');
         if (productStat) productStat.dataset.target = allProducts.length;
+        const categoryStat = document.getElementById('statCategoriesNum');
+        if (categoryStat) categoryStat.dataset.target = new Set(allProducts.map(p => p.cat)).size;
         animateStats();
 
         // Update result count
         const resultCountNum = document.getElementById('resultCountNum');
         if (resultCountNum) resultCountNum.textContent = allProducts.length;
+
+        // Keep every "43+" style mention across the site in sync with the real count
+        syncProductCounts();
+    }
+
+    function toDevanagariDigits(n) {
+        const map = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+        return String(n).split('').map(ch => map[ch] || ch).join('');
+    }
+
+    function syncProductCounts() {
+        const total = allProducts.length;
+        const totalMr = toDevanagariDigits(total);
+        const enIds = ['headerProductCountEn', 'announceProductCountEn', 'btnProductCountEn', 'dlProductCountEn'];
+        const mrIds = ['headerProductCountMr', 'announceProductCountMr', 'btnProductCountMr', 'dlProductCountMr'];
+        enIds.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = total; });
+        mrIds.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = totalMr; });
     }
 
     // ============================================================
@@ -3324,7 +3343,7 @@ a{color:inherit;}
     //  NOTICE TICKER
     // ============================================================
     const noticeItems = [
-        { icon: 'fa-bullhorn', en: 'District Product Exhibition — 43+ agro-forest products now live', mr: 'जिल्हा उत्पादन प्रदर्शन — ४३+ कृषी-वन उत्पादने आता उपलब्ध' },
+        { icon: 'fa-bullhorn', en: `District Product Exhibition — ${allProducts.length}+ agro-forest products now live`, mr: `जिल्हा उत्पादन प्रदर्शन — ${allProducts.length}+ कृषी-वन उत्पादने आता उपलब्ध` },
         { icon: 'fa-hand-holding-heart', en: 'A free, non-profit initiative of the District Collector Office, Gadchiroli', mr: 'जिल्हाधिकारी कार्यालय, गडचिरोली यांचा विनामूल्य, ना-नफा उपक्रम' },
         { icon: 'fa-industry', en: 'Discover small & medium industrial units alongside agro-forest products in the Product tab', mr: 'उत्पादन टॅबमध्ये कृषी-वन उत्पादनांसह लघु व मध्यम औद्योगिक उत्पादने पाहा' },
         { icon: 'fa-user-plus', en: 'Vendors: register your product free of cost via the Vendor Info tab', mr: 'विक्रेते: विक्रेता माहिती टॅबद्वारे विनामूल्य नोंदणी करा' },
@@ -3382,6 +3401,17 @@ a{color:inherit;}
     setTimeout(() => {
         renderDistrictGallerySliders('all');
     }, 200);
+
+    // ============================================================
+    //  NEW-PRODUCT POPUP — shows the most recently added product
+    //  automatically when the site is opened (Home page)
+    // ============================================================
+    setTimeout(() => {
+        if (newsItems.length === 0) return;
+        const latestNews = newsItems[newsItems.length - 1];
+        const latestProduct = allProducts.find(p => p.id === latestNews.productId);
+        if (latestProduct) showQuickView(latestProduct);
+    }, 1200);
 </script>
 </body>
 </html>
