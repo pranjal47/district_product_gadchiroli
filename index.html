@@ -1803,6 +1803,32 @@ a{color:inherit;}
     </div>
 </div>
 
+<!-- ===== WELCOME POPUP: District Collector Message + Mission & Vision ===== -->
+<div class="popup-overlay" id="welcomePopup">
+    <div class="popup-box" style="max-width:560px;max-height:85vh;overflow-y:auto;">
+        <button class="popup-close" id="welcomePopupClose">&times;</button>
+        <div style="text-align:center;margin-bottom:1.2rem;">
+            <img src="https://cdn.s3waas.gov.in/s35e388103a391daabe3de1d76a6739ccd/uploads/2024/12/2024122693.jpeg" alt="District Collector" style="width:84px;height:84px;border-radius:50%;object-fit:cover;border:3px solid var(--turmeric-500);padding:3px;">
+        </div>
+        <h3 style="justify-content:center;text-align:center;"><i class="fas fa-hand-holding-heart"></i> <span class="en-only">Welcome — A Message from the District Collector</span><span class="mr-only">स्वागत — जिल्हाधिकाऱ्यांचा संदेश</span></h3>
+        <p style="color:var(--ink-700);font-size:.96rem;line-height:1.7;text-align:center;">
+            <span class="en-only">This free, non-profit exhibition platform highlights Gadchiroli's agro, forest and industrial products. We are committed to promoting local producers, SHGs and small industries at no cost — connecting them directly to consumers and buyers.</span>
+            <span class="mr-only">हे विनामूल्य, ना-नफा प्रदर्शन व्यासपीठ गडचिरोलीची कृषी, वन व औद्योगिक उत्पादने अधोरेखित करते. आम्ही स्थानिक उत्पादक, बचत गट व लघु उद्योगांना विनामूल्य प्रोत्साहन देण्यासाठी — त्यांना थेट ग्राहक व खरेदीदारांशी जोडण्यासाठी वचनबद्ध आहोत.</span>
+        </p>
+        <p style="text-align:center;margin-top:.6rem;">
+            <strong style="color:var(--laterite-500);"><span class="collector-name-en">Shri Avishyant Panda, IAS</span><span class="collector-name-mr">श्री अविश्यंत पांडा, IAS</span></strong><br>
+            <span style="color:var(--ink-500);font-size:.88rem;"><span class="collector-title-en">District Collector, Gadchiroli</span><span class="collector-title-mr">जिल्हाधिकारी, गडचिरोली</span></span>
+        </p>
+        <div class="about-grid" style="margin-top:1.4rem;grid-template-columns:1fr 1fr;">
+            <div class="card"><h4><i class="fas fa-bullseye"></i> <span class="en-only">Our Mission</span><span class="mr-only">आमचे उद्दिष्ट</span></h4><p><span class="en-only">To promote Gadchiroli's unique agricultural, forest and industrial products, connect producers to markets, and preserve traditional knowledge — all free of cost.</span><span class="mr-only">गडचिरोलीच्या अद्वितीय कृषी, वन व औद्योगिक उत्पादनांना प्रोत्साहन देणे, उत्पादकांना बाजारपेठेशी जोडणे आणि पारंपरिक ज्ञान जतन करणे — सर्व विनामूल्य.</span></p></div>
+            <div class="card"><h4><i class="fas fa-eye"></i> <span class="en-only">Our Vision</span><span class="mr-only">आमचे दूरदृष्टी</span></h4><p><span class="en-only">To make Gadchiroli a model district for sustainable, community-driven economic growth through product excellence and innovation.</span><span class="mr-only">उत्पादन उत्कृष्टता आणि नवोपक्रमाद्वारे गडचिरोलीला शाश्वत, समुदाय-चालित आर्थिक विकासासाठी आदर्श जिल्हा बनवणे.</span></p></div>
+        </div>
+        <div style="text-align:center;margin-top:1.4rem;">
+            <button class="popup-btn" id="welcomePopupContinueBtn"><i class="fas fa-arrow-right"></i> <span class="en-only">Continue to Portal</span><span class="mr-only">पोर्टलवर पुढे जा</span></button>
+        </div>
+    </div>
+</div>
+
 <!-- ===== LEGACY POPUP (for news) ===== -->
 <div class="popup-overlay" id="newsPopup">
     <div class="popup-box">
@@ -3403,15 +3429,30 @@ a{color:inherit;}
     }, 200);
 
     // ============================================================
-    //  NEW-PRODUCT POPUP — shows the most recently added product
-    //  automatically when the site is opened (Home page)
+    //  WELCOME POPUP (District Collector message + Mission/Vision)
+    //  → shown first on opening; the new-product popup follows
+    //    once this one is closed.
     // ============================================================
-    setTimeout(() => {
+    const welcomePopup = document.getElementById('welcomePopup');
+    const welcomePopupClose = document.getElementById('welcomePopupClose');
+    const welcomePopupContinueBtn = document.getElementById('welcomePopupContinueBtn');
+
+    function showLatestProductPopup() {
         if (newsItems.length === 0) return;
         const latestNews = newsItems[newsItems.length - 1];
         const latestProduct = allProducts.find(p => p.id === latestNews.productId);
         if (latestProduct) showQuickView(latestProduct);
-    }, 1200);
+    }
+
+    function closeWelcomePopup() {
+        welcomePopup.classList.remove('active');
+        setTimeout(showLatestProductPopup, 400);
+    }
+    welcomePopupClose.addEventListener('click', closeWelcomePopup);
+    welcomePopupContinueBtn.addEventListener('click', closeWelcomePopup);
+    welcomePopup.addEventListener('click', (e) => { if (e.target === welcomePopup) closeWelcomePopup(); });
+
+    setTimeout(() => { welcomePopup.classList.add('active'); }, 800);
 </script>
 </body>
 </html>
