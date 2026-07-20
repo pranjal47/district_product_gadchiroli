@@ -392,6 +392,25 @@ a{color:inherit;}
   border:none;background:transparent;color:var(--ink-500);padding:.45rem .8rem;cursor:pointer;font-size:.95rem;transition:.15s;
 }
 .view-toggle button.active{background:var(--forest-800);color:#fff;}
+
+.news-update-toggle{display:flex;gap:.4rem;background:var(--paper-100);padding:.3rem;border-radius:var(--radius-pill);margin-bottom:1rem;}
+.news-update-toggle .nu-tab{
+  flex:1;border:none;background:transparent;color:var(--ink-500);padding:.5rem .8rem;border-radius:var(--radius-pill);
+  cursor:pointer;font-size:.86rem;font-weight:700;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+}
+.news-update-toggle .nu-tab.active{background:var(--forest-800);color:#fff;box-shadow:0 4px 10px -4px rgba(var(--shadow-color),.5);}
+.news-update-toggle .nu-tab i{font-size:.85rem;}
+.home-news-highlight{
+  display:flex;gap:.9rem;padding:.7rem .3rem;border-bottom:1px solid var(--paper-100);cursor:pointer;transition:.15s;border-radius:10px;
+}
+.home-news-highlight:last-child{border-bottom:none;}
+.home-news-highlight:hover{background:var(--forest-50);padding-left:.6rem;}
+.home-news-highlight .hnh-icon{
+  width:34px;height:34px;border-radius:50%;background:var(--forest-100);color:var(--forest-700);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;
+}
+.home-news-highlight .hnh-text{font-size:.94rem;color:var(--ink-900);}
+.home-news-highlight .hnh-text small{color:var(--ink-500);font-size:.78rem;display:block;margin-top:.2rem;}
 .sort-select{
   padding:.5rem 1rem;border:1px solid var(--line);border-radius:var(--radius-pill);
   background:var(--paper-0);color:var(--ink-900);font-weight:600;font-size:.88rem;cursor:pointer;
@@ -835,6 +854,13 @@ a{color:inherit;}
   background:none;border:none;transition:.2s;line-height:1;
 }
 .popup-box .popup-close:hover{color:var(--ink-900);transform:rotate(90deg);}
+.popup-translate-btn{
+  position:absolute;top:14px;right:52px;background:var(--forest-100);border:1px solid var(--forest-400);
+  color:var(--forest-700);font-size:.76rem;font-weight:700;padding:.35rem .8rem;border-radius:var(--radius-pill);
+  cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.2s;
+}
+.popup-translate-btn:hover{background:var(--forest-600);color:#fff;}
+@media (max-width:480px){.popup-translate-btn{top:auto;right:16px;bottom:16px;position:static;margin-bottom:.8rem;display:inline-flex;}}
 .popup-box h3{color:var(--forest-800);font-size:1.4rem;margin-bottom:.3rem;display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;}
 .popup-box h3 i{color:var(--turmeric-500);}
 .popup-box .popup-product{background:var(--paper-50);border-radius:14px;padding:1rem;margin:1rem 0;border-left:4px solid var(--forest-600);}
@@ -854,16 +880,20 @@ a{color:inherit;}
 .quickview-popup .popup-product .popup-name{font-size:1.3rem;}
 
 /* ============================== DISTRICT GALLERY SLIDER ============================== */
+.district-gallery-grid-wrap{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;align-items:start;
+}
 .district-slider-wrapper{
-  position:relative;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:1.5rem;
+  position:relative;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:0;
   box-shadow:0 14px 30px -18px rgba(var(--shadow-color),.55);
   background:var(--paper-0);border:1px solid var(--line);
+  aspect-ratio:3/4;width:100%;
 }
 .district-slider-slides{
-  display:flex;transition:transform .6s var(--ease);will-change:transform;
+  display:flex;height:100%;transition:transform .6s var(--ease);will-change:transform;
 }
 .district-slider-slide{
-  min-width:100%;height:420px;position:relative;flex-shrink:0;
+  min-width:100%;height:100%;position:relative;flex-shrink:0;
 }
 .district-slider-slide img{
   width:100%;height:100%;object-fit:cover;display:block;
@@ -906,7 +936,8 @@ a{color:inherit;}
 }
 .district-slider-download:hover{background:#fff;transform:scale(1.03);}
 @media (max-width:700px){
-  .district-slider-slide{height:300px;}
+  .district-gallery-grid-wrap{grid-template-columns:1fr;gap:1.5rem;}
+  .district-slider-wrapper{aspect-ratio:3/4;}
   .district-slider-overlay h4{font-size:1.1rem;}
   .district-slider-overlay p{font-size:.85rem;}
   .district-slider-btn{width:34px;height:34px;font-size:.9rem;}
@@ -1041,7 +1072,6 @@ a{color:inherit;}
   .toast-stack{right:.7rem;bottom:.9rem;left:.7rem;max-width:none;}
   .download-grid{grid-template-columns:1fr;}
   .download-result-item{flex-direction:column;align-items:flex-start;gap:.6rem;}
-  .district-slider-slide{height:300px;}
   .district-slider-overlay h4{font-size:1.1rem;}
   .district-slider-overlay p{font-size:.85rem;}
   .district-slider-btn{width:34px;height:34px;font-size:.9rem;}
@@ -1119,7 +1149,7 @@ a{color:inherit;}
 .lang-mr .download-label-mr{display:inline;}
 </style>
 </head>
-<body class="lang-en">
+<body class="lang-mr">
 <a href="#mainContent" class="skip-link">Skip to main content</a>
 
 <!-- ===== GOVT INFO STRIP (GIGW accessibility toolbar) ===== -->
@@ -1159,7 +1189,7 @@ a{color:inherit;}
             <span class="fav-count" id="favCount">0</span>
         </button>
         <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
-        <button class="lang-toggle" id="langToggle"><i class="fas fa-globe"></i> <span id="langLabel">मराठी</span></button>
+        <button class="lang-toggle" id="langToggle"><i class="fas fa-globe"></i> <span id="langLabel">English</span></button>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
     </div>
 </div>
@@ -1304,9 +1334,14 @@ a{color:inherit;}
             </div>
 
             <div class="home-card" id="newsCard">
-                <h3><i class="fas fa-newspaper"></i> <span class="en-only">News & Updates</span><span class="mr-only">बातम्या आणि अपडेट्स</span></h3>
-                <div id="newsList"></div>
-                <span class="view-all-news" id="viewAllNews"><span class="en-only">View all updates →</span><span class="mr-only">सर्व अपडेट्स पहा →</span></span>
+                <h3><i class="fas fa-newspaper"></i> <span class="en-only">News &amp; Updates</span><span class="mr-only">बातम्या आणि अपडेट्स</span></h3>
+                <div class="news-update-toggle" role="group" aria-label="Switch between News and Updates">
+                    <button class="nu-tab active" id="nuTabNews" data-nu="news"><i class="fas fa-user-tie"></i> <span class="en-only">News</span><span class="mr-only">बातम्या</span></button>
+                    <button class="nu-tab" id="nuTabUpdates" data-nu="updates"><i class="fas fa-bell"></i> <span class="en-only">Updates</span><span class="mr-only">अपडेट्स</span></button>
+                </div>
+                <div id="homeNewsHighlights"></div>
+                <div id="newsList" style="display:none;"></div>
+                <span class="view-all-news" id="viewAllNews"><span class="en-only">View all →</span><span class="mr-only">सर्व पहा →</span></span>
             </div>
         </div>
 
@@ -1792,6 +1827,7 @@ a{color:inherit;}
 <div class="popup-overlay quickview-popup" id="quickViewPopup">
     <div class="popup-box" style="max-width:560px;">
         <button class="popup-close" id="quickViewClose">&times;</button>
+        <button class="popup-translate-btn" id="quickViewTranslateBtn"><i class="fas fa-language"></i> <span class="en-only">मराठीत वाचा</span><span class="mr-only">Read in English</span></button>
         <h3><i class="fas fa-eye"></i> <span class="en-only">Product Details</span><span class="mr-only">उत्पादन तपशील</span></h3>
         <div class="popup-product" id="quickViewContent">
             <!-- populated dynamically -->
@@ -1807,6 +1843,7 @@ a{color:inherit;}
 <div class="popup-overlay" id="welcomePopup">
     <div class="popup-box" style="max-width:560px;max-height:85vh;overflow-y:auto;">
         <button class="popup-close" id="welcomePopupClose">&times;</button>
+        <button class="popup-translate-btn" id="welcomePopupTranslateBtn"><i class="fas fa-language"></i> <span class="en-only">मराठीत वाचा</span><span class="mr-only">Read in English</span></button>
         <div style="text-align:center;margin-bottom:1.2rem;">
             <img src="https://cdn.s3waas.gov.in/s35e388103a391daabe3de1d76a6739ccd/uploads/2024/12/2024122693.jpeg" alt="District Collector" style="width:84px;height:84px;border-radius:50%;object-fit:cover;border:3px solid var(--turmeric-500);padding:3px;">
         </div>
@@ -1926,38 +1963,76 @@ a{color:inherit;}
             img: "https://cdn.imgtree.co/images/n3w1vdEJ.jpg", cert: "GDC-F-031", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
         { id: 32, name_en: "Pulses (Kadadhanya)", name_mr: "कडधान्य", cat: "Food", desc_en: "Various pulses.", desc_mr: "विविध कडधान्ये.", gi: "No", gi_mr: "नाही", seller_en: "Bhagyalaxmi", seller_mr: "भाग्यलक्ष्मी", mobile: "9518372655", place_en: "Iruptola", place_mr: "इरुपटोला", origin_en: "Iruptola", origin_mr: "इरुपटोला",
             img: "https://cdn.imgtree.co/images/0D89jQJo.jpg", cert: "GDC-F-032", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
-        { id: 33, name_en: "Honey (Vadsa)", name_mr: "मध (वडसा)", cat: "Food", desc_en: "Immunity booster, cold and cough relief, natural sweetener.", desc_mr: "रोगप्रतिकारशक्ती वाढवणे, सर्दी-खोकल्यात आराम, नैसर्गिक गोड पदार्थ.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Wadsa", place_mr: "वडसा", origin_en: "Kulkheda", origin_mr: "कुळखेडा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-033" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
-        { id: 34, name_en: "Purple powder", name_mr: "जांभूळ पावडर", cat: "Food", desc_en: "Aids in blood sugar control, improves digestion, source of antioxidants.", desc_mr: "रक्तातील साखर नियंत्रणास मदत, पचन सुधारणा,अँटिऑक्सिडंटचा स्रोत.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Wadsa", place_mr: "वडसा", origin_en: "Kulkheda", origin_mr: "कुळखेडा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-034", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
-        { id: 35, name_en: "Purple juice", name_mr: "जांभूळ जूस", cat: "Food", desc_en: "Refreshes the body, aids in digestion, supplements in diabetes management.", desc_mr: "शरीराला ताजेतवाने ठेवणे, पचनास मदत, मधुमेह व्यवस्थापनात पूरक.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Vadsa", place_mr: "वडसा", origin_en: "Kulkheda", origin_mr: "कुळखेडा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-035", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
+        { id: 33, name_en: "Honey (Vadsa)", name_mr: "मध (वडसा)", cat: "Food", desc_en: "Immunity booster, cold and cough relief, natural sweetener.", desc_mr: "रोगप्रतिकारशक्ती वाढवणे, सर्दी-खोकल्यात आराम, नैसर्गिक गोड पदार्थ.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Wadsa", place_mr: "वडसा", origin_en: "Kurkheda", origin_mr: "कुरखेडा",
+            img: "https://cdn.imgtree.co/images/Tigssz71.jpg", cert: "GDC-F-033" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
+        { id: 34, name_en: "Java Plum powder", name_mr: "जांभूळ पावडर", cat: "Food", desc_en: "Aids in blood sugar control, improves digestion, source of antioxidants.", desc_mr: "रक्तातील साखर नियंत्रणास मदत, पचन सुधारणा,अँटिऑक्सिडंटचा स्रोत.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Wadsa", place_mr: "वडसा", origin_en: "Kurkheda", origin_mr: "कुरखेडा",
+            img: "https://cdn.imgtree.co/images/YIhDGnOP.jpg", cert: "GDC-F-034", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
+        { id: 35, name_en: "Java Plum juice", name_mr: "जांभूळ जूस", cat: "Food", desc_en: "Refreshes the body, aids in digestion, supplements in diabetes management.", desc_mr: "शरीराला ताजेतवाने ठेवणे, पचनास मदत, मधुमेह व्यवस्थापनात पूरक.", gi: "No", gi_mr: "नाही", seller_en: "Vibrant People Powered Instrumental Center Vadsa", seller_mr: "तेजोमय लोकसंचालित साधन केंद्र वडसा", mobile: "9423389340", place_en: "Vadsa", place_mr: "वडसा", origin_en: "Kurkheda", origin_mr: "कुरखेडा",
+            img: "https://cdn.imgtree.co/images/Aon7VAdU.jpg", cert: "GDC-F-035", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
         { id: 36, name_en: "Moh Ladu, Shankarpale, Chakali", name_mr: "मोह लाडू, शंकरपाळे, चकली", cat: "Food", desc_en: "Nutritious food, local value added production, support for income generation.", desc_mr: "पौष्टिक खाद्यपदार्थ, स्थानिक मूल्यवर्धित उत्पादन,उत्पन्नवाढीस मदत.", gi: "No", gi_mr: "नाही", seller_en: "Deepjyoti Van Dhan Vikas Kendra Dhanora", seller_mr: "दीपज्योती वन धन विकास केंद्र धानोरा", mobile: "8329832066", place_en: "Dhanora", place_mr: "धानोरा", origin_en: "Dhanora", origin_mr: "धानोरा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-036", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
+            img: "https://cdn.imgtree.co/images/YUeU8ye8.jpg", cert: "GDC-F-036", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
         { id: 37, name_en: "Gum, Berda", name_mr: "हिरडा, बेरडा", cat: "Food", desc_en: "Uses in Ayurvedic medicine, improve digestion, use in preparation of triphala.", desc_mr: "आयुर्वेदिक औषधांमध्ये वापर, पचन सुधारणा, त्रिफळा तयार करण्यासाठी उपयोग.", gi: "No", gi_mr: "नाही", seller_en: "Composite Subordinate Forest Produce Collection Center Vairagarh", seller_mr: "संमिश्र गौण वन उपज संकलन केंद्र वैरागढ", mobile: "8669797343", place_en: "Vairagarh", place_mr: "वैरागढ", origin_en: "Kukdi, Kojbi, Navargaon, Medha, Vadegaon", origin_mr: "कुकडी, कोजबी, नवरगाव, मेढा, वाडेगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-037" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
+            img: "https://cdn.imgtree.co/images/UiJCQTvJ.jpg", cert: "GDC-F-037" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
         { id: 38, name_en: "Tamarind", name_mr: "चिंच", cat: "Food", desc_en: "To give sour taste, use in chutney, amati, syrup, masala.", desc_mr: "आंबट चव देण्यासाठी, चटणी, आमटी, सरबत, मसाल्यात वापर.", gi: "No", gi_mr: "नाही", seller_en: "Composite Subordinate Forest Produce Collection Center Vairagarh", seller_mr: "संमिश्र गौण वन उपज संकलन केंद्र वैरागढ", mobile: "8669797343", place_en: "Vairagarh", place_mr: "वैरागढ", origin_en: "Kukdi, Kojbi, Navargaon, Medha, Vadegaon", origin_mr: "कुकडी, कोजबी, नवरगाव, मेढा, वाडेगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-038", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
+            img: "https://cdn.imgtree.co/images/T5y0RDWY.jpg", cert: "GDC-F-038", certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing" },
         { id: 39, name_en: "Gum (Dink)", name_mr: "डिंक", cat: "Food", desc_en: "Dink Ladoo, in the diet of women after delivery, to give strength and energy.", desc_mr: "डिंक लाडू, प्रसूतीनंतर महिलांच्या आहारात, शरीराला ताकद व ऊर्जा देण्यासाठी.", gi: "No", gi_mr: "नाही", seller_en: "Composite Subordinate Forest Produce Collection Center Vairagarh", seller_mr: "संमिश्र गौण वन उपज संकलन केंद्र वैरागढ", mobile: "8669797343", place_en: "Vairagarh", place_mr: "वैरागढ", origin_en: "Kukdi, Kojbi, Navargaon, Medha, Vadegaon", origin_mr: "कुकडी, कोजबी, नवरगाव, मेढा, वाडेगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-039" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
+            img: "https://cdn.imgtree.co/images/TFXDoRuS.jpg", cert: "GDC-F-039" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
         { id: 40, name_en: "Whole Masala Powder", name_mr: "संपूर्ण मसाला पावडर", cat: "Food", desc_en: "To add flavor and aroma to vegetables, meats, non-vegetarian dishes.", desc_mr: "भाजी, आमटी, मांसाहारी पदार्थ व इतर पाककृतींमध्ये चव आणि सुगंध वाढवण्यासाठी.", gi: "No", gi_mr: "नाही", seller_en: "Gyandeep Tejaswini Chili Masala Women's Industry Group", seller_mr: "ज्ञानदीप तेजस्विनी मिरची मसाला महिला उद्योग गट", mobile: "9921765529", place_en: "Armory", place_mr: "आरमोरी", origin_en: "Armory", origin_mr: "आरमोरी",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-040" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
+            img: "https://cdn.imgtree.co/images/BJ5o4WPM.jpg", cert: "GDC-F-040" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
         { id: 41, name_en: "Mushrooms (dry, wet)", name_mr: "मशरूम (सुके, ओले)", cat: "Food", desc_en: "Nutritious food, good source of protein, vegetables, soups, snacks.", desc_mr: "पौष्टिक अन्न, प्रथिनांचा उत्तम स्रोत, भाजी, सूप, स्नॅक्स व प्रक्रिया उद्योगात वापर.", gi: "No", gi_mr: "नाही", seller_en: "Dnyaneshwari Sahata Group Adarsh Women Sahata Group", seller_mr: "ज्ञानेश्वरी बचत गट आदर्श महिला बचत गट", mobile: "9284491420", place_en: "Gogaon", place_mr: "गोगाव", origin_en: "Gogaon", origin_mr: "गोगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-041" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
+            img: "https://cdn.imgtree.co/images/uAm0_N0s.jpg", cert: "GDC-F-041" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
         { id: 42, name_en: "Charoli", name_mr: "चारोळी", cat: "Food", desc_en: "Use in sweets, kheer, halwa, shrikhand, spices and dry fruit mix.", desc_mr: "मिठाई, खीर, हलवा, श्रीखंड, मसाले व ड्रायफ्रूट मिश्रणात वापर.", gi: "No", gi_mr: "नाही", seller_en: "Shramsaflya Loksanchalit Sadhan Kendra Chamorshi", seller_mr: "श्रमसाफल्य लोक्संचालीत साधन केंद्र चामोर्शी", mobile: "9403237072", place_en: "Chamorshi", place_mr: "चामोर्शी", origin_en: "Parimuranda", origin_mr: "पारीमुरांडा",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-042" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
+            img: "https://cdn.imgtree.co/images/BjA1Ayqk.jpg", cert: "GDC-F-042" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"},
         { id: 43, name_en: "Arjun Sal", name_mr: "अर्जुन साल", cat: "Food", desc_en: "Uses in Ayurveda for heart health, blood pressure control and making decoctions.", desc_mr: "आयुर्वेदात हृदयाच्या आरोग्यासाठी, रक्तदाब नियंत्रणासाठी आणि काढा तयार करण्यासाठी वापर.", gi: "No", gi_mr: "नाही", seller_en: "Composite Subordinate Forest Produce Collection Center Vairagarh", seller_mr: "संमिश्र गौण वन उपज संकलन केंद्र वैरागढ", mobile: "8669797343", place_en: "Vairagarh", place_mr: "वैरागढ", origin_en: "Kukdi, Kojbi, Navargaon, Medha, Vadegaon", origin_mr: "कुकडी, कोजबी, नवरगाव, मेढा, वाडेगाव",
-            img: "https://i.postimg.cc/YqrYmtfD/after-the-storm-wallpaper-5120x2880.jpg", cert: "GDC-F-043" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"}
+            img: "https://cdn.imgtree.co/images/Sd6rGmzi.jpg", cert: "GDC-F-043" , certPdf: "https://drive.google.com/file/d/1sample001/view?usp=sharing"}
     ];
 
     // --- INDUSTRIAL PRODUCTS (blended into the main product grid) ---
     const industrialProducts = [
-        { id: 101, name_en: "Bamboo Furniture & Handicrafts", name_mr: "बांबू फर्निचर व हस्तकला", cat: "Industrial", desc_en: "Chairs, baskets and decor pieces crafted by a small-scale bamboo processing unit, turning the district's abundant bamboo into finished goods locally.", desc_mr: "जिल्ह्यातील मुबलक बांबूपासून स्थानिक पातळीवर खुर्च्या, टोपल्या व सजावटीच्या वस्तू बनवणारा लघु-उद्योग.", gi: "No", gi_mr: "नाही", seller_en: "Gadchiroli Bamboo Crafts Unit", seller_mr: "गडचिरोली बांबू क्राफ्ट्स युनिट", mobile: "07132-123456", place_en: "MIDC Industrial Area, Gadchiroli", place_mr: "MIDC औद्योगिक क्षेत्र, गडचिरोली", origin_en: "Gadchiroli", origin_mr: "गडचिरोली", img: "https://picsum.photos/seed/ind-bamboo-1/700/500", cert: "GDC-IND-001", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing" },
-        { id: 102, name_en: "Custom Rice Milling & Rice Bran", name_mr: "कस्टम राइस मिलिंग व राइस ब्रान", cat: "Industrial", desc_en: "A local rice mill offering custom milling for farmers and producing rice bran as a by-product for oil extraction and cattle feed.", desc_mr: "शेतकऱ्यांसाठी कस्टम मिलिंग सेवा देणारी व तेल उत्खनन आणि पशुखाद्यासाठी राइस ब्रान तयार करणारी स्थानिक राइस मिल.", gi: "No", gi_mr: "नाही", seller_en: "Chamorshi Rice Mill (Small Scale)", seller_mr: "चामोर्शी राइस मिल (लघु उद्योग)", mobile: "07132-123457", place_en: "Chamorshi", place_mr: "चामोर्शी", origin_en: "Chamorshi", origin_mr: "चामोर्शी", img: "https://picsum.photos/seed/ind-rice-1/700/500", cert: "GDC-IND-002", certPdf: "https://drive.google.com/file/d/1ind002/view?usp=sharing" },
-        { id: 103, name_en: "Dal (Pulses) Processing", name_mr: "डाळ प्रक्रिया", cat: "Industrial", desc_en: "A small dal mill that cleans, splits and polishes locally grown tur and chana into market-ready pulses for nearby markets.", desc_mr: "स्थानिक पिकवलेल्या तूर व हरभऱ्याची स्वच्छता, विभाजन व पॉलिशिंग करून बाजारासाठी तयार डाळ बनवणारी लघु डाळ मिल.", gi: "No", gi_mr: "नाही", seller_en: "Armori Dal Processing Unit", seller_mr: "आरमोरी डाळ प्रक्रिया युनिट", mobile: "07132-123458", place_en: "Armori", place_mr: "आरमोरी", origin_en: "Armori", origin_mr: "आरमोरी", img: "https://picsum.photos/seed/ind-dal-1/700/500", cert: "GDC-IND-003", certPdf: "https://drive.google.com/file/d/1ind003/view?usp=sharing" },
-        { id: 104, name_en: "Cold-Pressed Edible Oil (Til/Groundnut)", name_mr: "कोल्ड-प्रेस्ड खाद्यतेल (तीळ/भुईमूग)", cat: "Industrial", desc_en: "A village-level oil ghani (cold-press unit) producing chemical-free til and groundnut oil for household and local retail use.", desc_mr: "घरगुती व स्थानिक विक्रीसाठी रसायनमुक्त तीळ व भुईमूग तेल तयार करणारी गावपातळीवरील कोल्ड-प्रेस तेल घाणी.", gi: "No", gi_mr: "नाही", seller_en: "Kurkheda Village Oil Ghani", seller_mr: "कुरखेडा ग्राम तेल घाणी", mobile: "07132-123459", place_en: "Kurkheda", place_mr: "कुरखेडा", origin_en: "Kurkheda", origin_mr: "कुरखेडा", img: "https://picsum.photos/seed/ind-oil-1/700/500", cert: "GDC-IND-004", certPdf: "https://drive.google.com/file/d/1ind004/view?usp=sharing" },
-        { id: 105, name_en: "Agricultural Tools & Implements", name_mr: "शेती अवजारे व साधने", cat: "Industrial", desc_en: "A small steel-fabrication workshop making and repairing hand tools, sickles and farm implements for the district's farming community.", desc_mr: "जिल्ह्यातील शेतकरी समुदायासाठी हाताची अवजारे, विळे व शेती साधने बनवणारी व दुरुस्त करणारी लघु स्टील फॅब्रिकेशन कार्यशाळा.", gi: "No", gi_mr: "नाही", seller_en: "Dhanora Agro-Tools Workshop", seller_mr: "धानोरा कृषी-साधने कार्यशाळा", mobile: "07132-123460", place_en: "Dhanora", place_mr: "धानोरा", origin_en: "Dhanora", origin_mr: "धानोरा", img: "https://picsum.photos/seed/ind-tools-1/700/500", cert: "GDC-IND-005", certPdf: "https://drive.google.com/file/d/1ind005/view?usp=sharing" },
-        { id: 106, name_en: "Handmade Paper & Eco Packaging", name_mr: "हस्तनिर्मित कागद व इको पॅकेजिंग", cat: "Industrial", desc_en: "A small eco-unit converting agricultural waste and cotton rags into handmade paper products and biodegradable packaging.", desc_mr: "शेती कचरा व कापूस चिंध्यांपासून हस्तनिर्मित कागद उत्पादने व जैवविघटनशील पॅकेजिंग बनवणारा लघु इको-उद्योग.", gi: "No", gi_mr: "नाही", seller_en: "Desaiganj Eco-Paper Unit", seller_mr: "देसाईगंज इको-पेपर युनिट", mobile: "07132-123461", place_en: "Desaiganj (Wadsa)", place_mr: "देसाईगंज (वडसा)", origin_en: "Desaiganj", origin_mr: "देसाईगंज", img: "https://picsum.photos/seed/ind-paper-1/700/500", cert: "GDC-IND-006", certPdf: "https://drive.google.com/file/d/1ind006/view?usp=sharing" }
+        {id:101,name_en:"Single Flower Bouquet",name_mr:"एका फुलाचा गुच्छ",cat:"Industrial",desc_en:"Sustainable bamboo flower brings timeless elegance to any space. Made from responsibly sourced bamboo, each piece celebrates traditional craftsmanship, supports rural livelihoods, and transforms nature into a lasting décor accent.",desc_mr:"शाश्वत बांबूचे फूल कोणत्याही जागेला कालातीत सौंदर्य प्रदान करते. जबाबदारीने मिळवलेल्या बांबूपासून बनवलेली प्रत्येक वस्तू पारंपरिक कारागिरीचा गौरव करते, ग्रामीण उपजीविकेला आधार देते आणि निसर्गाला एका चिरस्थायी सजावटीच्या घटकात रूपांतरित करते नैसर्गिक गोड पदार्थ, त्वचा व केसांची निगा.",
+        gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली  ",origin_en:"Gadchiroli",origin_mr:"गडचिरोली   ",img:"https://cdn.imgtree.co/images/JJdwwWDm.jpg", cert: "GDC-IND-001", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:102,name_en:"Three Flower Bouquet",name_mr:"तीन फुलांचा गुच्छ",cat:"Industrial",desc_en:"This sustainable three-flower bamboo bouquet beautifully blends nature with craftsmanship. Made from responsibly sourced bamboo, it symbolizes elegance, supports artisan livelihoods.",desc_mr:"हा टिकाऊ तीन फुलांचा बांबूचा पुष्पगुच्छ निसर्ग आणि कारागिरीचा सुंदर संगम आहे. जबाबदारीने मिळवलेल्या बांबूपासून बनवलेला हा पुष्पगुच्छ अभिजाततेचे प्रतीक असून, कारागिरांच्या उपजीविकेला आधार देतो.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/EOaVQ8pa.jpg", cert: "GDC-IND-002", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:103,name_en:"Six Flower Bouquet",name_mr:"सहा फुलांचा गुच्छ",cat:"Industrial",desc_en:"A handcrafted celebration of sustainability and timeless artistry, the Six Flower Bamboo Bouquet is skillfully made by artisans under the Gondwana Craft, Each flower reflects the dedication of traditional craftsmanship, transforming a natural material into a lasting décor piece – (Best seller Article)",desc_mr:"शाश्वतता आणि कालातीत कलाकुसरीचा एक उत्कृष्ट नमुना असलेला 'सिक्स फ्लॉवर बांबू बुके', 'गोंडवाना क्राफ्ट' अंतर्गत कारागिरांनी अत्यंत कौशल्याने साकारला आहे. यातील प्रत्येक फूल पारंपरिक कारागिरीप्रती असलेली निष्ठा दर्शवते आणि नैसर्गिक साहित्याचे रूपांतर एका टिकाऊ सजावटीच्या वस्तूत करते – (सर्वाधिक विक्री होणारी वस्तू)",
+        gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली  ",origin_en:"Gadchiroli",origin_mr:"गडचिरोली   ",img:"https://cdn.imgtree.co/images/vIpJpfIH.png", cert: "GDC-IND-003", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:104,name_en:"Forest Bloom Bouquet",name_mr:"फॉरेस्ट ब्लूम बुके",cat:"Industrial",desc_en:"Inspired by the serenity of the forest, the Forest Bloom Bouquet is handcrafted by skilled artisans, each bouquet brings the beauty of nature indoors while supporting artisan livelihoods and preserving the rich craft heritage of the Gondwana region.",desc_mr:"जंगलातील शांततेतून प्रेरणा घेऊन, 'फॉरेस्ट ब्लूम बुके' कुशल कारागिरांनी हाताने तयार केला आहे. हा बुके निसर्गाचे सौंदर्य घरात आणण्यासोबतच कारागिरांच्या उपजीविकेला आधार देतो आणि गोंडवाना प्रदेशाचा समृद्ध कला वारसा जतन करतो.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/sLNgIg1e.png", cert: "GDC-IND-004", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:105,name_en:"Bamboo Mobile Holder",name_mr:"बांबूचा मोबाईल होल्डर",cat:"Industrial",desc_en:"Mobile Holder Stand combines functionality with sustainable craftsmanship, it offers a sturdy and elegant way to keep your phone accessible while adding a natural touch to your workspace or Home.",desc_mr:"हा मोबाईल होल्डर स्टँड उपयुक्तता आणि शाश्वत कारागिरी यांचा सुरेख संगम साधतो; हा स्टँड तुमचा फोन सहज उपलब्ध ठेवण्यासाठी एक मजबूत आणि आकर्षक पर्याय ठरतो, तसेच तुमच्या कामाच्या जागेला किंवा घराला एक नैसर्गिक लूक देतो.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/KF1FwJjb.jpg", cert: "GDC-IND-005", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:106,name_en:"Bamboo Essentials Dock",name_mr:"बांबू इसेन्शियल्स डॉक",cat:"Industrial",desc_en:"The Bamboo Essential Dock is a sustainable desk companion made from responsibly sourced bamboo. Designed to keep your mobile phone secure and within easy reach, it combines everyday functionality with timeless handcrafted elegance.",desc_mr:"बांबू इसेन्शियल डॉक हे जबाबदारीने मिळवलेल्या बांबूपासून बनवलेले एक टिकाऊ डेस्क साथीदार आहे. तुमचा मोबाईल फोन सुरक्षित आणि सहज आवाक्यात ठेवण्यासाठी डिझाइन केलेले, हे दैनंदिन कार्यक्षमता आणि कालातीत हस्तनिर्मित सौंदर्य यांचा संगम साधते.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/kgE17Tsn.png", cert: "GDC-IND-006", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:107,name_en:"Bamboo Wall Mate",name_mr:"बांबू वॉल मेट",cat:"Industrial",desc_en:"Geometric Panel blends contemporary geometric design with the timeless beauty of bamboo craftsmanship. Made from responsibly sourced bamboo, it transforms natural materials into a sustainable wall décor piece that adds texture, warmth, and character to any interior.",desc_mr:"जिओमेट्रिक पॅनेल हे आधुनिक भौमितिक डिझाइन आणि बांबूच्या कारागिरीचे कालातीत सौंदर्य यांचा संगम आहे. जबाबदारीने मिळवलेल्या बांबूपासून बनवलेले हे पॅनेल, नैसर्गिक सामग्रीचे एका टिकाऊ भिंतीवरील सजावटीच्या वस्तूत रूपांतर करते, जे कोणत्याही अंतर्गत सजावटीला पोत, ऊब आणि वैशिष्ट्य प्रदान करते.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/t8lHChZg.png", cert: "GDC-IND-007", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:108,name_en:"Bamboo Key Chain",name_mr:"बांबूची की-चेन",cat:"Industrial",desc_en:"Carry a touch of nature wherever you go with this handcrafted Bamboo Engraved Key Chain. Made from sustainably sourced bamboo and precision engraved with unique designs or personalized messages",desc_mr:"या हस्तनिर्मित बांबू कोरीव की-चेनद्वारे तुम्ही जिथे जाल तिथे निसर्गाचा स्पर्श सोबत ठेवा. ही की-चेन शाश्वत पद्धतीने मिळवलेल्या बांबूपासून बनवलेली असून, त्यावर अद्वितीय डिझाईन्स किंवा वैयक्तिक संदेश अचूकपणे कोरलेले आहेत.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/mD4KQ3aq.png", cert: "GDC-IND-008", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:109,name_en:"Customized Mementoes",name_mr:"सानुकूलित स्मृतिचिन्हे",cat:"Industrial",desc_en:"Designed to leave a lasting impression, our customized mementos are handcrafted by artisans from the forest regions of Gadchiroli. Each piece can be personalized with institutional branding, event details, or custom artwork, making it an ideal choice for recognition ceremonies, official events, and memorable celebrations while promoting sustainable craftsmanship.",desc_mr:"दीर्घकाळ स्मरणात राहतील अशा प्रकारे तयार केलेल्या आमच्या खास भेटवस्तू, गडचिरोलीच्या वनक्षेत्रातील कारागिरांनी हाताने बनवलेल्या आहेत. प्रत्येक वस्तूवर संस्थेचे नाव किंवा बोधचिन्ह, कार्यक्रमाचा तपशील किंवा विशिष्ट कलाकृती यांचा समावेश करून ती वैयक्तिकृत करता येते. त्यामुळेच, शाश्वत कारागिरीला प्रोत्साहन देण्यासोबतच सन्मान सोहळे, अधिकृत कार्यक्रम आणि अविस्मरणीय उत्सवांसाठी या भेटवस्तू एक उत्तम पर्याय ठरतात.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/NnxMXRLz.jpg", cert: "GDC-IND-009", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:110,name_en:"Name Plates",name_mr:"नावाच्या पाट्या",cat:"Industrial",desc_en:"Crafted from sustainably sourced bamboo, this elegant name plate adds a natural and professional touch to homes, offices, cabins, and workspaces. Customizable with names, designations, logos, or room titles, it combines durability with timeless craftsmanship.",desc_mr:"शाश्वत स्रोतांपासून मिळवलेल्या बांबूपासून तयार केलेली ही आकर्षक नेमप्लेट घरे, कार्यालये, केबिन्स आणि कामाच्या जागांना एक नैसर्गिक व व्यावसायिक लूक देते. नावे, हुद्दे, लोगो किंवा खोल्यांची नावे यांनुसार ती कस्टमाईज करता येते आणि यात टिकाऊपणाचा सुरेख संगम उत्कृष्ट कारागिरीशी साधला गेला आहे.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/Cb7wjAMp.jpg", cert: "GDC-IND-010", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:111,name_en:"Ganesh Idol Small",name_mr:"गणपतीची लहान मूर्ती",cat:"Industrial",desc_en:"The Small Bamboo Ganesh Idol is specifically designed for compact spaces, making it the perfect spiritual accessory for your car dashboard. This eco-friendly idol serves as a meaningful symbol of protection and positive energy for every journey.",desc_mr:"बांबूपासून बनवलेली ही छोटी गणेशमूर्ती विशेषतः कमी जागेत ठेवण्यासाठी तयार करण्यात आली आहे, ज्यामुळे ती तुमच्या कारच्या डॅशबोर्डसाठी एक उत्तम आध्यात्मिक वस्तू ठरते. ही पर्यावरणपूरक मूर्ती प्रत्येक प्रवासासाठी संरक्षण आणि सकारात्मक ऊर्जेचे एक अर्थपूर्ण प्रतीक आहे.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/y1-e41zA.jpg", cert: "GDC-IND-011", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:112,name_en:"Ganesh Idol Medium",name_mr:"मध्यम आकाराची गणेशमूर्ती",cat:"Industrial",desc_en:"This handcrafted medium-sized Ganesh idol is expertly sculpted from natural bamboo, blending spiritual tradition with sustainable artistry.It is perfectly sized for use as a centerpiece in home shrines, a peaceful accent for office desks, or a thoughtful, eco-friendly gift for special occasions.",desc_mr:"नैसर्गिक बांबूपासून अत्यंत कौशल्याने घडवलेली ही मध्यम आकाराची गणेशमूर्ती आध्यात्मिक परंपरा आणि पर्यावरणपूरक कलाकुसर यांचा सुरेख संगम साधते. घरातील देव्हाऱ्यात मध्यवर्ती आकर्षण म्हणून ठेवण्यासाठी, ऑफिसच्या डेस्कवर शांततापूर्ण शोभा वाढवण्यासाठी किंवा विशेष प्रसंगी एक विचारपूर्वक निवडलेली पर्यावरणपूरक भेटवस्तू म्हणून देण्यासाठी ही मूर्ती अगदी योग्य आहे.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/tk2IuPWV.jpg", cert: "GDC-IND-012", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:113,name_en:"Ganesh Idol Large",name_mr:"गणेशमूर्ती (मोठी)",cat:"Industrial",desc_en:"This majestic Ganesha idol is a masterpiece of sustainable artistry, handcrafted by the skilled tribal artisans of the Gadchiroli region. Using naturally aged bamboo, each idol is intricately carved to honor the traditional 'Gondwana' aesthetic, blending sacred symbolism with eco-friendly craftsmanship.",desc_mr:"गडचिरोली भागातील कुशल आदिवासी कारागिरांनी हाताने घडवलेली ही भव्य गणेशमूर्ती म्हणजे शाश्वत कलाकौशल्याचा एक उत्कृष्ट नमुना आहे. नैसर्गिकरीत्या परिपक्व झालेल्या बांबूचा वापर करून आणि पारंपरिक 'गोंडवाना' शैलीचा आधार घेऊन, पवित्र प्रतीकात्मकता व पर्यावरणपूरक कारागिरी यांचा सुरेख संगम साधत ही मूर्ती अत्यंत बारकाईने कोरली गेली आहे.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/VSuH9haK.jpg", cert: "GDC-IND-013", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:114,name_en:"Dokra Tortoise small",name_mr:"डोकरा कासव (लहान)",cat:"Industrial",desc_en:"This compact Dokra Tortoise is a delicate and charming masterpiece of metalwork, meticulously hand-cast using the ancient and intricate lost-wax technique. The design features a beautifully executed material contrast, pairing fine, polished brass filigree with a vibrant crimson-textured shell.",desc_mr:"हे लहान आकाराचे डोक्रा कासव धातूकामाचा एक नाजूक आणि मोहक नमुना आहे, जे प्राचीन आणि गुंतागुंतीच्या 'लॉस्ट-वॅक्स' तंत्राचा वापर करून अत्यंत काळजीपूर्वक हाताने ओतकाम करून बनवले आहे. याच्या रचनेत विविध सामग्रींचा सुंदर विरोधाभास साधला आहे, ज्यात उत्तम, चकचकीत पितळी कलाकुसर आणि चमकदार किरमिजी रंगाचे पोत असलेले कवच यांची जोड दिली आहे.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/rSQJ-WQn.png", cert: "GDC-IND-014", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:115,name_en:"Dokra Tortoise Medium",name_mr:"डोकरा कासव (मध्यम)",cat:"Industrial",desc_en:"This compact Dokra Tortoise is a delicate and charming masterpiece of metalwork, meticulously hand-cast using the ancient and intricate lost-wax technique. The design features a beautifully executed material contrast, pairing fine, polished brass filigree with a vibrant crimson-textured shell.",desc_mr:"हे लहान आकाराचे डोक्रा कासव धातूकामाचा एक नाजूक आणि मोहक नमुना आहे, जे प्राचीन आणि गुंतागुंतीच्या 'लॉस्ट-वॅक्स' तंत्राचा वापर करून अत्यंत काळजीपूर्वक हाताने ओतकाम करून बनवले आहे. याच्या रचनेत विविध सामग्रींचा सुंदर विरोधाभास साधला आहे, ज्यात उत्तम, चकचकीत पितळी कलाकुसर आणि चमकदार किरमिजी रंगाचे पोत असलेले कवच यांची जोड दिली आहे.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/-Oq28qL2.png", cert: "GDC-IND-015", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:116,name_en:"Dokra Tortoise Large",name_mr:"मोठा डोकरा कासव",cat:"Industrial",desc_en:"This premium Dokra Tortoise is a stunning masterpiece of metalwork, hand-cast using the ancient and intricate lost-wax technique. The design creates a striking material contrast by pairing highly detailed, polished brass filigree with a vibrant crimson-textured shell.",desc_mr:"हे प्रीमियम डोकरा कासव धातूकामाचा एक अप्रतिम नमुना आहे, जे प्राचीन आणि गुंतागुंतीच्या 'लॉस्ट-वॅक्स' तंत्राचा वापर करून हाताने ओतकाम करून बनवले आहे. याच्या डिझाइनमध्ये, अत्यंत तपशीलवार, चकचकीत पितळी तारकाम आणि चमकदार किरमिजी रंगाचे पोत असलेले कवच यांची जोड देऊन एक लक्षवेधी भौतिक विरोधाभास निर्माण केला आहे.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/vSeIAFKq.jpg", cert: "GDC-IND-016", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:117,name_en:"Dokra Nandi",name_mr:"डोकरा नंदी",cat:"Industrial",desc_en:"The Nandi dokra Icon is a masterwork created using the lost-wax (Cire Perdue) casting technique, an ancient metal craft that has remained unchanged for over 4,000 years. This sculpture depicts the sacred bull, Nandi, meticulously detailed with traditional bells, a ceremonial saddle accented in vibrant crimson, and intricate wire-work patterns. ",desc_mr:"नंदीची ही 'डोकरा' (Dokra) मूर्ती 'लॉस्ट-वॅक्स' (Cire Perdue) किंवा 'हरवलेल्या मेणाचे साचे' वापरून धातू ओतण्याच्या प्राचीन तंत्राचा वापर करून साकारलेली एक उत्कृष्ट कलाकृती आहे; हे तंत्र ४,००० वर्षांहून अधिक काळापासून अपरिवर्तित राहिले आहे. या शिल्पात पवित्र नंदीचे रूप अत्यंत बारकाईने साकारले असून, त्यात पारंपरिक घंटा, गडद लाल रंगाची शोभा असलेली औपचारिक काठी (सॅडल) आणि धातूच्या तारेचे (wire-work) नक्षीकाम यांसारख्या वैशिष्ट्यांचा समावेश आहे.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/_CbqDILh.jpg", cert: "GDC-IND-017", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:118,name_en:"Gond Painting",name_mr:"गोंड चित्रकला",cat:"Industrial",desc_en:"Add a touch of handmade elegance to your décor with the Bamboo Cosmos Flower Basket, a vibrant artisan-crafted piece featuring colorful cosmos-style bamboo flowers. Each petal is shaped from finely cut bamboo strips, dyed in warm tones of yellow, orange, red, and magenta to create a cheerful, natural display.",desc_mr:"बांबू कॉसमॉस फ्लॉवर बास्केटने तुमच्या सजावटीला हस्तनिर्मित अभिजाततेचा स्पर्श द्या. ही एक आकर्षक, कारागिरांनी बनवलेली वस्तू असून, त्यात रंगीबेरंगी कॉसमॉस-शैलीतील बांबूची फुले आहेत. प्रत्येक पाकळी बारीक कापलेल्या बांबूच्या पट्ट्यांपासून तयार केली जाते आणि पिवळा, नारंगी, लाल व किरमिजी रंगांच्या उबदार छटांमध्ये रंगवली जाते, ज्यामुळे एक प्रसन्न आणि नैसर्गिक देखावा तयार होतो.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/58cnSjXU.jpg", cert: "GDC-IND-018", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        {id:119,name_en:"Pottery",name_mr:"कुंभारकाम",cat:"Industrial",desc_en:"Earthen pottery in the Gadchiroli district of Maharashtra is a deeply rooted, traditional tribal craft that beautifully merges utilitarian functionality with natural, eco-friendly aesthetics.",desc_mr:"महाराष्ट्रातील गडचिरोली जिल्ह्यातील मातीची भांडी बनवण्याची कला हा एक खोलवर रुजलेला पारंपरिक आदिवासी हस्तव्यवसाय आहे, जो दैनंदिन उपयुक्तता आणि नैसर्गिक व पर्यावरणपूरक सौंदर्य यांचा सुरेख संगम साधतो.",gi:"No",gi_mr:"नाही",seller_en:"Science & Technology Resource Centre, Gondwana University, Gadchiroli",seller_mr:"विज्ञान व तंत्रज्ञान संसाधन केंद्र, गोंडवाना विद्यापीठ, गडचिरोली",mobile:"9975252669",place_en:"Gadchiroli",place_mr:"गडचिरोली"
+        ,origin_en:"Gadchiroli",origin_mr:"गडचिरोली",img:"https://cdn.imgtree.co/images/lpYegVzQ.jpg", cert: "GDC-IND-019", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing"},
+        { id: 1003, name_en: "Bamboo Furniture & Handicrafts", name_mr: "बांबू फर्निचर व हस्तकला", cat: "Industrial", desc_en: "Chairs, baskets and decor pieces crafted by a small-scale bamboo processing unit, turning the district's abundant bamboo into finished goods locally.", desc_mr: "जिल्ह्यातील मुबलक बांबूपासून स्थानिक पातळीवर खुर्च्या, टोपल्या व सजावटीच्या वस्तू बनवणारा लघु-उद्योग.", gi: "No", gi_mr: "नाही", seller_en: "Gadchiroli Bamboo Crafts Unit", seller_mr: "गडचिरोली बांबू क्राफ्ट्स युनिट", mobile: "07132-123456", place_en: "MIDC Industrial Area, Gadchiroli", place_mr: "MIDC औद्योगिक क्षेत्र, गडचिरोली", origin_en: "Gadchiroli", origin_mr: "गडचिरोली", img: "https://picsum.photos/seed/ind-bamboo-1/700/500", cert: "GDC-IND-001", certPdf: "https://drive.google.com/file/d/1ind001/view?usp=sharing" },
+        { id: 1004, name_en: "Custom Rice Milling & Rice Bran", name_mr: "कस्टम राइस मिलिंग व राइस ब्रान", cat: "Industrial", desc_en: "A local rice mill offering custom milling for farmers and producing rice bran as a by-product for oil extraction and cattle feed.", desc_mr: "शेतकऱ्यांसाठी कस्टम मिलिंग सेवा देणारी व तेल उत्खनन आणि पशुखाद्यासाठी राइस ब्रान तयार करणारी स्थानिक राइस मिल.", gi: "No", gi_mr: "नाही", seller_en: "Chamorshi Rice Mill (Small Scale)", seller_mr: "चामोर्शी राइस मिल (लघु उद्योग)", mobile: "07132-123457", place_en: "Chamorshi", place_mr: "चामोर्शी", origin_en: "Chamorshi", origin_mr: "चामोर्शी", img: "https://picsum.photos/seed/ind-rice-1/700/500", cert: "GDC-IND-002", certPdf: "https://drive.google.com/file/d/1ind002/view?usp=sharing" },
+        { id: 1005, name_en: "Dal (Pulses) Processing", name_mr: "डाळ प्रक्रिया", cat: "Industrial", desc_en: "A small dal mill that cleans, splits and polishes locally grown tur and chana into market-ready pulses for nearby markets.", desc_mr: "स्थानिक पिकवलेल्या तूर व हरभऱ्याची स्वच्छता, विभाजन व पॉलिशिंग करून बाजारासाठी तयार डाळ बनवणारी लघु डाळ मिल.", gi: "No", gi_mr: "नाही", seller_en: "Armori Dal Processing Unit", seller_mr: "आरमोरी डाळ प्रक्रिया युनिट", mobile: "07132-123458", place_en: "Armori", place_mr: "आरमोरी", origin_en: "Armori", origin_mr: "आरमोरी", img: "https://picsum.photos/seed/ind-dal-1/700/500", cert: "GDC-IND-003", certPdf: "https://drive.google.com/file/d/1ind003/view?usp=sharing" },
+        { id: 1006, name_en: "Cold-Pressed Edible Oil (Til/Groundnut)", name_mr: "कोल्ड-प्रेस्ड खाद्यतेल (तीळ/भुईमूग)", cat: "Industrial", desc_en: "A village-level oil ghani (cold-press unit) producing chemical-free til and groundnut oil for household and local retail use.", desc_mr: "घरगुती व स्थानिक विक्रीसाठी रसायनमुक्त तीळ व भुईमूग तेल तयार करणारी गावपातळीवरील कोल्ड-प्रेस तेल घाणी.", gi: "No", gi_mr: "नाही", seller_en: "Kurkheda Village Oil Ghani", seller_mr: "कुरखेडा ग्राम तेल घाणी", mobile: "07132-123459", place_en: "Kurkheda", place_mr: "कुरखेडा", origin_en: "Kurkheda", origin_mr: "कुरखेडा", img: "https://picsum.photos/seed/ind-oil-1/700/500", cert: "GDC-IND-004", certPdf: "https://drive.google.com/file/d/1ind004/view?usp=sharing" },
+        { id: 1007, name_en: "Agricultural Tools & Implements", name_mr: "शेती अवजारे व साधने", cat: "Industrial", desc_en: "A small steel-fabrication workshop making and repairing hand tools, sickles and farm implements for the district's farming community.", desc_mr: "जिल्ह्यातील शेतकरी समुदायासाठी हाताची अवजारे, विळे व शेती साधने बनवणारी व दुरुस्त करणारी लघु स्टील फॅब्रिकेशन कार्यशाळा.", gi: "No", gi_mr: "नाही", seller_en: "Dhanora Agro-Tools Workshop", seller_mr: "धानोरा कृषी-साधने कार्यशाळा", mobile: "07132-123460", place_en: "Dhanora", place_mr: "धानोरा", origin_en: "Dhanora", origin_mr: "धानोरा", img: "https://picsum.photos/seed/ind-tools-1/700/500", cert: "GDC-IND-005", certPdf: "https://drive.google.com/file/d/1ind005/view?usp=sharing" },
+        { id: 1008, name_en: "Handmade Paper & Eco Packaging", name_mr: "हस्तनिर्मित कागद व इको पॅकेजिंग", cat: "Industrial", desc_en: "A small eco-unit converting agricultural waste and cotton rags into handmade paper products and biodegradable packaging.", desc_mr: "शेती कचरा व कापूस चिंध्यांपासून हस्तनिर्मित कागद उत्पादने व जैवविघटनशील पॅकेजिंग बनवणारा लघु इको-उद्योग.", gi: "No", gi_mr: "नाही", seller_en: "Desaiganj Eco-Paper Unit", seller_mr: "देसाईगंज इको-पेपर युनिट", mobile: "07132-123461", place_en: "Desaiganj (Wadsa)", place_mr: "देसाईगंज (वडसा)", origin_en: "Desaiganj", origin_mr: "देसाईगंज", img: "https://picsum.photos/seed/ind-paper-1/700/500", cert: "GDC-IND-006", certPdf: "https://drive.google.com/file/d/1ind006/view?usp=sharing" }
     ];
 
     // Combine all products
@@ -2289,6 +2364,7 @@ a{color:inherit;}
     }
 
     quickViewClose.addEventListener('click', closeQuickView);
+    document.getElementById('quickViewTranslateBtn').addEventListener('click', () => toggleLanguage());
     quickViewPopup.addEventListener('click', (e) => { if (e.target === quickViewPopup) closeQuickView(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeQuickView(); });
 
@@ -2354,7 +2430,7 @@ a{color:inherit;}
                 </div>
             `;
         });
-        container.innerHTML = html || '<p class="no-results"><span class="en-only">No events found for this category.</span><span class="mr-only">या श्रेणीसाठी कोणतेही कार्यक्रम सापडले नाहीत.</span></p>';
+        container.innerHTML = html ? `<div class="district-gallery-grid-wrap">${html}</div>` : '<p class="no-results"><span class="en-only">No events found for this category.</span><span class="mr-only">या श्रेणीसाठी कोणतेही कार्यक्रम सापडले नाहीत.</span></p>';
 
         // Initialize each slider
         container.querySelectorAll('.district-slider-wrapper').forEach(wrapper => {
@@ -2924,6 +3000,56 @@ a{color:inherit;}
     }
     renderNews();
 
+    // "News" — Collector & VIP visit highlights, sourced from the same
+    // officialEvents data that powers the District Gallery, so any event
+    // added there automatically shows up here too.
+    function renderHomeNewsHighlights() {
+        const container = document.getElementById('homeNewsHighlights');
+        if (!container) return;
+        const highlightCats = ['Collector Visits', 'Ministerial & VIP Visits'];
+        const items = officialEvents.filter(e => highlightCats.includes(e.cat)).slice(0, 5);
+        if (items.length === 0) {
+            container.innerHTML = '<p class="no-results" style="padding:1rem;"><span class="en-only">No recent visit highlights.</span><span class="mr-only">अलीकडील भेटींचे कोणतेही ठळक मुद्दे नाहीत.</span></p>';
+            return;
+        }
+        container.innerHTML = items.map(ev => `
+        <div class="home-news-highlight" data-ecat="${ev.cat}">
+          <div class="hnh-icon"><i class="fas ${ev.cat === 'Collector Visits' ? 'fa-user-tie' : 'fa-user-shield'}"></i></div>
+          <div class="hnh-text">
+            <span class="en-only">${ev.title_en}</span><span class="mr-only">${ev.title_mr}</span>
+            <small><i class="far fa-clock"></i> ${ev.date} &nbsp;·&nbsp; <span class="en-only">${ev.place_en}</span><span class="mr-only">${ev.place_mr}</span></small>
+          </div>
+        </div>
+      `).join('');
+        container.querySelectorAll('.home-news-highlight').forEach(el => {
+            el.addEventListener('click', function() {
+                setActive(5);
+                setTimeout(() => {
+                    const chip = document.querySelector(`#eventCatChips .cat-chip[data-ecat="${this.dataset.ecat}"]`) || document.querySelector('#eventCatChips .cat-chip[data-ecat="all"]');
+                    if (chip) chip.click();
+                }, 150);
+            });
+        });
+    }
+    renderHomeNewsHighlights();
+
+    // News / Updates sub-tab switching on the Home page card
+    const nuTabNews = document.getElementById('nuTabNews');
+    const nuTabUpdates = document.getElementById('nuTabUpdates');
+    const homeNewsHighlightsEl = document.getElementById('homeNewsHighlights');
+    const newsListEl = document.getElementById('newsList');
+    const viewAllNewsEl = document.getElementById('viewAllNews');
+    let activeNuTab = 'news';
+    function setNuTab(which) {
+        activeNuTab = which;
+        nuTabNews.classList.toggle('active', which === 'news');
+        nuTabUpdates.classList.toggle('active', which === 'updates');
+        homeNewsHighlightsEl.style.display = which === 'news' ? '' : 'none';
+        newsListEl.style.display = which === 'updates' ? '' : 'none';
+    }
+    nuTabNews.addEventListener('click', () => setNuTab('news'));
+    nuTabUpdates.addEventListener('click', () => setNuTab('updates'));
+
     // ============================================================
     //  LEGACY POPUP (for news)
     // ============================================================
@@ -2983,7 +3109,9 @@ a{color:inherit;}
         }
     });
 
-    document.getElementById('viewAllNews').addEventListener('click', () => setActive(1));
+    document.getElementById('viewAllNews').addEventListener('click', () => {
+        if (activeNuTab === 'news') { setActive(5); } else { setActive(1); }
+    });
 
     // ============================================================
     //  TAB SWITCHING
@@ -3159,13 +3287,13 @@ a{color:inherit;}
     }
 
     // ============================================================
-    //  LANGUAGE TOGGLE
+    //  LANGUAGE TOGGLE (default: Marathi)
     // ============================================================
     const langToggle = document.getElementById('langToggle');
     const langLabel = document.getElementById('langLabel');
-    let currentLang = 'en';
+    let currentLang = 'mr';
 
-    langToggle.addEventListener('click', function() {
+    function toggleLanguage() {
         const body = document.body;
         if (currentLang === 'en') {
             body.classList.remove('lang-en');
@@ -3178,7 +3306,9 @@ a{color:inherit;}
             langLabel.textContent = 'मराठी';
             currentLang = 'en';
         }
-    });
+        syncProductCounts();
+    }
+    langToggle.addEventListener('click', toggleLanguage);
 
     // ============================================================
     //  DARK MODE (light default)
@@ -3439,7 +3569,8 @@ a{color:inherit;}
 
     function showLatestProductPopup() {
         if (newsItems.length === 0) return;
-        const latestNews = newsItems[newsItems.length - 1];
+        // newsItems is newest-first (see array order/dates) — the most recent is index 0
+        const latestNews = newsItems[0];
         const latestProduct = allProducts.find(p => p.id === latestNews.productId);
         if (latestProduct) showQuickView(latestProduct);
     }
@@ -3449,6 +3580,7 @@ a{color:inherit;}
         setTimeout(showLatestProductPopup, 400);
     }
     welcomePopupClose.addEventListener('click', closeWelcomePopup);
+    document.getElementById('welcomePopupTranslateBtn').addEventListener('click', () => toggleLanguage());
     welcomePopupContinueBtn.addEventListener('click', closeWelcomePopup);
     welcomePopup.addEventListener('click', (e) => { if (e.target === welcomePopup) closeWelcomePopup(); });
 
