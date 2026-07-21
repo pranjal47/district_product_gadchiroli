@@ -1800,6 +1800,36 @@ a{color:inherit;}
     </div>
 </div>
 
+<!-- ===== SUCCESS STORY DETAIL POPUP ===== -->
+<div class="popup-overlay" id="storyDetailPopup">
+    <div class="popup-box" style="max-width:620px;max-height:85vh;overflow-y:auto;">
+        <button class="popup-close" id="storyDetailClose">&times;</button>
+        <button class="popup-translate-btn" id="storyDetailTranslateBtn"><i class="fas fa-language"></i> <span class="en-only">मराठीत वाचा</span><span class="mr-only">Read in English</span></button>
+        <img id="storyDetailImg" src="" alt="" style="width:100%;height:220px;object-fit:cover;border-radius:14px;margin-bottom:1rem;">
+        <h3 style="justify-content:flex-start;"><i class="fas fa-star"></i> <span id="storyDetailTitle"></span></h3>
+        <div class="story-seller" style="margin-bottom:.8rem;"><i class="fas fa-user-circle"></i> <span id="storyDetailName"></span> · <span id="storyDetailGroup"></span></div>
+        <div class="badge-row" style="margin-bottom:1rem;">
+            <span class="location"><i class="fas fa-map-pin"></i> <span id="storyDetailPlace"></span></span>
+            <span class="cat-badge" style="background:var(--forest-100);color:var(--forest-700);"><span id="storyDetailEnterprise"></span></span>
+        </div>
+        <div class="popup-product" style="border-left-color:var(--turmeric-500);">
+            <div class="popup-name"><i class="fas fa-cloud-showers-heavy"></i> <span class="en-only">Situation</span><span class="mr-only">परिस्थिती</span></div>
+            <div class="popup-detail" id="storyDetailSituation"></div>
+        </div>
+        <div class="popup-product" style="border-left-color:var(--forest-500);">
+            <div class="popup-name"><i class="fas fa-seedling"></i> <span class="en-only">Change</span><span class="mr-only">बदल</span></div>
+            <div class="popup-detail" id="storyDetailChange"></div>
+        </div>
+        <div class="popup-product" style="border-left-color:var(--laterite-500);">
+            <div class="popup-name"><i class="fas fa-trophy"></i> <span class="en-only">Impact</span><span class="mr-only">परिणाम</span></div>
+            <ul id="storyDetailImpact" style="margin:.5rem 0 0 1.1rem;padding:0;color:var(--ink-700);font-size:.92rem;line-height:1.8;"></ul>
+        </div>
+        <div style="text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--line);">
+            <span class="cat-badge" style="background:var(--turmeric-100);color:var(--turmeric-600);"><i class="fas fa-chart-line"></i> &nbsp;<span id="storyDetailIncome"></span></span>
+        </div>
+    </div>
+</div>
+
 <!-- ===== WELCOME POPUP: District Collector Message + Mission & Vision ===== -->
 <div class="popup-overlay" id="welcomePopup">
     <div class="popup-box" style="max-width:560px;max-height:85vh;overflow-y:auto;">
@@ -2028,55 +2058,188 @@ a{color:inherit;}
     // Combine all products
     const allProducts = [...products, ...industrialProducts];
 
-    const stories = [{
-        id: 1,
-        name_en: "From Forest to Fame",
-        name_mr: "जंगलातून प्रसिद्धीपर्यंत",
-        seller_en: "Shantimata SHG",
-        seller_mr: "शांतीमाता स्वयंसहाय्यता समूह",
-        product_en: "Machhi Loncha",
-        product_mr: "मच्छी लोनचा",
-        desc_en: "A group of 15 women from Harinagar started making traditional fish pickle using fresh local catch. With support from the District Collector's office, they got a platform at the SARAS Mela and now supply to over 5 districts. Their annual income has increased from ₹20,000 to ₹2.5 lakhs.",
-        desc_mr: "हरीनगरमधील १५ महिलांच्या गटाने ताज्या स्थानिक माशांचा वापर करून पारंपरिक मासे लोणचे तयार करण्यास सुरुवात केली. जिल्हाधिकारी कार्यालयाच्या पाठिंब्याने, त्यांना सरस मेला येथे व्यासपीठ मिळाले आणि आता ते ५ जिल्ह्यांना पुरवठा करतात. त्यांचे वार्षिक उत्पन्न ₹२०,००० वरून ₹२.५ लाख झाले आहे.",
-        img: "https://somethingiscooking.com/wp-content/uploads/2017/11/Fish-Pickle-682x1024.jpg",
-        cert: "GDC-F-001"
-    }, {
-        id: 2,
-        name_en: "Sweet Success with Mohua",
-        name_mr: "मोहासह गोड यश",
-        seller_en: "Khushi SHG",
-        seller_mr: "खुशी स्वयंसहाय्यता समूह",
-        product_en: "Mohua Laddu",
-        product_mr: "मोह लाडू",
-        desc_en: "This self-help group from Khudirampalli turned the humble Mahua flower into a nutritious sweet. Their laddus are now a hit at all district exhibitions. The group has grown from 8 to 25 members and each member now earns ₹8,000-10,000 per month.",
-        desc_mr: "खुदिरामपल्लीतील या स्वयंसहाय्यता गटाने साध्या मोहाच्या फुलाचे पौष्टिक गोड पदार्थात रूपांतर केले. त्यांचे लाडू आता सर्व जिल्हा प्रदर्शनांमध्ये हिट आहेत. गट ८ वरून २५ सदस्यांपर्यंत वाढला आहे आणि प्रत्येक सदस्याला आता दरमहा ₹८,०००-१०,००० मिळतात.",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjVpXzKLKEcRuHZhwtcH43GJCuZsybWzi2CElhJy1lAg&s=10",
-        cert: "GDC-F-002"
-    }, {
-        id: 3,
-        name_en: "Organic Turmeric Revolution",
-        name_mr: "सेंद्रिय हळद क्रांती",
-        seller_en: "Kalpavriksha Producer Group",
-        seller_mr: "कल्पवृक्ष उत्पादक गट",
-        product_en: "Turmeric Powder",
-        product_mr: "हळद पावडर",
-        desc_en: "Farmers from Lagam Chek adopted organic turmeric farming with zero chemicals. Their high-curcumin turmeric now fetches premium prices. The group of 30 farmers has doubled their income and inspired neighboring villages to go organic.",
-        desc_mr: "लगाम चेकमधील शेतकऱ्यांनी शून्य रासायनिक पद्धतीने सेंद्रिय हळद शेती स्वीकारली. त्यांच्या उच्च-करक्यूमिन हळदीला आता प्रीमियम किंमत मिळते. ३० शेतकऱ्यांच्या गटाने आपले उत्पन्न दुप्पट केले आणि शेजारील गावांना सेंद्रिय शेतीसाठी प्रेरित केले.",
-        img: "https://images.pexels.com/photos/6220710/pexels-photo-6220710.jpeg",
-        cert: "GDC-F-004"
-    }, {
-        id: 4,
-        name_en: "Healing with Traditional Oil",
-        name_mr: "पारंपरिक तेलाने उपचार",
-        seller_en: "Rajmateshwari Producer Group",
-        seller_mr: "राजमातेश्वरी उत्पादक गट",
-        product_en: "Toli Oil",
-        product_mr: "टोळी तेल",
-        desc_en: "This group from Pandharigota revived the ancient practice of making Toli oil from wild plants. Their oil is now used by Ayurvedic practitioners across Vidarbha. They have trained 50 women in the extraction process and created a sustainable livelihood.",
-        desc_mr: "पंढरीगोटामधील या गटाने वनस्पतींपासून टोळी तेल बनवण्याची प्राचीन पद्धत पुन्हा सुरू केली. त्यांचे तेल आता विदर्भभर आयुर्वेदिक चिकित्सक वापरतात. त्यांनी ५० महिलांना निष्कर्षण प्रक्रियेत प्रशिक्षित केले आणि शाश्वत उपजीविका निर्माण केली.",
-        img: "https://5.imimg.com/data5/UZ/JM/OP/SELLER-63371599/500ml-sesame-oil-500x500.jpg",
-        cert: "GDC-F-014"
-    }];
+    const stories = [
+        {
+            id: 1, name_en: "Shridevi Bapu Durge", name_mr: "श्रीदेवी बापू दुर्गे",
+            title_en: "The Leap of Shridevi Tai", title_mr: "श्रीदेवी ताईंची झेप",
+            group_en: "Vishwaratna Dr. Babasaheb Ambedkar SHG", group_mr: "विश्वरत्न डॉ. बाबासाहेब आंबेडकर स्वयंसहाय्यता समूह",
+            village_en: "Bamanpalli", village_mr: "बामणपल्ली", taluka_en: "Bhamragad", taluka_mr: "भामरागड",
+            enterprise_en: "Grocery Business", enterprise_mr: "किराणा व्यवसाय",
+            income_en: "Annual income ~₹65,000", income_mr: "वार्षिक उत्पन्न ~₹६५,०००",
+            situation_en: "Shridevi lives in Bamanpalli, a remote village about 40 km from the taluka headquarters, surrounded by dense forest. Her husband worked as a laborer and the family depended solely on his daily wages, making children's education, healthcare and household needs hard to manage.",
+            situation_mr: "श्रीदेवी तालुका मुख्यालयापासून सुमारे ४० किमी अंतरावरील, घनदाट जंगलाने वेढलेल्या बामणपल्ली या दुर्गम गावात राहतात. तिचे पती मजुरी करत असत आणि कुटुंब पूर्णपणे त्यांच्या रोजंदारीवर अवलंबून होते, त्यामुळे मुलांचे शिक्षण, आरोग्य व घरगुती गरजा भागवणे कठीण होते.",
+            change_en: "She joined a Self-Help Group on 20 December 2018 through the UMED Mission. She received ₹70,000 in support, used it to purchase goods worth about ₹35,000, and started a grocery business — gradually expanding it further.",
+            change_mr: "२० डिसेंबर २०१८ रोजी उमेद अभियानाद्वारे ती स्वयंसहाय्यता समूहात सामील झाली. तिला ₹७०,००० चे सहाय्य मिळाले, त्यातून सुमारे ₹३५,००० चा माल खरेदी करून तिने किराणा व्यवसाय सुरू केला आणि हळूहळू त्याचा विस्तार केला.",
+            impact_en: ["Annual income increased to around ₹65,000", "Improved the family's overall economic condition", "Gained confidence to contribute actively to family decisions", "Became financially self-reliant through the UMED Mission"],
+            impact_mr: ["वार्षिक उत्पन्न सुमारे ₹६५,००० पर्यंत वाढले", "कुटुंबाची एकूण आर्थिक स्थिती सुधारली", "कौटुंबिक निर्णयांमध्ये सक्रिय सहभाग घेण्याचा आत्मविश्वास मिळाला", "उमेद अभियानाच्या मदतीने आर्थिकदृष्ट्या स्वावलंबी झाली"],
+            img: "https://picsum.photos/seed/shg-story-1/700/500"
+        },
+        {
+            id: 2, name_en: "Monika Sapan Mandal", name_mr: "मोनिका सपन मंडल",
+            title_en: "A Single Woman Entrepreneur Who Built a Successful Business", title_mr: "यशस्वी व्यवसाय उभारणारी एकल महिला उद्योजक",
+            group_en: "Jay Maa Kali Women SHG", group_mr: "जय मां काली महिला स्वयंसहाय्यता समूह",
+            village_en: "Jarawandi", village_mr: "जरावंडी", taluka_en: "Etapalli", taluka_mr: "एटापल्ली",
+            enterprise_en: "Tailoring & Garment Trading", enterprise_mr: "शिवणकाम व वस्त्र व्यापार",
+            income_en: "Monthly income ₹10,000–15,000", income_mr: "मासिक उत्पन्न ₹१०,०००–१५,०००",
+            situation_en: "As a single woman responsible for her family, Monika faced severe financial challenges. She always wanted to start her own business, but lacked the skills, capital and guidance to take the first step.",
+            situation_mr: "कुटुंबाची जबाबदारी असलेली एकल महिला म्हणून मोनिकाला गंभीर आर्थिक अडचणींचा सामना करावा लागला. तिला स्वतःचा व्यवसाय सुरू करायचा होता, पण त्यासाठी आवश्यक कौशल्य, भांडवल व मार्गदर्शनाचा अभाव होता.",
+            change_en: "Through UMED's social inclusion initiatives she joined the Jay Maa Kali Women SHG, received a ₹30,000 SHG loan plus ₹1,00,000 in enterprise development support, and started a tailoring business that later expanded into garment trading.",
+            change_mr: "उमेद अभियानाच्या सामाजिक समावेशन उपक्रमांद्वारे ती जय मां काली महिला स्वयंसहाय्यता समूहात सामील झाली, तिला ₹३०,००० चे समूह कर्ज आणि ₹१,००,००० चे उद्यम विकास सहाय्य मिळाले, आणि तिने शिवणकामाचा व्यवसाय सुरू केला जो पुढे वस्त्र व्यापारात विस्तारला.",
+            impact_en: ["Earns approximately ₹300–500 per day through tailoring", "Monthly income increased to ₹10,000–15,000", "Successfully repaid her Self-Help Group loan", "Ended dependence on informal moneylenders", "Provides better education opportunities for her children", "Seasonal migration for work has reduced", "Her role in household decision-making has increased significantly"],
+            impact_mr: ["शिवणकामातून दररोज साधारण ₹३००–५०० कमावते", "मासिक उत्पन्न ₹१०,०००–१५,००० पर्यंत वाढले", "स्वयंसहाय्यता समूहाचे कर्ज यशस्वीरीत्या फेडले", "अनौपचारिक सावकारांवरील अवलंबित्व संपले", "मुलांना चांगल्या शिक्षणाच्या संधी देऊ शकते", "कामासाठी हंगामी स्थलांतर कमी झाले", "घरगुती निर्णयांमधील तिचा सहभाग लक्षणीयरीत्या वाढला"],
+            img: "https://picsum.photos/seed/shg-story-2/700/500"
+        },
+        {
+            id: 3, name_en: "Yammina Tikaram Yevle", name_mr: "यम्मीना तिकाराम येवले",
+            title_en: "From Struggle to Self-Reliance", title_mr: "संघर्षापासून स्वावलंबनापर्यंत",
+            group_en: "Pragati SHG (also an ICRP)", group_mr: "प्रगती स्वयंसहाय्यता समूह (ICRP देखील)",
+            village_en: "Wadadha", village_mr: "वडाढा", taluka_en: "Aheri", taluka_mr: "अहेरी",
+            enterprise_en: "Beauty Parlour", enterprise_mr: "ब्युटी पार्लर",
+            income_en: "Monthly income ₹5,000–10,000", income_mr: "मासिक उत्पन्न ₹५,०००–१०,०००",
+            situation_en: "After her marriage in 2008, Yammina's six-member household faced severe financial hardship. Her husband was unemployed and struggled with alcohol use, leading to regular conflict. A small beauty parlour she started earned barely ₹20–25 a day — not enough for the family.",
+            situation_mr: "२००८ मध्ये विवाहानंतर यम्मीनाच्या सहा सदस्यांच्या कुटुंबाला गंभीर आर्थिक अडचणींचा सामना करावा लागला. तिचे पती बेरोजगार व मद्यसेवनाच्या आहारी गेलेले होते, त्यामुळे कुटुंबात सतत वाद होत. तिने सुरू केलेल्या छोट्या ब्युटी पार्लरमधून दिवसाला जेमतेम ₹२०–२५ मिळत, जे कुटुंबासाठी पुरेसे नव्हते.",
+            change_en: "She joined a UMED SHG on 7 October 2017 and, despite opposition from her husband, helped form 10–15 Self-Help Groups. In 2023, with UMED's encouragement, she completed a one-month RSETI Beauty Parlour training course and relaunched her business.",
+            change_mr: "७ ऑक्टोबर २०१७ रोजी ती उमेद स्वयंसहाय्यता समूहात सामील झाली आणि पतीच्या विरोधाला न जुमानता तिने १०–१५ स्वयंसहाय्यता समूह स्थापन करण्यास मदत केली. २०२३ मध्ये उमेदच्या प्रोत्साहनाने तिने एक महिन्याचा आरसेटी ब्युटी पार्लर प्रशिक्षण अभ्यासक्रम पूर्ण केला आणि आपला व्यवसाय पुन्हा सुरू केला.",
+            impact_en: ["Earns approximately ₹5,000–10,000 per month", "Formed and supported 10–15 Self-Help Groups", "Completed professional Beauty Parlour training through RSETI", "Became financially self-reliant and socially empowered", "Now inspires and guides other women in her community"],
+            impact_mr: ["दरमहा साधारण ₹५,०००–१०,००० कमावते", "१०–१५ स्वयंसहाय्यता समूह स्थापन करून त्यांना पाठिंबा दिला", "आरसेटीद्वारे व्यावसायिक ब्युटी पार्लर प्रशिक्षण पूर्ण केले", "आर्थिकदृष्ट्या स्वावलंबी व सामाजिकदृष्ट्या सक्षम झाली", "आता इतर महिलांना प्रेरणा व मार्गदर्शन देते"],
+            img: "https://picsum.photos/seed/shg-story-3/700/500"
+        },
+        {
+            id: 4, name_en: "Chhaya Janardan Lanjikar", name_mr: "छाया जनार्दन लांजीकर",
+            title_en: "Starting a Pan Stall Business through a Bank Loan", title_mr: "बँक कर्जातून पान टपरी व्यवसायाची सुरुवात",
+            group_en: "Kumkum SHG", group_mr: "कुंकू स्वयंसहाय्यता समूह",
+            village_en: "Vairagad", village_mr: "वैरागड", taluka_en: "Armori", taluka_mr: "आरमोरी",
+            enterprise_en: "Tea & Snack Center", enterprise_mr: "चहा व नाश्ता केंद्र",
+            income_en: "Monthly income ₹12,000–15,000", income_mr: "मासिक उत्पन्न ₹१२,०००–१५,०००",
+            situation_en: "Chhaya is a widow from Vairagad village who depended on farming and daily wage labor, which was not enough to meet her family's needs. She was identified through a UMED Mission survey and enrolled in a Self-Help Group.",
+            situation_mr: "छाया वैरागड गावातील एक विधवा असून त्या शेती व रोजंदारी मजुरीवर अवलंबून होत्या, जे कुटुंबाच्या गरजा भागवण्यासाठी पुरेसे नव्हते. उमेद अभियानाच्या सर्वेक्षणाद्वारे त्यांची निवड झाली आणि त्यांना स्वयंसहाय्यता समूहात सामील करण्यात आले.",
+            change_en: "With her SHG's support she obtained a ₹50,000 bank loan and started a Tea & Snack Center. As demand grew, she began preparing a variety of food items and taking custom orders.",
+            change_mr: "स्वयंसहाय्यता समूहाच्या पाठिंब्याने त्यांनी ₹५०,००० चे बँक कर्ज घेतले आणि चहा व नाश्ता केंद्र सुरू केले. मागणी वाढत गेल्याने त्यांनी विविध खाद्यपदार्थ तयार करून ऑर्डरनुसार पुरवठाही सुरू केला.",
+            impact_en: ["Monthly income increased to approximately ₹12,000–15,000", "Expanded the business to include prepared food and order-based sales", "Improved her family's financial condition", "Became economically independent and self-confident"],
+            impact_mr: ["मासिक उत्पन्न सुमारे ₹१२,०००–१५,००० पर्यंत वाढले", "तयार खाद्यपदार्थ व ऑर्डर-आधारित विक्रीपर्यंत व्यवसायाचा विस्तार केला", "कुटुंबाची आर्थिक स्थिती सुधारली", "आर्थिकदृष्ट्या स्वतंत्र व आत्मविश्वासू झाली"],
+            img: "https://picsum.photos/seed/shg-story-4/700/500"
+        },
+        {
+            id: 5, name_en: "Indubai Nanu Kadte", name_mr: "इंदुबाई नानू कडते",
+            title_en: "Building a Sustainable Poultry Farming Enterprise", title_mr: "शाश्वत कुक्कुटपालन उद्योगाची उभारणी",
+            group_en: "Aarti SHG", group_mr: "आरती स्वयंसहाय्यता समूह",
+            village_en: "Kodigaon", village_mr: "कोडीगाव", taluka_en: "Mulchera", taluka_mr: "मुलचेरा",
+            enterprise_en: "Poultry Farming", enterprise_mr: "कुक्कुटपालन",
+            income_en: "Annual income ~₹1,00,000", income_mr: "वार्षिक उत्पन्न ~₹१,००,०००",
+            situation_en: "A single woman living with her parents and two brothers, Indubai's five-member household depended only on her father's insufficient earnings, making it hard to cover daily needs.",
+            situation_mr: "आई-वडील व दोन भावांसोबत राहणाऱ्या इंदुबाईंच्या पाच सदस्यांच्या कुटुंबाचा उदरनिर्वाह केवळ वडिलांच्या अपुऱ्या कमाईवर अवलंबून होता, त्यामुळे दैनंदिन गरजा भागवणे कठीण होते.",
+            change_en: "Through UMED's social inclusion initiatives she joined the Aarti SHG, received a ₹1,500 Revolving Fund loan followed by ₹8,000 from the Community Investment Fund, and started a poultry farming enterprise with continuous guidance from village Pashu Sakhi Mrs. Ashwini Durke.",
+            change_mr: "उमेद अभियानाच्या सामाजिक समावेशन उपक्रमांद्वारे ती आरती स्वयंसहाय्यता समूहात सामील झाली, तिला प्रथम ₹१,५०० चे फिरता निधी कर्ज व नंतर सामुदायिक गुंतवणूक निधीतून ₹८,००० मिळाले, आणि गावातील पशु सखी श्रीमती अश्विनी दुर्के यांच्या सतत मार्गदर्शनाने तिने कुक्कुटपालन उद्योग सुरू केला.",
+            impact_en: ["Cumulative income from the enterprise reached ~₹2,60,000 over five years", "Annual family income increased to nearly ₹1,00,000", "Monthly income improved to approximately ₹5,000–6,000", "Became a role model for other single women in Kodigaon village"],
+            impact_mr: ["पाच वर्षांत उद्योगातून एकूण उत्पन्न ~₹२,६०,००० पर्यंत पोहोचले", "कौटुंबिक वार्षिक उत्पन्न जवळपास ₹१,००,००० पर्यंत वाढले", "मासिक उत्पन्न सुमारे ₹५,०००–६,००० पर्यंत सुधारले", "कोडीगाव गावातील इतर एकल महिलांसाठी आदर्श ठरली"],
+            img: "https://picsum.photos/seed/shg-story-5/700/500"
+        },
+        {
+            id: 6, name_en: "Kalidasi Vikas Rai", name_mr: "कालिदासी विकास राय",
+            title_en: "Diversifying Livelihoods through Entrepreneurship", title_mr: "उद्योजकतेतून उपजीविकेचे वैविध्यीकरण",
+            group_en: "Jijamata SHG", group_mr: "जिजामाता स्वयंसहाय्यता समूह",
+            village_en: "Sundarnagar", village_mr: "सुंदरनगर", taluka_en: "Mulchera", taluka_mr: "मुलचेरा",
+            enterprise_en: "Tailoring, Agriculture, Vegetables & Poultry", enterprise_mr: "शिवणकाम, शेती, भाजीपाला व कुक्कुटपालन",
+            income_en: "Annual income ~₹1,00,000", income_mr: "वार्षिक उत्पन्न ~₹१,००,०००",
+            situation_en: "A single woman from Sundarnagar, Kalidasi faced socio-economic challenges due to limited income, health issues and the burden of family responsibilities, with no stable livelihood.",
+            situation_mr: "सुंदरनगरमधील एकल महिला कालिदासी यांना मर्यादित उत्पन्न, आरोग्य समस्या व कौटुंबिक जबाबदाऱ्यांच्या ओझ्यामुळे सामाजिक-आर्थिक अडचणींचा सामना करावा लागला; स्थिर उपजीविकेचे साधन नव्हते.",
+            change_en: "Through UMED she joined the Jijamata SHG, received a ₹3,000 Revolving Fund loan followed by ₹30,000 and ₹20,000 from the Community Investment Fund, and diversified into tailoring (sewing machine), agriculture, vegetable cultivation and poultry farming with guidance from the village Financial Literacy Sakhi and ICRPs.",
+            change_mr: "उमेद अभियानाद्वारे ती जिजामाता स्वयंसहाय्यता समूहात सामील झाली, तिला ₹३,००० चे फिरता निधी कर्ज व नंतर सामुदायिक गुंतवणूक निधीतून ₹३०,००० व ₹२०,००० मिळाले; गावातील आर्थिक साक्षरता सखी व ICRP यांच्या मार्गदर्शनाने तिने शिवणकाम (शिलाई मशीन), शेती, भाजीपाला लागवड व कुक्कुटपालन असे वैविध्यपूर्ण व्यवसाय सुरू केले.",
+            impact_en: ["Combined enterprises generated ~₹2,10,000 over five years", "Family income increased to approximately ₹1,00,000 annually", "Regular monthly earnings of around ₹5,000–6,000", "Became a role model for women in Sundarnagar village"],
+            impact_mr: ["पाच वर्षांत एकत्रित उद्योगांमधून ~₹२,१०,००० उत्पन्न मिळाले", "कौटुंबिक उत्पन्न वार्षिक सुमारे ₹१,००,००० पर्यंत वाढले", "नियमित मासिक कमाई सुमारे ₹५,०००–६,०००", "सुंदरनगर गावातील महिलांसाठी आदर्श ठरली"],
+            img: "https://picsum.photos/seed/shg-story-6/700/500"
+        },
+        {
+            id: 7, name_en: "Sugandha Khushab Naitam", name_mr: "सुगंधा खुशाब नैताम",
+            title_en: "From Financial Hardship to Successful Entrepreneurship", title_mr: "आर्थिक अडचणींपासून यशस्वी उद्योजकतेपर्यंत",
+            group_en: "Niradhar SHG", group_mr: "निराधार स्वयंसहाय्यता समूह",
+            village_en: "Renghewahi", village_mr: "रेंघेवाही", taluka_en: "Mulchera", taluka_mr: "मुलचेरा",
+            enterprise_en: "Goat Rearing & Cloth Shop", enterprise_mr: "शेळीपालन व कापड दुकान",
+            income_en: "~₹5,250 (Oct–Nov 2025), growing", income_mr: "~₹५,२५० (ऑक्टो–नोव्हें २०२५), वाढत आहे",
+            situation_en: "A single woman living with her father in a poor rural household in a forest area, Sugandha had very limited livelihood options and dreamed of becoming self-reliant, but lacked skills, capital and guidance.",
+            situation_mr: "वनक्षेत्रातील गरीब ग्रामीण कुटुंबात वडिलांसोबत राहणाऱ्या सुगंधा यांच्याकडे उपजीविकेचे अत्यंत मर्यादित पर्याय होते; स्वावलंबी होण्याचे स्वप्न होते, पण कौशल्य, भांडवल व मार्गदर्शनाचा अभाव होता.",
+            change_en: "She joined the Niradhar SHG, availed a group loan to start goat rearing, then obtained a ₹1,00,000 bank loan from GDCB Bank, Mulchera to also open a cloth shop — supported by entrepreneurship training through the District Industries Centre (DIC).",
+            change_mr: "ती निराधार स्वयंसहाय्यता समूहात सामील झाली, समूह कर्ज घेऊन शेळीपालन सुरू केले, आणि नंतर GDCB बँक, मुलचेरा येथून ₹१,००,००० चे बँक कर्ज घेऊन कापड दुकानही सुरू केले — जिल्हा उद्योग केंद्र (DIC) मार्फत उद्योजकता प्रशिक्षणाचाही लाभ घेतला.",
+            impact_en: ["Earned approximately ₹5,250 between October–November 2025 alone", "Income comes from goat kids, grown goats and organic manure sales", "Received entrepreneurship training from the District Industries Centre", "Improved household financial stability and self-confidence"],
+            impact_mr: ["एकट्या ऑक्टोबर–नोव्हेंबर २०२५ मध्ये सुमारे ₹५,२५० कमावले", "करडे, वाढलेल्या शेळ्या व सेंद्रिय खत विक्रीतून उत्पन्न", "जिल्हा उद्योग केंद्राकडून उद्योजकता प्रशिक्षण घेतले", "घराची आर्थिक स्थिरता व आत्मविश्वास सुधारला"],
+            img: "https://picsum.photos/seed/shg-story-7/700/500"
+        },
+        {
+            id: 8, name_en: "Shakuntala Namdev Uparikar", name_mr: "शकुंतला नामदेव उपारीकर",
+            title_en: "Supporting Her Son Through a Panipuri Business", title_mr: "पाणीपुरी व्यवसायातून मुलाला दिलेला आधार",
+            group_en: "Kalyani SHG", group_mr: "कल्याणी स्वयंसहाय्यता समूह",
+            village_en: "Vanakhi", village_mr: "वनाखी", taluka_en: "Armori", taluka_mr: "आरमोरी",
+            enterprise_en: "Panipuri Business (son's enterprise)", enterprise_mr: "पाणीपुरी व्यवसाय (मुलाचा उद्योग)",
+            income_en: "Steady family income since Dec 2024", income_mr: "डिसें २०२४ पासून स्थिर कौटुंबिक उत्पन्न",
+            situation_en: "A widow with no formal education, Shakuntala was left to raise and educate her son alone. Living in extreme poverty, she often had to borrow at high interest from moneylenders and mortgage household belongings during emergencies.",
+            situation_mr: "औपचारिक शिक्षण नसलेल्या विधवा शकुंतला यांना एकट्याने मुलाचे संगोपन व शिक्षण करावे लागले. अत्यंत गरिबीत राहत असल्याने आणीबाणीच्या वेळी त्यांना सावकारांकडून जास्त व्याजाने कर्ज घ्यावे लागे व घरगुती वस्तू गहाण ठेवाव्या लागत.",
+            change_en: "She joined the newly formed Kalyani SHG on 26 July 2018. Later, her son completed a Fast Food Training Program on 1 November 2024 and started a Panipuri Business, launched on 27 December 2024 with a ₹10,000 internal loan from her Self-Help Group.",
+            change_mr: "२६ जुलै २०१८ रोजी नव्याने स्थापन झालेल्या कल्याणी स्वयंसहाय्यता समूहात त्या सामील झाल्या. पुढे त्यांच्या मुलाने १ नोव्हेंबर २०२४ रोजी फास्ट फूड प्रशिक्षण कार्यक्रम पूर्ण केला आणि स्वयंसहाय्यता समूहाकडून ₹१०,००० चे अंतर्गत कर्ज घेऊन २७ डिसेंबर २०२४ रोजी पाणीपुरी व्यवसाय सुरू केला.",
+            impact_en: ["Accessed affordable group credit instead of high-interest moneylenders", "Supported her son's skill training and self-employment", "Started a successful panipuri business with a ₹10,000 SHG loan", "Improved household income and financial security"],
+            impact_mr: ["उच्च-व्याज सावकारांऐवजी परवडणारे समूह कर्ज उपलब्ध झाले", "मुलाच्या कौशल्य प्रशिक्षण व स्वयंरोजगारासाठी आधार दिला", "₹१०,००० च्या समूह कर्जातून यशस्वी पाणीपुरी व्यवसाय सुरू केला", "घराचे उत्पन्न व आर्थिक सुरक्षितता सुधारली"],
+            img: "https://picsum.photos/seed/shg-story-8/700/500"
+        },
+        {
+            id: 9, name_en: "Yogita Uttam Chahande", name_mr: "योगिता उत्तम चहांदे",
+            title_en: "Becoming Self-Reliant Through an Atta Chakki Enterprise", title_mr: "पीठ गिरणी उद्योगातून स्वावलंबन",
+            group_en: "Ramai SHG", group_mr: "रमाई स्वयंसहाय्यता समूह",
+            village_en: "Palsagaon", village_mr: "पळसगाव", taluka_en: "Armori", taluka_mr: "आरमोरी",
+            enterprise_en: "Atta Chakki (Flour Mill) & Pan Stall", enterprise_mr: "पीठ गिरणी व पान टपरी",
+            income_en: "Additional profit ₹2,500–3,000/month", income_mr: "अतिरिक्त नफा ₹२,५००–३,०००/महिना",
+            situation_en: "Married in 2008, Yogita's family depended mainly on agriculture, which was not enough to cover expenses. A physical disability made farm work difficult for her, and her husband's small pan stall alone could not meet the family's growing needs.",
+            situation_mr: "२००८ मध्ये विवाहित योगिता यांचे कुटुंब प्रामुख्याने शेतीवर अवलंबून होते, जे खर्च भागवण्यास अपुरे होते. शारीरिक अपंगत्वामुळे शेतीकाम करणे त्यांना कठीण जात असे, आणि पतींची छोटी पान टपरी एकटी कुटुंबाच्या वाढत्या गरजा भागवू शकत नव्हती.",
+            change_en: "She joined the Ramai SHG in 2017 and, in 2020, obtained a ₹20,000 Village Revolving Fund (VRF) loan available for persons with disabilities to purchase an Atta Chakki (flour mill) — the only one in her locality. After her husband's death in 2021, she also added grocery items to the pan stall.",
+            change_mr: "२०१७ मध्ये त्या रमाई स्वयंसहाय्यता समूहात सामील झाल्या आणि २०२० मध्ये अपंग व्यक्तींसाठी उपलब्ध ग्राम फिरता निधी (VRF) मधून ₹२०,००० चे कर्ज घेऊन पीठ गिरणी खरेदी केली — जी त्यांच्या भागातील एकमेव गिरणी होती. २०२१ मध्ये पतीच्या निधनानंतर त्यांनी पान टपरीत किराणा वस्तूंचीही भर घातली.",
+            impact_en: ["Established a successful flour mill business — the only one in the locality", "Continued livelihood activities despite the loss of her husband", "Expanded her pan stall business by adding grocery sales", "Earns approximately ₹2,500–3,000 additional profit per month", "Improved household income and children's education opportunities"],
+            impact_mr: ["परिसरातील एकमेव यशस्वी पीठ गिरणी व्यवसाय उभारला", "पतीच्या निधनानंतरही उपजीविका उपक्रम सुरू ठेवले", "पान टपरीत किराणा विक्री जोडून व्यवसायाचा विस्तार केला", "दरमहा सुमारे ₹२,५००–३,००० अतिरिक्त नफा कमावते", "कौटुंबिक उत्पन्न व मुलांच्या शिक्षणाच्या संधी सुधारल्या"],
+            img: "https://picsum.photos/seed/shg-story-9/700/500"
+        },
+        {
+            id: 10, name_en: "Rasika Ramdas Bulle", name_mr: "रसिका रामदास बुल्ले",
+            title_en: "From Despair to Sustainable Livelihood", title_mr: "निराशेपासून शाश्वत उपजीविकेपर्यंत",
+            group_en: "Sampada Mahila SHG", group_mr: "संपदा महिला स्वयंसहाय्यता समूह",
+            village_en: "Dongargaon", village_mr: "डोंगरगाव", taluka_en: "Armori", taluka_mr: "आरमोरी",
+            enterprise_en: "Grocery, Dairy, Goat Rearing & Poultry", enterprise_mr: "किराणा, दुग्ध व्यवसाय, शेळीपालन व कुक्कुटपालन",
+            income_en: "Monthly income ₹12,000–15,000", income_mr: "मासिक उत्पन्न ₹१२,०००–१५,०००",
+            situation_en: "Illiterate and working alongside her husband in farming and wage labor, Rasika's life took a difficult turn when her husband, who struggled with alcohol addiction, passed away, and her son later forced her out of the house.",
+            situation_mr: "निरक्षर असलेल्या रसिका पतीसोबत शेती व मजुरी करत असत. मद्यव्यसनाच्या आहारी गेलेल्या पतीच्या निधनानंतर आणि नंतर मुलाने घराबाहेर काढल्याने त्यांचे जीवन अत्यंत कठीण झाले.",
+            change_en: "With encouragement from Community Resource Person Papita Kolhe, she joined the Sampada Mahila SHG on 3 September 2017, received ₹10,000 from the Community Investment Fund to open a small grocery shop, and later took a ₹7,50,000 bank loan to start a dairy enterprise alongside goat rearing and poultry farming.",
+            change_mr: "समुदाय संसाधन व्यक्ती पपिता कोल्हे यांच्या प्रोत्साहनाने त्या ३ सप्टेंबर २०१७ रोजी संपदा महिला स्वयंसहाय्यता समूहात सामील झाल्या, सामुदायिक गुंतवणूक निधीतून ₹१०,००० घेऊन छोटे किराणा दुकान सुरू केले, आणि नंतर ₹७,५०,००० चे बँक कर्ज घेऊन शेळीपालन व कुक्कुटपालनासोबत दुग्ध व्यवसायही सुरू केला.",
+            impact_en: ["Received ₹10,000 CIF support to start a grocery business", "Learned business management despite being illiterate", "Her progress motivated her son to give up alcohol", "Accessed a ₹7.5 lakh bank loan for dairy development", "Established dairy, goat rearing and poultry enterprises", "Achieved a regular monthly income of ₹12,000–15,000"],
+            impact_mr: ["किराणा व्यवसायासाठी ₹१०,००० चे CIF सहाय्य मिळाले", "निरक्षर असूनही व्यवसाय व्यवस्थापन शिकल्या", "त्यांच्या प्रगतीने मुलाला व्यसनमुक्त होण्यास प्रेरित केले", "दुग्ध व्यवसायासाठी ₹७.५ लाखांचे बँक कर्ज मिळवले", "दुग्ध, शेळीपालन व कुक्कुटपालन उद्योग उभारले", "दरमहा नियमित ₹१२,०००–१५,००० उत्पन्न मिळवले"],
+            img: "https://picsum.photos/seed/shg-story-10/700/500"
+        },
+        {
+            id: 11, name_en: "Nikita Prabhudas Gawade", name_mr: "निकिता प्रभुदास गावडे",
+            title_en: "Improving Family Income through Fish Farming", title_mr: "मत्स्यपालनातून कौटुंबिक उत्पन्नात सुधारणा",
+            group_en: "Vaishnav Rani SHG", group_mr: "वैष्णव राणी स्वयंसहाय्यता समूह",
+            village_en: "Navegaon", village_mr: "नवेगाव", taluka_en: "Gadchiroli", taluka_mr: "गडचिरोली",
+            enterprise_en: "Fish Farming", enterprise_mr: "मत्स्यपालन",
+            income_en: "Net profit ₹10,320 per season", income_mr: "हंगामी निव्वळ नफा ₹१०,३२०",
+            situation_en: "Before joining UMED, Nikita's life revolved around household responsibilities with little exposure to livelihood opportunities. Income from agriculture and wage labor was insufficient, often forcing the family to borrow from moneylenders at high interest.",
+            situation_mr: "उमेदमध्ये सामील होण्यापूर्वी निकिता यांचे जीवन घरगुती जबाबदाऱ्यांभोवती फिरत असे, उपजीविकेच्या संधींचा फारसा अनुभव नव्हता. शेती व मजुरीचे उत्पन्न अपुरे असल्याने कुटुंबाला अनेकदा सावकारांकडून जास्त व्याजाने कर्ज घ्यावे लागे.",
+            change_en: "After her SHG was linked to UMED in 2021, guidance from the village Matsya Sakhi (Fishery Resource Person) inspired her to convert her family's unused pond into a scientifically managed fish farm, stocking 15 kg of fish seed with an investment of ₹9,000.",
+            change_mr: "२०२१ मध्ये तिचा स्वयंसहाय्यता समूह उमेदशी जोडला गेल्यानंतर, गावातील मत्स्य सखी यांच्या मार्गदर्शनाने तिने कुटुंबाचा न वापरलेला तलाव शास्त्रोक्त पद्धतीने व्यवस्थापित मत्स्यपालन तलावात रूपांतरित केला, ₹९,००० गुंतवणुकीतून १५ किलो मत्स्यबीज साठवले.",
+            impact_en: ["Produced 92 kg of fish, sold at ₹210/kg for total sales of ₹19,320", "Earned a net profit of approximately ₹10,320 from fish farming", "Reduced dependence on moneylenders", "Created an additional income source alongside agriculture", "Improved household financial stability and confidence"],
+            impact_mr: ["९२ किलो मासे उत्पादन, ₹२१०/किलो दराने ₹१९,३२० ची एकूण विक्री", "मत्स्यपालनातून सुमारे ₹१०,३२० निव्वळ नफा मिळवला", "सावकारांवरील अवलंबित्व कमी झाले", "शेतीसोबत अतिरिक्त उत्पन्नाचे साधन निर्माण झाले", "कौटुंबिक आर्थिक स्थिरता व आत्मविश्वास वाढला"],
+            img: "https://picsum.photos/seed/shg-story-11/700/500"
+        },
+        {
+            id: 12, name_en: "Anita Shivram Jesendi", name_mr: "अनिता शिवराम जेसेंदी",
+            title_en: "Improving Family Income Through Fish Farming and Vegetable Cultivation", title_mr: "मत्स्यपालन व भाजीपाला लागवडीतून कौटुंबिक उत्पन्नात सुधारणा",
+            group_en: "SHG linked to Rani Laxmibai Gram Sangh", group_mr: "राणी लक्ष्मीबाई ग्रामसंघाशी संलग्न स्वयंसहाय्यता समूह",
+            village_en: "Heti", village_mr: "हेटी", taluka_en: "Dhanora", taluka_mr: "धानोरा",
+            enterprise_en: "Fish Farming & Vegetable Cultivation", enterprise_mr: "मत्स्यपालन व भाजीपाला लागवड",
+            income_en: "Net profit ₹16,600 per season", income_mr: "हंगामी निव्वळ नफा ₹१६,६००",
+            situation_en: "From a tribal family in Heti village with her husband and three children, Anita's household depended on agriculture, which was not enough to meet expenses — regularly forcing them to borrow from local moneylenders at high interest.",
+            situation_mr: "हेटी गावातील आदिवासी कुटुंबातील अनिता, पती व तीन मुलांसह शेतीवर अवलंबून होत्या, जे खर्च भागवण्यास अपुरे होते — त्यामुळे त्यांना नियमितपणे स्थानिक सावकारांकडून जास्त व्याजाने कर्ज घ्यावे लागे.",
+            change_en: "After UMED activities began in her area in 2014, she joined a Self-Help Group linked to the Rani Laxmibai Gram Sangh. With guidance from the Matsya Sakhi, Krishi Sakhi and Pashu Sakhi, she converted her family's unused pond into a fish farm, stocking Catla and Grass Carp with an investment of ₹10,200.",
+            change_mr: "२०१४ मध्ये तिच्या भागात उमेद उपक्रम सुरू झाल्यानंतर ती राणी लक्ष्मीबाई ग्रामसंघाशी संलग्न स्वयंसहाय्यता समूहात सामील झाली. मत्स्य सखी, कृषी सखी व पशु सखी यांच्या मार्गदर्शनाने तिने कुटुंबाचा न वापरलेला तलाव मत्स्यपालनासाठी वापरला, ₹१०,२०० गुंतवणुकीतून कटला व ग्रास कार्प जातीचे मत्स्यबीज साठवले.",
+            impact_en: ["Produced 130 kg of fish for total sales of ₹27,300", "Earned an annual fish farming profit of approximately ₹16,600", "Reduced dependence on moneylenders", "Improved family income through fish farming and vegetable cultivation together", "Developed multiple livelihood sources for long-term economic security"],
+            impact_mr: ["१३० किलो मासे उत्पादन, ₹२७,३०० ची एकूण विक्री", "वार्षिक मत्स्यपालन नफा सुमारे ₹१६,६०० मिळवला", "सावकारांवरील अवलंबित्व कमी झाले", "मत्स्यपालन व भाजीपाला लागवड या दोन्हीतून कौटुंबिक उत्पन्न सुधारले", "दीर्घकालीन आर्थिक सुरक्षिततेसाठी विविध उपजीविका साधने विकसित केली"],
+            img: "https://picsum.photos/seed/shg-story-12/700/500"
+        }
+    ];
 
     // Industrial success stories (blended)
     const industrialStoriesData = [
@@ -2225,13 +2388,15 @@ a{color:inherit;}
 
     function renderStoryCard(s) {
         return `
-        <div class="story-card">
+        <div class="story-card" data-story-id="${s.id}">
           <img src="${s.img}" alt="${s.name_en}" loading="lazy">
           <div class="story-content">
-            <h4><span class="pname-en">${s.name_en}</span><span class="pname-mr">${s.name_mr}</span></h4>
-            <div class="story-seller"><i class="fas fa-user-circle"></i> <span class="seller-en">${s.seller_en}</span><span class="seller-mr">${s.seller_mr}</span> · <span class="pname-en">${s.product_en}</span><span class="pname-mr">${s.product_mr}</span></div>
-            <p><span class="desc-en">${s.desc_en}</span><span class="desc-mr">${s.desc_mr}</span></p>
-            <div class="story-meta"><i class="fas fa-certificate"></i> ${s.cert}</div>
+            <h4><span class="en-only">${s.title_en}</span><span class="mr-only">${s.title_mr}</span></h4>
+            <div class="story-seller"><i class="fas fa-user-circle"></i> <span class="en-only">${s.name_en}</span><span class="mr-only">${s.name_mr}</span> · <span class="en-only">${s.group_en}</span><span class="mr-only">${s.group_mr}</span></div>
+            <p style="font-size:.82rem;color:var(--ink-500);"><i class="fas fa-map-pin"></i> <span class="en-only">${s.village_en}, ${s.taluka_en} Taluka</span><span class="mr-only">${s.village_mr}, ${s.taluka_mr} तालुका</span></p>
+            <p><span class="en-only">${s.situation_en.slice(0, 130)}…</span><span class="mr-only">${s.situation_mr.slice(0, 110)}…</span></p>
+            <div class="story-meta"><i class="fas fa-chart-line"></i> <span class="en-only">${s.income_en}</span><span class="mr-only">${s.income_mr}</span></div>
+            <button class="download-btn read-full-story-btn" data-story-id="${s.id}" style="margin-top:.6rem;width:100%;justify-content:center;"><i class="fas fa-book-open"></i> <span class="en-only">Read Full Story</span><span class="mr-only">संपूर्ण कहाणी वाचा</span></button>
           </div>
         </div>
       `;
@@ -2348,6 +2513,33 @@ a{color:inherit;}
     document.getElementById('quickViewTranslateBtn').addEventListener('click', () => toggleLanguage());
     quickViewPopup.addEventListener('click', (e) => { if (e.target === quickViewPopup) closeQuickView(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeQuickView(); });
+
+    // ============================================================
+    //  SUCCESS STORY DETAIL POPUP
+    // ============================================================
+    const storyDetailPopup = document.getElementById('storyDetailPopup');
+    function showStoryDetail(s) {
+        document.getElementById('storyDetailImg').src = s.img;
+        document.getElementById('storyDetailImg').alt = s.name_en;
+        document.getElementById('storyDetailTitle').innerHTML = `<span class="en-only">${s.title_en}</span><span class="mr-only">${s.title_mr}</span>`;
+        document.getElementById('storyDetailName').innerHTML = `<span class="en-only">${s.name_en}</span><span class="mr-only">${s.name_mr}</span>`;
+        document.getElementById('storyDetailGroup').innerHTML = `<span class="en-only">${s.group_en}</span><span class="mr-only">${s.group_mr}</span>`;
+        document.getElementById('storyDetailPlace').innerHTML = `<span class="en-only">${s.village_en}, ${s.taluka_en} Taluka</span><span class="mr-only">${s.village_mr}, ${s.taluka_mr} तालुका</span>`;
+        document.getElementById('storyDetailEnterprise').innerHTML = `<span class="en-only">${s.enterprise_en}</span><span class="mr-only">${s.enterprise_mr}</span>`;
+        document.getElementById('storyDetailSituation').innerHTML = `<span class="en-only">${s.situation_en}</span><span class="mr-only">${s.situation_mr}</span>`;
+        document.getElementById('storyDetailChange').innerHTML = `<span class="en-only">${s.change_en}</span><span class="mr-only">${s.change_mr}</span>`;
+        document.getElementById('storyDetailImpact').innerHTML = s.impact_en.map((pt, i) => `<li><span class="en-only">${pt}</span><span class="mr-only">${s.impact_mr[i]}</span></li>`).join('');
+        document.getElementById('storyDetailIncome').innerHTML = `<span class="en-only">${s.income_en}</span><span class="mr-only">${s.income_mr}</span>`;
+        storyDetailPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeStoryDetail() {
+        storyDetailPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('storyDetailClose').addEventListener('click', closeStoryDetail);
+    document.getElementById('storyDetailTranslateBtn').addEventListener('click', () => toggleLanguage());
+    storyDetailPopup.addEventListener('click', (e) => { if (e.target === storyDetailPopup) closeStoryDetail(); });
 
     quickViewShareBtn.addEventListener('click', function() {
         if (currentQuickViewProduct) {
@@ -2531,6 +2723,13 @@ a{color:inherit;}
         // Stories (both agro-forest and industrial)
         document.getElementById('storyGrid').innerHTML = stories.map(s => renderStoryCard(s)).join('');
         document.getElementById('industrialStoryGrid').innerHTML = industrialStoriesData.map(s => renderIndustrialStoryCard(s)).join('');
+        document.querySelectorAll('.read-full-story-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sid = parseInt(this.dataset.storyId);
+                const s = stories.find(st => st.id === sid);
+                if (s) showStoryDetail(s);
+            });
+        });
 
         // Populate feedback dropdowns
         populateFeedbackDropdowns();
@@ -3049,7 +3248,7 @@ a{color:inherit;}
         const storyItems = allStories.slice(-3).reverse().map(s => ({
             icon: 'fa-star',
             title_en: `Success Story: ${s.name_en}`, title_mr: `यशोगाथा: ${s.name_mr}`,
-            sub_en: s.seller_en || s.role_en || '', sub_mr: s.seller_mr || s.role_mr || '', date: '',
+            sub_en: s.group_en || s.role_en || '', sub_mr: s.group_mr || s.role_mr || '', date: '',
             onClick: () => setActive(4)
         }));
 
