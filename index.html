@@ -608,15 +608,41 @@ a{color:inherit;}
 .about-grid .card p{font-size:.98rem;color:var(--ink-700);}
 
 /* ============================== VENDOR ============================== */
-.vendor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.6rem;margin-bottom:2rem;}
+.vendor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.6rem;margin-bottom:2rem;align-items:stretch;}
 .vendor-card{
-  background:var(--paper-0);border-radius:var(--radius-md);padding:1.7rem;border:1px solid var(--line);
+  background:var(--paper-0);border-radius:var(--radius-md);padding:1.6rem;border:1px solid var(--line);
   box-shadow:0 10px 22px -16px rgba(var(--shadow-color),.5);transition:.2s;position:relative;
+  display:flex;flex-direction:column;
 }
-.vendor-card:hover{transform:translateY(-4px);}
-.vendor-card h4{color:var(--forest-800);font-size:1.2rem;margin-bottom:.6rem;font-family:var(--font-display);font-weight:600;}
-.vendor-card .vendor-meta{color:var(--ink-700);font-size:.92rem;margin:.3rem 0;display:flex;align-items:center;gap:8px;}
-.vendor-card .vendor-meta i{width:20px;color:var(--forest-600);}
+.vendor-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px -16px rgba(var(--shadow-color),.55);}
+.vendor-card-head{display:flex;align-items:center;gap:.9rem;margin-bottom:.9rem;}
+.vendor-avatar{
+  width:48px;height:48px;border-radius:50%;background:var(--forest-100);color:var(--forest-700);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:2px dashed var(--turmeric-400);
+}
+.vendor-card-head h4{color:var(--forest-800);font-size:1.1rem;font-family:var(--font-display);font-weight:600;line-height:1.3;}
+.vendor-card .vendor-meta{color:var(--ink-700);font-size:.88rem;margin:.3rem 0;display:flex;align-items:center;gap:8px;}
+.vendor-card .vendor-meta i{width:20px;color:var(--forest-600);flex-shrink:0;}
+.vendor-product-count-chip{
+  display:inline-flex;align-items:center;gap:6px;background:var(--turmeric-100);color:var(--turmeric-600);
+  font-size:.76rem;font-weight:700;padding:.3rem .85rem;border-radius:var(--radius-pill);margin:.5rem 0;width:fit-content;
+}
+.vendor-preview-thumbs{display:flex;align-items:center;gap:-8px;margin:.4rem 0 .8rem;}
+.vendor-preview-thumbs img{
+  width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--paper-0);
+  box-shadow:0 2px 6px rgba(0,0,0,.15);margin-left:-10px;background:var(--forest-100);
+}
+.vendor-preview-thumbs img:first-child{margin-left:0;}
+.vendor-preview-more{
+  width:36px;height:36px;border-radius:50%;background:var(--forest-700);color:#fff;font-size:.72rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin-left:-10px;border:2px solid var(--paper-0);flex-shrink:0;
+}
+.vendor-card-footer{margin-top:auto;padding-top:.8rem;display:flex;gap:.6rem;}
+.vendor-details-btn{
+  flex:1;background:var(--forest-800);color:#fff;border:none;padding:.6rem 1rem;border-radius:var(--radius-pill);
+  font-weight:700;font-size:.86rem;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+}
+.vendor-details-btn:hover{background:var(--forest-600);}
 .vendor-products-list{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:.5rem;}
 .vendor-product-row{
   display:flex;align-items:center;gap:.7rem;padding:.5rem;border-radius:var(--radius-sm);
@@ -1800,6 +1826,21 @@ a{color:inherit;}
     </div>
 </div>
 
+<!-- ===== VENDOR DETAIL POPUP ===== -->
+<div class="popup-overlay" id="vendorDetailPopup">
+    <div class="popup-box" style="max-width:600px;max-height:85vh;overflow-y:auto;">
+        <button class="popup-close" id="vendorDetailClose">&times;</button>
+        <div class="vendor-card-head" style="margin-bottom:1rem;">
+            <div class="vendor-avatar" style="width:56px;height:56px;font-size:1.4rem;"><i class="fas fa-store"></i></div>
+            <h3 style="justify-content:flex-start;margin-bottom:0;" id="vendorDetailName"></h3>
+        </div>
+        <div class="vendor-meta"><i class="fas fa-phone"></i> <span id="vendorDetailMobile"></span> <button class="copy-btn" id="vendorDetailCopyBtn"><i class="fas fa-copy"></i> <span class="en-only">Copy</span><span class="mr-only">कॉपी</span></button></div>
+        <div class="vendor-meta"><i class="fas fa-map-pin"></i> <span id="vendorDetailPlace"></span></div>
+        <div class="vendor-product-count-chip"><i class="fas fa-boxes-stacked"></i> <span id="vendorDetailCount"></span></div>
+        <div class="vendor-products-list" id="vendorDetailProductsList"></div>
+    </div>
+</div>
+
 <!-- ===== SUCCESS STORY DETAIL POPUP ===== -->
 <div class="popup-overlay" id="storyDetailPopup">
     <div class="popup-box" style="max-width:620px;max-height:85vh;overflow-y:auto;">
@@ -2364,24 +2405,24 @@ a{color:inherit;}
       `;
     }
 
-    function renderVendorCard(vendor) {
-        const productsHtml = vendor.products.map(p => `
-          <a href="${p.certPdf}" target="_blank" class="vendor-product-row" data-id="${p.id}" title="${p.cert}">
-            <img src="${p.img}" alt="${p.name_en}" loading="lazy" class="vendor-product-thumb">
-            <span class="vendor-product-info">
-              <span class="vendor-product-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
-              <span class="vendor-product-cert">${p.cert}</span>
-            </span>
-            <i class="fas fa-file-pdf vendor-product-pdf-icon"></i>
-          </a>
-        `).join('');
+    function renderVendorCard(vendor, idx) {
+        const previewCount = 4;
+        const previewThumbs = vendor.products.slice(0, previewCount).map(p => `<img src="${p.img}" alt="${p.name_en}" loading="lazy">`).join('');
+        const moreCount = vendor.products.length - previewCount;
+        const moreChip = moreCount > 0 ? `<div class="vendor-preview-more">+${moreCount}</div>` : '';
         return `
         <div class="vendor-card">
-          <h4><span class="seller-en">${vendor.seller_en}</span><span class="seller-mr">${vendor.seller_mr}</span></h4>
+          <div class="vendor-card-head">
+            <div class="vendor-avatar"><i class="fas fa-store"></i></div>
+            <h4><span class="seller-en">${vendor.seller_en}</span><span class="seller-mr">${vendor.seller_mr}</span></h4>
+          </div>
           <div class="vendor-meta"><i class="fas fa-phone"></i> ${vendor.mobile} <button class="copy-btn" data-phone="${vendor.mobile}"><i class="fas fa-copy"></i> <span class="en-only">Copy</span><span class="mr-only">कॉपी</span></button></div>
           <div class="vendor-meta"><i class="fas fa-map-pin"></i> <span class="place-en">${vendor.place_en}</span><span class="place-mr">${vendor.place_mr}</span></div>
-          <div class="vendor-meta"><i class="fas fa-boxes-stacked"></i> ${vendor.products.length} <span class="en-only">product(s) listed</span><span class="mr-only">उत्पादन(ने) सूचीबद्ध</span></div>
-          <div class="vendor-products-list">${productsHtml}</div>
+          <div class="vendor-product-count-chip"><i class="fas fa-boxes-stacked"></i> ${vendor.products.length} <span class="en-only">product(s)</span><span class="mr-only">उत्पादन(ने)</span></div>
+          <div class="vendor-preview-thumbs">${previewThumbs}${moreChip}</div>
+          <div class="vendor-card-footer">
+            <button class="vendor-details-btn" data-vendor-idx="${idx}"><i class="fas fa-circle-info"></i> <span class="en-only">View Details</span><span class="mr-only">तपशील पहा</span></button>
+          </div>
         </div>
       `;
     }
@@ -2541,6 +2582,41 @@ a{color:inherit;}
     document.getElementById('storyDetailTranslateBtn').addEventListener('click', () => toggleLanguage());
     storyDetailPopup.addEventListener('click', (e) => { if (e.target === storyDetailPopup) closeStoryDetail(); });
 
+    // ============================================================
+    //  VENDOR DETAIL POPUP
+    // ============================================================
+    const vendorDetailPopup = document.getElementById('vendorDetailPopup');
+    function showVendorDetail(vendor) {
+        document.getElementById('vendorDetailName').innerHTML = `<span class="seller-en">${vendor.seller_en}</span><span class="seller-mr">${vendor.seller_mr}</span>`;
+        document.getElementById('vendorDetailMobile').textContent = vendor.mobile;
+        document.getElementById('vendorDetailCopyBtn').dataset.phone = vendor.mobile;
+        document.getElementById('vendorDetailPlace').innerHTML = `<span class="place-en">${vendor.place_en}</span><span class="place-mr">${vendor.place_mr}</span>`;
+        document.getElementById('vendorDetailCount').innerHTML = `${vendor.products.length} <span class="en-only">product(s) listed</span><span class="mr-only">उत्पादन(ने) सूचीबद्ध</span>`;
+        document.getElementById('vendorDetailProductsList').innerHTML = vendor.products.map(p => `
+        <a href="${p.certPdf}" target="_blank" class="vendor-product-row" data-id="${p.id}" title="${p.cert}">
+          <img src="${p.img}" alt="${p.name_en}" loading="lazy" class="vendor-product-thumb">
+          <span class="vendor-product-info">
+            <span class="vendor-product-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
+            <span class="vendor-product-cert">${p.cert}</span>
+          </span>
+          <i class="fas fa-file-pdf vendor-product-pdf-icon"></i>
+        </a>
+      `).join('');
+        vendorDetailPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeVendorDetail() {
+        vendorDetailPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('vendorDetailClose').addEventListener('click', closeVendorDetail);
+    document.getElementById('vendorDetailCopyBtn').addEventListener('click', function() {
+        const phone = this.dataset.phone;
+        const finish = () => toast((currentLang === 'en' ? `Copied ${phone}` : `${phone} कॉपी केले`), 'fa-copy');
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(phone).then(finish).catch(finish); } else { finish(); }
+    });
+    vendorDetailPopup.addEventListener('click', (e) => { if (e.target === vendorDetailPopup) closeVendorDetail(); });
+
     quickViewShareBtn.addEventListener('click', function() {
         if (currentQuickViewProduct) {
             const shareText = `${currentQuickViewProduct.name_en} — Gadchiroli District Exhibition (${currentQuickViewProduct.cert})`;
@@ -2681,6 +2757,60 @@ a{color:inherit;}
     // ============================================================
     //  RENDER ALL
     // ============================================================
+    // ============================================================
+    //  FEATURED PRODUCTS — rotates once every calendar day, picking
+    //  up to 8 products spread across different categories. The
+    //  selection is seeded by today's date, so it's the same for
+    //  every visitor on a given day and automatically changes to a
+    //  fresh set the next day — no storage, no server needed.
+    // ============================================================
+    function mulberry32(seed) {
+        return function() {
+            seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+            let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+    }
+    function seededShuffle(arr, rand) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(rand() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+    function getDaySeed() {
+        const d = new Date();
+        return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+    }
+    function getFeaturedProducts(count) {
+        const rand = mulberry32(getDaySeed());
+        const byCat = {};
+        allProducts.forEach(p => {
+            if (!byCat[p.cat]) byCat[p.cat] = [];
+            byCat[p.cat].push(p);
+        });
+        Object.keys(byCat).forEach(c => { byCat[c] = seededShuffle(byCat[c], rand); });
+
+        const featured = [];
+        let round = 0;
+        while (featured.length < count) {
+            const catOrder = seededShuffle(Object.keys(byCat), rand);
+            let addedThisRound = false;
+            catOrder.forEach(c => {
+                if (featured.length < count && byCat[c][round]) {
+                    featured.push(byCat[c][round]);
+                    addedThisRound = true;
+                }
+            });
+            round++;
+            if (!addedThisRound) break; // ran out of products across every category
+        }
+        return featured;
+    }
+
+    let currentVendorList = [];
     function renderAll() {
         const food = allProducts.filter(p => p.cat === 'Food');
         const medicinal = allProducts.filter(p => p.cat === 'Medicinal');
@@ -2705,8 +2835,8 @@ a{color:inherit;}
         </div>
       `).join('');
 
-        // Featured (first 6 from allProducts)
-        document.getElementById('featuredGrid').innerHTML = allProducts.slice(0, 6).map((p, i) => renderProductCard(p, i)).join('');
+        // Featured — 8 products, rotating daily, spread across categories
+        document.getElementById('featuredGrid').innerHTML = getFeaturedProducts(8).map((p, i) => renderProductCard(p, i)).join('');
 
         // Vendor Grid — group by vendor, listing EVERY product that vendor sells
         const vendorMap = {};
@@ -2718,7 +2848,14 @@ a{color:inherit;}
             vendorMap[key].products.push(p);
         });
         const vendorList = Object.values(vendorMap);
-        document.getElementById('vendorGrid').innerHTML = vendorList.map(v => renderVendorCard(v)).join('');
+        currentVendorList = vendorList;
+        document.getElementById('vendorGrid').innerHTML = vendorList.map((v, i) => renderVendorCard(v, i)).join('');
+        document.querySelectorAll('.vendor-details-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const idx = parseInt(this.dataset.vendorIdx);
+                if (currentVendorList[idx]) showVendorDetail(currentVendorList[idx]);
+            });
+        });
 
         // Stories (both agro-forest and industrial)
         document.getElementById('storyGrid').innerHTML = stories.map(s => renderStoryCard(s)).join('');
@@ -3172,22 +3309,31 @@ a{color:inherit;}
     // 3 most recently added vendors, computed live from the product/vendor
     // lists themselves. Add a product or a new vendor's first product to
     // the data and this list updates on its own — nothing to curate by hand.
+    function recentFrom(arr, n) {
+        return arr.slice(Math.max(0, arr.length - n)).reverse();
+    }
+    function recentVendorsFrom(arr, n) {
+        const seen = new Set();
+        const order = [];
+        arr.forEach(p => {
+            const key = p.seller_en + '|' + p.seller_mr;
+            if (!seen.has(key)) {
+                seen.add(key);
+                order.push({ seller_en: p.seller_en, seller_mr: p.seller_mr, place_en: p.place_en, place_mr: p.place_mr });
+            }
+        });
+        return order.slice(Math.max(0, order.length - n)).reverse();
+    }
+
     function renderHomeUpdates() {
         const container = document.getElementById('newsList');
         if (!container) return;
-        const total = allProducts.length;
-        const lastProducts = allProducts.slice(Math.max(0, total - 3)).reverse();
-
-        const vendorSeen = new Set();
-        const vendorOrder = [];
-        allProducts.forEach(p => {
-            const key = p.seller_en + '|' + p.seller_mr;
-            if (!vendorSeen.has(key)) {
-                vendorSeen.add(key);
-                vendorOrder.push({ seller_en: p.seller_en, seller_mr: p.seller_mr, place_en: p.place_en, place_mr: p.place_mr });
-            }
-        });
-        const lastVendors = vendorOrder.slice(Math.max(0, vendorOrder.length - 3)).reverse();
+        // Bug fix: pulling straight from allProducts.slice(-3) always returned
+        // the tail of industrialProducts (since it's concatenated last), so
+        // any addition to the main `products` list never showed up here.
+        // Sampling each source array separately fixes that for good.
+        const lastProducts = [...recentFrom(products, 2), ...recentFrom(industrialProducts, 1)];
+        const lastVendors = [...recentVendorsFrom(products, 2), ...recentVendorsFrom(industrialProducts, 1)];
 
         let html = lastProducts.map(p => `
         <div class="news-item" data-product-id="${p.id}">
@@ -3244,8 +3390,13 @@ a{color:inherit;}
             }
         }));
 
-        const allStories = [...stories, ...industrialStoriesData];
-        const storyItems = allStories.slice(-3).reverse().map(s => ({
+        // Bug fix: [...stories, ...industrialStoriesData].slice(-3) always
+        // returned the tail of industrialStoriesData (concatenated last), so
+        // new entries added to `stories` never appeared here. Sample each
+        // source separately instead.
+        const recentAgroStories = recentFrom(stories, 2);
+        const recentIndStories = recentFrom(industrialStoriesData, 1);
+        const storyItems = [...recentAgroStories, ...recentIndStories].map(s => ({
             icon: 'fa-star',
             title_en: `Success Story: ${s.name_en}`, title_mr: `यशोगाथा: ${s.name_mr}`,
             sub_en: s.group_en || s.role_en || '', sub_mr: s.group_mr || s.role_mr || '', date: '',
