@@ -129,7 +129,7 @@ a{color:inherit;}
 }
 .topbar .topbar-left{display:flex;gap:1.4rem;flex-wrap:wrap;opacity:.85;}
 .topbar .topbar-left span{display:inline-flex;align-items:center;gap:6px;}
-.topbar .topbar-right{display:flex;gap:.9rem;align-items:center;}
+.topbar .topbar-right{display:flex;gap:.9rem;align-items:center;flex-wrap:wrap;}
 .icon-toggle{
   background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--turmeric-100);
   width:30px;height:30px;border-radius:50%;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
@@ -581,15 +581,7 @@ a{color:inherit;}
 .insights-note i{color:var(--turmeric-500);}
 
 /* ============================== GALLERY ============================== */
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;}
-.gallery-card{
-  background:var(--paper-0);border-radius:var(--radius-md);overflow:hidden;
-  box-shadow:0 10px 22px -16px rgba(var(--shadow-color),.5);transition:.2s;border:1px solid var(--line);
-}
-.gallery-card:hover{transform:translateY(-4px) scale(1.01);}
-.gallery-card img{width:100%;height:170px;object-fit:cover;display:block;}
-.gallery-card .card-content{padding:.9rem;gap:.35rem;}
-.gallery-card h4{color:var(--forest-800);margin-bottom:.15rem;font-family:var(--font-display);font-weight:600;font-size:1.05rem;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.6rem;}
 
 /* ============================== ABOUT ============================== */
 .about-block{
@@ -1082,16 +1074,21 @@ a{color:inherit;}
   .tab-bar.open{display:flex;}
   .tab-link{border-radius:10px;width:100%;}
   .tab-link.active::after{display:none;}
+  .container{padding:0 1.1rem;}
+  .about-block,.download-card,.achieve-box,.collector-box{padding:1.5rem;}
 }
 @media (max-width:700px){
-  .header h1{font-size:1.25rem;}
-  .header{flex-direction:column;align-items:flex-start;gap:.7rem;}
-  .header-actions{width:100%;justify-content:space-between;}
+  .header h1{font-size:1.15rem;}
+  .header{flex-direction:column;align-items:flex-start;gap:.7rem;padding:.9rem 1.1rem;}
+  .header-actions{width:100%;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+  .brand-badge{width:42px;height:42px;}
+  .brand-badge i{font-size:1.05rem;}
+  .header .subhead{font-size:.8rem;}
   .about-grid{grid-template-columns:1fr;}
-  .search-container{flex-wrap:wrap;padding:1rem;border-radius:var(--radius-md);}
+  .search-container{flex-wrap:wrap;padding:.8rem;border-radius:var(--radius-md);}
   .search-container input,.search-container select,.search-container .search-btn,.clear-search{flex:1 1 100%;justify-content:center;}
   .home-top-row,.achieve-collector-row{grid-template-columns:1fr;}
-  .stat-strip{grid-template-columns:1fr;}
+  .stat-strip{grid-template-columns:1fr;padding:1.1rem;}
   .stat + .stat{border-left:none;border-top:1px dashed var(--line);padding-top:.8rem;}
   .to-top{left:.9rem;bottom:.9rem;width:42px;height:42px;}
   .print-btn{left:.9rem;bottom:4.1rem;width:42px;height:42px;}
@@ -1102,6 +1099,60 @@ a{color:inherit;}
   .district-slider-overlay p{font-size:.85rem;}
   .district-slider-btn{width:34px;height:34px;font-size:.9rem;}
   .district-slider-download{padding:.3rem .7rem;font-size:.75rem;}
+
+  /* --- General de-bulking for phones/small tablets --- */
+  .container{padding:0 1rem;}
+  .topbar{font-size:.72rem;padding:.4rem .9rem;justify-content:flex-start;}
+  .topbar .topbar-left{gap:.8rem;}
+  .topbar .topbar-right{gap:.5rem;width:100%;justify-content:space-between;}
+  .a11y-toolbar{padding-right:.4rem;gap:3px;}
+  .a11y-btn{min-width:23px;height:23px;font-size:.66rem;}
+  .notice-ticker-set{padding:.45rem 1.4rem .45rem 0;gap:2rem;}
+  .notice-item{font-size:.78rem;}
+  .breadcrumb-inner{padding:.5rem 1rem;font-size:.74rem;}
+  .trust-strip-inner{padding:.65rem 1rem;gap:1.2rem;}
+  .trust-item{font-size:.74rem;}
+  .hero{padding:1.8rem 0 1.4rem;margin-bottom:1.2rem;}
+  .hero-inner{gap:1.4rem;padding:0 1rem;}
+  .hero-eyebrow{font-size:.74rem;padding:.3rem .8rem;}
+  .hero p.lede{font-size:.96rem;max-width:none;}
+  .section-title{font-size:1.3rem;margin:1.6rem 0 1rem;gap:.5rem;}
+  .section-title i{width:32px;height:32px;font-size:.85rem;}
+  .section-sub{font-size:.92rem;margin:-.4rem 0 1.1rem;}
+  .about-block,.download-card,.achieve-box,.collector-box,.ind-hero,.download-hero{padding:1.3rem;}
+  .popup-box{padding:1.3rem;width:94%;}
+  .popup-translate-btn{right:44px;font-size:.7rem;padding:.3rem .6rem;}
+  .quick-cat-chips{gap:.4rem;}
+  .cat-chip{padding:.42rem .85rem;font-size:.8rem;}
+  .footer{padding:1.8rem 1rem 1.3rem;}
+  .footer-share-qr{padding:.9rem;gap:1rem;}
+  .emblem-row{gap:.6rem;}
+  .emblem-badge{font-size:.7rem;padding:.4rem .8rem;}
+  .footer-policy-links{gap:.7rem;font-size:.72rem;}
+  .footer-links{gap:.9rem;font-size:.8rem;}
+  .vendor-card,.download-card{padding:1.3rem;}
+  .story-card .story-content{padding:1.1rem;}
+  .card-content{padding:1rem;}
+  .insights-grid{gap:.9rem;}
+  .insight-card{padding:1.2rem 1rem;}
+  .feedback-form{padding:1.3rem;}
+}
+
+@media (max-width:480px){
+  html{font-size:94%;}
+  .header h1{font-size:1.05rem;}
+  .hero h2{font-size:1.5rem;}
+  .stat .num{font-size:1.7rem;}
+  .a11y-toolbar{border-right:none;padding-right:0;}
+  .topbar .topbar-left span:nth-child(2){display:none;} /* hide secondary "Official District Portal" label on very small screens */
+  .lang-toggle,.theme-toggle,.fav-pill{padding:.45rem .85rem;font-size:.82rem;}
+  .more-btn,.vendor-reg-btn,.download-btn,.vendor-details-btn{padding:.6rem 1.2rem;font-size:.84rem;}
+  .badge-row{gap:.35rem;}
+  .cat-badge,.gi-badge,.cert-badge{font-size:.68rem;padding:.2rem .6rem;}
+  .product-name{font-size:1.1rem;}
+  .home-card,.achieve-box,.collector-box,.about-block,.download-card,.vendor-card{border-radius:var(--radius-md);}
+  .popup-box{padding:1.1rem;}
+  .vendor-preview-thumbs img,.vendor-preview-more{width:30px;height:30px;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -2824,16 +2875,32 @@ a{color:inherit;}
 
         // Gallery
         document.getElementById('galleryGrid').innerHTML = allProducts.map(p => `
-        <div class="gallery-card">
-          <img src="${p.img}" alt="${p.name_en}" loading="lazy">
+        <div class="product-card gallery-product-card in-view">
+          <div class="card-image">
+            <img src="${p.img}" alt="${p.name_en}" loading="lazy">
+            <div class="card-image-overlay">
+              <button class="quick-btn gallery-quick-btn" data-id="${p.id}" title="Quick view" aria-label="Quick view"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
           <div class="card-content">
-            <h4><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></h4>
-            <span class="cat-badge">${p.cat}</span>
-            <p style="font-size:0.85rem;color:var(--ink-500);"><span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span></p>
-            <p style="font-size:0.72rem;color:var(--forest-700);background:var(--forest-100);padding:2px 10px;border-radius:12px;display:inline-block;"><i class="fas fa-certificate"></i> ${p.cert}</p>
+            <span class="product-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
+            <div class="badge-row">
+              <span class="cat-badge">${p.cat}</span>
+              <span class="cert-badge"><i class="fas fa-certificate"></i> ${p.cert}</span>
+            </div>
+            <div class="location"><i class="fas fa-map-pin"></i> <span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span></div>
+            <button class="vendor-details-btn gallery-quick-btn" data-id="${p.id}"><i class="fas fa-eye"></i> <span class="en-only">View Details</span><span class="mr-only">तपशील पहा</span></button>
           </div>
         </div>
       `).join('');
+        document.querySelectorAll('.gallery-quick-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = parseInt(this.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                if (p) showQuickView(p);
+            });
+        });
 
         // Featured — 8 products, rotating daily, spread across categories
         document.getElementById('featuredGrid').innerHTML = getFeaturedProducts(8).map((p, i) => renderProductCard(p, i)).join('');
