@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gadchiroli · District Exhibition – Agro, Forest & Industrial</title>
+<title>Unexplored Gadchiroli – Agro, Forest & Industrial</title>
 <meta name="description" content="Official exhibition portal of the District Collector Office, Gadchiroli — showcasing agro-forest, natural & industrial products, non-profit initiative." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231c4f32'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle' fill='%23d99a1b'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#1c4f32">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Gadchiroli District Exhibition — Agro, Forest & Industrial Portal">
+<meta property="og:title" content="Unexplored Gadchiroli – Agro, Forest & Industrial">
 <meta property="og:description" content="A free, non-profit initiative of the District Collector Office, Gadchiroli, promoting local agro-forest producers alongside the district's industrial development story.">
-<meta property="og:site_name" content="Gadchiroli District Exhibition">
+<meta property="og:site_name" content="Unexplored Gadchiroli – Agro, Forest & Industrial">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Gadchiroli District Exhibition Portal">
+<meta name="twitter:title" content="Unexplored Gadchiroli – Agro, Forest & Industrial">
 <meta name="twitter:description" content="Official, non-profit portal of the District Collector Office, Gadchiroli.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -412,9 +412,14 @@ a{color:inherit;}
 .home-news-highlight .hnh-text{font-size:.94rem;color:var(--ink-900);}
 .home-news-highlight .hnh-text small{color:var(--ink-500);font-size:.78rem;display:block;margin-top:.2rem;}
 .sort-select{
-  padding:.5rem 1rem;border:1px solid var(--line);border-radius:var(--radius-pill);
-  background:var(--paper-0);color:var(--ink-900);font-weight:600;font-size:.88rem;cursor:pointer;
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;
+  padding:.62rem 2.2rem .62rem 1.1rem;border:2px solid var(--line);border-radius:var(--radius-pill);
+  background-color:var(--paper-0);color:var(--ink-900);font-weight:700;font-size:.86rem;cursor:pointer;transition:.2s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231c4f32' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .8rem center;background-size:14px;
 }
+.sort-select:hover{border-color:var(--forest-400);}
+.sort-select:focus{border-color:var(--forest-600);outline:none;box-shadow:0 0 0 4px var(--forest-100);}
 
 /* ============================== PRODUCT GRID / CARD ============================== */
 .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.6rem;margin-bottom:2rem;}
@@ -652,12 +657,241 @@ a{color:inherit;}
 }
 .copy-btn:hover{background:var(--forest-100);color:var(--forest-700);}
 
+/* ============================== RATINGS ============================== */
+.rating-row{display:flex;align-items:center;gap:6px;font-size:.82rem;flex-wrap:wrap;}
+.rating-stars{color:var(--turmeric-500);font-size:.85rem;letter-spacing:1px;white-space:nowrap;}
+.rating-stars .star-empty{color:var(--line);}
+.rating-score{font-weight:700;color:var(--forest-800);font-size:.84rem;}
+.rating-count{color:var(--ink-500);font-size:.78rem;}
+.no-rating-badge{
+  display:inline-flex;align-items:center;gap:6px;color:var(--ink-500);font-size:.82rem;font-weight:600;
+  cursor:pointer;border-bottom:1px dashed var(--line);transition:.15s;
+}
+.no-rating-badge i{color:var(--turmeric-500);}
+.no-rating-badge:hover{color:var(--forest-700);border-bottom-color:var(--forest-700);}
+.review-summary{display:flex;align-items:center;gap:1rem;background:var(--paper-50);border-radius:12px;padding:.8rem 1rem;margin:.8rem 0;}
+.review-summary .rs-score{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--forest-900);line-height:1;}
+.review-summary .rs-side{display:flex;flex-direction:column;gap:2px;}
+.review-list{margin-top:.6rem;max-height:220px;overflow-y:auto;padding-right:4px;}
+.review-item{border-bottom:1px dashed var(--line);padding:.65rem 0;}
+.review-item:last-child{border-bottom:none;}
+.review-item .ri-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-size:.86rem;font-weight:700;color:var(--forest-800);}
+.review-item .ri-date{font-size:.72rem;color:var(--ink-500);font-weight:500;white-space:nowrap;}
+.review-item .ri-stars{color:var(--turmeric-500);font-size:.78rem;margin-top:2px;}
+.review-item .ri-text{font-size:.86rem;color:var(--ink-700);margin-top:.3rem;line-height:1.5;}
+.write-review-btn{
+  margin-top:.7rem;background:var(--forest-100);color:var(--forest-700);border:1.5px solid var(--forest-400);
+  padding:.5rem 1.1rem;border-radius:var(--radius-pill);font-weight:700;font-size:.82rem;cursor:pointer;transition:.2s;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.write-review-btn:hover{background:var(--forest-700);color:#fff;}
+.review-form{margin-top:.7rem;background:var(--paper-50);border-radius:12px;padding:.9rem;display:none;}
+.review-form.show{display:block;}
+.review-form input,.review-form textarea{
+  width:100%;padding:.6rem .8rem;border:1.5px solid var(--line);border-radius:10px;font-size:.86rem;
+  margin-top:.5rem;font-family:inherit;background:var(--paper-0);color:var(--ink-900);
+}
+.review-form textarea{min-height:70px;resize:vertical;}
+.review-star-picker{display:flex;gap:5px;font-size:1.35rem;color:var(--line);cursor:pointer;margin-top:.5rem;}
+.review-star-picker i.active{color:var(--turmeric-500);}
+.review-form-submit{
+  margin-top:.6rem;background:var(--forest-800);color:#fff;border:none;padding:.5rem 1.2rem;
+  border-radius:var(--radius-pill);font-weight:700;font-size:.84rem;cursor:pointer;
+}
+.review-form-submit:hover{background:var(--forest-600);}
+
+/* ============================== SELLER LINK ============================== */
+.seller-link{
+  color:var(--forest-700);font-weight:700;text-decoration:none;border-bottom:1.5px dashed var(--forest-400);
+  cursor:pointer;transition:.15s;
+}
+.seller-link:hover{color:var(--forest-900);border-bottom-color:var(--forest-900);}
+.seller-link i.fa-arrow-up-right-from-square{font-size:.7rem;margin-left:4px;opacity:.7;}
+
+/* ============================== CARD IMAGE CAROUSEL (multi-image, Amazon/Flipkart style) ============================== */
+.card-img-track{display:flex;height:100%;transition:transform .35s var(--ease);}
+.card-img-track img{width:100%;height:100%;object-fit:cover;flex-shrink:0;display:block;}
+.card-img-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:4;pointer-events:auto;}
+.card-img-dots button{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.65);border:none;padding:0;cursor:pointer;transition:.2s;}
+.card-img-dots button.active{background:#fff;width:15px;border-radius:4px;}
+.card-img-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.85);border:none;display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;cursor:pointer;z-index:4;opacity:0;transition:.2s;color:var(--ink-900);pointer-events:auto;
+}
+.card-image:hover .card-img-arrow{opacity:1;}
+.card-img-arrow.prev{left:6px;}
+.card-img-arrow.next{right:6px;}
+.card-img-count{
+  position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.55);color:#fff;font-size:.66rem;font-weight:700;
+  padding:2px 8px;border-radius:var(--radius-pill);z-index:4;display:inline-flex;align-items:center;gap:4px;pointer-events:none;
+}
+
+/* ============================== COMPARE FEATURE ============================== */
+.compare-chip{
+  display:inline-flex;align-items:center;gap:6px;background:var(--paper-100);border:1.5px solid var(--line);
+  color:var(--ink-700);font-size:.76rem;font-weight:700;padding:.32rem .75rem;border-radius:var(--radius-pill);
+  cursor:pointer;transition:.15s;
+}
+.compare-chip i{font-size:.7rem;}
+.compare-chip.active{background:var(--forest-800);border-color:var(--forest-800);color:#fff;}
+.compare-chip.disabled{opacity:.45;cursor:not-allowed;}
+.compare-fab{
+  position:fixed;bottom:6.6rem;right:1.4rem;z-index:1250;
+  width:56px;height:56px;border-radius:50%;background:var(--forest-800);color:#fff;border:none;
+  display:none;align-items:center;justify-content:center;cursor:pointer;font-size:1.25rem;
+  box-shadow:0 14px 28px -10px rgba(var(--shadow-color),.65);transition:.2s;
+}
+.compare-fab.show{display:flex;}
+body:has(.popup-overlay.active) .compare-fab{display:none !important;}
+.compare-fab:hover{background:var(--forest-600);transform:scale(1.06);}
+.compare-fab-badge{
+  position:absolute;top:-3px;right:-3px;background:var(--laterite-500);color:#fff;
+  min-width:22px;height:22px;padding:0 4px;border-radius:50%;font-size:.7rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;border:2px solid var(--paper-0);
+}
+.compare-clear-btn{background:transparent;border:1px solid var(--line);color:var(--ink-700);padding:.55rem 1.2rem;border-radius:var(--radius-pill);cursor:pointer;font-size:.85rem;transition:.2s;display:inline-flex;align-items:center;gap:7px;}
+.compare-clear-btn:hover{background:var(--paper-100);}
+.compare-go-btn{background:var(--turmeric-500);color:var(--forest-950);border:none;padding:.55rem 1.3rem;border-radius:var(--radius-pill);font-weight:800;cursor:pointer;transition:.2s;}
+.compare-go-btn:hover{background:var(--turmeric-400);}
+.compare-go-btn:disabled{opacity:.5;cursor:not-allowed;}
+.compare-modal-box{max-width:960px !important;width:95%;max-height:88vh;overflow-y:auto;}
+.compare-table{width:100%;border-collapse:collapse;margin-top:.6rem;}
+.compare-table th,.compare-table td{border:1px solid var(--line);padding:.7rem .85rem;font-size:.86rem;vertical-align:top;text-align:left;}
+.compare-table th{background:var(--forest-100);color:var(--forest-800);width:130px;font-weight:700;}
+.compare-table td img{width:100%;max-width:140px;height:100px;object-fit:cover;border-radius:10px;display:block;}
+.compare-table td .cmp-remove-btn{
+  margin-top:.6rem;background:var(--laterite-100);color:var(--laterite-600);border:none;padding:.32rem .8rem;
+  border-radius:var(--radius-pill);font-size:.74rem;cursor:pointer;font-weight:700;
+}
+.compare-empty-msg{text-align:center;color:var(--ink-500);padding:2rem 1rem;}
+
+/* ============================== RECENTLY VIEWED ============================== */
+.recent-strip{display:flex;gap:1rem;overflow-x:auto;padding-bottom:.7rem;}
+.recent-strip::-webkit-scrollbar{height:6px;}
+.recent-mini-card{
+  flex-shrink:0;width:150px;background:var(--paper-0);border:1px solid var(--line);border-radius:var(--radius-md);
+  overflow:hidden;cursor:pointer;transition:.2s;
+}
+.recent-mini-card:hover{transform:translateY(-3px);box-shadow:0 10px 20px -12px rgba(var(--shadow-color),.5);}
+.recent-mini-card img{width:100%;height:92px;object-fit:cover;display:block;}
+.recent-mini-card .rmc-name{font-size:.78rem;font-weight:700;color:var(--forest-800);padding:.5rem .6rem .6rem;line-height:1.3;}
+
+/* ============================== SEARCH AUTOCOMPLETE ============================== */
+.search-container{position:relative;}
+.search-autocomplete{
+  position:absolute;top:100%;left:0;right:0;background:var(--paper-0);border:1px solid var(--line);
+  border-top:none;border-radius:0 0 var(--radius-md) var(--radius-md);box-shadow:0 16px 30px -18px rgba(var(--shadow-color),.55);
+  z-index:45;max-height:360px;overflow-y:auto;display:none;
+}
+.search-autocomplete.show{display:block;}
+.sac-item{display:flex;align-items:center;gap:10px;padding:.6rem .9rem;cursor:pointer;transition:.15s;border-bottom:1px solid var(--paper-100);}
+.sac-item:last-child{border-bottom:none;}
+.sac-item:hover{background:var(--forest-50);}
+.sac-item img{width:34px;height:34px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--forest-100);}
+.sac-item .sac-text{display:flex;flex-direction:column;min-width:0;}
+.sac-item .sac-name{font-weight:700;font-size:.88rem;color:var(--forest-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sac-item .sac-meta{font-size:.74rem;color:var(--ink-500);}
+
+/* ============================== QUICK VIEW: GALLERY, RELATED, VENDOR-MORE ============================== */
+.qv-gallery{margin-bottom:1rem;}
+.qv-main-wrap{position:relative;}
+.qv-main-img{width:100%;height:260px;object-fit:cover;border-radius:14px;display:block;background:var(--forest-100);}
+.qv-main-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.9);border:none;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;cursor:pointer;color:var(--ink-900);box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+.qv-main-arrow.prev{left:10px;}
+.qv-main-arrow.next{right:10px;}
+.qv-thumbs{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap;}
+.qv-thumb{width:56px;height:56px;border-radius:10px;object-fit:cover;cursor:pointer;border:2px solid transparent;opacity:.7;transition:.15s;}
+.qv-thumb:hover{opacity:1;}
+.qv-thumb.active{border-color:var(--turmeric-500);opacity:1;}
+.related-section{margin-top:1.3rem;padding-top:1rem;border-top:1px dashed var(--line);}
+.related-section h4{font-size:.95rem;color:var(--forest-800);margin-bottom:.6rem;display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;}
+.related-strip{display:flex;gap:.7rem;overflow-x:auto;padding-bottom:.4rem;}
+.mini-product-card{flex-shrink:0;width:118px;cursor:pointer;}
+.mini-product-card img{width:100%;height:78px;object-fit:cover;border-radius:10px;display:block;margin-bottom:4px;background:var(--forest-100);}
+.mini-product-card .mpc-name{font-size:.74rem;font-weight:700;color:var(--forest-800);line-height:1.25;}
+
+/* ============================== PRODUCTS TAB: DAILY TILES (name always visible) ============================== */
+.modern-toolbar{
+  display:flex;gap:.9rem;flex-wrap:wrap;align-items:center;margin-bottom:1.4rem;
+  background:var(--paper-0);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:.65rem .8rem;box-shadow:0 12px 28px -22px rgba(var(--shadow-color),.55);
+}
+.modern-search-box{
+  flex:1;min-width:230px;position:relative;display:flex;align-items:center;gap:.6rem;
+  background:var(--paper-50);border:2px solid transparent;border-radius:var(--radius-pill);
+  padding:.6rem .6rem .6rem 1.15rem;transition:.2s;
+}
+.modern-search-box:focus-within{border-color:var(--forest-500);background:var(--paper-0);box-shadow:0 0 0 4px var(--forest-100);}
+.modern-search-box i.fa-search{color:var(--ink-300);font-size:1rem;transition:.2s;flex-shrink:0;}
+.modern-search-box:focus-within i.fa-search{color:var(--forest-600);}
+.modern-search-box input{border:none;background:transparent;flex:1;font-size:.95rem;color:var(--ink-900);outline:none;padding:.35rem 0;min-width:0;}
+.search-clear-x{
+  width:24px;height:24px;border-radius:50%;border:none;background:var(--paper-200);color:var(--ink-500);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.68rem;flex-shrink:0;
+  opacity:0;pointer-events:none;transition:.15s;
+}
+.search-clear-x.show{opacity:1;pointer-events:auto;}
+.search-clear-x:hover{background:var(--laterite-500);color:#fff;}
+.modern-sort-wrap{position:relative;flex-shrink:0;display:flex;align-items:center;}
+.modern-sort-wrap i{position:absolute;left:.95rem;color:var(--forest-600);font-size:.82rem;pointer-events:none;z-index:1;}
+.modern-sort-wrap .sort-select{padding-left:2.3rem;}
+.gallery-grid.modern{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.3rem;}
+.daily-tile{
+  background:var(--paper-0);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;
+  cursor:pointer;transition:.25s;box-shadow:0 8px 18px -14px rgba(var(--shadow-color),.45);
+}
+.daily-tile:hover{transform:translateY(-4px);box-shadow:0 16px 28px -16px rgba(var(--shadow-color),.5);}
+.daily-tile-img-wrap{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--forest-100);}
+.daily-tile-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s var(--ease);}
+.daily-tile:hover .daily-tile-img-wrap img{transform:scale(1.08);}
+.daily-tile-caption{padding:.7rem .85rem .85rem;}
+.dtc-name{font-weight:700;font-size:.9rem;color:var(--forest-900);line-height:1.3;}
+.dtc-seller{font-size:.76rem;color:var(--ink-500);margin-top:3px;display:flex;align-items:center;gap:5px;}
+.gc-count{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:var(--radius-pill);display:flex;align-items:center;gap:4px;}
+.gc-cat{position:absolute;top:8px;left:8px;background:var(--turmeric-500);color:var(--forest-950);font-size:.64rem;font-weight:800;padding:2px 9px;border-radius:var(--radius-pill);text-transform:uppercase;}
+.tile-wish-btn{position:absolute;bottom:10px;right:10px;z-index:5;}
+
+/* ============================== LIGHTBOX (gallery multi-image viewer) ============================== */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(6,14,10,.94);z-index:200;display:none;align-items:center;justify-content:center;padding:2rem 1.2rem;}
+.lightbox-overlay.active{display:flex;}
+.lightbox-box{max-width:880px;width:100%;color:#fff;}
+.lightbox-main{position:relative;border-radius:16px;overflow:hidden;background:#000;}
+.lightbox-main img{width:100%;max-height:56vh;object-fit:contain;display:block;margin:0 auto;background:#111;}
+.lightbox-nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.05rem;cursor:pointer;transition:.2s;}
+.lightbox-nav-btn:hover{background:rgba(255,255,255,.3);}
+.lightbox-nav-btn.prev{left:10px;}
+.lightbox-nav-btn.next{right:10px;}
+.lightbox-close{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;line-height:1;}
+.lightbox-thumbs{display:flex;gap:.6rem;margin-top:.9rem;overflow-x:auto;}
+.lightbox-thumbs img{width:62px;height:62px;object-fit:cover;border-radius:8px;cursor:pointer;opacity:.5;flex-shrink:0;border:2px solid transparent;}
+.lightbox-thumbs img.active{opacity:1;border-color:var(--turmeric-500);}
+.lightbox-info{margin-top:1rem;text-align:center;}
+.lightbox-info h4{font-family:var(--font-display);font-size:1.2rem;font-weight:600;}
+.lightbox-info p{color:#cfe0d3;font-size:.86rem;margin-top:.2rem;}
+.lightbox-info .lb-actions{display:flex;gap:.6rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap;}
+@media (max-width:640px){
+  .compare-fab{bottom:5.6rem;right:1rem;width:50px;height:50px;font-size:1.1rem;}
+  .lightbox-close{top:-38px;font-size:1.5rem;}
+}
+
 .vendor-reg-btn{
   background:var(--laterite-500);color:#fff;border:none;padding:.85rem 2.4rem;border-radius:var(--radius-pill);
   font-size:1.08rem;font-weight:700;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:10px;
   margin-top:1.5rem;box-shadow:0 10px 22px -10px rgba(181,70,31,.55);text-decoration:none;
 }
 .vendor-reg-btn:hover{background:var(--laterite-600);transform:translateY(-2px);}
+.no-fee-notice{
+  display:flex;align-items:flex-start;gap:12px;background:var(--laterite-100);border:1px solid var(--laterite-500);
+  color:var(--laterite-600);padding:.9rem 1.2rem;border-radius:var(--radius-md);font-size:.92rem;line-height:1.6;
+  margin-bottom:1.4rem;
+}
+.no-fee-notice i{margin-top:2px;flex-shrink:0;font-size:1.1rem;}
+.no-fee-notice strong{color:var(--laterite-600);}
 .reg-section{margin-top:2.4rem;border-top:2px dashed var(--line);padding-top:2rem;text-align:center;}
 .reg-section .reg-sub{margin-top:.5rem;color:var(--ink-500);font-size:.94rem;}
 
@@ -1252,7 +1486,7 @@ a{color:inherit;}
     <div class="brand">
         <div class="brand-badge"><i class="fas fa-seedling"></i></div>
         <div>
-            <h1><span class="en-only">Gadchiroli · District Exhibition – Agro, Forest & Industrial</span><span class="mr-only">गडचिरोली · जिल्हा प्रदर्शन – कृषी, वन व औद्योगिक</span></h1>
+            <h1><span class="en-only">Unexplored Gadchiroli – Agro, Forest & Industrial</span><span class="mr-only">अनएक्सप्लोर्ड गडचिरोली – कृषी, वन आणि औद्योगिक</span></h1>
             <div class="subhead">
                 <span class="en-only">District Collector Office · Non-Profit · Free Promotion</span><span class="mr-only">जिल्हाधिकारी कार्यालय · ना-नफा · विनामूल्य प्रोत्साहन</span>
                 <span class="dot"></span>
@@ -1295,7 +1529,7 @@ a{color:inherit;}
 <div class="breadcrumb-bar">
     <div class="breadcrumb-inner">
         <i class="fas fa-house home-crumb"></i>
-        <span class="en-only">Gadchiroli District Exhibition</span><span class="mr-only">गडचिरोली जिल्हा प्रदर्शन</span>
+        <span class="en-only">Unexplored Gadchiroli – Agro, Forest & Industrial</span><span class="mr-only">अनएक्सप्लोर्ड गडचिरोली – कृषी, वन आणि औद्योगिक</span>
         <span class="breadcrumb-sep">/</span>
         <span class="breadcrumb-current" id="breadcrumbCurrent"><span class="en-only">Home</span><span class="mr-only">मुख्यपृष्ठ</span></span>
     </div>
@@ -1461,6 +1695,12 @@ a{color:inherit;}
             <button class="more-btn" id="goToProductBtn2"><i class="fas fa-arrow-right"></i> <span class="en-only">See all <span id="btnProductCountEn">43</span>+ products →</span><span class="mr-only">सर्व <span id="btnProductCountMr">४३</span>+ उत्पादने पहा →</span></button>
         </div>
 
+        <!-- ===== RECENTLY VIEWED ===== -->
+        <div id="recentlyViewedSection" style="display:none;">
+            <div class="section-title"><i class="fas fa-clock-rotate-left"></i> <span class="en-only">Recently Viewed</span><span class="mr-only">अलीकडे पाहिलेले</span></div>
+            <div class="recent-strip" id="recentlyViewedStrip"></div>
+        </div>
+
         <!-- ===== VISITOR INSIGHTS ===== -->
         <div class="section-title"><i class="fas fa-chart-line"></i> <span class="en-only">Visitor Insights</span><span class="mr-only">पर्यटक अंतर्दृष्टी</span></div>
         <p class="section-sub"><span class="en-only">Live engagement snapshot for this portal, updated automatically.</span><span class="mr-only">या पोर्टलसाठी थेट सहभाग स्नॅपशॉट, आपोआप अद्यतनित.</span></p>
@@ -1491,9 +1731,27 @@ a{color:inherit;}
         <p class="insights-note" id="insightsOfflineNote" style="display:none;"><i class="fas fa-triangle-exclamation" style="color:var(--laterite-500);"></i> <span class="en-only">Live counter temporarily unreachable (network restriction) — showing "—" until it reconnects.</span><span class="mr-only">थेट काउंटर सध्या उपलब्ध नाही (नेटवर्क प्रतिबंध) — पुन्हा कनेक्ट होईपर्यंत "—" दाखवत आहे.</span></p>
     </div>
 
-    <!-- ===== PRODUCT PANE ===== -->
+    <!-- ===== PRODUCT PANE (daily curated picks by category) ===== -->
     <div id="productPane" class="tab-pane">
         <div class="section-title"><i class="fas fa-apple-alt"></i> <span class="en-only">Browse Products</span><span class="mr-only">उत्पादने ब्राउझ करा</span></div>
+        <p class="section-sub"><span class="en-only">A fresh selection from every category, reshuffled daily so no product is always stuck at the bottom — tap "Show all" to browse the complete category, or open any photo for full details.</span><span class="mr-only">प्रत्येक श्रेणीतून दररोज नव्याने निवडलेली उत्पादने, जेणेकरून कोणतेही उत्पादन नेहमी शेवटी राहणार नाही — संपूर्ण श्रेणी पाहण्यासाठी "सर्व पहा" वर टॅप करा, किंवा संपूर्ण तपशिलांसाठी कोणताही फोटो उघडा.</span></p>
+        <div class="modern-toolbar">
+            <div class="modern-search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="dailySearchInput" placeholder="Search for products, sellers, locations..." autocomplete="off" />
+                <button class="search-clear-x" id="dailySearchClearBtn" type="button" aria-label="Clear search"><i class="fas fa-times"></i></button>
+                <div class="search-autocomplete" id="dailySearchAutocomplete"></div>
+            </div>
+            <div class="modern-sort-wrap">
+                <i class="fas fa-arrow-down-wide-short"></i>
+                <select class="sort-select" id="dailySortSelect">
+                    <option value="default">Sort: Featured</option>
+                    <option value="az">Name: A → Z</option>
+                    <option value="za">Name: Z → A</option>
+                    <option value="cert">Certificate No.</option>
+                </select>
+            </div>
+        </div>
         <div class="quick-cat-chips" id="quickCatChips">
             <button class="cat-chip active" data-cat="all"><i class="fas fa-border-all"></i> <span class="en-only">All</span><span class="mr-only">सर्व</span></button>
             <button class="cat-chip" data-cat="Food"><i class="fas fa-utensils"></i> <span class="en-only">Food</span><span class="mr-only">अन्न</span></button>
@@ -1501,9 +1759,33 @@ a{color:inherit;}
             <button class="cat-chip" data-cat="Woodcraft"><i class="fas fa-tree"></i> <span class="en-only">Woodcraft</span><span class="mr-only">लाकडी कला</span></button>
             <button class="cat-chip" data-cat="Industrial"><i class="fas fa-industry"></i> <span class="en-only">Industrial</span><span class="mr-only">औद्योगिक</span></button>
         </div>
+        <div id="dailyProductSections"></div>
+        <div id="dailySearchResultsWrap" style="display:none;">
+            <div class="result-count"><strong id="dailyResultCountNum">0</strong> <span class="en-only">products found</span><span class="mr-only">उत्पादने सापडली</span></div>
+            <div class="gallery-grid modern daily-tile-grid" id="dailySearchGrid" style="margin-top:1rem;"></div>
+            <div id="dailyNoResults" style="display:none;" class="no-results">
+                <i class="fas fa-search" style="font-size:2rem; display:block; margin-bottom:0.5rem;"></i>
+                <span class="en-only">No products found matching your search.</span>
+                <span class="mr-only">तुमच्या शोधाशी जुळणारी कोणतीही उत्पादने सापडली नाहीत.</span>
+            </div>
+        </div>
+        <div style="text-align:center; margin:1rem 0 2rem;">
+            <p style="color:var(--ink-500); font-size:.9rem;">
+                <i class="fas fa-magnifying-glass"></i>
+                <span class="en-only">Looking for the complete detailed listing with seller contact info? Visit the <strong>Gallery</strong> tab.</span>
+                <span class="mr-only">विक्रेता संपर्क तपशिलांसह संपूर्ण यादी हवी आहे? <strong>गॅलरी</strong> टॅबला भेट द्या.</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== GALLERY PANE (full searchable catalog, all products with complete details) ===== -->
+    <div id="galleryPane" class="tab-pane">
+        <div class="section-title"><i class="fas fa-images"></i> <span class="en-only">Product Gallery</span><span class="mr-only">उत्पादन गॅलरी</span></div>
+        <p class="section-sub"><span class="en-only">The complete, searchable catalog of everything grown, gathered, crafted and produced across the district — with full seller details, certificates and multi-image previews.</span><span class="mr-only">जिल्ह्यात पिकवलेल्या, गोळा केलेल्या, बनवलेल्या व उत्पादित केलेल्या सर्व वस्तूंची संपूर्ण, शोधण्यायोग्य यादी — विक्रेता तपशील, प्रमाणपत्रे व बहु-छायाचित्रांसह.</span></p>
         <div class="search-container">
             <i class="fas fa-search" style="color:var(--ink-300); font-size:1.05rem;"></i>
-            <input type="text" id="productSearch" placeholder="Search for products, sellers, locations..." />
+            <input type="text" id="productSearch" placeholder="Search for products, sellers, locations..." autocomplete="off" />
+            <div class="search-autocomplete" id="searchAutocomplete"></div>
             <select id="categoryFilter">
                 <option value="all"><span class="category-label-en">All Categories</span><span class="category-label-mr">सर्व श्रेणी</span></option>
                 <option value="Food"><span class="category-label-en">Food</span><span class="category-label-mr">अन्न</span></option>
@@ -1516,7 +1798,7 @@ a{color:inherit;}
         </div>
 
         <div class="controls-row">
-            <div class="result-count"><strong id="resultCountNum">43</strong> <span class="en-only">products found</span><span class="mr-only">उत्पादने सापडली</span></div>
+            <div class="result-count"><strong id="resultCountNum">43</strong> <span class="en-only">products found</span><span class="mr-only">उत्पादने सापडली</span> <span style="color:var(--ink-300);">·</span> <span class="en-only" style="color:var(--ink-500);font-weight:500;"><i class="fas fa-code-compare"></i> Tap "Compare" on up to 3 products to compare them side by side</span><span class="mr-only" style="color:var(--ink-500);font-weight:500;"><i class="fas fa-code-compare"></i> ३ पर्यंत उत्पादने एकत्र तुलना करण्यासाठी "तुलना करा" वर टॅप करा</span></div>
             <div class="view-sort">
                 <select class="sort-select" id="sortSelect">
                     <option value="default">Sort: Featured</option>
@@ -1551,16 +1833,14 @@ a{color:inherit;}
         </div>
     </div>
 
-    <!-- ===== GALLERY PANE ===== -->
-    <div id="galleryPane" class="tab-pane">
-        <div class="section-title"><i class="fas fa-images"></i> <span class="en-only">Product Gallery</span><span class="mr-only">उत्पादन गॅलरी</span></div>
-        <p class="section-sub"><span class="en-only">A visual look at everything grown, gathered, crafted and produced across the district.</span><span class="mr-only">जिल्ह्यात पिकवलेल्या, गोळा केलेल्या, बनवलेल्या व उत्पादित केलेल्या सर्व वस्तूंचे दृश्य स्वरूप.</span></p>
-        <div class="gallery-grid" id="galleryGrid"></div>
-    </div>
-
     <!-- ===== VENDOR PANE ===== -->
     <div id="vendorPane" class="tab-pane">
         <div class="section-title"><i class="fas fa-store"></i> <span class="en-only">Vendor Information</span><span class="mr-only">विक्रेता माहिती</span></div>
+        <div class="no-fee-notice">
+            <i class="fas fa-shield-halved"></i>
+            <span class="en-only"><strong>Registration on this portal is completely free.</strong> The District Collector Office, Gadchiroli never charges any fee or amount for vendor registration. If anyone asks you for payment in this regard, please inform the District Collector Office, Gadchiroli immediately.</span>
+            <span class="mr-only"><strong>या पोर्टलवरील नोंदणी पूर्णपणे विनामूल्य आहे.</strong> जिल्हाधिकारी कार्यालय, गडचिरोली विक्रेता नोंदणीसाठी कधीही कोणतेही शुल्क किंवा रक्कम आकारत नाही. याबाबत कोणी पैशांची मागणी केल्यास, कृपया त्वरित जिल्हाधिकारी कार्यालय, गडचिरोली यांना कळवा.</span>
+        </div>
         <p style="margin-bottom:1.5rem; font-size:1.1rem; color:var(--ink-700);">
             <span class="en-only">List of all registered vendors with their products and contact details.</span>
             <span class="mr-only">सर्व नोंदणीकृत विक्रेत्यांची त्यांच्या उत्पादनांसह आणि संपर्क तपशिलांसह यादी.</span>
@@ -1751,7 +2031,7 @@ a{color:inherit;}
                 <div class="card"><h4><i class="fas fa-handshake"></i> <span class="en-only">Support for Producers</span><span class="mr-only">उत्पादकांसाठी सहाय्य</span></h4><p><span class="en-only">We provide training, branding support, and market linkages to SHGs, tribal groups, and individual producers at no cost.</span><span class="mr-only">आम्ही स्वयंसहाय्यता समूह, आदिवासी गट आणि वैयक्तिक उत्पादकांना विनामूल्य प्रशिक्षण, ब्रँडिंग सहाय्य आणि बाजारपेठेचे दुवे प्रदान करतो.</span></p></div>
                 <div class="card"><h4><i class="fas fa-seedling"></i> <span class="en-only">Sustainability Focus</span><span class="mr-only">शाश्वततेवर भर</span></h4><p><span class="en-only">All products promoted are organic, natural, or crafted with eco-friendly practices, preserving the environment.</span><span class="mr-only">प्रोत्साहित केलेली सर्व उत्पादने सेंद्रिय, नैसर्गिक किंवा पर्यावरणपूरक पद्धतींनी बनवलेली आहेत, पर्यावरण जतन करतात.</span></p></div>
             </div>
-            <p><span class="en-only">📍 Near Collector Office, Complex Area, Mul Road, Gadchiroli – 442605<br>📞 07132-222001 / 8087000081<br>✉️ collector.gadchiroli@maharashtra.gov.in</span><span class="mr-only">📍 जिल्हाधिकारी कार्यालयाजवळ, कॉम्प्लेक्स एरिया, मुळ रोड, गडचिरोली – ४४२६०५<br>📞 ०७१३२-२२२००१  / ८०८७००००८१ <br>✉️ collector.gadchiroli@maharashtra.gov.in</span></p>
+            <p><span class="en-only">📍 Near Collector Office, Complex Area, Mul Road, Gadchiroli – 442605<br>📞 07132-222001 / 8087000081<br>✉️ collector.gadchiroli@maharashtra.gov.in</span><span class="mr-only">📍 जिल्हाधिकारी कार्यालयाजवळ, कॉम्प्लेक्स एरिया, मुळ रोड, गडचिरोली – ४४२६०५<br>📞 ०७१३२-२२२००१ / ८०८७००००८१ <br>✉️ collector.gadchiroli@maharashtra.gov.in</span></p>
             <div class="contact-row">
                 <div><i class="fas fa-user-tie"></i> <strong><span class="en-only">District Collector:</span><span class="mr-only">जिल्हाधिकारी:</span></strong> <span class="collector-name-en">Shri Avishyant Panda</span><span class="collector-name-mr">श्री अविश्यंत पांडा</span></div>
                 <div><i class="fas fa-calendar-alt"></i> <span class="en-only">Helpdesk:</span><span class="mr-only">मदत केंद्र:</span> Mon–Fri 9.45am–6.15pm</div>
@@ -1820,13 +2100,12 @@ a{color:inherit;}
         <div class="important-links">
             <div class="il-heading"><span class="en-only">Important Links</span><span class="mr-only">महत्त्वाचे दुवे</span></div>
             <div class="il-row">
+                <a href="https://www.india.gov.in" target="_blank" rel="noopener"><i class="fas fa-flag"></i> Government of India</a>
+                <a href="https://www.nic.in" target="_blank" rel="noopener"><i class="fas fa-server"></i> National Informatics Centre (NIC)</a>
                 <a href="https://www.maharashtra.gov.in" target="_blank" rel="noopener"><i class="fas fa-landmark"></i> Government of Maharashtra</a>
-                <a href="https://www.india.gov.in" target="_blank" rel="noopener"><i class="fas fa-flag"></i> National Portal of India</a>
-                <a href="https://www.digitalindia.gov.in" target="_blank" rel="noopener"><i class="fas fa-shield-halved"></i> Digital India</a>
+                <a href="https://gadchiroli.gov.in" target="_blank" rel="noopener"><i class="fas fa-map-location-dot"></i> Gadchiroli District Website</a>
                 <a href="https://aaplesarkar.mahaonline.gov.in" target="_blank" rel="noopener"><i class="fas fa-user-check"></i> Aaple Sarkar</a>
-                <a href="https://www.mahaonline.gov.in" target="_blank" rel="noopener"><i class="fas fa-globe"></i> MahaOnline</a>
                 <a href="https://www.midcindia.org" target="_blank" rel="noopener"><i class="fas fa-industry"></i> MIDC</a>
-                <a href="https://data.gov.in" target="_blank" rel="noopener"><i class="fas fa-database"></i> Open Government Data</a>
             </div>
         </div>
         <div class="footer-share-qr">
@@ -1863,7 +2142,7 @@ a{color:inherit;}
 
 <!-- ===== PRODUCT QUICK VIEW POPUP (enhanced with full details) ===== -->
 <div class="popup-overlay quickview-popup" id="quickViewPopup">
-    <div class="popup-box" style="max-width:560px;">
+    <div class="popup-box" style="max-width:660px;max-height:88vh;overflow-y:auto;">
         <button class="popup-close" id="quickViewClose">&times;</button>
         <button class="popup-translate-btn" id="quickViewTranslateBtn"><i class="fas fa-language"></i> <span class="en-only">मराठीत वाचा</span><span class="mr-only">Read in English</span></button>
         <h3><i class="fas fa-eye"></i> <span class="en-only">Product Details</span><span class="mr-only">उत्पादन तपशील</span></h3>
@@ -1966,6 +2245,25 @@ a{color:inherit;}
         <div style="display:flex; gap:.6rem; flex-wrap:wrap;">
             <button class="popup-btn" id="popupViewBtn"><i class="fas fa-arrow-right"></i> <span class="en-only">View Product</span><span class="mr-only">उत्पादन पहा</span></button>
             <button class="popup-btn" id="popupShareBtn" style="background:var(--laterite-500);"><i class="fas fa-share-alt"></i> <span class="en-only">Share</span><span class="mr-only">शेअर करा</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== PRODUCT COMPARISON FAB — always on top, opens the comparison popup directly ===== -->
+<button class="compare-fab" id="compareFab" title="View comparison" aria-label="View product comparison">
+    <i class="fas fa-code-compare"></i>
+    <span class="compare-fab-badge" id="compareFabBadge">0</span>
+</button>
+
+<!-- ===== PRODUCT COMPARISON MODAL ===== -->
+<div class="popup-overlay" id="compareModal">
+    <div class="popup-box compare-modal-box">
+        <button class="popup-close" id="compareModalClose">&times;</button>
+        <h3><i class="fas fa-code-compare"></i> <span class="en-only">Compare Products</span><span class="mr-only">उत्पादनांची तुलना करा</span></h3>
+        <p class="section-sub" style="margin:-.4rem 0 .8rem;font-size:.86rem;"><i class="fas fa-circle-info"></i> <span class="en-only">Comparison is limited to products within the same category.</span><span class="mr-only">तुलना फक्त एकाच श्रेणीतील उत्पादनांसाठी मर्यादित आहे.</span></p>
+        <div id="compareModalBody"></div>
+        <div style="text-align:center;margin-top:1rem;">
+            <button class="compare-clear-btn" id="compareClearBtn" style="color:var(--ink-700);border-color:var(--line);"><i class="fas fa-trash"></i> <span class="en-only">Clear All</span><span class="mr-only">सर्व साफ करा</span></button>
         </div>
     </div>
 </div>
@@ -2149,6 +2447,214 @@ a{color:inherit;}
 
     // Combine all products
     const allProducts = [...products, ...industrialProducts];
+
+    // ============================================================
+    //  MULTI-IMAGE GALLERY HELPER
+    //  Every product supports an `images` array (as vendors upload
+    //  more photos via the registration form). Until a vendor has
+    //  uploaded extra photos, we assemble a small gallery using the
+    //  primary photo plus other verified photos from the same
+    //  category, so every product already previews the multi-image
+    //  experience described in the vendor registration form.
+    // ============================================================
+    function getProductImages(p) {
+        if (p.images && p.images.length) return p.images;
+        const pool = allProducts.filter(x => x.cat === p.cat && x.id !== p.id && x.img);
+        const extras = [];
+        for (let i = 0; i < pool.length && extras.length < 2; i++) {
+            const idx = (p.id * 7 + i * 13) % pool.length;
+            const cand = pool[idx].img;
+            if (cand && cand !== p.img && !extras.includes(cand)) extras.push(cand);
+        }
+        return [p.img, ...extras].filter(Boolean);
+    }
+
+    // ============================================================
+    //  RATINGS & REVIEWS — real, user-submitted only (no dummy data).
+    //  Every product starts with no rating. Visitors can add their
+    //  own star rating + review from the Quick View popup; this is
+    //  stored per-browser and used to compute the shown average.
+    // ============================================================
+    function renderStars(rating) {
+        const full = Math.round(rating);
+        let html = '';
+        for (let i = 1; i <= 5; i++) html += `<i class="fas fa-star${i > full ? ' star-empty' : ''}"></i>`;
+        return html;
+    }
+    // In-browser "write a review" additions (kept for this browser via localStorage)
+    function getStoredReviews(productId) {
+        try {
+            const raw = localStorage.getItem('gdc_reviews_' + productId);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+    }
+    function addStoredReview(productId, review) {
+        try {
+            const list = getStoredReviews(productId);
+            list.unshift(review);
+            localStorage.setItem('gdc_reviews_' + productId, JSON.stringify(list));
+        } catch (e) { /* storage unavailable */ }
+    }
+    function computeAggregateRating(productId) {
+        const reviews = getStoredReviews(productId);
+        if (reviews.length === 0) return null;
+        const avg = reviews.reduce((s, r) => s + (r.stars || 0), 0) / reviews.length;
+        return { rating: Math.round(avg * 10) / 10, count: reviews.length };
+    }
+    function renderRatingBadge(productId) {
+        const agg = computeAggregateRating(productId);
+        if (!agg) {
+            return `<span class="no-rating-badge" data-id="${productId}"><i class="fas fa-star-half-stroke"></i> <span class="en-only">No reviews yet — be the first!</span><span class="mr-only">अद्याप पुनरावलोकन नाही — पहिले व्हा!</span></span>`;
+        }
+        return `<span class="rating-stars">${renderStars(agg.rating)}</span><span class="rating-score">${agg.rating}</span><span class="rating-count">(${agg.count} <span class="en-only">${agg.count > 1 ? 'reviews' : 'review'}</span><span class="mr-only">पुनरावलोकने</span>)</span>`;
+    }
+    function refreshCardRating(productId) {
+        document.querySelectorAll(`.rating-row[data-rating-for="${productId}"]`).forEach(el => {
+            el.innerHTML = renderRatingBadge(productId);
+            const badge = el.querySelector('.no-rating-badge');
+            if (badge) {
+                badge.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const p = allProducts.find(pr => pr.id === productId);
+                    if (p) showQuickView(p);
+                });
+            }
+        });
+    }
+
+    // ============================================================
+    //  VENDOR LOOKUP (seller name → Vendor Info tab)
+    // ============================================================
+    function vendorKeyFor(p) { return p.seller_en + '|' + p.seller_mr; }
+    function goToVendorFromProduct(sellerEn, sellerMr) {
+        const key = sellerEn + '|' + sellerMr;
+        const vendor = currentVendorList.find(v => (v.seller_en + '|' + v.seller_mr) === key);
+        closeQuickView();
+        setActive(3);
+        setTimeout(() => { if (vendor) showVendorDetail(vendor); }, 260);
+    }
+    window.goToVendorFromProduct = goToVendorFromProduct;
+
+    // ============================================================
+    //  RECENTLY VIEWED
+    // ============================================================
+    function getRecentlyViewed() {
+        try { return JSON.parse(localStorage.getItem('gdc_recently_viewed') || '[]'); }
+        catch (e) { return []; }
+    }
+    function addRecentlyViewed(id) {
+        let list = getRecentlyViewed().filter(x => x !== id);
+        list.unshift(id);
+        list = list.slice(0, 10);
+        try { localStorage.setItem('gdc_recently_viewed', JSON.stringify(list)); } catch (e) {}
+        renderRecentlyViewed();
+    }
+    function renderRecentlyViewed() {
+        const ids = getRecentlyViewed();
+        const section = document.getElementById('recentlyViewedSection');
+        const strip = document.getElementById('recentlyViewedStrip');
+        if (!section || !strip) return;
+        const items = ids.map(id => allProducts.find(p => p.id === id)).filter(Boolean);
+        if (items.length === 0) { section.style.display = 'none'; return; }
+        section.style.display = '';
+        strip.innerHTML = items.map(p => `
+            <div class="recent-mini-card" data-id="${p.id}">
+                <img src="${p.img}" alt="${p.name_en}" loading="lazy">
+                <div class="rmc-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></div>
+            </div>
+        `).join('');
+        strip.querySelectorAll('.recent-mini-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = parseInt(card.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                if (p) showQuickView(p);
+            });
+        });
+    }
+
+    // ============================================================
+    //  PRODUCT COMPARISON (max 3)
+    // ============================================================
+    let compareList = [];
+    function isComparing(id) { return compareList.includes(id); }
+    function compareCategory() {
+        if (compareList.length === 0) return null;
+        const first = allProducts.find(p => p.id === compareList[0]);
+        return first ? first.cat : null;
+    }
+    function toggleCompare(id) {
+        if (compareList.includes(id)) {
+            compareList = compareList.filter(x => x !== id);
+        } else {
+            const product = allProducts.find(p => p.id === id);
+            const activeCat = compareCategory();
+            if (activeCat && product && product.cat !== activeCat) {
+                toast(currentLang === 'en' ? `You can only compare products from the same category (${activeCat})` : `तुम्ही फक्त एकाच श्रेणीतील उत्पादनांची तुलना करू शकता (${activeCat})`, 'fa-triangle-exclamation');
+                return;
+            }
+            if (compareList.length >= 3) {
+                toast(currentLang === 'en' ? 'You can compare up to 3 products at a time' : 'तुम्ही एकावेळी जास्तीत जास्त ३ उत्पादनांची तुलना करू शकता', 'fa-triangle-exclamation');
+                return;
+            }
+            compareList.push(id);
+        }
+        document.querySelectorAll(`.compare-chip[data-id="${id}"]`).forEach(chip => chip.classList.toggle('active', compareList.includes(id)));
+        updateCompareChipAvailability();
+        renderCompareBar();
+    }
+    function updateCompareChipAvailability() {
+        const activeCat = compareCategory();
+        document.querySelectorAll('.compare-chip').forEach(chip => {
+            const id = parseInt(chip.dataset.id);
+            const product = allProducts.find(p => p.id === id);
+            const blocked = activeCat && product && product.cat !== activeCat && !compareList.includes(id);
+            chip.classList.toggle('disabled', !!blocked);
+            chip.disabled = !!blocked;
+            chip.title = blocked ? (currentLang === 'en' ? `Only ${activeCat} products can be compared together` : `फक्त ${activeCat} श्रेणीतील उत्पादनांची एकत्र तुलना करता येते`) : 'Add to compare';
+        });
+    }
+    function renderCompareBar() {
+        const fab = document.getElementById('compareFab');
+        const badge = document.getElementById('compareFabBadge');
+        if (!fab) return;
+        fab.classList.toggle('show', compareList.length > 0);
+        if (badge) badge.textContent = compareList.length;
+        // Keep an already-open comparison popup in sync as items are added/removed
+        if (document.getElementById('compareModal').classList.contains('active')) openCompareModal();
+    }
+    function openCompareModal() {
+        // Guarantee a clean, separate popup: close any other open popup first
+        // so the comparison never renders stacked behind another modal.
+        document.querySelectorAll('.popup-overlay.active').forEach(ov => {
+            if (ov.id !== 'compareModal') ov.classList.remove('active');
+        });
+        const body = document.getElementById('compareModalBody');
+        const items = compareList.map(id => allProducts.find(p => p.id === id)).filter(Boolean);
+        if (items.length < 2) {
+            body.innerHTML = `<div class="compare-empty-msg"><i class="fas fa-code-compare" style="font-size:1.8rem;display:block;margin-bottom:.6rem;"></i><span class="en-only">Select at least 2 products to compare.</span><span class="mr-only">तुलना करण्यासाठी किमान २ उत्पादने निवडा.</span></div>`;
+        } else {
+            const rows = [
+                { label_en: 'Photo', label_mr: 'फोटो', render: p => `<img src="${p.img}" alt="${p.name_en}">` },
+                { label_en: 'Name', label_mr: 'नाव', render: p => `<strong><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></strong>` },
+                { label_en: 'Category', label_mr: 'श्रेणी', render: p => p.cat },
+                { label_en: 'Rating', label_mr: 'रेटिंग', render: p => renderRatingBadge(p.id) },
+                { label_en: 'GI Tag', label_mr: 'GI टॅग', render: p => `<span class="en-only">${p.gi}</span><span class="mr-only">${p.gi_mr}</span>` },
+                { label_en: 'Certificate', label_mr: 'प्रमाणपत्र', render: p => p.cert },
+                { label_en: 'Seller', label_mr: 'विक्रेता', render: p => `<span class="seller-en">${p.seller_en}</span><span class="seller-mr">${p.seller_mr}</span>` },
+                { label_en: 'Location', label_mr: 'स्थान', render: p => `<span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span>` },
+                { label_en: 'Description', label_mr: 'वर्णन', render: p => `<span class="desc-en">${p.desc_en}</span><span class="desc-mr">${p.desc_mr}</span>` },
+                { label_en: '', label_mr: '', render: p => `<button class="cmp-remove-btn" data-id="${p.id}"><i class="fas fa-times"></i> <span class="en-only">Remove</span><span class="mr-only">काढा</span></button>` }
+            ];
+            body.innerHTML = `<table class="compare-table"><tbody>
+                ${rows.map(row => `<tr><th><span class="en-only">${row.label_en}</span><span class="mr-only">${row.label_mr}</span></th>${items.map(p => `<td>${row.render(p)}</td>`).join('')}</tr>`).join('')}
+            </tbody></table>`;
+            body.querySelectorAll('.cmp-remove-btn').forEach(btn => {
+                btn.addEventListener('click', () => { toggleCompare(parseInt(btn.dataset.id)); openCompareModal(); });
+            });
+        }
+        document.getElementById('compareModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 
     const stories = [
         {
@@ -2422,13 +2928,46 @@ a{color:inherit;}
     });
 
     // ============================================================
+    //  COMPARE FAB / MODAL WIRING
+    // ============================================================
+    document.getElementById('compareClearBtn').addEventListener('click', () => {
+        compareList.forEach(id => document.querySelectorAll(`.compare-chip[data-id="${id}"]`).forEach(chip => chip.classList.remove('active')));
+        compareList = [];
+        renderCompareBar();
+        openCompareModal();
+    });
+    document.getElementById('compareFab').addEventListener('click', () => {
+        // Comparison is always its own popup — close any product detail view first
+        // so it never renders hidden behind another open popup.
+        if (typeof closeQuickView === 'function') closeQuickView();
+        if (typeof closeVendorDetail === 'function') closeVendorDetail();
+        if (typeof closeStoryDetail === 'function') closeStoryDetail();
+        openCompareModal();
+    });
+    document.getElementById('compareModalClose').addEventListener('click', () => {
+        document.getElementById('compareModal').classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    document.getElementById('compareModal').addEventListener('click', (e) => {
+        if (e.target.id === 'compareModal') { document.getElementById('compareModal').classList.remove('active'); document.body.style.overflow = ''; }
+    });
+
+    // ============================================================
     //  RENDER FUNCTIONS
     // ============================================================
     function renderProductCard(p, index) {
+        const images = getProductImages(p);
+        const imgsHtml = images.map(src => `<img src="${src}" alt="${p.name_en}" loading="lazy">`).join('');
+        const dotsHtml = images.length > 1 ? `<div class="card-img-dots">${images.map((_, i) => `<button data-i="${i}" class="${i === 0 ? 'active' : ''}"></button>`).join('')}</div>` : '';
+        const arrowsHtml = images.length > 1 ? `<button class="card-img-arrow prev" data-dir="-1" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button><button class="card-img-arrow next" data-dir="1" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>` : '';
+        const countHtml = images.length > 1 ? `<span class="card-img-count"><i class="fas fa-images"></i> ${images.length}</span>` : '';
         return `
         <div class="product-card" data-id="${p.id}" data-name="${p.name_en.toLowerCase()} ${p.name_mr.toLowerCase()}" data-seller="${p.seller_en.toLowerCase()} ${p.seller_mr.toLowerCase()}" data-place="${p.place_en.toLowerCase()} ${p.place_mr.toLowerCase()}" data-cert="${p.cert.toLowerCase()}" data-cat="${p.cat}">
-          <div class="card-image">
-            <img src="${p.img}" alt="${p.name_en}" loading="lazy">
+          <div class="card-image" data-img-index="0">
+            <div class="card-img-track" style="transform:translateX(0%);">${imgsHtml}</div>
+            ${countHtml}
+            ${arrowsHtml}
+            ${dotsHtml}
             <div class="card-image-overlay">
               <button class="wish-btn" data-id="${p.id}" title="Save to favourites" aria-label="Save to favourites"><i class="fas fa-heart"></i></button>
               <button class="quick-btn" data-id="${p.id}" title="Quick view" aria-label="Quick view"><i class="fas fa-eye"></i></button>
@@ -2437,17 +2976,19 @@ a{color:inherit;}
           <div class="card-content">
             <div class="name-section">
               <span class="card-number">${index + 1}</span>
-              <span class="product-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
+              <span class="product-name product-name-link" data-id="${p.id}" title="Quick view" style="cursor:pointer;"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
             </div>
+            <div class="rating-row" data-rating-for="${p.id}">${renderRatingBadge(p.id)}</div>
             <div class="badge-row">
               <span class="cat-badge">${p.cat}</span>
               <span class="gi-badge"><i class="fas fa-tag"></i> <span class="gi-label-en">GI: ${p.gi}</span><span class="gi-label-mr">GI: ${p.gi_mr}</span></span>
               <a href="${p.certPdf}" target="_blank" class="cert-badge" title="Download Certificate PDF"><i class="fas fa-file-pdf"></i> <span class="cert-label-en">${p.cert}</span><span class="cert-label-mr">${p.cert}</span></a>
+              <button class="compare-chip" data-id="${p.id}" title="Add to compare"><i class="fas fa-code-compare"></i> <span class="en-only">Compare</span><span class="mr-only">तुलना</span></button>
             </div>
             <div class="description"><i class="fas fa-info-circle"></i> <span class="desc-en">${p.desc_en}</span><span class="desc-mr">${p.desc_mr}</span></div>
             <div class="location"><i class="fas fa-map-pin"></i> <span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span></div>
             <div class="contact-block">
-              <div class="contact-item"><i class="fas fa-user-circle"></i> <strong><span class="seller-label-en">Seller:</span><span class="seller-label-mr">विक्रेता:</span></strong> <span class="seller-en">${p.seller_en}</span><span class="seller-mr">${p.seller_mr}</span></div>
+              <div class="contact-item"><i class="fas fa-user-circle"></i> <strong><span class="seller-label-en">Seller:</span><span class="seller-label-mr">विक्रेता:</span></strong> <a href="#" class="seller-link" data-seller-en="${p.seller_en}" data-seller-mr="${p.seller_mr}"><span class="seller-en">${p.seller_en}</span><span class="seller-mr">${p.seller_mr}</span> <i class="fas fa-arrow-up-right-from-square"></i></a></div>
               <div class="contact-item"><i class="fas fa-mobile-alt"></i> <strong><span class="mobile-label-en">Mobile:</span><span class="mobile-label-mr">मोबाईल:</span></strong> ${p.mobile}</div>
               <div class="contact-item"><i class="fas fa-map-marker-alt"></i> <strong><span class="origin-label-en">Origin:</span><span class="origin-label-mr">मूळ:</span></strong> <span class="origin-en">${p.origin_en}</span><span class="origin-mr">${p.origin_mr}</span></div>
             </div>
@@ -2527,6 +3068,63 @@ a{color:inherit;}
                 if (p) showQuickView(p);
             });
         });
+        root.querySelectorAll('.product-name-link').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(el.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                if (p) showQuickView(p);
+            });
+        });
+        root.querySelectorAll('.seller-link').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                goToVendorFromProduct(el.dataset.sellerEn, el.dataset.sellerMr);
+            });
+        });
+        root.querySelectorAll('.compare-chip').forEach(btn => {
+            const id = parseInt(btn.dataset.id);
+            btn.classList.toggle('active', isComparing(id));
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleCompare(id);
+            });
+        });
+        updateCompareChipAvailability();
+        root.querySelectorAll('.no-rating-badge').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(el.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                if (p) showQuickView(p);
+            });
+        });
+        root.querySelectorAll('.card-image').forEach(cardImg => {
+            const track = cardImg.querySelector('.card-img-track');
+            if (!track) return;
+            const imgCount = track.querySelectorAll('img').length;
+            if (imgCount <= 1) return;
+            const dots = cardImg.querySelectorAll('.card-img-dots button');
+            function goTo(i) {
+                const idx = ((i % imgCount) + imgCount) % imgCount;
+                cardImg.dataset.imgIndex = idx;
+                track.style.transform = `translateX(-${idx * 100}%)`;
+                dots.forEach((d, di) => d.classList.toggle('active', di === idx));
+            }
+            cardImg.querySelectorAll('.card-img-arrow').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    goTo(parseInt(cardImg.dataset.imgIndex || 0) + parseInt(btn.dataset.dir));
+                });
+            });
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    goTo(parseInt(dot.dataset.i));
+                });
+            });
+        });
     }
 
     function wireVendorCopyButtons(root) {
@@ -2570,30 +3168,184 @@ a{color:inherit;}
     const quickViewShareBtn = document.getElementById('quickViewShareBtn');
     let currentQuickViewProduct = null;
 
+    function renderMiniProductCard(p) {
+        return `<div class="mini-product-card" data-id="${p.id}">
+            <img src="${p.img}" alt="${p.name_en}" loading="lazy">
+            <div class="mpc-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></div>
+        </div>`;
+    }
+    function wireMiniProductCards(root) {
+        root.querySelectorAll('.mini-product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = parseInt(card.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                if (p) showQuickView(p);
+            });
+        });
+    }
+
     function showQuickView(product) {
         currentQuickViewProduct = product;
-        const imgHtml = product.img ? `<img src="${product.img}" alt="${product.name_en}" style="width:100%;border-radius:12px;margin-bottom:1rem;max-height:240px;object-fit:cover;">` : '';
+        addRecentlyViewed(product.id);
+        const images = getProductImages(product);
+        const storedReviews = getStoredReviews(product.id);
+        const agg = computeAggregateRating(product.id);
+
+        const galleryHtml = `
+            <div class="qv-gallery">
+                <div class="qv-main-wrap">
+                    <img id="qvMainImg" class="qv-main-img" src="${images[0]}" alt="${product.name_en}">
+                    ${images.length > 1 ? `<button class="qv-main-arrow prev" id="qvPrevBtn"><i class="fas fa-chevron-left"></i></button><button class="qv-main-arrow next" id="qvNextBtn"><i class="fas fa-chevron-right"></i></button>` : ''}
+                </div>
+                ${images.length > 1 ? `<div class="qv-thumbs">${images.map((src, i) => `<img class="qv-thumb${i === 0 ? ' active' : ''}" data-i="${i}" src="${src}" alt="">`).join('')}</div>` : ''}
+            </div>`;
+
+        // Related: same category, different product, up to 6
+        const related = allProducts.filter(p => p.cat === product.cat && p.id !== product.id).slice(0, 8);
+        const relatedPicked = [];
+        for (let i = 0; i < related.length && relatedPicked.length < 6; i++) {
+            const idx = (product.id * 5 + i * 11) % related.length;
+            if (!relatedPicked.includes(related[idx])) relatedPicked.push(related[idx]);
+        }
+        // More from this vendor
+        const moreFromVendor = allProducts.filter(p => p.seller_en === product.seller_en && p.id !== product.id);
+
         quickViewContent.innerHTML = `
-            ${imgHtml}
+            ${galleryHtml}
             <div class="popup-name"><span class="pname-en">${product.name_en}</span><span class="pname-mr">${product.name_mr}</span></div>
+            <div class="rating-row" style="margin:.3rem 0;" data-rating-for="${product.id}">${renderRatingBadge(product.id)}</div>
             <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem;">
                 <span class="cat-badge">${product.cat}</span>
                 <span class="gi-badge"><i class="fas fa-tag"></i> <span class="gi-label-en">GI: ${product.gi}</span><span class="gi-label-mr">GI: ${product.gi_mr}</span></span>
                 <span class="cert-badge"><i class="fas fa-file-pdf"></i> ${product.cert}</span>
+                <button class="compare-chip" id="qvCompareBtn" data-id="${product.id}"><i class="fas fa-code-compare"></i> <span class="en-only">Compare</span><span class="mr-only">तुलना</span></button>
             </div>
             <div class="popup-grid">
-                <div><span class="popup-label"><i class="fas fa-user-circle"></i> <span class="en-only">Seller</span><span class="mr-only">विक्रेता</span></span><div class="popup-value"><span class="seller-en">${product.seller_en}</span><span class="seller-mr">${product.seller_mr}</span></div></div>
+                <div><span class="popup-label"><i class="fas fa-user-circle"></i> <span class="en-only">Seller</span><span class="mr-only">विक्रेता</span></span><div class="popup-value"><a href="#" class="seller-link" id="qvSellerLink"><span class="seller-en">${product.seller_en}</span><span class="seller-mr">${product.seller_mr}</span> <i class="fas fa-arrow-up-right-from-square"></i></a></div></div>
                 <div><span class="popup-label"><i class="fas fa-mobile-alt"></i> <span class="en-only">Mobile</span><span class="mr-only">मोबाईल</span></span><div class="popup-value">${product.mobile}</div></div>
                 <div><span class="popup-label"><i class="fas fa-map-pin"></i> <span class="en-only">Location</span><span class="mr-only">स्थान</span></span><div class="popup-value"><span class="place-en">${product.place_en}</span><span class="place-mr">${product.place_mr}</span></div></div>
                 <div><span class="popup-label"><i class="fas fa-map-marker-alt"></i> <span class="en-only">Origin</span><span class="mr-only">मूळ</span></span><div class="popup-value"><span class="origin-en">${product.origin_en}</span><span class="origin-mr">${product.origin_mr}</span></div></div>
                 <div style="grid-column:1/-1;"><span class="popup-label"><i class="fas fa-info-circle"></i> <span class="en-only">Description</span><span class="mr-only">वर्णन</span></span><div class="popup-value"><span class="desc-en">${product.desc_en}</span><span class="desc-mr">${product.desc_mr}</span></div></div>
                 <div style="grid-column:1/-1;"><span class="popup-label"><i class="fas fa-certificate"></i> <span class="en-only">Certificate</span><span class="mr-only">प्रमाणपत्र</span></span><div class="popup-value">${product.cert}</div></div>
             </div>
+
+            <div class="related-section">
+                <h4><i class="fas fa-star"></i> <span class="en-only">Ratings &amp; Reviews</span><span class="mr-only">रेटिंग व पुनरावलोकने</span></h4>
+                ${agg ? `
+                <div class="review-summary">
+                    <div class="rs-score">${agg.rating}<span style="font-size:1rem;color:var(--ink-500);">/5</span></div>
+                    <div class="rs-side">
+                        <span class="rating-stars">${renderStars(agg.rating)}</span>
+                        <span class="rating-count">${agg.count} <span class="en-only">${agg.count > 1 ? 'reviews' : 'review'}</span><span class="mr-only">पुनरावलोकने</span></span>
+                    </div>
+                </div>
+                <div class="review-list" id="qvReviewList">
+                    ${storedReviews.map(r => `
+                        <div class="review-item">
+                            <div class="ri-head"><span>${r.name}</span><span class="ri-date">${currentLang === 'en' ? 'Just now' : 'आत्ताच'}</span></div>
+                            <div class="ri-stars">${renderStars(r.stars)}</div>
+                            <div class="ri-text"><span class="en-only">${r.en}</span><span class="mr-only">${r.mr || r.en}</span></div>
+                        </div>
+                    `).join('')}
+                </div>` : `
+                <div class="compare-empty-msg" style="padding:1.2rem .5rem;">
+                    <i class="fas fa-comment-slash" style="font-size:1.6rem;display:block;margin-bottom:.5rem;color:var(--ink-300);"></i>
+                    <span class="en-only">No ratings or reviews yet for this product. Be the first to share your experience!</span>
+                    <span class="mr-only">या उत्पादनासाठी अद्याप कोणतेही रेटिंग किंवा पुनरावलोकन नाही. तुमचा अनुभव शेअर करणारे पहिले व्हा!</span>
+                </div>`}
+                <button class="write-review-btn" id="qvWriteReviewBtn"><i class="fas fa-pen"></i> <span class="en-only">Write a Review</span><span class="mr-only">पुनरावलोकन लिहा</span></button>
+                <div class="review-form" id="qvReviewForm">
+                    <div class="review-star-picker" id="qvStarPicker">
+                        <i class="fas fa-star" data-v="1"></i><i class="fas fa-star" data-v="2"></i><i class="fas fa-star" data-v="3"></i><i class="fas fa-star" data-v="4"></i><i class="fas fa-star" data-v="5"></i>
+                    </div>
+                    <input type="text" id="qvReviewName" placeholder="${currentLang === 'en' ? 'Your name (optional)' : 'तुमचे नाव (ऐच्छिक)'}">
+                    <textarea id="qvReviewText" placeholder="${currentLang === 'en' ? 'Share your experience with this product...' : 'या उत्पादनाबद्दल तुमचा अनुभव शेअर करा...'}"></textarea>
+                    <button class="review-form-submit" id="qvReviewSubmit"><i class="fas fa-paper-plane"></i> <span class="en-only">Submit Review</span><span class="mr-only">पुनरावलोकन सबमिट करा</span></button>
+                </div>
+            </div>
+
+            ${relatedPicked.length ? `<div class="related-section">
+                <h4><i class="fas fa-layer-group"></i> <span class="en-only">Similar Products in ${product.cat}</span><span class="mr-only">${product.cat} मधील समान उत्पादने</span></h4>
+                <div class="related-strip">${relatedPicked.map(renderMiniProductCard).join('')}</div>
+            </div>` : ''}
+
+            ${moreFromVendor.length ? `<div class="related-section">
+                <h4><i class="fas fa-store"></i> <span class="en-only">More from this Vendor</span><span class="mr-only">या विक्रेत्याकडून अधिक</span></h4>
+                <div class="related-strip">${moreFromVendor.map(renderMiniProductCard).join('')}</div>
+            </div>` : ''}
         `;
         quickViewCertBtn.href = product.certPdf || '#';
         quickViewCertBtn.target = '_blank';
         quickViewPopup.classList.add('active');
         document.body.style.overflow = 'hidden';
+
+        // Wire gallery nav
+        let qvIdx = 0;
+        const qvMainImg = document.getElementById('qvMainImg');
+        const qvThumbs = quickViewContent.querySelectorAll('.qv-thumb');
+        function setQvImage(i) {
+            qvIdx = ((i % images.length) + images.length) % images.length;
+            qvMainImg.src = images[qvIdx];
+            qvThumbs.forEach((t, ti) => t.classList.toggle('active', ti === qvIdx));
+        }
+        qvThumbs.forEach(t => t.addEventListener('click', () => setQvImage(parseInt(t.dataset.i))));
+        const qvPrevBtn = document.getElementById('qvPrevBtn');
+        const qvNextBtn = document.getElementById('qvNextBtn');
+        if (qvPrevBtn) qvPrevBtn.addEventListener('click', () => setQvImage(qvIdx - 1));
+        if (qvNextBtn) qvNextBtn.addEventListener('click', () => setQvImage(qvIdx + 1));
+
+        // Wire seller link → vendor tab
+        const qvSellerLink = document.getElementById('qvSellerLink');
+        if (qvSellerLink) qvSellerLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            goToVendorFromProduct(product.seller_en, product.seller_mr);
+        });
+
+        // Wire compare chip — same-category rule is now enforced visually here too
+        // (matches the grid cards), and comparing now opens as its own clean
+        // popup instead of floating behind the still-open product detail view.
+        const qvCompareBtn = document.getElementById('qvCompareBtn');
+        if (qvCompareBtn) {
+            qvCompareBtn.classList.toggle('active', isComparing(product.id));
+            updateCompareChipAvailability();
+            qvCompareBtn.addEventListener('click', () => {
+                if (qvCompareBtn.disabled) return;
+                toggleCompare(product.id);
+                qvCompareBtn.classList.toggle('active', isComparing(product.id));
+                if (isComparing(product.id) && compareList.length >= 2) {
+                    // Enough to compare — close this detail view and open the
+                    // comparison as a dedicated, separate popup (no overlap).
+                    closeQuickView();
+                    openCompareModal();
+                } else if (isComparing(product.id)) {
+                    toast(currentLang === 'en' ? `Added to comparison. Pick one more ${product.cat} product to compare.` : `तुलनेत जोडले. तुलना करण्यासाठी आणखी एक ${product.cat} उत्पादन निवडा.`, 'fa-code-compare');
+                }
+            });
+        }
+
+        // Wire write-a-review
+        let pickedStars = 0;
+        const starPicker = document.getElementById('qvStarPicker');
+        const reviewForm = document.getElementById('qvReviewForm');
+        document.getElementById('qvWriteReviewBtn').addEventListener('click', () => reviewForm.classList.toggle('show'));
+        if (starPicker) starPicker.querySelectorAll('i').forEach(star => {
+            star.addEventListener('click', () => {
+                pickedStars = parseInt(star.dataset.v);
+                starPicker.querySelectorAll('i').forEach(s => s.classList.toggle('active', parseInt(s.dataset.v) <= pickedStars));
+            });
+        });
+        document.getElementById('qvReviewSubmit').addEventListener('click', () => {
+            const text = document.getElementById('qvReviewText').value.trim();
+            if (!pickedStars) { toast(currentLang === 'en' ? 'Please select a star rating first' : 'कृपया आधी स्टार रेटिंग निवडा', 'fa-circle-info'); return; }
+            if (!text) { toast(currentLang === 'en' ? 'Please write a few words first' : 'कृपया आधी काही शब्द लिहा', 'fa-circle-info'); return; }
+            const name = document.getElementById('qvReviewName').value.trim() || (currentLang === 'en' ? 'Anonymous Visitor' : 'अनामिक अभ्यागत');
+            addStoredReview(product.id, { name, stars: pickedStars, en: text, mr: text });
+            toast(currentLang === 'en' ? 'Thanks for your review!' : 'तुमच्या पुनरावलोकनासाठी धन्यवाद!', 'fa-check-circle');
+            refreshCardRating(product.id);
+            showQuickView(product);
+        });
+
+        wireMiniProductCards(quickViewContent);
     }
 
     function closeQuickView() {
@@ -2670,7 +3422,7 @@ a{color:inherit;}
 
     quickViewShareBtn.addEventListener('click', function() {
         if (currentQuickViewProduct) {
-            const shareText = `${currentQuickViewProduct.name_en} — Gadchiroli District Exhibition (${currentQuickViewProduct.cert})`;
+            const shareText = `${currentQuickViewProduct.name_en} — Unexplored Gadchiroli – Agro, Forest & Industrial (${currentQuickViewProduct.cert})`;
             if (navigator.share) {
                 navigator.share({ title: 'Gadchiroli Exhibition', text: shareText }).catch(() => {});
             } else if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -2680,6 +3432,244 @@ a{color:inherit;}
                 toast(shareText, 'fa-share-alt');
             }
         }
+    });
+
+    // ============================================================
+    //  DAILY CURATED PRODUCTS (by category, randomized per day)
+    //  A lightweight deterministic PRNG seeded by the calendar date
+    //  + category name, so the "top 8" for each category changes
+    //  every day but stays the same for everyone on a given day —
+    //  and never just mirrors the original listing order (so the
+    //  same item isn't always last).
+    //  NOTE: mulberry32() / getDaySeed() / seededShuffle() are the
+    //  same helpers already defined below for Featured Products —
+    //  reused here (function declarations are hoisted) rather than
+    //  redeclared, to avoid a naming collision.
+    // ============================================================
+    function hashStr(s) {
+        let h = 0;
+        for (let i = 0; i < s.length; i++) { h = (h << 5) - h + s.charCodeAt(i); h |= 0; }
+        return h;
+    }
+
+    const dailyCategoryDefs = [
+        { cat: 'Food', icon: 'fa-utensils', title_en: 'Food & Forest Products', title_mr: 'अन्न व वन उत्पादने' },
+        { cat: 'Medicinal', icon: 'fa-mortar-pestle', title_en: 'Medicinal Products', title_mr: 'औषधी उत्पादने' },
+        { cat: 'Woodcraft', icon: 'fa-tree', title_en: 'Woodcraft & Handicraft', title_mr: 'लाकडी कला व हस्तकला' },
+        { cat: 'Industrial', icon: 'fa-industry', title_en: 'Industrial Products', title_mr: 'औद्योगिक उत्पादने' }
+    ];
+    const DAILY_LIMIT = 8;
+
+    function renderDailyTile(p) {
+        const images = getProductImages(p);
+        return `
+        <div class="daily-tile in-view" data-id="${p.id}">
+          <div class="daily-tile-img-wrap">
+            <span class="gc-cat">${p.cat}</span>
+            ${images.length > 1 ? `<span class="gc-count"><i class="fas fa-images"></i> ${images.length}</span>` : ''}
+            <img src="${images[0]}" alt="${p.name_en}" loading="lazy">
+            <button class="wish-btn tile-wish-btn" data-id="${p.id}" title="Save to favourites" aria-label="Save to favourites"><i class="fas fa-heart"></i></button>
+          </div>
+          <div class="daily-tile-caption">
+            <div class="dtc-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></div>
+            <div class="dtc-seller"><i class="fas fa-user-circle"></i> <span class="seller-en">${p.seller_en}</span><span class="seller-mr">${p.seller_mr}</span></div>
+            <div class="rating-row" data-rating-for="${p.id}" style="margin-top:.35rem;">${renderRatingBadge(p.id)}</div>
+          </div>
+        </div>`;
+    }
+    function wireDailyTiles(root) {
+        if (!root) return;
+        root.querySelectorAll('.daily-tile').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.tile-wish-btn') || e.target.closest('.no-rating-badge')) return;
+                const id = parseInt(card.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                if (p) showQuickView(p);
+            });
+        });
+        root.querySelectorAll('.tile-wish-btn').forEach(btn => {
+            const id = parseInt(btn.dataset.id);
+            btn.classList.toggle('active', wishlist.has(id));
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleWishlist(id, btn);
+            });
+        });
+        root.querySelectorAll('.no-rating-badge').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(el.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                if (p) showQuickView(p);
+            });
+        });
+    }
+
+    let dailySearchQuery = '';
+    let dailySortMode = 'default';
+    let dailyActiveCat = 'all';
+
+    function sortDailyList(list, mode) {
+        const arr = list.slice();
+        if (mode === 'az') arr.sort((a, b) => a.name_en.localeCompare(b.name_en));
+        else if (mode === 'za') arr.sort((a, b) => b.name_en.localeCompare(a.name_en));
+        else if (mode === 'cert') arr.sort((a, b) => (a.cert || '').localeCompare(b.cert || ''));
+        return arr;
+    }
+    function matchesDailySearch(p, q) {
+        const s = q.toLowerCase();
+        return p.name_en.toLowerCase().includes(s) || p.name_mr.toLowerCase().includes(s) ||
+            p.seller_en.toLowerCase().includes(s) || p.seller_mr.toLowerCase().includes(s) ||
+            p.place_en.toLowerCase().includes(s) || p.place_mr.toLowerCase().includes(s);
+    }
+    function getCategoryDailyList(cat) {
+        const daySeed = getDaySeed();
+        const list0 = allProducts.filter(p => p.cat === cat);
+        let list = seededShuffle(list0, mulberry32(daySeed ^ hashStr(cat)));
+        if (dailySortMode !== 'default') list = sortDailyList(list, dailySortMode);
+        return list;
+    }
+
+    function renderDailyProductSections() {
+        const container = document.getElementById('dailyProductSections');
+        const searchWrap = document.getElementById('dailySearchResultsWrap');
+        const searchGrid = document.getElementById('dailySearchGrid');
+        const noResultsEl = document.getElementById('dailyNoResults');
+        const chipsEl = document.getElementById('quickCatChips');
+        if (!container) return;
+
+        const query = dailySearchQuery.trim();
+        if (query !== '') {
+            // FLAT SEARCH MODE — search across the whole catalog
+            container.style.display = 'none';
+            if (chipsEl) chipsEl.style.display = 'none';
+            searchWrap.style.display = '';
+            let list = allProducts.filter(p => matchesDailySearch(p, query));
+            if (dailyActiveCat !== 'all') list = list.filter(p => p.cat === dailyActiveCat);
+            list = sortDailyList(list, dailySortMode);
+            document.getElementById('dailyResultCountNum').textContent = list.length;
+            noResultsEl.style.display = list.length === 0 ? 'block' : 'none';
+            searchGrid.innerHTML = list.map(renderDailyTile).join('');
+            wireDailyTiles(searchGrid);
+            return;
+        }
+
+        // CURATED CATEGORY MODE
+        searchWrap.style.display = 'none';
+        if (chipsEl) chipsEl.style.display = '';
+        container.style.display = '';
+        container.innerHTML = dailyCategoryDefs.map(def => {
+            const shuffled = getCategoryDailyList(def.cat);
+            const showAllInitially = shuffled.length <= DAILY_LIMIT;
+            const initial = showAllInitially ? shuffled : shuffled.slice(0, DAILY_LIMIT);
+            return `
+            <div class="daily-cat-section" data-daily-cat="${def.cat}">
+                <div class="section-title"><i class="fas ${def.icon}"></i> <span class="en-only">${def.title_en}</span><span class="mr-only">${def.title_mr}</span></div>
+                <p class="section-sub" style="margin-top:-0.6rem;">
+                    <span class="en-only">Today's pick of ${shuffled.length} product${shuffled.length === 1 ? '' : 's'} in this category — refreshed daily.</span>
+                    <span class="mr-only">या श्रेणीतील ${shuffled.length} उत्पादनांपैकी आजची निवड — दररोज ताजी होते.</span>
+                </p>
+                <div class="gallery-grid modern daily-tile-grid" id="dailyGrid-${def.cat}">${initial.map(renderDailyTile).join('')}</div>
+                ${!showAllInitially ? `
+                <div style="text-align:center; margin:1.2rem 0 2.2rem;">
+                    <button class="more-btn show-all-cat-btn" data-cat="${def.cat}">
+                        <i class="fas fa-layer-group"></i>
+                        <span class="en-only">Show all ${shuffled.length} products in ${def.title_en} →</span>
+                        <span class="mr-only">${def.title_mr} मधील सर्व ${shuffled.length} उत्पादने पहा →</span>
+                    </button>
+                </div>` : ''}
+            </div>`;
+        }).join('');
+
+        dailyCategoryDefs.forEach(def => wireDailyTiles(document.getElementById(`dailyGrid-${def.cat}`)));
+
+        container.querySelectorAll('.show-all-cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const cat = btn.dataset.cat;
+                const shuffled = getCategoryDailyList(cat);
+                const grid = document.getElementById(`dailyGrid-${cat}`);
+                grid.innerHTML = shuffled.map(renderDailyTile).join('');
+                wireDailyTiles(grid);
+                btn.closest('div').style.display = 'none';
+            });
+        });
+
+        document.querySelectorAll('.daily-cat-section').forEach(sec => {
+            sec.style.display = (dailyActiveCat === 'all' || sec.dataset.dailyCat === dailyActiveCat) ? '' : 'none';
+        });
+    }
+
+    // Search box on the Products tab
+    const dailySearchInput = document.getElementById('dailySearchInput');
+    const dailySearchClearBtn = document.getElementById('dailySearchClearBtn');
+    const dailySearchAutocomplete = document.getElementById('dailySearchAutocomplete');
+    if (dailySearchInput) dailySearchInput.addEventListener('input', () => {
+        dailySearchQuery = dailySearchInput.value;
+        renderDailyProductSections();
+        if (dailySearchClearBtn) dailySearchClearBtn.classList.toggle('show', dailySearchInput.value.trim().length > 0);
+        renderDailyAutocomplete(dailySearchInput.value.trim());
+    });
+    if (dailySearchClearBtn) dailySearchClearBtn.addEventListener('click', () => {
+        dailySearchInput.value = '';
+        dailySearchQuery = '';
+        renderDailyProductSections();
+        dailySearchClearBtn.classList.remove('show');
+        if (dailySearchAutocomplete) { dailySearchAutocomplete.classList.remove('show'); dailySearchAutocomplete.innerHTML = ''; }
+        dailySearchInput.focus();
+    });
+    function renderDailyAutocomplete(query) {
+        if (!dailySearchAutocomplete) return;
+        if (!query) { dailySearchAutocomplete.classList.remove('show'); dailySearchAutocomplete.innerHTML = ''; return; }
+        const q = query.toLowerCase();
+        const matches = allProducts.filter(p =>
+            p.name_en.toLowerCase().includes(q) || p.name_mr.toLowerCase().includes(q) ||
+            p.seller_en.toLowerCase().includes(q) || p.seller_mr.toLowerCase().includes(q) ||
+            p.place_en.toLowerCase().includes(q)
+        ).slice(0, 7);
+        if (matches.length === 0) { dailySearchAutocomplete.classList.remove('show'); dailySearchAutocomplete.innerHTML = ''; return; }
+        dailySearchAutocomplete.innerHTML = matches.map(p => `
+            <div class="sac-item" data-id="${p.id}">
+                <img src="${p.img}" alt="">
+                <div class="sac-text">
+                    <span class="sac-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
+                    <span class="sac-meta"><span class="seller-en">${p.seller_en}</span><span class="seller-mr">${p.seller_mr}</span> · ${p.cat}</span>
+                </div>
+            </div>
+        `).join('');
+        dailySearchAutocomplete.classList.add('show');
+        dailySearchAutocomplete.querySelectorAll('.sac-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const id = parseInt(item.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                dailySearchAutocomplete.classList.remove('show');
+                if (p) {
+                    dailySearchInput.value = p.name_en;
+                    dailySearchQuery = p.name_en;
+                    if (dailySearchClearBtn) dailySearchClearBtn.classList.add('show');
+                    renderDailyProductSections();
+                    showQuickView(p);
+                }
+            });
+        });
+    }
+    if (dailySearchInput) dailySearchInput.addEventListener('focus', () => { if (dailySearchInput.value.trim()) renderDailyAutocomplete(dailySearchInput.value.trim()); });
+    document.addEventListener('click', (e) => {
+        if (dailySearchAutocomplete && !e.target.closest('.modern-search-box')) dailySearchAutocomplete.classList.remove('show');
+    });
+    // Sort dropdown on the Products tab
+    const dailySortSelect = document.getElementById('dailySortSelect');
+    if (dailySortSelect) dailySortSelect.addEventListener('change', () => {
+        dailySortMode = dailySortSelect.value;
+        renderDailyProductSections();
+    });
+    // Quick category filter chips on the Products tab (isolate a category)
+    document.querySelectorAll('#quickCatChips .cat-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('#quickCatChips .cat-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            dailyActiveCat = chip.dataset.cat;
+            renderDailyProductSections();
+        });
     });
 
     // ============================================================
@@ -2873,34 +3863,8 @@ a{color:inherit;}
         document.getElementById('woodcraftGrid').innerHTML = wood.map((p, i) => renderProductCard(p, i + food.length + medicinal.length)).join('');
         document.getElementById('industrialProductGrid').innerHTML = industrial.map((p, i) => renderProductCard(p, i + food.length + medicinal.length + wood.length)).join('');
 
-        // Gallery
-        document.getElementById('galleryGrid').innerHTML = allProducts.map(p => `
-        <div class="product-card gallery-product-card in-view">
-          <div class="card-image">
-            <img src="${p.img}" alt="${p.name_en}" loading="lazy">
-            <div class="card-image-overlay">
-              <button class="quick-btn gallery-quick-btn" data-id="${p.id}" title="Quick view" aria-label="Quick view"><i class="fas fa-eye"></i></button>
-            </div>
-          </div>
-          <div class="card-content">
-            <span class="product-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
-            <div class="badge-row">
-              <span class="cat-badge">${p.cat}</span>
-              <span class="cert-badge"><i class="fas fa-certificate"></i> ${p.cert}</span>
-            </div>
-            <div class="location"><i class="fas fa-map-pin"></i> <span class="place-en">${p.place_en}</span><span class="place-mr">${p.place_mr}</span></div>
-            <button class="vendor-details-btn gallery-quick-btn" data-id="${p.id}"><i class="fas fa-eye"></i> <span class="en-only">View Details</span><span class="mr-only">तपशील पहा</span></button>
-          </div>
-        </div>
-      `).join('');
-        document.querySelectorAll('.gallery-quick-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const id = parseInt(this.dataset.id);
-                const p = allProducts.find(pr => pr.id === id);
-                if (p) showQuickView(p);
-            });
-        });
+        // Daily curated product sections (Products tab)
+        renderDailyProductSections();
 
         // Featured — 8 products, rotating daily, spread across categories
         document.getElementById('featuredGrid').innerHTML = getFeaturedProducts(8).map((p, i) => renderProductCard(p, i)).join('');
@@ -3090,7 +4054,7 @@ a{color:inherit;}
     Submitted via: https://gadchiroli.gov.in/exhibition
     `;
 
-        const subject = encodeURIComponent(`Feedback: ${name} - District Exhibition`);
+        const subject = encodeURIComponent(`Feedback: ${name} - Unexplored Gadchiroli – Agro, Forest & Industrial`);
         const mailtoLink = `mailto:collector.gadchiroli@maharashtra.gov.in?subject=${subject}&body=${encodeURIComponent(body)}`;
         window.location.href = mailtoLink;
 
@@ -3117,7 +4081,7 @@ a{color:inherit;}
         const filtered = category ? allProducts.filter(p => p.cat === category) : allProducts;
         const title = category ? `${category} Products Catalog` : 'Complete Product Catalog';
         let html = `<html><head><title>${title}</title><style>body{font-family:sans-serif;padding:2rem;}h1{color:#1a5a2a;}table{width:100%;border-collapse:collapse;margin-top:1rem;}th{background:#1f4b2e;color:#fff;padding:.5rem;text-align:left;}td,th{border:1px solid #ddd;padding:.5rem;}</style></head><body>`;
-        html += `<h1>${title} - Gadchiroli District Exhibition</h1><p>Generated: ${new Date().toLocaleDateString()}</p><table><tr><th>#</th><th>Product</th><th>Category</th><th>Seller</th><th>Location</th><th>Cert</th></tr>`;
+        html += `<h1>${title} - Unexplored Gadchiroli – Agro, Forest & Industrial</h1><p>Generated: ${new Date().toLocaleDateString()}</p><table><tr><th>#</th><th>Product</th><th>Category</th><th>Seller</th><th>Location</th><th>Cert</th></tr>`;
         filtered.forEach((p, i) => {
             html += `<tr><td>${i+1}</td><td>${p.name_en}</td><td>${p.cat}</td><td>${p.seller_en}</td><td>${p.place_en}</td><td>${p.cert}</td></tr>`;
         });
@@ -3568,7 +4532,7 @@ a{color:inherit;}
     popupShareBtn.addEventListener('click', function() {
         const pid = parseInt(this.dataset.productId);
         const p = allProducts.find(pr => pr.id === pid);
-        const shareText = `${p ? p.name_en : 'Product'} — Gadchiroli District Exhibition (${p ? p.cert : ''})`;
+        const shareText = `${p ? p.name_en : 'Product'} — Unexplored Gadchiroli – Agro, Forest & Industrial (${p ? p.cert : ''})`;
         if (navigator.share) {
             navigator.share({ title: 'Gadchiroli Exhibition', text: shareText }).catch(() => {});
         } else if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -3923,8 +4887,51 @@ a{color:inherit;}
         }
     }
 
-    searchBtn.addEventListener('click', performSearch);
-    searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') performSearch(); });
+    // ============================================================
+    //  SEARCH AUTOCOMPLETE
+    // ============================================================
+    const searchAutocomplete = document.getElementById('searchAutocomplete');
+    function renderAutocomplete(query) {
+        if (!searchAutocomplete) return;
+        if (!query) { searchAutocomplete.classList.remove('show'); searchAutocomplete.innerHTML = ''; return; }
+        const q = query.toLowerCase();
+        const matches = allProducts.filter(p =>
+            p.name_en.toLowerCase().includes(q) || p.name_mr.toLowerCase().includes(q) ||
+            p.seller_en.toLowerCase().includes(q) || p.seller_mr.toLowerCase().includes(q) ||
+            p.place_en.toLowerCase().includes(q)
+        ).slice(0, 7);
+        if (matches.length === 0) { searchAutocomplete.classList.remove('show'); searchAutocomplete.innerHTML = ''; return; }
+        searchAutocomplete.innerHTML = matches.map(p => `
+            <div class="sac-item" data-id="${p.id}">
+                <img src="${p.img}" alt="">
+                <div class="sac-text">
+                    <span class="sac-name"><span class="pname-en">${p.name_en}</span><span class="pname-mr">${p.name_mr}</span></span>
+                    <span class="sac-meta"><span class="seller-en">${p.seller_en}</span><span class="seller-mr">${p.seller_mr}</span> · ${p.cat}</span>
+                </div>
+            </div>
+        `).join('');
+        searchAutocomplete.classList.add('show');
+        searchAutocomplete.querySelectorAll('.sac-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const id = parseInt(item.dataset.id);
+                const p = allProducts.find(pr => pr.id === id);
+                searchAutocomplete.classList.remove('show');
+                if (p) {
+                    searchInput.value = p.name_en;
+                    performSearch();
+                    showQuickView(p);
+                }
+            });
+        });
+    }
+    searchInput.addEventListener('input', () => renderAutocomplete(searchInput.value.trim()));
+    searchInput.addEventListener('focus', () => { if (searchInput.value.trim()) renderAutocomplete(searchInput.value.trim()); });
+    document.addEventListener('click', (e) => {
+        if (searchAutocomplete && !e.target.closest('.search-container')) searchAutocomplete.classList.remove('show');
+    });
+
+    searchBtn.addEventListener('click', () => { performSearch(); if (searchAutocomplete) searchAutocomplete.classList.remove('show'); });
+    searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') { performSearch(); if (searchAutocomplete) searchAutocomplete.classList.remove('show'); } });
     categoryFilter.addEventListener('change', () => {
         performSearch();
         document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === categoryFilter.value));
@@ -3996,9 +5003,9 @@ a{color:inherit;}
     const qrImg = document.getElementById('footerQrImg');
     if (qrImg) qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent(portalUrl);
 
-    document.getElementById('shareWhatsapp').addEventListener('click', () => window.open('https://wa.me/?text=' + encodeURIComponent('Gadchiroli District Exhibition Portal: ' + portalUrl), '_blank'));
+    document.getElementById('shareWhatsapp').addEventListener('click', () => window.open('https://wa.me/?text=' + encodeURIComponent('Unexplored Gadchiroli – Agro, Forest & Industrial: ' + portalUrl), '_blank'));
     document.getElementById('shareFacebook').addEventListener('click', () => window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(portalUrl), '_blank'));
-    document.getElementById('shareTwitter').addEventListener('click', () => window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(portalUrl) + '&text=' + encodeURIComponent('Gadchiroli District Exhibition Portal'), '_blank'));
+    document.getElementById('shareTwitter').addEventListener('click', () => window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(portalUrl) + '&text=' + encodeURIComponent('Unexplored Gadchiroli – Agro, Forest & Industrial'), '_blank'));
     document.getElementById('shareCopyLink').addEventListener('click', () => {
         const finish = () => toast(currentLang === 'en' ? 'Link copied' : 'दुवा कॉपी केला', 'fa-link');
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -4022,6 +5029,7 @@ a{color:inherit;}
     //  INITIAL RENDER
     // ============================================================
     renderAll();
+    renderRecentlyViewed();
     
     // Initialize district gallery after render
     setTimeout(() => {
@@ -4030,23 +5038,14 @@ a{color:inherit;}
 
     // ============================================================
     //  WELCOME POPUP (District Collector message + Mission/Vision)
-    //  → shown first on opening; the new-product popup follows
-    //    once this one is closed.
+    //  → shown on opening.
     // ============================================================
     const welcomePopup = document.getElementById('welcomePopup');
     const welcomePopupClose = document.getElementById('welcomePopupClose');
     const welcomePopupContinueBtn = document.getElementById('welcomePopupContinueBtn');
 
-    function showLatestProductPopup() {
-        // Consistent with the Updates tab: "latest" = last entry in the live product list
-        if (allProducts.length === 0) return;
-        const latestProduct = allProducts[allProducts.length - 1];
-        if (latestProduct) showQuickView(latestProduct);
-    }
-
     function closeWelcomePopup() {
         welcomePopup.classList.remove('active');
-        setTimeout(showLatestProductPopup, 400);
     }
     welcomePopupClose.addEventListener('click', closeWelcomePopup);
     document.getElementById('welcomePopupTranslateBtn').addEventListener('click', () => toggleLanguage());
